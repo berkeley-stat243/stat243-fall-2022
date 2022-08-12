@@ -7,12 +7,13 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - syllabus.qmd
+      - href: syllabus.qmd
+        text: Syllabus
       - text: "Units"
         menu:
           - units/unit1.Rmd
           - units/unit2.Rmd
-      - href: edstem.org
+      - href: https://edstem.org
         text: "Discussion"
        
       
