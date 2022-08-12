@@ -5,14 +5,14 @@ website:
   title: "Statistics 243 Fall 2022"
   navbar:
     left:
-      - href: index.qmd
+      - file: index.qmd
         text: Home
-      - href: syllabus.qmd
+      - file: syllabus.qmd
         text: Syllabus
       - text: "Units"
         menu:
-          - units/unit1.Rmd
-          - units/unit2.Rmd
+          - file: units/unit1.Rmd
+          - file: units/unit2.Rmd
       - href: https://edstem.org
         text: "Discussion"
        
