@@ -305,6 +305,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>R allows you to read in not just from a file but from a more general construct called a <em>connection</em>. Here are some examples of connections:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">readLines</span>(<span class="fu">pipe</span>(<span class="st">"ls -al"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "total 64"                                                         
+[2] "drwxr-sr-x 2 paciorek scfstaff     8 Aug 12 10:56 ."              
+[3] "drwxr-sr-x 5 paciorek scfstaff    12 Aug 12 10:49 .."             
+[4] "-rw-r--r-- 1 paciorek scfstaff 10177 Aug 12 10:13 unit1.Rmd"      
+[5] "-rw-r--r-- 1 paciorek scfstaff    48 Aug 12 10:49 unit2.R"        
+[6] "-rw-r--r-- 1 paciorek scfstaff    55 Aug 12 10:20 unit2.R~"       
+[7] "-rw-r--r-- 1 paciorek scfstaff 12791 Aug 12 10:56 unit2.rmarkdown"
+[8] "-rw-r--r-- 1 paciorek scfstaff 12785 Aug 12 10:56 unit2.Rmd"      
+[9] "-rw-r--r-- 1 paciorek scfstaff 12797 Aug 12 10:30 unit2.Rmd~"     </code></pre>
+</div>
 </div>
 <p>In some cases, you might need to create the connection using <em>url()</em> or using the <em>curl()</em> function from the <em>curl</em> package. Though for the example here, simply passing the URL to <em>readLines()</em> does work. (In general, <em>curl::curl()</em> provides some nice features for reading off the internet.)</p>
 <p>If a file is large, we may want to read it in in chunks (of lines), do some computations to reduce the size of things, and iterate. <em>read.table()</em>, <em>read.fwf()</em> and <em>readLines()</em> all have the arguments that let you read in a fixed number of lines. To read-on-the-fly in blocks, we need to first establish the connection and then read from it sequentially. (If you don’t, you’ll read from the start of the file every time you read from the file.)</p>
