@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="August 2022, UC Berkeley">
+
+<title>Statistics 243 Fall 2022 – unit1</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Statistics 243 Fall 2022</span>
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html">Home</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">About</a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-units" role="button" data-bs-toggle="dropdown" aria-expanded="false">Units</a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-units">    
+        <li>
+    <a class="dropdown-item" href="../units/unit1.html">
+ <span class="dropdown-text">A few administrative things</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../units/unit2.html">
+ <span class="dropdown-text">Unit 2: Data Technologies</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#a-few-administrative-things" id="toc-a-few-administrative-things" class="nav-link active" data-scroll-target="#a-few-administrative-things">A few administrative things</a>
+  <ul class="collapse">
+  <li><a href="#where-to-find-stuff" id="toc-where-to-find-stuff" class="nav-link" data-scroll-target="#where-to-find-stuff">Where to find stuff</a></li>
+  <li><a href="#wireless" id="toc-wireless" class="nav-link" data-scroll-target="#wireless">Wireless</a></li>
+  </ul></li>
+  <li><a href="#how-well-operate" id="toc-how-well-operate" class="nav-link" data-scroll-target="#how-well-operate">How we’ll operate</a></li>
+  <li><a href="#getting-help" id="toc-getting-help" class="nav-link" data-scroll-target="#getting-help">Getting help</a></li>
+  <li><a href="#suggestions-on-how-to-get-the-most-out-of-the-bootcamp" id="toc-suggestions-on-how-to-get-the-most-out-of-the-bootcamp" class="nav-link" data-scroll-target="#suggestions-on-how-to-get-the-most-out-of-the-bootcamp">Suggestions on how to get the most out of the bootcamp</a></li>
+  <li><a href="#rstudio-and-r-markdown" id="toc-rstudio-and-r-markdown" class="nav-link" data-scroll-target="#rstudio-and-r-markdown">RStudio and R Markdown</a></li>
+  <li><a href="#using-github-to-get-the-documents" id="toc-using-github-to-get-the-documents" class="nav-link" data-scroll-target="#using-github-to-get-the-documents">Using GitHub to get the documents</a>
+  <ul class="collapse">
+  <li><a href="#within-rstudio" id="toc-within-rstudio" class="nav-link" data-scroll-target="#within-rstudio">Within RStudio</a></li>
+  <li><a href="#from-a-maclinux-terminal-window" id="toc-from-a-maclinux-terminal-window" class="nav-link" data-scroll-target="#from-a-maclinux-terminal-window">From a Mac/Linux terminal window</a></li>
+  <li><a href="#as-a-zip-file" id="toc-as-a-zip-file" class="nav-link" data-scroll-target="#as-a-zip-file">As a zip file</a></li>
+  </ul></li>
+  <li><a href="#what-is-r" id="toc-what-is-r" class="nav-link" data-scroll-target="#what-is-r">What is R?</a></li>
+  <li><a href="#modes-of-using-r" id="toc-modes-of-using-r" class="nav-link" data-scroll-target="#modes-of-using-r">Modes of using R</a></li>
+  <li><a href="#starting-r-and-rstudio" id="toc-starting-r-and-rstudio" class="nav-link" data-scroll-target="#starting-r-and-rstudio">Starting R and RStudio</a></li>
+  <li><a href="#why-r" id="toc-why-r" class="nav-link" data-scroll-target="#why-r">Why R?</a></li>
+  <li><a href="#why-not-r" id="toc-why-not-r" class="nav-link" data-scroll-target="#why-not-r">Why Not R?</a></li>
+  <li><a href="#what-are-my-other-options" id="toc-what-are-my-other-options" class="nav-link" data-scroll-target="#what-are-my-other-options">What are my other options?</a></li>
+  <li><a href="#my-hidden-agenda" id="toc-my-hidden-agenda" class="nav-link" data-scroll-target="#my-hidden-agenda">My hidden agenda</a></li>
+  <li><a href="#the-legal-stuff" id="toc-the-legal-stuff" class="nav-link" data-scroll-target="#the-legal-stuff">The Legal Stuff</a></li>
+  <li><a href="#thanks" id="toc-thanks" class="nav-link" data-scroll-target="#thanks">Thanks!</a></li>
+  <li><a href="#we-want-your-feedback-even-if-you-leave-early" id="toc-we-want-your-feedback-even-if-you-leave-early" class="nav-link" data-scroll-target="#we-want-your-feedback-even-if-you-leave-early">We want your feedback (even if you leave early)!</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">R bootcamp, Module 0: Recruit processing</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>August 2022, UC Berkeley </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Chris Paciorek</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<section id="a-few-administrative-things" class="level1">
+<h1>A few administrative things</h1>
+<section id="where-to-find-stuff" class="level2">
+<h2 class="anchored" data-anchor-id="where-to-find-stuff">Where to find stuff</h2>
+<p>The GitHub site (<a href="https://github.com/berkeley-scf/r-bootcamp-fall-2022">https://github.com/berkeley-scf/r-bootcamp-fall-2022</a>) is the main site for the bootcamp. It has information on logistics, software installation, and is the master repository for materials for the modules.</p>
+<p>We have an <a href="https://edstem.org/us/courses/24442">Ed Discussion site</a> for discussion and answering questions online during (and before) the bootcamp.</p>
+<p>If you have an administrative question, email r-bootcamp@lists.berkeley.edu.</p>
+</section>
+<section id="wireless" class="level2">
+<h2 class="anchored" data-anchor-id="wireless">Wireless</h2>
+<p>The campus WiFi is now eduroam, not AirBears. Follow <a href="https://berkeley.service-now.com/kb_view.do?sysparm_article=KB0013807">these instructions</a> for how to set up your eduroam account. If you need wireless access as a guest (i.e., you don’t have a CalNet ID), connect to ‘CalVisitor’.</p>
+</section>
+</section>
+<section id="how-well-operate" class="level1">
+<h1>How we’ll operate</h1>
+<p>The bootcamp will be organized in modules, each of which will be a combination of lecture/demo presentation concluded by a breakout session in which you’ll work on a variety of problems of different levels of difficulty. The idea is for each person to find problems that challenge them but are not too hard. Solutions to the breakout problems will be presented before the start of the next module.</p>
+<p>Many of the modules will use a common dataset as an example on which to carry out various operations. We’ll focus on dataset of demographic/economic information (population, GDP per capita, life expectancy) for many of the countries in the world every five years, provided by the <a href="https://www.gapminder.org">Gapminder project</a>. (Note that this is almost the full population of countries – I’ll fit some statistical models but the interpretation is tricky as we are not working with a sample from a well-defined population.)</p>
+</section>
+<section id="getting-help" class="level1">
+<h1>Getting help</h1>
+<ul>
+<li>Counselors will be available to help answer any questions you have (just wave to one of them if you’re in person).</li>
+<li>Or feel free to just ask the presenter during the presentation.</li>
+<li>The counselors will also be monitoring the Ed Discussion site, so feel free to type in a question there and one of the counselors will answer the question. Or if you know the answer, help us out by answering it yourself or adding your thoughts.</li>
+</ul>
+<p>Your counseloRs are: Alan Aw (Statistics), Florica Constantine (Statistics), Corrine Elliott (Statistics), and Natalia Sarabia Vasquez (Statistics).</p>
+</section>
+<section id="suggestions-on-how-to-get-the-most-out-of-the-bootcamp" class="level1">
+<h1>Suggestions on how to get the most out of the bootcamp</h1>
+<p>I encourage you to:</p>
+<ul>
+<li>try out the code as we walk through it</li>
+<li>keep your eyes open! – We’ll illustrate a lot of syntax and concepts by example</li>
+<li>try to guess what the syntax means in cases we haven’t yet seen that syntax</li>
+<li>play with it and try variations and try to break it and see what happens</li>
+<li>tell us if something interesting happens as you experiment, or post a comment in the chat room</li>
+<li>ask questions of me, the counselors, and on the Ed Discussion forum.</li>
+</ul>
+<p>This is a bootcamp. So there may be some pain involved! If you find yourself not following everything, that’s ok. You may miss some details, but try to follow the basics and the big picture.</p>
+<p>A few additional thoughts on my pedagogical philosophy here:</p>
+<ul>
+<li>I want to expose you to a lot of tools and ideas that you can come back to when you need them and when you have time for more depth.</li>
+<li>My aim is not to show you how to use specific statistical methods or analysis techniques. My goal is to get you up to speed generally in R.</li>
+<li>It can be hard to absorb everything in such a concentrated situation. Hopefully the material presented will be useful to you over the longer-term as you do more work with R.</li>
+</ul>
+</section>
+<section id="rstudio-and-r-markdown" class="level1">
+<h1>RStudio and R Markdown</h1>
+<p>We’ll present most of the material from within RStudio, using R Markdown documents with embedded R code. R Markdown is an extension to the Markdown markup language that makes it easy to write HTML in a simple plain text format. This allows us to both run the R code directly as well as compile on-the-fly to an HTML file that can be used for presentation. All files will be available on <a href="https://github.com/berkeley-scf/r-bootcamp-fall-2022">GitHub</a>.</p>
+<p>Note: The files named <em>moduleX_blah.html</em> have individual slides, while the files named <em>moduleX_blah_onepage.html</em> have the same content but all on one page.</p>
+<p>Warning: in some cases the processing of the R code in the R Markdown is screwy and the slides have error messages that do not occur if you just run the code directly in R or RStudio.</p>
+</section>
+<section id="using-github-to-get-the-documents" class="level1">
+<h1>Using GitHub to get the documents</h1>
+<p>To download the files from GitHub, you can do the following.</p>
+<section id="within-rstudio" class="level2">
+<h2 class="anchored" data-anchor-id="within-rstudio">Within RStudio</h2>
+<p>Within RStudio go to File-&gt;New Project-&gt;Version Control-&gt;Git and enter:</p>
+<ul>
+<li>“Repository URL”: https://github.com/berkeley-scf/r-bootcamp-fall-2022</li>
+<li>“Project Directory Name”: r-bootcamp-fall-2022 (or something else of your choosing)</li>
+<li>“Directory”: ~/Desktop (or somewhere of your choosing)</li>
+</ul>
+<p>Then to update from the repository to get any changes we’ve made, you can select (from within RStudio): Tools-&gt;Version Control-&gt;Pull Branches</p>
+<p>or from the Environment/History/Git window, click on the Git tab and then on the blue down arrow.</p>
+<p>Be warned that you probably do not want to make your own notes or changes to the files we are providing. Because if you do, and you then do a “Git Pull” to update the materials, you’ll have to deal with the conflict between your local version and our version. You probably will want to make a personal copy of such files in another directory or by making copies of files with new names.</p>
+</section>
+<section id="from-a-maclinux-terminal-window" class="level2">
+<h2 class="anchored" data-anchor-id="from-a-maclinux-terminal-window">From a Mac/Linux terminal window</h2>
+<p>Run the following commands:</p>
+<ul>
+<li><code>cd /directory/where/you/want/repository/located</code></li>
+<li><code>git clone https://github.com/berkeley-scf/r-bootcamp-fall-2022</code></li>
+</ul>
+<p>Then to update from the repository to get any changes we’ve made:</p>
+<ul>
+<li><code>cd /directory/where/you/put/the/repository/r-bootcamp-fall-2022</code></li>
+<li><code>git pull</code></li>
+</ul>
+</section>
+<section id="as-a-zip-file" class="level2">
+<h2 class="anchored" data-anchor-id="as-a-zip-file">As a zip file</h2>
+<p>If you don’t want to bother using Git or have problems, simply download a zip file with all the material from <a href="https://github.com/berkeley-scf/r-bootcamp-fall-2022/archive/main.zip">https://github.com/berkeley-scf/r-bootcamp-fall-2022/archive/main.zip</a>.</p>
+</section>
+</section>
+<section id="what-is-r" class="level1">
+<h1>What is R?</h1>
+<ul>
+<li>R is an Open Source (and freely available) environment for statistical computing and graphics</li>
+<li>It is a full-featured programming language, in particular a scripting language (with similarities to Matlab and Python)</li>
+<li>It can be run interactively or as a batch/background job</li>
+<li>R is being actively developed with ongoing updates/new releases</li>
+<li>R has a variety of built-in as well as community-provided packages that extend its functionality with code and data; see <a href="https://cran.r-project.org/web/packages/index.html">CRAN</a> for the thousands of add-on packages</li>
+<li>It is freely-available and modifiable</li>
+<li>Available for Windows, Mac OS X, and <a href="http://dilbert.com/strips/comic/1995-06-24/">Linux</a></li>
+</ul>
+</section>
+<section id="modes-of-using-r" class="level1">
+<h1>Modes of using R</h1>
+<ul>
+<li>Using the RStudio GUI, an ‘integrated development environment’</li>
+<li>From the command line in a Linux/Mac terminal window</li>
+<li>Running an R script in the background on a Linux/Mac machine (Windows?)</li>
+<li>Using the Windows/Mac GUIs</li>
+</ul>
+</section>
+<section id="starting-r-and-rstudio" class="level1">
+<h1>Starting R and RStudio</h1>
+<p>The pieces of an R session include:</p>
+<ul>
+<li>The R console</li>
+<li>Scripts containing your code
+<ul>
+<li>The script window also has Notebook capabilities like Jupyter notebooks</li>
+</ul></li>
+<li>Help files</li>
+<li>Graphics windows</li>
+<li>Workspace containing your objects, which hold data and information</li>
+</ul>
+<p>RStudio provides an integrated development environment in which all of these pieces are in a single application and tightly integrated, with a built-in editor for your code/scripts.</p>
+</section>
+<section id="why-r" class="level1">
+<h1>Why R?</h1>
+<ul>
+<li>R is widely used (statisticians, scientists, social scientists) and has the widest statistical functionality of any software</li>
+<li>Users add functionality via packages all the time</li>
+<li>R is free and available on all major platforms</li>
+<li>As a scripting language, R is very powerful, flexible, and easy to use</li>
+<li>As a scripting language, R allows for reproducibility and automating tasks</li>
+<li>As a language, R can do essentially anything</li>
+<li>Wide usage helps to improve quality and reduce bugs</li>
+<li>R can interact with other software, databases, the operating system, the web, etc.</li>
+<li>R is built on C and can call user-written and external C code and packages (in particular, see the <em>Rcpp</em> R package)</li>
+</ul>
+</section>
+<section id="why-not-r" class="level1">
+<h1>Why Not R?</h1>
+<ul>
+<li><p>Other software is better than R at various tasks</p>
+<p>E.g., <a href="http://imgs.xkcd.com/comics/python.png">Python</a> is very good for text manipulation, interacting with the operating system, and as a glue for tying together various applications/software in a workflow</p></li>
+<li><p>R can be much slower than compiled languages (but is often quite fast with good coding practices!)</p></li>
+<li><p>R’s packages are only as good as the person who wrote them; no explicit quality control</p></li>
+<li><p>R is a sprawling and unstandardized ecosystem</p></li>
+</ul>
+</section>
+<section id="what-are-my-other-options" class="level1">
+<h1>What are my other options?</h1>
+<ul>
+<li>Python</li>
+<li>Matlab/Octave</li>
+<li>Julia</li>
+<li>C/C++</li>
+<li>SAS</li>
+<li>Stata</li>
+</ul>
+</section>
+<section id="my-hidden-agenda" class="level1">
+<h1>My hidden agenda</h1>
+<p>In addition to learning some R, this workshop will expose you to a way of thinking about doing your computational work.</p>
+<p>The building blocks of scientific computing include:</p>
+<ul>
+<li>scripting</li>
+<li>reproducibility</li>
+<li>automating repetitive tasks</li>
+<li>version control (note our basic use of Git)</li>
+</ul>
+</section>
+<section id="the-legal-stuff" class="level1">
+<h1>The Legal Stuff</h1>
+<ul>
+<li>Some of this material was originally drawn from <a href="http://jaredknowles.com/r-bootcamp/url">Jared Knowles R bootcamp</a>.</li>
+<li>Contributions from Corrine Elliott, Dana Seidel, Kellie Ottoboni, Nima Hejazi, Rochelle Terman, Chris Krogslund, and Jarrod Millman. Thank you!!!</li>
+<li>You are free to use, modify and redistribute any of this material with or without attribution, but if you use chunks of material, I’d appreciate a call-out.</li>
+</ul>
+</section>
+<section id="thanks" class="level1">
+<h1>Thanks!</h1>
+<ul>
+<li>To all the presenters and assistants.</li>
+<li>To the Statistics Department and the Statewide Database at Berkeley Law for sponsorship and logistical support.</li>
+</ul>
+</section>
+<section id="we-want-your-feedback-even-if-you-leave-early" class="level1">
+<h1>We want your feedback (even if you leave early)!</h1>
+<p>During the afternoon break tomorrow, we’ll ask everyone to fill out a feedback form, but if you leave early, please see the Ed Discussion board for the link. In order to view the recordings after the last day of the bootcamp, you’ll need to fill out the feedback form!</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

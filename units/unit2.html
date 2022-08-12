@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="foo">
+<meta name="dcterms.date" content="2022-08-12">
+
+<title>Statistics 243 Fall 2022 - Unit 2: Data Technologies</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Statistics 243 Fall 2022</span>
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html">Home</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">About</a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-units" role="button" data-bs-toggle="dropdown" aria-expanded="false">Units</a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-units">    
+        <li>
+    <a class="dropdown-item" href="../units/unit1.html">
+ <span class="dropdown-text">A few administrative things</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../units/unit2.html">
+ <span class="dropdown-text">Unit 2: Data Technologies</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#optional-videos" id="toc-optional-videos" class="nav-link active" data-scroll-target="#optional-videos">(Optional) Videos</a></li>
+  <li><a href="#data-storage-and-file-formats-on-a-computer" id="toc-data-storage-and-file-formats-on-a-computer" class="nav-link" data-scroll-target="#data-storage-and-file-formats-on-a-computer">Data storage and file formats on a computer</a>
+  <ul class="collapse">
+  <li><a href="#text-and-binary-files" id="toc-text-and-binary-files" class="nav-link" data-scroll-target="#text-and-binary-files">Text and binary files</a></li>
+  <li><a href="#common-file-types" id="toc-common-file-types" class="nav-link" data-scroll-target="#common-file-types">Common file types</a></li>
+  </ul></li>
+  <li><a href="#reading-data-from-text-files-into-r" id="toc-reading-data-from-text-files-into-r" class="nav-link" data-scroll-target="#reading-data-from-text-files-into-r">Reading data from text files into R</a>
+  <ul class="collapse">
+  <li><a href="#core-r-functions" id="toc-core-r-functions" class="nav-link" data-scroll-target="#core-r-functions">Core R functions</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Unit 2: Data Technologies</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>foo </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 12, 2022</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<p>References:</p>
+<ul>
+<li><p>Adler</p></li>
+<li><p>Nolan and Temple Lang, XML and Web Technologies for Data Sciences with R.</p></li>
+<li><p>Chambers</p></li>
+<li><p><a href="http://cran.r-project.org/doc/manuals/R-intro.html">R intro manual</a> on CRAN (R-intro).</p></li>
+<li><p>Venables and Ripley, Modern Applied Statistics with S</p></li>
+<li><p>Murrell, Introduction to Data Technologies.</p></li>
+<li><p><a href="http://cran.r-project.org/doc/manuals/R-data.html">R Data Import/Export manual</a> on CRAN (R-data).</p></li>
+<li><p>SCF tutorial on “Working with large datasets in SQL, R, and Python”, available from<br>
+<a href="http://statistics.berkeley.edu/computing/training/tutorials" class="uri">http://statistics.berkeley.edu/computing/training/tutorials</a>.</p></li>
+</ul>
+<section id="optional-videos" class="level1 unnumbered">
+<h1 class="unnumbered">(Optional) Videos</h1>
+<p>There are four videos from 2020 in the bCourses Media Gallery that you can use for reference if you want to:</p>
+<ol type="1">
+<li><p>Text files and ASCII</p></li>
+<li><p>Encodings and UTF-8</p></li>
+<li><p>HTML</p></li>
+<li><p>XML and JSON</p></li>
+</ol>
+</section>
+<section id="data-storage-and-file-formats-on-a-computer" class="level1">
+<h1>Data storage and file formats on a computer</h1>
+<p>We’re going to start early in the data analysis pipeline: getting data, reading data in, writing data out to disk, and webscraping. We’ll focus on doing these manipulations in R, but the concepts and tools involved are common to other languages, so familarity with these in R should allow you to pick up other tools more easily. The main downside to working with datasets in R (true for Python as well) is that the entire dataset resides in memory, so R is not so good for dealing with very large datasets. More on alternatives in a later unit. Another common frustration is controlling how the variables are interpreted (numeric, character, factor) when reading data into a data frame. R (and similar languages) has the capability to read in a wide variety of file formats.</p>
+<section id="text-and-binary-files" class="level2">
+<h2 class="anchored" data-anchor-id="text-and-binary-files">Text and binary files</h2>
+<p>In general, files can be divided into text files and binary files. In both cases, information is stored as a series of bits. Recall that a bit is a single value in base 2 (i.e., a 0 or a 1), while a byte is 8 bits.</p>
+<p>A <strong>text file</strong> is one in which the bits in the file encode individual characters. Note that the characters can include the digit characters 0-9, so one can include numbers in a text file by writing down the digits needed for the number of interest. Examples of text file formats include CSV, XML, HTML, and JSON.</p>
+<p>Text files may be simple ASCII files (i.e., files encoded using ASCII) or in other encodings such as UTF-8, both covered in Section 4. <a href="http://en.wikipedia.org/wiki/ASCII">ASCII</a> files have 8 bits (1 byte) per character and can represent 128 characters (the 52 lower and upper case letters in English, 10 digits, punctuation and a few other things – basically what you see on a standard US keyboard). UTF-8 files have between 1 and 4 bytes per character.</p>
+<p>A <strong>binary file</strong> is one in which the bits in the file encode the information in a custom format and not simply individual characters. Binary formats are not (easily) human readable but can be more space-efficient and faster to work with (because it can allow random access into the data rather than requiring sequential reading). The meaning of the bytes in such files depends on the specific binary format being used and a program that uses the file needs to know how the format represents information. Examples of binary files include netCDF files, R data (e.g., .Rda) files, and compiled code files.</p>
+<p>Numbers in binary files are usually stored as 8 bytes per number. We’ll discuss this much more in Unit 6.</p>
+</section>
+<section id="common-file-types" class="level2">
+<h2 class="anchored" data-anchor-id="common-file-types">Common file types</h2>
+<p>Here are some of the common file types. Any of these types can be categorized as text or binary.</p>
+<ol type="1">
+<li><p>‘Flat’ text files: data are often provided as simple text files. Often one has one record or observation per row and each column or field is a different variable or type of information about the record. Such files can either have a fixed number of characters in each field (fixed width format) or a special character (a delimiter) that separates the fields in each row. Common delimiters are tabs, commas, one or more spaces, and the pipe (|). Common file extensions are <em>.txt</em> and <em>.csv</em>. Metadata (information about the data) are often stored in a separate file. CSV files are quite common, but if you have files where the data contain commas, other delimiters can be good. Text can be put in quotes in CSV files, and this can allow use of commas within the data. This is difficult to deal with in bash, but <em>read.table()</em> in R handles this situation.</p>
+<ul>
+<li>One occasionally tricky difficulty is as follows. If you have a text file created in Windows, the line endings are coded differently than in UNIX (a newline (the ASCII character <em>\n</em>) and a carriage return (the ASCII character <em>\r</em>) in Windows vs. only a newline in UNIX). There are UNIX utilities (<em>fromdos</em> in Ubuntu, including the SCF Linux machines and <em>dos2unix</em> in other Linux distributions) that can do the necessary conversion. If you see <em>^M</em> at the end of the lines in a file, that’s the tool you need. Alternatively, if you open a UNIX file in Windows, it may treat all the lines as a single line. You can fix this with <em>todos</em> or <em>unix2dos</em>.</li>
+</ul></li>
+<li><p>In some contexts, such as textual data and bioinformatics data, the data may in a text file with one piece of information per row, but without meaningful columns/fields.</p></li>
+<li><p>In scientific contexts, netCDF (<em>.nc</em>) (and the related HDF5) are popular format for gridded data that allows for highly-efficient storage and contains the metadata within the file. The basic structure of a netCDF file is that each variable is an array with multiple dimensions (e.g., latitude, longitude, and time), and one can also extract the values of and metadata about each dimension. The <em>ncdf4</em> package in R nicely handles working with netCDF files.</p></li>
+<li><p>Data may also be in text files in formats designed for data interchange between various languages, in particular XML or JSON. These formats are “self-describing”; namely the metadata is part of the file. The <em>XML2, rvest</em>, and <em>jsonlite</em> packages are useful for reading and writing from these formats.</p></li>
+<li><p>You may be scraping information on the web, so dealing with text files in various formats, including HTML. The <em>XML2</em> and <em>rvest</em> packages are also useful for reading HTML.</p></li>
+<li><p>Data may already be in a database or in the data storage of another statistical package (<em>Stata</em>, <em>SAS</em>, <em>SPSS</em>, etc.). The <em>foreign</em> package in R has excellent capabilities for importing Stata (<em>read.dta()</em>), SPSS (<em>read.spss()</em>), and SAS (<em>read.ssd()</em> and, for XPORT files, <em>read.xport()</em>), among others.</p></li>
+<li><p>For Excel, there are capabilities to read an Excel file (see the <em>readxl</em> and <em>XLConnect</em> package among others), but you can also just go into Excel and export as a CSV file or the like and then read that into R. In general, it’s best not to pass around data files as Excel or other spreadsheet format files because (1) Excel is proprietary, so someone may not have Excel and the format is subject to change, (2) Excel imposes limits on the number of rows, (3) one can easily manipulate text files such as CSV using UNIX tools, but this is not possible with an Excel file, (4) Excel files often have more than one sheet, graphs, macros, etc., so they’re not a data storage format per se.</p></li>
+<li><p>R can easily interact with databases (SQLite, PostgreSQL, MySQL, Oracle, etc.), querying the database using SQL and returning results to R. More in the big data unit and in the large datasets tutorial mentioned above.</p></li>
+</ol>
+</section>
+</section>
+<section id="reading-data-from-text-files-into-r" class="level1">
+<h1>Reading data from text files into R</h1>
+<section id="core-r-functions" class="level2">
+<h2 class="anchored" data-anchor-id="core-r-functions">Core R functions</h2>
+<p><em>read.table()</em> is probably the most commonly-used function for reading in data. It reads in delimited files (<em>read.csv()</em> and <em>read.delim()</em> are special cases of <em>read.table()</em>). The key arguments are the delimiter (the <em>sep</em> argument) and whether the file contains a header, a line with the variable names. We can use <em>read.fwf()</em> to read from a fixed width text file into a data frame.</p>
+<p>The most difficult part of reading in such files can be dealing with how R determines the classes of the fields that are read in. There are a number of arguments to <em>read.table()</em> and <em>read.fwf()</em> that allow the user to control the classes. One difficulty in older versions of R was that character fields were read in as factors.</p>
+<p>Let’s work through a couple examples. Before we do that, let’s look at the arguments to <em>read.table()</em>. Note that <em>sep=“</em> separates on any amount of white space. In the code chunk below, I’ve told <em>knitr</em> not to print the output to the PDF; you can see the full output by running the code yourself.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="fu">file.path</span>(<span class="st">'..'</span>, <span class="st">'data'</span>, <span class="st">'RTADataSub.csv'</span>),</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">sep =</span> <span class="st">','</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(dat, class)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="do">## whoops, there is an 'x', presumably indicating missingness:</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(dat[ , <span class="dv">2</span>])</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="do">## let's treat 'x' as a missing value indicator</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>dat2 <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="fu">file.path</span>(<span class="st">'..'</span>, <span class="st">'data'</span>, <span class="st">'RTADataSub.csv'</span>),</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                   <span class="at">sep =</span> <span class="st">','</span>, <span class="at">header =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">na.strings =</span> <span class="fu">c</span>(<span class="st">"NA"</span>, <span class="st">"x"</span>))</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(dat2[ ,<span class="dv">2</span>])</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="do">## hmmm, what happened to the blank values this time?</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(dat[ ,<span class="dv">2</span>] <span class="sc">==</span> <span class="st">""</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>dat2[<span class="fu">which</span>(dat[, <span class="dv">2</span>] <span class="sc">==</span> <span class="st">""</span>)[<span class="dv">1</span>], ] <span class="co"># pull out a line with a missing string</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># using 'colClasses'</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>sequ <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="fu">file.path</span>(<span class="st">'..'</span>, <span class="st">'data'</span>, <span class="st">'hivSequ.csv'</span>),</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">sep =</span> <span class="st">','</span>, <span class="at">header =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">colClasses =</span> <span class="fu">c</span>(<span class="st">'integer'</span>,<span class="st">'integer'</span>,<span class="st">'character'</span>,</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">'character'</span>,<span class="st">'numeric'</span>,<span class="st">'integer'</span>))</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="do">## let's make sure the coercion worked - sometimes R is obstinant</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(sequ, class)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="do">## that made use of the fact that a data frame is a list</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Note that you can avoid reading in one or more columns by specifying <em>NULL</em> as the column class for those columns to be omitted. Also, specifying the <em>colClasses</em> argument explicitly should make for faster file reading. Finally, setting <code>stringsAsFactors=FALSE</code> is standard practice and is the default in R as of version 4.0. (<em>readr::read_csv()</em> has always set <code>stringsAsFactors=FALSE</code>.</p>
+<p>If possible, it’s a good idea to look through the input file in the shell or in an editor before reading into R to catch such issues in advance. Using <em>less</em> on <em>RTADataSub.csv</em> would have revealed these various issues, but note that <em>RTADataSub.csv</em> is a 1000-line subset of a much larger file of data available from the kaggle.com website. So more sophisticated use of UNIX utilities as we saw in Unit 2 is often useful before trying to read something into R.</p>
+<p>The basic function <em>scan()</em> simply reads everything in, ignoring lines, which works well and very quickly if you are reading in a numeric vector or matrix. <em>scan()</em> is also useful if your file is free format - i.e., if it’s not one line per observation, but just all the data one value after another; in this case you can use <em>scan()</em> to read it in and then format the resulting character or numeric vector as a matrix with as many columns as fields in the dataset. Remember that the default is to fill the matrix by column.</p>
+<p>If the file is not nicely arranged by field (e.g., if it has ragged lines), we’ll need to do some more work. <em>readLines()</em> will read in each line into a separate character vector, after which we can process the lines using text manipulation. Here’s an example from some US meteorological data where I know from metadata (not provided here) that the 4-11th values are an identifier, the 17-20th are the year, the 22-23rd the month, etc.</p>
+<p>Actually, that file, <em>precip.txt</em>, is in a fixed-width format (i.e., every element in a given column has the exact same number of characters),so reading in using <em>read.fwf()</em> would be a good strategy.</p>
+<p>R allows you to read in not just from a file but from a more general construct called a <em>connection</em>. Here are some examples of connections:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">readLines</span>(<span class="fu">pipe</span>(<span class="st">"ls -al"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In some cases, you might need to create the connection using <em>url()</em> or using the <em>curl()</em> function from the <em>curl</em> package. Though for the example here, simply passing the URL to <em>readLines()</em> does work. (In general, <em>curl::curl()</em> provides some nice features for reading off the internet.)</p>
+<p>If a file is large, we may want to read it in in chunks (of lines), do some computations to reduce the size of things, and iterate. <em>read.table()</em>, <em>read.fwf()</em> and <em>readLines()</em> all have the arguments that let you read in a fixed number of lines. To read-on-the-fly in blocks, we need to first establish the connection and then read from it sequentially. (If you don’t, you’ll read from the start of the file every time you read from the file.)</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
