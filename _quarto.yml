@@ -7,7 +7,7 @@ website:
     left:
       - file: index.qmd
         text: Home
-      - file: syllabus.qmd
+      - file: syllabus.md
         text: Syllabus
       - text: "Units"
         menu:
