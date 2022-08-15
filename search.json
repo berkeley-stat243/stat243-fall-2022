@@ -18,7 +18,7 @@
     "href": "index.html",
     "title": "Statistics 243 Fall 2022",
     "section": "",
-    "text": "This site is UNDER CONSTRUCTION. Do not rely on materials here before August 22.\nIf you would like to audit the class, enroll as a UC Berkeley undergraduate, or enroll as a concurrent enrollment student (i.e., for visiting students), or for some other reason are not enrolled, please fill out this survey as soon as possible. All those enrolled or wishing to take the class should have filled it out by Friday August 27 at noon.\nThe first three weeks involve a lot of moving pieces, in part related to trying to get everyone up to speed with the bash shell and R. Please use these notes to keep on top of what you need to do."
+    "text": "This site is UNDER CONSTRUCTION. Do not rely on materials here before August 22.\nSee the links above for the key resources for the course."
   },
   {
     "objectID": "units/unit1.html",
@@ -81,7 +81,7 @@
     "href": "index.html#course-content",
     "title": "Statistics 243 Fall 2022",
     "section": "Course content",
-    "text": "Course content\n\nThis site: most non-recorded course material\nVarious SCF tutorials: These include the various tutorials referred to in the class materials (e.g., the UNIX and bash shell tutorials, the dynamic documents tutorial, the Git tutorial, the string processing tutorial, etc.)\nbCourses: links to class course captures and any pre-recorded material.\n\nIf you’re not yet familiar with Git, go to the upper right of this page and click on ‘Clone or download’ and then ‘Download ZIP’."
+    "text": "Course content\n\nThis site: most non-recorded course material\n\nFor html versions of the Units, see the navigation bar above.\nFor PDF versions of the Units, clone the GitHub repository, or if you’re not yet familiar with Git, Download a zip file.\n\nVarious SCF tutorials: These include the various tutorials referred to in the class materials (e.g., the UNIX and bash shell tutorials, the dynamic documents tutorial, the Git tutorial, the string processing tutorial, etc.).\nbCourses: links to class course captures and any pre-recorded material.\n\nIf you’re not yet familiar with Git, go to the upper right of this page and click on ‘Clone or download’ and then ‘Download ZIP’."
   },
   {
     "objectID": "index.html#logistics",
@@ -208,5 +208,12 @@
     "title": "Statistics 243 Fall 2022",
     "section": "",
     "text": "Accessing the UNIX command line (i.e., bash or zsh shell)\nInstalling Git\nInstalling R and RStudio\n\nInstalling R and RStudio on Windows\n\nUsing Linux via the Windows Subsystem for Linux\nAccessing Python\nSubmitting problem sets"
+  },
+  {
+    "objectID": "index.html#questions-about-taking-the-class",
+    "href": "index.html#questions-about-taking-the-class",
+    "title": "Statistics 243 Fall 2022",
+    "section": "Questions about taking the class",
+    "text": "Questions about taking the class\nIf you would like to audit the class, enroll as a UC Berkeley undergraduate, or enroll as a concurrent enrollment student (i.e., for visiting students), or for some other reason are not enrolled, please fill out this survey as soon as possible. All those enrolled or wishing to take the class should have filled it out by Friday August 26 at noon.\nUndergraduates can only take the course with my permission and once all graduate students have an opportunity to register. I expect there will be space, and will likely start admitting undergraduates early the week of August 29 or late the previous week.\nConcurrent enrollment students can take the course with my permission and once all UC Berkeley students have had an opportunity to register. I expect there will be space, and will likely start admitting concurrent enrollment students early the week of August 29.\nPlease see the syllabus for the math and statistics background I expect, as well as the need to be familiar with R or to get up to speed in R during the first few weeks of the semester.\nThe first three weeks involve a lot of moving pieces, in part related to trying to get everyone up to speed with the bash shell and R. Please use these notes to keep on top of what you need to do."
   }
 ]
