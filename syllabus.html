@@ -76,17 +76,33 @@ ul.task-list{list-style: none;}
   <li class="nav-item">
     <a class="nav-link" href="./index.html">Home</a>
   </li>  
-  <li class="dropdown-header">
- syllabus.qmd</li>
+  <li class="nav-item">
+    <a class="nav-link active" href="./syllabus.html" aria-current="page">Syllabus</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./office_hours.html">Office hours</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./software.md">Software</a>
+  </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-units" role="button" data-bs-toggle="dropdown" aria-expanded="false">Units</a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-units">    
-        <li class="dropdown-header">units/unit1.Rmd</li>
-        <li class="dropdown-header">units/unit2.Rmd</li>
+        <li>
+    <a class="dropdown-item" href="./units/unit1.Rmd">
+ <span class="dropdown-text"></span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./units/unit2.Rmd">
+ <span class="dropdown-text"></span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./edstem.org">Discussion</a>
+    <a class="nav-link" href="https://edstem.org">Discussion</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://statistics.berkeley.edu/computing/training/tutorials">Tutorials</a>
   </li>  
 </ul>
               <div id="quarto-search" class="" title="Search"></div>
@@ -107,7 +123,10 @@ ul.task-list{list-style: none;}
   <li><a href="#covid-considerations" id="toc-covid-considerations" class="nav-link" data-scroll-target="#covid-considerations">Covid considerations</a></li>
   <li><a href="#objectives-of-the-course" id="toc-objectives-of-the-course" class="nav-link" data-scroll-target="#objectives-of-the-course">Objectives of the course</a></li>
   <li><a href="#personnel" id="toc-personnel" class="nav-link" data-scroll-target="#personnel">Personnel</a></li>
-  <li><a href="#course-websites-github-piazza-gradescope-and-bcourses" id="toc-course-websites-github-piazza-gradescope-and-bcourses" class="nav-link" data-scroll-target="#course-websites-github-piazza-gradescope-and-bcourses">Course websites: GitHub, Piazza, GradeScope, and bCourses</a></li>
+  <li><a href="#course-websites-github-piazza-gradescope-and-bcourses" id="toc-course-websites-github-piazza-gradescope-and-bcourses" class="nav-link" data-scroll-target="#course-websites-github-piazza-gradescope-and-bcourses">Course websites: GitHub, Ed Discussion, GradeScope, and bCourses</a>
+  <ul class="collapse">
+  <li><a href="#course-discussion" id="toc-course-discussion" class="nav-link" data-scroll-target="#course-discussion">Course discussion</a></li>
+  </ul></li>
   <li><a href="#course-material" id="toc-course-material" class="nav-link" data-scroll-target="#course-material">Course material</a></li>
   <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section">Section</a></li>
   <li><a href="#computing-resources" id="toc-computing-resources" class="nav-link" data-scroll-target="#computing-resources">Computing Resources</a></li>
@@ -116,6 +135,7 @@ ul.task-list{list-style: none;}
   <ul class="collapse">
   <li><a href="#course-grades" id="toc-course-grades" class="nav-link" data-scroll-target="#course-grades">Course grades</a></li>
   <li><a href="#problem-sets" id="toc-problem-sets" class="nav-link" data-scroll-target="#problem-sets">Problem sets</a></li>
+  <li><a href="#submitting-assignments" id="toc-submitting-assignments" class="nav-link" data-scroll-target="#submitting-assignments">Submitting assignments</a></li>
   <li><a href="#problem-set-grading" id="toc-problem-set-grading" class="nav-link" data-scroll-target="#problem-set-grading">Problem set grading</a></li>
   <li><a href="#final-project" id="toc-final-project" class="nav-link" data-scroll-target="#final-project">Final project</a></li>
   <li><a href="#rules-for-working-together-and-the-campus-honor-code" id="toc-rules-for-working-together-and-the-campus-honor-code" class="nav-link" data-scroll-target="#rules-for-working-together-and-the-campus-honor-code">Rules for working together and the campus honor code</a></li>
@@ -140,7 +160,7 @@ ul.task-list{list-style: none;}
 <h2 class="unnumbered anchored" data-anchor-id="course-description">Course description</h2>
 <p>Statistics 243 is an introduction to statistical computing, taught using R. The course will cover both programming concepts and statistical computing concepts. Programming concepts will include data and text manipulation, data structures, functions and variable scope, regular expressions, debugging/testing, and parallel processing. Statistical computing topics will include working with large datasets, numerical linear algebra, computer arithmetic/precision, simulation studies and Monte Carlo methods, numerical optimization, and numerical integration/differentiation. A goal is that coverage of these topics complement the models/methods discussed in the rest of the statistics/biostatistics graduate curriculum. We will also cover the basics of UNIX/Linux, in particular some basic shell scripting and operating on remote servers, as well as a bit of Python.</p>
 <p>While the course is taught using R and you will learn a lot about using R at an advanced level, the focus of the course is statistical computing/computing for data science more generally. Also, this is not a course that will cover specific statistical/data analysis methods.</p>
-<p>Informal prerequisites: If you are not a statistics or biostatistics graduate student, please chat with me if you’re not sure if this course makes sense for you. A background in calculus, linear algebra, probability and statistics is expected, as well as a basic ability to operate on a computer (but I do not assume familiarity with the UNIX-style command line/terminal/shell). Furthermore, I’m expecting you will know the basics of R, at the level of the Modules 1-5 in the R bootcamp offered Aug.&nbsp;21-22, 2021. If you don’t have that background you’ll need to spend time in the initial couple weeks getting up to speed. All the material from the bootcamp is <a href="https://github.com/berkeley-scf/r-bootcamp-fall-2019/archive/master.zip">available here</a> (plus I can give you access to the bootcamp videos), we’ll have an optional hands-on practice session during the second or third week of class, and the GSI can also provide assistance.</p>
+<p>Informal prerequisites: If you are not a statistics or biostatistics graduate student, please chat with me if you’re not sure if this course makes sense for you. A background in calculus, linear algebra, probability and statistics is expected, as well as a basic ability to operate on a computer (but I do not assume familiarity with the UNIX-style command line/terminal/shell). Furthermore, I’m expecting you will know the basics of R, at the level of the Modules 1-5 in the R bootcamp offered Aug.&nbsp;20-21, 2022. If you don’t have that background you’ll need to spend time in the initial couple weeks getting up to speed. All the material from the bootcamp is <a href="https://github.com/berkeley-scf/r-bootcamp-fall-2022/archive/main.zip">available here</a> (plus I can give you access to the bootcamp videos), we’ll have an optional hands-on practice session during the second or third week of class, and the GSI can also provide assistance.</p>
 </section>
 <section id="covid-considerations" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="covid-considerations">Covid considerations</h2>
@@ -178,19 +198,22 @@ ul.task-list{list-style: none;}
 </ul>
 </section>
 <section id="course-websites-github-piazza-gradescope-and-bcourses" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="course-websites-github-piazza-gradescope-and-bcourses">Course websites: GitHub, Piazza, GradeScope, and bCourses</h2>
+<h2 class="unnumbered anchored" data-anchor-id="course-websites-github-piazza-gradescope-and-bcourses">Course websites: GitHub, Ed Discussion, GradeScope, and bCourses</h2>
 <p>Key websites for the course are:</p>
 <ul>
 <li><p>GitHub for course content: <a href="https://github.com/berkeley-stat243/stat243-fall-2021" class="uri">https://github.com/berkeley-stat243/stat243-fall-2021</a>, including logistics info on the main GitHub page (scroll down below the files listing).</p></li>
 <li><p>SCF tutorials for additional content: <a href="https://statistics.berkeley.edu/computing/training/tutorials" class="uri">https://statistics.berkeley.edu/computing/training/tutorials</a></p></li>
-<li><p>Piazza site for discussions/Q&amp;A (also linked from bCourses): <a href="https://piazza.com/berkeley/fall2021/stat243" class="uri">https://piazza.com/berkeley/fall2021/stat243</a></p></li>
+<li><p>Ed Discussion site for discussions/Q&amp;A: <a href="https://edstem.org/us/courses/25090/discussion/" class="uri">https://edstem.org/us/courses/25090/discussion/</a></p></li>
 <li><p>bCourses site for course capture recordings and possibly some other materials:</p>
 <p><a href="https://bcourses.berkeley.edu/courses/1507757" class="uri">https://bcourses.berkeley.edu/courses/1507757</a>.</p></li>
 <li><p>Gradescope for assignments (also linked from bCourses): [UNDER CONSTRUCTION]<a href="https://www.gradescope.com/courses/XYZ" class="uri">https://www.gradescope.com/courses/XYZ</a></p></li>
 </ul>
 <p>All course materials will be posted on GitHub except for video content, which will be in bCourses.</p>
-<p>We will use the course Piazza site for communication (announcements, questions, and discussion). You should ask questions about class material and problem sets through Piazza. Please use this site for your questions so that either Andrew or I can respond and so that everyone can benefit from the discussion. I suggest you to modify your settings on Piazza so you are informed by email of postings. I strongly encourage you to respond to or comment on each other’s questions as well (this will help your class participation grade), although of course you should not provide a solution to a problem set problem. If you have a specific administrative question you need to direct just to me, it’s fine to email me directly. But if you simply want to privately ask a question about content, then just come to an office hour or see me after class.</p>
-<p>In addition, we will use Gradescope for viewing grades.</p>
+<section id="course-discussion" class="level3">
+<h3 class="anchored" data-anchor-id="course-discussion">Course discussion</h3>
+<p>We will use the course Ed Discussion site for communication (announcements, questions, and discussion). You should ask questions about class material and problem sets through the site. Please use this site for your questions so that either James or I can respond and so that everyone can benefit from the discussion. I suggest you to modify your settings on Ed Discussion so you are informed by email of postings. I strongly encourage you to respond to or comment on each other’s questions as well (this will help your class participation grade), although of course you should not provide a solution to a problem set problem. If you have a specific administrative question you need to direct just to me, it’s fine to email me directly. But if you simply want to privately ask a question about content, then just come to an office hour or see me after class or James during/after section.</p>
+<p>If you’re enrolled in the class you should be a member of the group and be able to access it. If you’re auditing or not yet enrolled and would like access, make sure to fill out the survey above and I will add you. In addition, we will use Gradescope for viewing grades.</p>
+</section>
 </section>
 <section id="course-material" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="course-material">Course material</h2>
@@ -234,7 +257,7 @@ ul.task-list{list-style: none;}
 </section>
 <section id="computing-resources" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="computing-resources">Computing Resources</h2>
-<p>Most work for the course can be done on your laptop. Later in the course we’ll also use the Statistics Department cluster. You can also use the campus DataHub to access a bash shell or run RStudio.</p>
+<p>Most work for the course can be done on your laptop. Later in the course we’ll also use the Statistics Department cluster. You can also use the <a href="datahub.berkeley.edu">campus DataHub</a> to access a bash shell or run RStudio.</p>
 <p>The software needed for the course is as follows:</p>
 <ul>
 <li><p>Access to the UNIX command line (bash shell)</p></li>
@@ -242,7 +265,7 @@ ul.task-list{list-style: none;}
 <li><p>R (RStudio is recommended but by no means required)</p></li>
 <li><p>Python (later in the course)</p></li>
 </ul>
-<p>Some tips for software installation (and access to DataHub) are in the ‘howtos’ directory of the Git repository. In particular, please see ‘accessingUnixCommandLine.html’ for options of how to access a bash shell.</p>
+<p>We have <a href="software">some tips for software installation (and access to DataHub)</a>. In particular, we have <a href="software/shell">suggestions for how to access a UNIX shell</a>, which you’ll need to be able to do by the second week of class.</p>
 </section>
 <section id="class-time" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="class-time">Class time</h2>
@@ -274,6 +297,10 @@ ul.task-list{list-style: none;}
 <li><p>Any mathematical derivations may be done by hand and scanned with your phone if you prefer that to writing up LaTeX equations.</p></li>
 </ol>
 <p>Note: knitr is a tool that allows one to embed chunks of code within LaTeX documents. It can also be used with the L-.1667em.25emY-.125emX GUI front-end to LaTeX. R Markdown is an extension to the Markdown markup language that allows one to embed R code within an HTML document. Please see the <em>dynamics document tutorial</em> on the SCF tutorials website; there will be additional information in the first section and on the first problem set.</p>
+</section>
+<section id="submitting-assignments" class="level3">
+<h3 class="anchored" data-anchor-id="submitting-assignments">Submitting assignments</h3>
+<p>The file [UNDER CONSTRUCTION][submitting-electronically.txt](./howtos/submitting-electronically.txt) has information on setting up a Github repository for the class and submitting your assignments by committing your solution to Github. We will discuss this in section on Friday September 3.</p>
 </section>
 <section id="problem-set-grading" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="problem-set-grading">Problem set grading</h3>
