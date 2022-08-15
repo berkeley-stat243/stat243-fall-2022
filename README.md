@@ -1,4 +1,5 @@
 # stat243-fall-2022
+
 This repository holds course materials for the Fall 2022 offering of Statistics 243 at UC Berkeley.
 
 This site is UNDER CONSTRUCTION. Do not rely on materials here before August 22.
@@ -7,7 +8,7 @@ See the links above for the key resources for the course.
 
 ## Questions about taking the class
 
-If you would like to audit the class, enroll as a UC Berkeley undergraduate, or enroll as a concurrent enrollment student (i.e., for visiting students), or for some other reason are not enrolled, please fill out [this survey](https://forms.gle/8mDrVJ6XufaTMCPm9) as soon as possible. All those enrolled or wishing to take the class should have filled it out by Friday August 26 at noon.
+If you would like to audit the class, enroll as a UC Berkeley undergraduate, or enroll as a concurrent enrollment student (i.e., for visiting students), or for some other reason are not enrolled, please fill out [this survey](https://forms.gle/SVm9thpkh16Zps2h6) as soon as possible. All those enrolled or wishing to take the class should have filled it out by Friday August 26 at noon.
 
 Undergraduates can only take the course with my permission and once all graduate students have an opportunity to register. I expect there will be space, and will likely start admitting undergraduates early the week of August 29 or late the previous week.
 
