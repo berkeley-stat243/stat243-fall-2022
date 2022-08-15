@@ -1,3 +1,4 @@
+   
 ## Course description {#course-description .unnumbered}
 
 Statistics 243 is an introduction to statistical computing, taught using
@@ -26,10 +27,10 @@ probability and statistics is expected, as well as a basic ability to
 operate on a computer (but I do not assume familiarity with the
 UNIX-style command line/terminal/shell). Furthermore, I'm expecting you
 will know the basics of R, at the level of the Modules 1-5 in the R
-bootcamp offered Aug. 21-22, 2021. If you don't have that background
+bootcamp offered Aug. 20-21, 2022. If you don't have that background
 you'll need to spend time in the initial couple weeks getting up to
 speed. All the material from the bootcamp is [available
-here](https://github.com/berkeley-scf/r-bootcamp-fall-2019/archive/master.zip)
+here](https://github.com/berkeley-scf/r-bootcamp-fall-2022/archive/main.zip)
 (plus I can give you access to the bootcamp videos), we'll have an
 optional hands-on practice session during the second or third week of
 class, and the GSI can also provide assistance.
@@ -96,7 +97,7 @@ able to:
     something a few different ways and define/summarize what is going
     wrong or where you are getting stuck.
 
-## Course websites: GitHub, Piazza, GradeScope, and bCourses {#course-websites-github-piazza-gradescope-and-bcourses .unnumbered}
+## Course websites: GitHub, Ed Discussion, GradeScope, and bCourses {#course-websites-github-piazza-gradescope-and-bcourses .unnumbered}
 
 Key websites for the course are:
 
@@ -108,8 +109,8 @@ Key websites for the course are:
 -   SCF tutorials for additional content:
     <https://statistics.berkeley.edu/computing/training/tutorials>
 
--   Piazza site for discussions/Q&A (also linked from bCourses):
-    <https://piazza.com/berkeley/fall2021/stat243>
+-   Ed Discussion site for discussions/Q&A:
+    <https://edstem.org/us/courses/25090/discussion/>
 
 -   bCourses site for course capture recordings and possibly some other
     materials:
@@ -122,19 +123,22 @@ Key websites for the course are:
 All course materials will be posted on GitHub except for video content,
 which will be in bCourses.
 
-We will use the course Piazza site for communication (announcements,
+### Course discussion
+
+We will use the course Ed Discussion site for communication (announcements,
 questions, and discussion). You should ask questions about class
-material and problem sets through Piazza. Please use this site for your
-questions so that either Andrew or I can respond and so that everyone
+material and problem sets through the site. Please use this site for your
+questions so that either James or I can respond and so that everyone
 can benefit from the discussion. I suggest you to modify your settings
-on Piazza so you are informed by email of postings. I strongly encourage
+on Ed Discussion so you are informed by email of postings. I strongly encourage
 you to respond to or comment on each other's questions as well (this
 will help your class participation grade), although of course you should
 not provide a solution to a problem set problem. If you have a specific
 administrative question you need to direct just to me, it's fine to
 email me directly. But if you simply want to privately ask a question
-about content, then just come to an office hour or see me after class.
+about content, then just come to an office hour or see me after class or James during/after section.
 
+If you're enrolled in the class you should be a member of the group and be able to access it. If you're auditing or not yet enrolled and would like access, make sure to fill out the survey above and I will add you. 
 In addition, we will use Gradescope for viewing grades.
 
 ## Course material  {#course-material .unnumbered}
@@ -219,7 +223,7 @@ first.
 
 Most work for the course can be done on your laptop. Later in the course
 we'll also use the Statistics Department cluster. You can also use the
-campus DataHub to access a bash shell or run RStudio.
+[campus DataHub](datahub.berkeley.edu) to access a bash shell or run RStudio.
 
 The software needed for the course is as follows:
 
@@ -231,10 +235,11 @@ The software needed for the course is as follows:
 
 -   Python (later in the course)
 
-Some tips for software installation (and access to DataHub) are in the
-'howtos' directory of the Git repository. In particular, please see
-'accessingUnixCommandLine.html' for options of how to access a bash
-shell.
+We have [some tips for software installation (and access to DataHub)](software).
+In particular, we have [suggestions for how to access a UNIX shell](software/shell),
+which you'll need to be able to do by the second week of class.
+
+
 
 ## Class time {#class-time .unnumbered}
 
@@ -325,6 +330,10 @@ markup language that allows one to embed R code within an HTML document.
 Please see the *dynamics document tutorial* on the SCF tutorials
 website; there will be additional information in the first section and
 on the first problem set.
+
+### Submitting assignments
+
+The file [UNDER CONSTRUCTION][submitting-electronically.txt](./howtos/submitting-electronically.txt) has information on setting up a Github repository for the class and submitting your assignments by committing your solution to Github. We will discuss this in section on Friday September 3.
 
 ### Problem set grading {#problem-set-grading .unnumbered}
 

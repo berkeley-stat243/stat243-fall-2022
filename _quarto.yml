@@ -9,14 +9,19 @@ website:
         text: Home
       - file: syllabus.md
         text: Syllabus
+      - file: office_hours.md
+        text: "Office hours"
+      - file: software.md
+        text: Software
       - text: "Units"
         menu:
           - file: units/unit1.Rmd
           - file: units/unit2.Rmd
       - href: https://edstem.org
         text: "Discussion"
-       
-      
+      - href: https://statistics.berkeley.edu/computing/training/tutorials
+        text: Tutorials
+        
 
 format:
   html:
