@@ -99,7 +99,7 @@ ul.task-list{list-style: none;}
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="https://edstem.org">Discussion</a>
+    <a class="nav-link" href="https://edstem.org/us/courses/25090/discussion/">Discussion</a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="https://statistics.berkeley.edu/computing/training/tutorials">Tutorials</a>
@@ -122,6 +122,7 @@ ul.task-list{list-style: none;}
   <li><a href="#course-description" id="toc-course-description" class="nav-link active" data-scroll-target="#course-description">Course description</a></li>
   <li><a href="#covid-considerations" id="toc-covid-considerations" class="nav-link" data-scroll-target="#covid-considerations">Covid considerations</a></li>
   <li><a href="#objectives-of-the-course" id="toc-objectives-of-the-course" class="nav-link" data-scroll-target="#objectives-of-the-course">Objectives of the course</a></li>
+  <li><a href="#topics-in-order-with-rough-timing" id="toc-topics-in-order-with-rough-timing" class="nav-link" data-scroll-target="#topics-in-order-with-rough-timing">Topics (in order with rough timing)</a></li>
   <li><a href="#personnel" id="toc-personnel" class="nav-link" data-scroll-target="#personnel">Personnel</a></li>
   <li><a href="#course-websites-github-piazza-gradescope-and-bcourses" id="toc-course-websites-github-piazza-gradescope-and-bcourses" class="nav-link" data-scroll-target="#course-websites-github-piazza-gradescope-and-bcourses">Course websites: GitHub, Ed Discussion, GradeScope, and bCourses</a>
   <ul class="collapse">
@@ -143,11 +144,7 @@ ul.task-list{list-style: none;}
   <li><a href="#feedback" id="toc-feedback" class="nav-link" data-scroll-target="#feedback">Feedback</a></li>
   <li><a href="#accomodations-for-students-with-disabilities" id="toc-accomodations-for-students-with-disabilities" class="nav-link" data-scroll-target="#accomodations-for-students-with-disabilities">Accomodations for Students with Disabilities</a></li>
   <li><a href="#scheduling-conflicts" id="toc-scheduling-conflicts" class="nav-link" data-scroll-target="#scheduling-conflicts">Scheduling Conflicts</a></li>
-  <li><a href="#campus-honor-code" id="toc-campus-honor-code" class="nav-link" data-scroll-target="#campus-honor-code">Campus Honor Code</a>
-  <ul class="collapse">
-  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"></a></li>
-  <li><a href="#topics-in-order-with-rough-timing" id="toc-topics-in-order-with-rough-timing" class="nav-link" data-scroll-target="#topics-in-order-with-rough-timing">Topics (in order with rough timing)</a></li>
-  </ul></li>
+  <li><a href="#campus-honor-code" id="toc-campus-honor-code" class="nav-link" data-scroll-target="#campus-honor-code">Campus Honor Code</a></li>
   </ul>
 </nav>
     </div>
@@ -158,29 +155,47 @@ ul.task-list{list-style: none;}
 
 <section id="course-description" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="course-description">Course description</h2>
-<p>Statistics 243 is an introduction to statistical computing, taught using R. The course will cover both programming concepts and statistical computing concepts. Programming concepts will include data and text manipulation, data structures, functions and variable scope, regular expressions, debugging/testing, and parallel processing. Statistical computing topics will include working with large datasets, numerical linear algebra, computer arithmetic/precision, simulation studies and Monte Carlo methods, numerical optimization, and numerical integration/differentiation. A goal is that coverage of these topics complement the models/methods discussed in the rest of the statistics/biostatistics graduate curriculum. We will also cover the basics of UNIX/Linux, in particular some basic shell scripting and operating on remote servers, as well as a bit of Python.</p>
-<p>While the course is taught using R and you will learn a lot about using R at an advanced level, the focus of the course is statistical computing/computing for data science more generally. Also, this is not a course that will cover specific statistical/data analysis methods.</p>
-<p>Informal prerequisites: If you are not a statistics or biostatistics graduate student, please chat with me if you’re not sure if this course makes sense for you. A background in calculus, linear algebra, probability and statistics is expected, as well as a basic ability to operate on a computer (but I do not assume familiarity with the UNIX-style command line/terminal/shell). Furthermore, I’m expecting you will know the basics of R, at the level of the Modules 1-5 in the R bootcamp offered Aug.&nbsp;20-21, 2022. If you don’t have that background you’ll need to spend time in the initial couple weeks getting up to speed. All the material from the bootcamp is <a href="https://github.com/berkeley-scf/r-bootcamp-fall-2022/archive/main.zip">available here</a> (plus I can give you access to the bootcamp videos), we’ll have an optional hands-on practice session during the second or third week of class, and the GSI can also provide assistance.</p>
+<p>Statistics 243 is an introduction to statistical computing, taught using R. The course will cover both programming concepts and statistical computing concepts. Programming concepts will include data and text manipulation, data structures, functions and variable scope, regular expressions, debugging/testing, and parallel processing. Statistical computing topics will include working with large datasets, numerical linear algebra, computer arithmetic/precision, simulation studies and Monte Carlo methods, numerical optimization, and numerical integration/differentiation. A goal is that coverage of these topics complement the models/methods discussed in the rest of the statistics/biostatistics graduate curriculum. We will also cover the basics of UNIX/Linux, in particular some basic shell scripting and operating on remote servers, as well as a moderate amount of Python.</p>
+<p>While the course is taught using R and you will learn a lot about using R at an advanced level, the focus of the course is computing for statistics and data science more generally. Also, this is not a course that will cover specific statistical/machine learning/data analysis methods.</p>
+<p>Informal prerequisites: If you are not a statistics or biostatistics graduate student, please chat with me if you’re not sure if this course makes sense for you. A background in calculus, linear algebra, probability and statistics is expected, as well as a basic ability to operate on a computer (but I do not assume familiarity with the UNIX-style command line/terminal/shell). Furthermore, I’m expecting you will know the basics of R, at the level of the Modules 1-5 in the <a href="https://berkeley-scf.github.io/r-bootcamp-fall-2022">R bootcamp</a> offered Aug.&nbsp;20-21, 2022. If you don’t have that background you’ll need to spend time in the initial couple weeks getting up to speed. All the material from the bootcamp is <a href="https://github.com/berkeley-scf/r-bootcamp-fall-2022/archive/main.zip">available here</a> (plus I can give you access to the bootcamp videos), we’ll have an optional hands-on practice session during the second or third week of class, and the GSI can also provide assistance.</p>
 </section>
 <section id="covid-considerations" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="covid-considerations">Covid considerations</h2>
-<p>We’ll be following university policy through the semester. At the moment that means:</p>
+<p>We’ll be following university policy through the semester.</p>
 <ol type="1">
-<li><p>Class and section are in person. I will be recording class (but not section) via the room’s course capture capabilities so if anyone needs to miss a class they should be able to catch up. There is in-class discussion and problem-solving so I expect students to attend class in general. <strong>However, please do not come to class if you feel any symptoms or satisfy the university’s definition of having been exposed to Covid – you can watch the recording and it will not affect your grade in any way.</strong></p></li>
-<li><p>Masks are required at the moment. Hopefully the public health situation will improve to the point that masks will be optional later in the semester.</p></li>
-<li><p>Vaccination is required with very limited exceptions.</p></li>
+<li><p>Class and section are in person. I will be recording class (but not section) via the room’s course capture capabilities so if anyone needs to miss a class they should be able to catch up. There is in-class discussion and problem-solving so I expect students to attend class in general. <strong>However, please do not come to class if you feel any symptoms</strong> – you can watch the recording and it will not affect your grade in any way.**</p></li>
+<li><p>Masks are not required at the moment, but you are welcome to wear one. For the sake of communicating most clearly I won’t wear one while teaching.</p></li>
 </ol>
-<p>Personally, I am feeling comfortable with having class under these circumstances, and I hope you are as well. If you have any concerns, please let me know; I’m happy to talk with you.</p>
 </section>
 <section id="objectives-of-the-course" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="objectives-of-the-course">Objectives of the course</h2>
 <p>The goals of the course are that, by the end of the course, students be able to:</p>
 <ul>
 <li><p>operate effectively in a UNIX environment and on remote servers and compute clusters;</p></li>
-<li><p>program effectively in R with an advanced knowledge of R functionality and an understanding of general programming concepts and principles;</p></li>
+<li><p>have a solid understanding of general programming concepts and principles, and be able to program effectively in R with an advanced knowledge of R functionality;</p></li>
 <li><p>be familiar with concepts and tools for reproducible research and good scientific computing practices; and</p></li>
 <li><p>understand in depth and be able to make use of principles of numerical linear algebra, optimization, and simulation for statistics- and data science-related analyses and research.</p></li>
 </ul>
+</section>
+<section id="topics-in-order-with-rough-timing" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="topics-in-order-with-rough-timing">Topics (in order with rough timing)</h2>
+<p>The ‘days’ here are (roughly) class sessions, as general guidance.</p>
+<ol type="1">
+<li><p>Introduction to UNIX, operating on a compute server (1 day)</p></li>
+<li><p>Data formats, data access, webscraping, data structures (2 days)</p></li>
+<li><p>Debugging, good programming practices, reproducible research (1 day)</p></li>
+<li><p>The bash shell and shell scripting, version control (3 days)</p></li>
+<li><p>Programming concepts and advanced R programming: text processing and regular expressions, object-oriented programming, functions and variable scope, efficient programming, memory use (9 days)</p></li>
+<li><p>Computer arithmetic/representation of numbers on a computer (3 days)</p></li>
+<li><p>Parallel processing (2 days)</p></li>
+<li><p>Working with databases, hashing, and big data (3 days)</p></li>
+<li><p>Numerical linear algebra (5 days)</p></li>
+<li><p>Simulation studies and Monte Carlo (2 days)</p></li>
+<li><p>Optimization (7 days)</p></li>
+<li><p>Numerical integration and differentiation (1 day)</p></li>
+<li><p>Graphics (1 day)</p></li>
+</ol>
+<p>If you want to get a sense of what material we will cover in more detail, in advance, you can take a look at the materials in the <em>units</em> directory of GitHub repository from when I taught the class in 2021. See <a href="https://github.com/berkeley-stat243/stat243-fall-2021" class="uri">https://github.com/berkeley-stat243/stat243-fall-2021</a>.</p>
 </section>
 <section id="personnel" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="personnel">Personnel</h2>
@@ -191,9 +206,9 @@ ul.task-list{list-style: none;}
 </ul></li>
 <li><p>GSI</p>
 <ul>
-<li>Andrew Vaughn (ahv36@berkeley.edu)</li>
+<li>James Duncan</li>
 </ul></li>
-<li><p>We’ll post office hours on the GitHub site README.</p></li>
+<li><p>Office hours can be found <a href="office_hours">here</a>.</p></li>
 <li><p><strong>When to see us about an assignment</strong>: We’re here to help, including providing guidance on assignments. You don’t want to be futilely spinning your wheels for a long time getting nowhere. That said, before coming to see us about a difficulty, you should try something a few different ways and define/summarize what is going wrong or where you are getting stuck.</p></li>
 </ul>
 </section>
@@ -201,18 +216,17 @@ ul.task-list{list-style: none;}
 <h2 class="unnumbered anchored" data-anchor-id="course-websites-github-piazza-gradescope-and-bcourses">Course websites: GitHub, Ed Discussion, GradeScope, and bCourses</h2>
 <p>Key websites for the course are:</p>
 <ul>
-<li><p>GitHub for course content: <a href="https://github.com/berkeley-stat243/stat243-fall-2021" class="uri">https://github.com/berkeley-stat243/stat243-fall-2021</a>, including logistics info on the main GitHub page (scroll down below the files listing).</p></li>
+<li><p>This course website, which is hosted on GitHub pages, and the GitHub repository containing the source materials: <a href="https://github.com/berkeley-stat243/stat243-fall-2022" class="uri">https://github.com/berkeley-stat243/stat243-fall-2022</a></p></li>
 <li><p>SCF tutorials for additional content: <a href="https://statistics.berkeley.edu/computing/training/tutorials" class="uri">https://statistics.berkeley.edu/computing/training/tutorials</a></p></li>
 <li><p>Ed Discussion site for discussions/Q&amp;A: <a href="https://edstem.org/us/courses/25090/discussion/" class="uri">https://edstem.org/us/courses/25090/discussion/</a></p></li>
-<li><p>bCourses site for course capture recordings and possibly some other materials:</p>
-<p><a href="https://bcourses.berkeley.edu/courses/1507757" class="uri">https://bcourses.berkeley.edu/courses/1507757</a>.</p></li>
+<li><p>bCourses site for course capture recordings and possibly some other materials: <a href="https://bcourses.berkeley.edu/courses/1507757" class="uri">https://bcourses.berkeley.edu/courses/1507757</a>.</p></li>
 <li><p>Gradescope for assignments (also linked from bCourses): [UNDER CONSTRUCTION]<a href="https://www.gradescope.com/courses/XYZ" class="uri">https://www.gradescope.com/courses/XYZ</a></p></li>
 </ul>
-<p>All course materials will be posted on GitHub except for video content, which will be in bCourses.</p>
+<p>All course materials will be posted on here / on GitHub except for video content, which will be in bCourses.</p>
 <section id="course-discussion" class="level3">
 <h3 class="anchored" data-anchor-id="course-discussion">Course discussion</h3>
-<p>We will use the course Ed Discussion site for communication (announcements, questions, and discussion). You should ask questions about class material and problem sets through the site. Please use this site for your questions so that either James or I can respond and so that everyone can benefit from the discussion. I suggest you to modify your settings on Ed Discussion so you are informed by email of postings. I strongly encourage you to respond to or comment on each other’s questions as well (this will help your class participation grade), although of course you should not provide a solution to a problem set problem. If you have a specific administrative question you need to direct just to me, it’s fine to email me directly. But if you simply want to privately ask a question about content, then just come to an office hour or see me after class or James during/after section.</p>
-<p>If you’re enrolled in the class you should be a member of the group and be able to access it. If you’re auditing or not yet enrolled and would like access, make sure to fill out the survey above and I will add you. In addition, we will use Gradescope for viewing grades.</p>
+<p>We will use the course Ed Discussion site for communication (announcements, questions, and discussion). You should ask questions about class material and problem sets through the site. Please use this site for your questions so that either James or I can respond and so that everyone can benefit from the discussion. I suggest you to modify your settings on Ed Discussion so you are informed by email of postings. I strongly encourage you to respond to or comment on each other’s questions as well (this will help your class participation grade), although of course you should not provide a solution to a problem set problem. If you have a specific administrative question you need to direct just to me, it’s fine to email me directly or post private on the Discussion site. But if you simply want to privately ask a question about content, then just come to an office hour or see me after class or James during/after section.</p>
+<p>If you’re enrolled in the class you should be a member of the group and be able to access it. If you’re auditing or not yet enrolled and would like access, make sure to fill out the <a href="https://forms.gle/SVm9thpkh16Zps2h6">course survey</a> and I will add you. In addition, we will use Gradescope for viewing grades.</p>
 </section>
 </section>
 <section id="course-material" class="level2 unnumbered">
@@ -253,11 +267,11 @@ ul.task-list{list-style: none;}
 </section>
 <section id="section" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="section">Section</h2>
-<p>The GSI will lead a two-hour discussion section each week (there are two sections). By and large, these will only last for about one hour of actual content, but the second hour may be used as an office hour with the GSI or for troubleshooting software during the early weeks. The discussion sections will vary in format and topic, but material will include demonstrations on various topics (version control, debugging, testing, etc.), group work on these topics, discussion of relevant papers, and discussion of problem set solutions. The first section generally has more demand, so to avoid having too many people in the room, you should go to your assigned section unless you talk to me first.</p>
+<p>The GSI will lead a two-hour discussion section each week (there are two sections). By and large, these will only last for about one hour of actual content, but the second hour may be used as an office hour with the GSI or for troubleshooting software during the early weeks. The discussion sections will vary in format and topic, but material will include demonstrations on various topics (version control, debugging, testing, etc.), group work on these topics, discussion of relevant papers, and discussion of problem set solutions. <strong>The first section (noon - 2 pm) generally has more demand, so to avoid having too many people in the room, you should go to your assigned section unless you talk to me first.</strong></p>
 </section>
 <section id="computing-resources" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="computing-resources">Computing Resources</h2>
-<p>Most work for the course can be done on your laptop. Later in the course we’ll also use the Statistics Department cluster. You can also use the <a href="datahub.berkeley.edu">campus DataHub</a> to access a bash shell or run RStudio.</p>
+<p>Most work for the course can be done on your laptop. Later in the course we’ll also use the Statistics Department cluster. You can also use the to access a bash shell or run RStudio.</p>
 <p>The software needed for the course is as follows:</p>
 <ul>
 <li><p>Access to the UNIX command line (bash shell)</p></li>
@@ -269,7 +283,7 @@ ul.task-list{list-style: none;}
 </section>
 <section id="class-time" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="class-time">Class time</h2>
-<p>My goal is to have classes be an interactive environment. This is both more interesting for all of us and more effective in learning the material. I encourage you to ask questions and will pose questions to the class to think about, respond to via Google forms, and discuss (though I may have to adjust discussion given mask wearing and the public health situation). To increase time for discussion and assimilation of the material in class, before some classes I may ask that you read material or work through tutorials in advance of class. Occasionally, I will ask you to submit answers to questions in advance of class as well.</p>
+<p>My goal is to have classes be an interactive environment. This is both more interesting for all of us and more effective in learning the material. I encourage you to ask questions and will pose questions to the class to think about, respond to via Google forms, and discuss. To increase time for discussion and assimilation of the material in class, before some classes I may ask that you read material or work through tutorials in advance of class. Occasionally, I will ask you to submit answers to questions in advance of class as well.</p>
 <p>Please do not use phones during class and limit laptop use to the material being covered.</p>
 <p>Student backgrounds with computing will vary. For those of you with limited background on a topic, I encourage you to ask questions during class so I know what you find confusing. For those of you with extensive background on a topic (there will invariably be some topics where one of you will know more about it than I do or have more real-world experience), I encourage you to pitch in with your perspective. In general, there are many ways to do things on a computer, particularly in a UNIX environment and in R, so it will help everyone (including me) if we hear multiple perspectives/ideas.</p>
 <p>Finally, class recordings for review or to make up for absence will be available through the bCourses Media Gallery, available on the Media Gallery tab on the bCourses page for the class.</p>
@@ -278,7 +292,7 @@ ul.task-list{list-style: none;}
 <h2 class="unnumbered anchored" data-anchor-id="course-requirements-and-grading">Course requirements and grading</h2>
 <section id="course-grades" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="course-grades">Course grades</h3>
-<p>The grade for this course is primarily based on assignments due every 1-2 weeks, two quizzes (likely in early-mid October and mid-late November, or possibly a single quiz/exam in November, and a final group project. I will also provide extra credit questions on some problem sets. There is no final exam. 50% of the grade is based on the problem sets, 25% on the quizzes, 15% on the project, and 10% on your participation in discussions on Piazza, your responses to the in-class Google forms questions, as well as occasional brief questions that I will ask you to answer in advance of the next class.</p>
+<p>The grade for this course is primarily based on assignments due every 1-2 weeks, two quizzes (likely in early-mid October and mid-late November), and a final group project. I will also provide extra credit questions on some problem sets. There is no final exam. 50% of the grade is based on the problem sets, 25% on the quizzes, 15% on the project, and 10% on your participation in discussions on Ed, your responses to the in-class Google forms questions, as well as occasional brief questions that I will ask you to answer in advance of the next class.</p>
 <p>Grades will generally be As and Bs. An A involves doing all the work, getting full credit on most of the problem sets, showing competence on the quizzes, and doing a thorough job on the final project.</p>
 </section>
 <section id="problem-sets" class="level3 unnumbered">
@@ -286,21 +300,21 @@ ul.task-list{list-style: none;}
 <p>We will be less willing to help you if you come to our office hours or post a question online at the last minute. Working with computers can be unpredictable, so give yourself plenty of time for the assignments.</p>
 <p>There are several rules for submitting your assignments.</p>
 <ol type="1">
-<li><p>You should prepare your assignments using either R Markdown or LaTeX plus knitr.</p></li>
+<li><p>You should prepare your assignments using either R Markdown (or the new Quarto format) or LaTeX plus knitr.</p></li>
 <li><p>Problem set submission consists of <strong>both</strong> of the following:</p>
 <ol type="1">
 <li><p>A PDF submitted electronically through Gradescope, <strong>by the start of class (10 am)</strong> on the due date, and</p></li>
-<li><p>An electronic copy of the PDF, code file, and R Markdown/knitr document pushed to your class GitHub repository, following the instructions to be provided by the GSI.</p></li>
+<li><p>An electronic copy of the PDF, code file, and R Markdown/Quarto/knitr document pushed to your class GitHub repository, following the instructions to be provided by the GSI.</p></li>
 </ol>
 <p><strong>On-time submission will be determined based on the time stamp of when the PDF is submitted to gradeScope.</strong></p></li>
 <li><p>Answers should consist of textual response or mathematical expressions as appropriate, with key chunks of code embedded within the document. Extensive additional code can be provided as an appendix. Before diving into the code for a problem, you should say what the goal of the code is and your strategy for solving the problem. <strong>Raw code without explanation is not an appropriate solution.</strong></p></li>
 <li><p>Any mathematical derivations may be done by hand and scanned with your phone if you prefer that to writing up LaTeX equations.</p></li>
 </ol>
-<p>Note: knitr is a tool that allows one to embed chunks of code within LaTeX documents. It can also be used with the L-.1667em.25emY-.125emX GUI front-end to LaTeX. R Markdown is an extension to the Markdown markup language that allows one to embed R code within an HTML document. Please see the <em>dynamics document tutorial</em> on the SCF tutorials website; there will be additional information in the first section and on the first problem set.</p>
+<p>Note: R Markdown is an extension to the Markdown markup language that allows one to embed R code within an HTML document. Quarto is a new tool that generalized R Markdown and provides the compatible qmd format. knitr is a tool that allows one to embed chunks of code within LaTeX documents. It can also be used with Overleaf and the LyX GUI front-end to LaTeX. Please see the SCF <a href="https://berkeley-scf.github.io/tutorial-dynamic-docs">dynamics document tutorial</a>; there will be additional information in the first section and on the first problem set.</p>
 </section>
 <section id="submitting-assignments" class="level3">
 <h3 class="anchored" data-anchor-id="submitting-assignments">Submitting assignments</h3>
-<p>The file [UNDER CONSTRUCTION][submitting-electronically.txt](./howtos/submitting-electronically.txt) has information on setting up a Github repository for the class and submitting your assignments by committing your solution to Github. We will discuss this in section on Friday September 3.</p>
+<p>The file [UNDER CONSTRUCTION][submitting-electronically.txt](./software/submitting-electronically.txt) has information on setting up a Github repository for the class and submitting your assignments by committing your solution to Github. We will discuss this in section on Friday September 3.</p>
 </section>
 <section id="problem-set-grading" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="problem-set-grading">Problem set grading</h3>
@@ -320,7 +334,22 @@ ul.task-list{list-style: none;}
 </section>
 <section id="rules-for-working-together-and-the-campus-honor-code" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="rules-for-working-together-and-the-campus-honor-code">Rules for working together and the campus honor code</h3>
-<p>I encourage you to work together and help each other out. However, with regard to the problem sets, you should first try to figure out a given problem on your own. After that, if you’re stuck or want to explore alternative approaches, feel free to consult with your fellow students and with the GSI and me. You can share tips on general strategy or syntax for how to do small individual tasks within a problem, but <strong>you should not ask for and you should not share complete code or solutions</strong> for a problem. Basically, you can help each other out, but no one should be doing the work for someone else. In particular, <strong>your solution to a problem set (writeup and code) must be your own</strong>, and you’ll hear from me if either look too similar to someone else’s. <strong>You MUST note on your problem set solution any fellow students who you worked/consulted with.</strong> <strong>If you got a specific idea for how to do part of a problem from a fellow student, you should note that in your solution in the appropriate place</strong>, just as you would cite a book or URL.</p>
+<p>I encourage you to work together and help each other out. However, the problem set solutions you submit must be your own. What do I mean by that?</p>
+<ul>
+<li>You must first try to figure out a given problem on your own. After that, if you’re stuck or want to explore alternative approaches or check what you’ve done, feel free to consult with your fellow students and with the GSI and me.</li>
+<li>What does “consult with a fellow student mean”? You can discuss a problem with another student, brainstorm approaches, and share code syntax (generally not more than one line) on how to do small individual coding tasks within a problem.
+<ul>
+<li><strong>You should not ask another student for complete code or solutions, or look at their code/solution.</strong></li>
+<li><strong>You should not share complete code or solutions with another student or on Ed Discussion.</strong></li>
+</ul></li>
+<li>You must provide attribution for ideas obtained elsewhere, including other students.
+<ul>
+<li><strong>If you got a specific idea for how to do part of a problem from a fellow student, you should note that in your solution in the appropriate place</strong> (for specific syntax ideas, note this in a code comment), just as you would cite a book or URL.</li>
+<li><strong>You MUST note on your problem set solution any fellow students who you worked/consulted with.</strong></li>
+<li>You do not need to cite any Ed Discussion posts nor any discussions with Chris or James.</li>
+</ul></li>
+<li>Ultimately, <strong>your solution to a problem set (writeup and code) must be your own</strong>, and you’ll hear from me if either look too similar to someone else’s.</li>
+</ul>
 <p>Please see the last section of this document for more information on the Campus Honor Code, which I expect you to follow.</p>
 </section>
 </section>
@@ -334,43 +363,21 @@ ul.task-list{list-style: none;}
 </section>
 <section id="scheduling-conflicts" class="level1 unnumbered">
 <h1 class="unnumbered">Scheduling Conflicts</h1>
-<p>Campus asks that I include this information about conflicts: Please notify me in writing by the second week of the term about any known or potential extracurricular conflicts (such as religious observances, graduate or medical school interviews, or team activities). I will try my best to help you with making accommodations, but cannot promise them in all cases. In the event there is no mutually-workable solution, you may be dropped from the class.</p>
-<p>The main conflict that would be a problem would be the quizzes, whose date(s) is(are) TBD.</p>
+<p>Campus asks that I include this information about conflicts: Please notify me in writing by the second week of the term about any known or potential extracurricular conflicts (such as religious observances, graduate or medical school interviews, or team activities). I will try my best to help you with making accommodations, but I cannot promise them in all cases. In the event there is no mutually-workable solution, you may be dropped from the class.</p>
+<p>The main conflict that would be a problem would be the quizzes, whose dates I will determine in late August / early September.</p>
+<p><strong>Quizzes are in-person.</strong> There is no remote option, and the only make-up accommodations I will make are for illness or serious personal issues. <strong>Do not schedule any travel that may conflict with a quiz.</strong></p>
 </section>
 <section id="campus-honor-code" class="level1 unnumbered">
 <h1 class="unnumbered">Campus Honor Code</h1>
-<p><em>The following is the Campus Honor Code. With regard to collaboration and independence, please see my rules regarding problem sets earlier in this document – Chris.</em></p>
+<p><em>The following is the Campus Honor Code. With regard to collaboration and independence, please see my rules regarding problem sets above – Chris.</em></p>
 <p>The student community at UC Berkeley has adopted the following Honor Code: “As a member of the UC Berkeley community, I act with honesty, integrity, and respect for others.” The hope and expectation is that you will adhere to this code.</p>
 <p>Collaboration and Independence: Reviewing lecture and reading materials and studying for exams can be enjoyable and enriching things to do with fellow students. This is recommended. However, unless otherwise instructed, homework assignments are to be completed independently and materials submitted as homework should be the result of one’s own independent work.</p>
 <p>Cheating: A good lifetime strategy is always to act in such a way that no one would ever imagine that you would even consider cheating. Anyone caught cheating on a quiz or exam in this course will receive a failing grade in the course and will also be reported to the University Center for Student Conduct. In order to guarantee that you are not suspected of cheating, please keep your eyes on your own materials and do not converse with others during the quizzes and exams.</p>
 <p>Plagiarism: To copy text or ideas from another source without appropriate reference is plagiarism and will result in a failing grade for your assignment and usually further disciplinary action. For additional information on plagiarism and how to avoid it, see, for example: http://gsi.berkeley.edu/teachingguide/misconduct/prevent-plag.html</p>
 <p>Academic Integrity and Ethics: Cheating on exams and plagiarism are two common examples of dishonest, unethical behavior. Honesty and integrity are of great importance in all facets of life. They help to build a sense of self-confidence, and are key to building trust within relationships, whether personal or professional. There is no tolerance for dishonesty in the academic world, for it undermines what we are dedicated to doing – furthering knowledge for the benefit of humanity.</p>
 <p>Your experience as a student at UC Berkeley is hopefully fueled by passion for learning and replete with fulfilling activities. And we also appreciate that being a student may be stressful. There may be times when there is temptation to engage in some kind of cheating in order to improve a grade or otherwise advance your career. This could be as blatant as having someone else sit for you in an exam, or submitting a written assignment that has been copied from another source. And it could be as subtle as glancing at a fellow student’s exam when you are unsure of an answer to a question and are looking for some confirmation. One might do any of these things and potentially not get caught. However, if you cheat, no matter how much you may have learned in this class, you have failed to learn perhaps the most important lesson of all.</p>
-<section id="section-1" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="section-1"></h2>
-</section>
-<section id="topics-in-order-with-rough-timing" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="topics-in-order-with-rough-timing">Topics (in order with rough timing)</h2>
-<p>The ‘days’ here are class sessions under a non-virtual format, as general guidance.</p>
-<ol type="1">
-<li><p>Introduction to UNIX, operating on a compute server (1 day)</p></li>
-<li><p>Data formats, data access, webscraping (2 days)</p></li>
-<li><p>Debugging, good programming practices, reproducible research (1 day)</p></li>
-<li><p>The bash shell and shell scripting, version control (3 days)</p></li>
-<li><p>Programming concepts and advanced R programming: text processing and regular expressions, functions and variable scope, environments, object oriented programming, efficient programming (9 days)</p></li>
-<li><p>Computer arithmetic/representation of numbers on a computer (3 days)</p></li>
-<li><p>Parallel processing (2 days)</p></li>
-<li><p>Working with databases, hashing, and big data (3 days)</p></li>
-<li><p>Numerical linear algebra (5 days)</p></li>
-<li><p>Simulation studies and Monte Carlo (2 days)</p></li>
-<li><p>Optimization (7 days)</p></li>
-<li><p>Numerical integration and differentiation (1 day)</p></li>
-<li><p>Graphics (1 day)</p></li>
-</ol>
-<p>If you want to get a sense of what material we will cover in more detail, in advance, you can take a look at the materials in the <em>units</em> directory of GitHub repository from when I taught the class in 2020. See <a href="https://github.com/berkeley-stat243/stat243-fall-2020" class="uri">https://github.com/berkeley-stat243/stat243-fall-2020</a>.</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
