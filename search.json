@@ -81,7 +81,7 @@
     "href": "index.html#course-content",
     "title": "Statistics 243 Fall 2022",
     "section": "Course content",
-    "text": "Course content\n\nThis site: most non-recorded course material\n\nFor html versions of the Units, see the navigation bar above.\nFor PDF versions of the Units, clone the GitHub repository, or if you’re not yet familiar with Git, Download a zip file.\n\nVarious SCF tutorials: These include the various tutorials referred to in the class materials (e.g., the UNIX and bash shell tutorials, the dynamic documents tutorial, the Git tutorial, the string processing tutorial, etc.).\nbCourses: links to class course captures and any pre-recorded material.\n\nIf you’re not yet familiar with Git, go to the upper right of this page and click on ‘Clone or download’ and then ‘Download ZIP’."
+    "text": "Course content\n\nThis site: most non-recorded course material\n\nFor html versions of the Units, see the navigation bar above.\nFor PDF versions of the Units, clone the GitHub repository, or if you’re not yet familiar with Git, download a zip file.\n\nVarious SCF tutorials: These include the various tutorials referred to in the class materials (e.g., the UNIX and bash shell tutorials, the dynamic documents tutorial, the Git tutorial, the string processing tutorial, etc.).\nbCourses: links to class course captures and any pre-recorded material.\n\nIf you’re not yet familiar with Git, go to the upper right of this page and click on ‘Clone or download’ and then ‘Download ZIP’."
   },
   {
     "objectID": "index.html#logistics",
@@ -215,5 +215,26 @@
     "title": "Statistics 243 Fall 2022",
     "section": "Questions about taking the class",
     "text": "Questions about taking the class\nIf you would like to audit the class, enroll as a UC Berkeley undergraduate, or enroll as a concurrent enrollment student (i.e., for visiting students), or for some other reason are not enrolled, please fill out this survey as soon as possible. All those enrolled or wishing to take the class should have filled it out by Friday August 26 at noon.\nUndergraduates can only take the course with my permission and once all graduate students have an opportunity to register. I expect there will be space, and will likely start admitting undergraduates early the week of August 29 or late the previous week.\nConcurrent enrollment students can take the course with my permission and once all UC Berkeley students have had an opportunity to register. I expect there will be space, and will likely start admitting concurrent enrollment students early the week of August 29.\nPlease see the syllabus for the math and statistics background I expect, as well as the need to be familiar with R or to get up to speed in R during the first few weeks of the semester.\nThe first three weeks involve a lot of moving pieces, in part related to trying to get everyone up to speed with the bash shell and R. Please use these notes to keep on top of what you need to do."
+  },
+  {
+    "objectID": "units/unit1-unix.html",
+    "href": "units/unit1-unix.html",
+    "title": "Introduction to UNIX, computers, and key tools",
+    "section": "",
+    "text": "By UNIX, I mean any UNIX-like operating system, including Linux and Mac OS X. On the Mac you can access a UNIX terminal window with the Terminal application (via Applications -> Utilities -> Terminal from the Finder). Most modern scientific computing is done on UNIX-based machines, often by remotely logging in to a UNIX-based server.\nThere are a variety of ways to get access to a UNIX-style command line environment, outlined in the software tips on the course website."
+  },
+  {
+    "objectID": "units/unit1-unix.html#some-useful-editors",
+    "href": "units/unit1-unix.html#some-useful-editors",
+    "title": "Introduction to UNIX, computers, and key tools",
+    "section": "Some useful editors",
+    "text": "Some useful editors\n\nvarious editors available on all operating systems:\n\ntraditional editors born in UNIX: emacs, vim\nsome newer editors: Atom, Sublime Text (Sublime is proprietary/not free)\n\nWindows-specific: WinEdt\nMac-specific: Aquamacs Emacs, TextMate, TextEdit\nRStudio provides a built-in editor for R code and R Markdown files. (Note: RStudio as a whole is an IDE (integrated development environment. The editor is just the editing window where you edit code (and R Markdown) files.)\nVSCode has a powerful code editor that is customized to work with various languages.\n\nAs you get started it’s ok to use a very simple text editor such as Notepad in Windows, but you should take the time in the next few weeks to try out more powerful editors such as one of those listed above. It will be well worth your time over the course of your graduate work and then your career.\nBe careful in Windows - file suffixes are often hidden."
+  },
+  {
+    "objectID": "units/unit1-unix.html#optional-basic-emacs",
+    "href": "units/unit1-unix.html#optional-basic-emacs",
+    "title": "Introduction to UNIX, computers, and key tools",
+    "section": "(Optional) Basic emacs",
+    "text": "(Optional) Basic emacs\nEmacs is one option as an editor. I use Emacs a fair amount, so I’m including some tips here, but other editors listed above are just as good.\n\nEmacs has special modes for different types of files: R code files, C code files, Latex files – it’s worth your time to figure out how to set this up on your machine for the kinds of files you often work on\n\nFor working with R, ESS (emacs speaks statistics) mode is helpful. This is built into Aquamacs Emacs.\n\nTo open emacs in the terminal window rather than as a new window, which is handy when it’s too slow (or impossible) to pass (i.e., tunnel) the graphical emacs window through ssh: emacs -nw file.txt\nSome helpful keystroke sequence shorcuts\n\n\n\n\n\n\n\n\nSequence\nResult\n\n\n\n\nC-x,C-c\nClose the file\n\n\nC-x,C-s\nSave the file\n\n\nC-x,C-w\nSave with a new name\n\n\nC-s\nSearch\n\n\nESC\nGet out of command buffer at bottom of screen\n\n\nC-a\nGo to beginning of line\n\n\nC-e\nGo to end of line\n\n\nC-k\nDelete the rest of the line from cursor forward\n\n\nC-space, then move to end of block\nHighlight a block of text\n\n\nC-w\nRemove the highlighted block, putting it in the kill buffer\n\n\nC-y (after using C-k or C-w)\nPaste from kill buffer (‘y’ is for ‘yank’)"
   }
 ]
