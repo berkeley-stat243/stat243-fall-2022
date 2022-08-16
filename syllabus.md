@@ -15,10 +15,14 @@ statistics/biostatistics graduate curriculum. We will also cover the
 basics of UNIX/Linux, in particular some basic shell scripting and
 operating on remote servers, as well as a moderate amount of Python.
 
+### What the course is not
+
 While the course is taught using R and you will learn a lot about using
 R at an advanced level, the focus of the course is computing for
 statistics and data science more generally. Also, this is not a
 course that will cover specific statistical/machine learning/data analysis methods.
+
+### Prerequisites
 
 Informal prerequisites: If you are not a statistics or biostatistics
 graduate student, please chat with me if you're not sure if this course
