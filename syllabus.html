@@ -89,12 +89,12 @@ ul.task-list{list-style: none;}
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-units" role="button" data-bs-toggle="dropdown" aria-expanded="false">Units</a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-units">    
         <li>
-    <a class="dropdown-item" href="./units/unit1.Rmd">
- <span class="dropdown-text"></span></a>
+    <a class="dropdown-item" href="./units/unit1-unix.html">
+ <span class="dropdown-text">Unit 1</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./units/unit2.Rmd">
- <span class="dropdown-text"></span></a>
+    <a class="dropdown-item" href="./units/unit2-dataTech.html">
+ <span class="dropdown-text">Unit 2</span></a>
   </li>  
     </ul>
   </li>
@@ -119,12 +119,16 @@ ul.task-list{list-style: none;}
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#course-description" id="toc-course-description" class="nav-link active" data-scroll-target="#course-description">Course description</a></li>
+  <li><a href="#course-description" id="toc-course-description" class="nav-link active" data-scroll-target="#course-description">Course description</a>
+  <ul class="collapse">
+  <li><a href="#what-the-course-is-not" id="toc-what-the-course-is-not" class="nav-link" data-scroll-target="#what-the-course-is-not">What the course is not</a></li>
+  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link" data-scroll-target="#prerequisites">Prerequisites</a></li>
+  </ul></li>
   <li><a href="#covid-considerations" id="toc-covid-considerations" class="nav-link" data-scroll-target="#covid-considerations">Covid considerations</a></li>
   <li><a href="#objectives-of-the-course" id="toc-objectives-of-the-course" class="nav-link" data-scroll-target="#objectives-of-the-course">Objectives of the course</a></li>
   <li><a href="#topics-in-order-with-rough-timing" id="toc-topics-in-order-with-rough-timing" class="nav-link" data-scroll-target="#topics-in-order-with-rough-timing">Topics (in order with rough timing)</a></li>
   <li><a href="#personnel" id="toc-personnel" class="nav-link" data-scroll-target="#personnel">Personnel</a></li>
-  <li><a href="#course-websites-github-piazza-gradescope-and-bcourses" id="toc-course-websites-github-piazza-gradescope-and-bcourses" class="nav-link" data-scroll-target="#course-websites-github-piazza-gradescope-and-bcourses">Course websites: GitHub, Ed Discussion, GradeScope, and bCourses</a>
+  <li><a href="#course-websites-github-piazza-gradescope-and-bcourses" id="toc-course-websites-github-piazza-gradescope-and-bcourses" class="nav-link" data-scroll-target="#course-websites-github-piazza-gradescope-and-bcourses">Course websites: GitHub, Ed Discussion, Gradescope, and bCourses</a>
   <ul class="collapse">
   <li><a href="#course-discussion" id="toc-course-discussion" class="nav-link" data-scroll-target="#course-discussion">Course discussion</a></li>
   </ul></li>
@@ -134,6 +138,7 @@ ul.task-list{list-style: none;}
   <li><a href="#class-time" id="toc-class-time" class="nav-link" data-scroll-target="#class-time">Class time</a></li>
   <li><a href="#course-requirements-and-grading" id="toc-course-requirements-and-grading" class="nav-link" data-scroll-target="#course-requirements-and-grading">Course requirements and grading</a>
   <ul class="collapse">
+  <li><a href="#scheduling-conflicts" id="toc-scheduling-conflicts" class="nav-link" data-scroll-target="#scheduling-conflicts">Scheduling Conflicts</a></li>
   <li><a href="#course-grades" id="toc-course-grades" class="nav-link" data-scroll-target="#course-grades">Course grades</a></li>
   <li><a href="#problem-sets" id="toc-problem-sets" class="nav-link" data-scroll-target="#problem-sets">Problem sets</a></li>
   <li><a href="#submitting-assignments" id="toc-submitting-assignments" class="nav-link" data-scroll-target="#submitting-assignments">Submitting assignments</a></li>
@@ -143,7 +148,6 @@ ul.task-list{list-style: none;}
   </ul></li>
   <li><a href="#feedback" id="toc-feedback" class="nav-link" data-scroll-target="#feedback">Feedback</a></li>
   <li><a href="#accomodations-for-students-with-disabilities" id="toc-accomodations-for-students-with-disabilities" class="nav-link" data-scroll-target="#accomodations-for-students-with-disabilities">Accomodations for Students with Disabilities</a></li>
-  <li><a href="#scheduling-conflicts" id="toc-scheduling-conflicts" class="nav-link" data-scroll-target="#scheduling-conflicts">Scheduling Conflicts</a></li>
   <li><a href="#campus-honor-code" id="toc-campus-honor-code" class="nav-link" data-scroll-target="#campus-honor-code">Campus Honor Code</a></li>
   </ul>
 </nav>
@@ -156,14 +160,20 @@ ul.task-list{list-style: none;}
 <section id="course-description" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="course-description">Course description</h2>
 <p>Statistics 243 is an introduction to statistical computing, taught using R. The course will cover both programming concepts and statistical computing concepts. Programming concepts will include data and text manipulation, data structures, functions and variable scope, regular expressions, debugging/testing, and parallel processing. Statistical computing topics will include working with large datasets, numerical linear algebra, computer arithmetic/precision, simulation studies and Monte Carlo methods, numerical optimization, and numerical integration/differentiation. A goal is that coverage of these topics complement the models/methods discussed in the rest of the statistics/biostatistics graduate curriculum. We will also cover the basics of UNIX/Linux, in particular some basic shell scripting and operating on remote servers, as well as a moderate amount of Python.</p>
+<section id="what-the-course-is-not" class="level3">
+<h3 class="anchored" data-anchor-id="what-the-course-is-not">What the course is not</h3>
 <p>While the course is taught using R and you will learn a lot about using R at an advanced level, the focus of the course is computing for statistics and data science more generally. Also, this is not a course that will cover specific statistical/machine learning/data analysis methods.</p>
+</section>
+<section id="prerequisites" class="level3">
+<h3 class="anchored" data-anchor-id="prerequisites">Prerequisites</h3>
 <p>Informal prerequisites: If you are not a statistics or biostatistics graduate student, please chat with me if you’re not sure if this course makes sense for you. A background in calculus, linear algebra, probability and statistics is expected, as well as a basic ability to operate on a computer (but I do not assume familiarity with the UNIX-style command line/terminal/shell). Furthermore, I’m expecting you will know the basics of R, at the level of the Modules 1-5 in the <a href="https://berkeley-scf.github.io/r-bootcamp-fall-2022">R bootcamp</a> offered Aug.&nbsp;20-21, 2022. If you don’t have that background you’ll need to spend time in the initial couple weeks getting up to speed. All the material from the bootcamp is <a href="https://github.com/berkeley-scf/r-bootcamp-fall-2022/archive/main.zip">available here</a> (plus I can give you access to the bootcamp videos), we’ll have an optional hands-on practice session during the second or third week of class, and the GSI can also provide assistance.</p>
+</section>
 </section>
 <section id="covid-considerations" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="covid-considerations">Covid considerations</h2>
 <p>We’ll be following university policy through the semester.</p>
 <ol type="1">
-<li><p>Class and section are in person. I will be recording class (but not section) via the room’s course capture capabilities so if anyone needs to miss a class they should be able to catch up. There is in-class discussion and problem-solving so I expect students to attend class in general. <strong>However, please do not come to class if you feel any symptoms</strong> – you can watch the recording and it will not affect your grade in any way.**</p></li>
+<li><p>Class and section are in person. I will be recording class (but not section) via the room’s course capture capabilities so if anyone needs to miss a class they should be able to catch up. There is in-class discussion and problem-solving so I expect students to attend class in general. <strong>However, please do not come to class if you feel any symptoms</strong> – you can watch the recording and it will not affect your grade in any way.</p></li>
 <li><p>Masks are not required at the moment, but you are welcome to wear one. For the sake of communicating most clearly I won’t wear one while teaching.</p></li>
 </ol>
 </section>
@@ -209,11 +219,11 @@ ul.task-list{list-style: none;}
 <li>James Duncan</li>
 </ul></li>
 <li><p>Office hours can be found <a href="office_hours">here</a>.</p></li>
-<li><p><strong>When to see us about an assignment</strong>: We’re here to help, including providing guidance on assignments. You don’t want to be futilely spinning your wheels for a long time getting nowhere. That said, before coming to see us about a difficulty, you should try something a few different ways and define/summarize what is going wrong or where you are getting stuck.</p></li>
+<li><p><strong>When to see us about an assignment</strong>: We’re here to help, including providing guidance on assignments. You don’t want to be futilely spinning your wheels for a long time getting nowhere. That said, before coming to see us about a difficulty, you should try something a few different ways and define/summarize for yourself what is going wrong or where you are getting stuck.</p></li>
 </ul>
 </section>
 <section id="course-websites-github-piazza-gradescope-and-bcourses" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="course-websites-github-piazza-gradescope-and-bcourses">Course websites: GitHub, Ed Discussion, GradeScope, and bCourses</h2>
+<h2 class="unnumbered anchored" data-anchor-id="course-websites-github-piazza-gradescope-and-bcourses">Course websites: GitHub, Ed Discussion, Gradescope, and bCourses</h2>
 <p>Key websites for the course are:</p>
 <ul>
 <li><p>This course website, which is hosted on GitHub pages, and the GitHub repository containing the source materials: <a href="https://github.com/berkeley-stat243/stat243-fall-2022" class="uri">https://github.com/berkeley-stat243/stat243-fall-2022</a></p></li>
@@ -271,7 +281,7 @@ ul.task-list{list-style: none;}
 </section>
 <section id="computing-resources" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="computing-resources">Computing Resources</h2>
-<p>Most work for the course can be done on your laptop. Later in the course we’ll also use the Statistics Department cluster. You can also use the to access a bash shell or run RStudio.</p>
+<p>Most work for the course can be done on your laptop. Later in the course we’ll also use the Statistics Department cluster. You can also use the SCF JupyterHub or the campus DataHub to access a bash shell or run RStudio.</p>
 <p>The software needed for the course is as follows:</p>
 <ul>
 <li><p>Access to the UNIX command line (bash shell)</p></li>
@@ -290,6 +300,12 @@ ul.task-list{list-style: none;}
 </section>
 <section id="course-requirements-and-grading" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="course-requirements-and-grading">Course requirements and grading</h2>
+<section id="scheduling-conflicts" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="scheduling-conflicts">Scheduling Conflicts</h3>
+<p>Campus asks that I include this information about conflicts: Please notify me in writing by the second week of the term about any known or potential extracurricular conflicts (such as religious observances, graduate or medical school interviews, or team activities). I will try my best to help you with making accommodations, but I cannot promise them in all cases. In the event there is no mutually-workable solution, you may be dropped from the class.</p>
+<p>The main conflict that would be a problem would be the quizzes, whose dates I will determine in late August / early September.</p>
+<p><strong>Quizzes are in-person.</strong> There is no remote option, and the only make-up accommodations I will make are for illness or serious personal issues. <strong>Do not schedule any travel that may conflict with a quiz.</strong></p>
+</section>
 <section id="course-grades" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="course-grades">Course grades</h3>
 <p>The grade for this course is primarily based on assignments due every 1-2 weeks, two quizzes (likely in early-mid October and mid-late November), and a final group project. I will also provide extra credit questions on some problem sets. There is no final exam. 50% of the grade is based on the problem sets, 25% on the quizzes, 15% on the project, and 10% on your participation in discussions on Ed, your responses to the in-class Google forms questions, as well as occasional brief questions that I will ask you to answer in advance of the next class.</p>
@@ -306,15 +322,15 @@ ul.task-list{list-style: none;}
 <li><p>A PDF submitted electronically through Gradescope, <strong>by the start of class (10 am)</strong> on the due date, and</p></li>
 <li><p>An electronic copy of the PDF, code file, and R Markdown/Quarto/knitr document pushed to your class GitHub repository, following the instructions to be provided by the GSI.</p></li>
 </ol>
-<p><strong>On-time submission will be determined based on the time stamp of when the PDF is submitted to gradeScope.</strong></p></li>
-<li><p>Answers should consist of textual response or mathematical expressions as appropriate, with key chunks of code embedded within the document. Extensive additional code can be provided as an appendix. Before diving into the code for a problem, you should say what the goal of the code is and your strategy for solving the problem. <strong>Raw code without explanation is not an appropriate solution.</strong></p></li>
+<p><strong>On-time submission will be determined based on the time stamp of when the PDF is submitted to Gradescope.</strong></p></li>
+<li><p>Answers should consist of textual response or mathematical expressions as appropriate, with key chunks of code embedded within the document. Extensive additional code can be provided as an appendix. Before diving into the code for a problem, you should say what the goal of the code is and your strategy for solving the problem. <strong>Raw code without explanation is not an appropriate solution.</strong> Please see our <a href="rubric">qualitative grading rubric</a> for guidance. In general the rubric is meant to reinforce good coding practices and high-quality scientific communication.</p></li>
 <li><p>Any mathematical derivations may be done by hand and scanned with your phone if you prefer that to writing up LaTeX equations.</p></li>
 </ol>
-<p>Note: R Markdown is an extension to the Markdown markup language that allows one to embed R code within an HTML document. Quarto is a new tool that generalized R Markdown and provides the compatible qmd format. knitr is a tool that allows one to embed chunks of code within LaTeX documents. It can also be used with Overleaf and the LyX GUI front-end to LaTeX. Please see the SCF <a href="https://berkeley-scf.github.io/tutorial-dynamic-docs">dynamics document tutorial</a>; there will be additional information in the first section and on the first problem set.</p>
+<p>Note: R Markdown is an extension to the Markdown markup language that allows one to embed R code within an HTML document. Quarto is a new tool that generalizes R Markdown and provides the compatible qmd format. knitr is a tool that allows one to embed chunks of code within LaTeX documents, including with Overleaf and the LyX GUI front-end to LaTeX. Please see the SCF <a href="https://berkeley-scf.github.io/tutorial-dynamic-docs">dynamics document tutorial</a>; there will be additional information in the first section and on the first problem set.</p>
 </section>
 <section id="submitting-assignments" class="level3">
 <h3 class="anchored" data-anchor-id="submitting-assignments">Submitting assignments</h3>
-<p>The file [UNDER CONSTRUCTION][submitting-electronically.txt](./software/submitting-electronically.txt) has information on setting up a Github repository for the class and submitting your assignments by committing your solution to Github. We will discuss this in section on Friday September 3.</p>
+<p>In the first section (September 2), we’ll discuss <a href="software/ps_submission">how to submit your problem sets</a> both on Gradescope and via your class GitHub repository, located at <code>https:github.berkeley.edu/&lt;your_calnet_username&gt;</code>.</p>
 </section>
 <section id="problem-set-grading" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="problem-set-grading">Problem set grading</h3>
@@ -325,6 +341,7 @@ ul.task-list{list-style: none;}
 <li><p>2 = satisfactory (you tried everything but there were pieces of what you did that didn’t solve or present/explain one or more problems in a complete way), and</p></li>
 <li><p>3 = full credit.</p></li>
 </ul>
+<p>Again, the <a href="rubric">qualitative grading rubric</a> provides guidance on what we want to see for full credit.</p>
 <p>For components #1 and #3, many of you will get a score of 2 for some problem sets as you develop good coding practices. You can still get an A in the class despite this.</p>
 <p>Your total score for the PS is a weighted sum of the scores for the three components. If you turn in a PS late, I’ll bump you down by two points (out of the available). If you turn it in really late (i.e., after we start grading them), I will bump you down by four points. No credit after solutions are distributed.</p>
 </section>
@@ -357,18 +374,12 @@ ul.task-list{list-style: none;}
 <h2 class="unnumbered anchored" data-anchor-id="feedback">Feedback</h2>
 <p>I welcome comments and suggestions and concerns. Particularly good suggestions will count towards your class participation grade.</p>
 </section>
-<section id="accomodations-for-students-with-disabilities" class="level1 unnumbered">
-<h1 class="unnumbered">Accomodations for Students with Disabilities</h1>
+<section id="accomodations-for-students-with-disabilities" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="accomodations-for-students-with-disabilities">Accomodations for Students with Disabilities</h2>
 <p>Please see me as soon as possible if you need particular accommodations, and we will work out the necessary arrangements.</p>
 </section>
-<section id="scheduling-conflicts" class="level1 unnumbered">
-<h1 class="unnumbered">Scheduling Conflicts</h1>
-<p>Campus asks that I include this information about conflicts: Please notify me in writing by the second week of the term about any known or potential extracurricular conflicts (such as religious observances, graduate or medical school interviews, or team activities). I will try my best to help you with making accommodations, but I cannot promise them in all cases. In the event there is no mutually-workable solution, you may be dropped from the class.</p>
-<p>The main conflict that would be a problem would be the quizzes, whose dates I will determine in late August / early September.</p>
-<p><strong>Quizzes are in-person.</strong> There is no remote option, and the only make-up accommodations I will make are for illness or serious personal issues. <strong>Do not schedule any travel that may conflict with a quiz.</strong></p>
-</section>
-<section id="campus-honor-code" class="level1 unnumbered">
-<h1 class="unnumbered">Campus Honor Code</h1>
+<section id="campus-honor-code" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="campus-honor-code">Campus Honor Code</h2>
 <p><em>The following is the Campus Honor Code. With regard to collaboration and independence, please see my rules regarding problem sets above – Chris.</em></p>
 <p>The student community at UC Berkeley has adopted the following Honor Code: “As a member of the UC Berkeley community, I act with honesty, integrity, and respect for others.” The hope and expectation is that you will adhere to this code.</p>
 <p>Collaboration and Independence: Reviewing lecture and reading materials and studying for exams can be enjoyable and enriching things to do with fellow students. This is recommended. However, unless otherwise instructed, homework assignments are to be completed independently and materials submitted as homework should be the result of one’s own independent work.</p>
