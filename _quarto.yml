@@ -15,9 +15,9 @@ website:
         text: Software
       - text: "Units"
         menu:
-          - file: units/unit1.Rmd
+          - file: units/unit1-unix.Rmd
           - text: "Unit 1"
-          - file: units/unit2.Rmd
+          - file: units/unit2-dataTech.Rmd
       - href: https://edstem.org/us/courses/25090/discussion/
         text: "Discussion"
       - href: https://statistics.berkeley.edu/computing/training/tutorials
