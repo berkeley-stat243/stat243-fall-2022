@@ -46,7 +46,7 @@ We'll be following university policy through the semester.
     in-class discussion and problem-solving so I expect students to
     attend class in general. **However, please do not come to class if
     you feel any symptoms** -- you can watch the recording and it
-    will not affect your grade in any way.**
+    will not affect your grade in any way.
 
 2.  Masks are not required at the moment, but you are welcome to wear
    one. For the sake of communicating most clearly I won't wear one while teaching.
@@ -123,8 +123,8 @@ directory of GitHub repository from when I taught the class in 2021. See
     including providing guidance on assignments. You don't want to be
     futilely spinning your wheels for a long time getting nowhere. That
     said, before coming to see us about a difficulty, you should try
-    something a few different ways and define/summarize what is going
-    wrong or where you are getting stuck.
+    something a few different ways and define/summarize for yourself what is going
+    wrong or where you are getting stuck. 
 
 ## Course websites: GitHub, Ed Discussion, GradeScope, and bCourses {#course-websites-github-piazza-gradescope-and-bcourses .unnumbered}
 
@@ -249,7 +249,7 @@ first.**
 
 Most work for the course can be done on your laptop. Later in the course
 we'll also use the Statistics Department cluster. You can also use the
- to access a bash shell or run RStudio.
+SCF JupyterHub or the campus DataHub to access a bash shell or run RStudio.
 
 The software needed for the course is as follows:
 
@@ -342,23 +342,25 @@ There are several rules for submitting your assignments.
     appendix. Before diving into the code for a problem, you should say
     what the goal of the code is and your strategy for solving the
     problem. **Raw code without explanation is not an appropriate
-    solution.**
+    solution.** Please see our [qualitative grading rubric](rubric) for guidance. 
+    In general the rubric is meant to reinforce good coding practices and 
+    high-quality scientific communication.
 
 4.  Any mathematical derivations may be done by hand and scanned with
     your phone if you prefer that to writing up LaTeX equations.
 
 Note: R Markdown is an extension to the Markdown
 markup language that allows one to embed R code within an HTML document.
-Quarto is a new tool that generalized R Markdown and provides the 
+Quarto is a new tool that generalizes R Markdown and provides the 
 compatible qmd format. knitr is a tool that allows one to embed chunks of code within
-LaTeX documents. It can also be used with Overleaf and the LyX
+LaTeX documents, including with Overleaf and the LyX
 GUI front-end to LaTeX. 
 Please see the SCF [dynamics document tutorial](https://berkeley-scf.github.io/tutorial-dynamic-docs); there will be additional information in the first section and
 on the first problem set.
 
 ### Submitting assignments
 
-The file [UNDER CONSTRUCTION][submitting-electronically.txt](./software/submitting-electronically.txt) has information on setting up a Github repository for the class and submitting your assignments by committing your solution to Github. We will discuss this in section on Friday September 3.
+The file [UNDER CONSTRUCTION][submitting-electronically.txt](./software/submitting-electronically.txt) has information on setting up a Github repository for the class and submitting your assignments by committing your solution to Github. We will discuss this in section on Friday September 2.
 
 ### Problem set grading {#problem-set-grading .unnumbered}
 
@@ -377,6 +379,9 @@ possible scores are:
     a complete way), and
 
 -   3 = full credit.
+
+Again, the [qualitative grading rubric](rubric) provides guidance
+on what we want to see for full credit.
 
 For components #1 and #3, many of you will get a score of 2 for some
 problem sets as you develop good coding practices. You can still get an
