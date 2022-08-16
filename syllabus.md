@@ -18,9 +18,9 @@ operating on remote servers, as well as a moderate amount of Python.
 ### What the course is not
 
 While the course is taught using R and you will learn a lot about using
-R at an advanced level, the focus of the course is computing for
-statistics and data science more generally. Also, this is not a
-course that will cover specific statistical/machine learning/data analysis methods.
+R at an advanced level, this is not a course about learning R.
+Rather the focus of the course is computing for
+statistics and data science more generally, using R to illustrate the concepts. Also, this is not a course that will cover specific statistical/machine learning/data analysis methods.
 
 ### Prerequisites
 
@@ -34,9 +34,7 @@ will know the basics of R, at the level of the Modules 1-5 in the
 [R bootcamp](https://berkeley-scf.github.io/r-bootcamp-fall-2022)
 offered Aug. 20-21, 2022. If you don't have that background
 you'll need to spend time in the initial couple weeks getting up to
-speed. All the material from the bootcamp is [available
-here](https://github.com/berkeley-scf/r-bootcamp-fall-2022/archive/main.zip)
-(plus I can give you access to the bootcamp videos), we'll have an
+speed. I may also be able to give access to the bootcamp videos. In addition, we'll have an
 optional hands-on practice session during the second or third week of
 class, and the GSI can also provide assistance.
 
@@ -265,9 +263,8 @@ The software needed for the course is as follows:
 
 -   Python (later in the course)
 
-We have [some tips for software installation (and access to DataHub)](software).
-In particular, we have [suggestions for how to access a UNIX shell](software/shell),
-which you'll need to be able to do by the second week of class.
+We have [some tips for software installation (and access to DataHub)](software), including
+suggestions for how to access a UNIX shell, which you'll need to be able to do by the second week of class.
 
 
 ## Class time {#class-time .unnumbered}
@@ -381,7 +378,7 @@ on the first problem set.
 
 ### Submitting assignments
 
-In the first section (September 2), we'll discuss [how to submit your problem sets](software/ps_submission) both on Gradescope and via your class GitHub repository, located at `https:github.berkeley.edu/<your_calnet_username>`.
+In the first section (September 2), we'll discuss [how to submit your problem sets](ps_submission) both on Gradescope and via your class GitHub repository, located at `https:github.berkeley.edu/<your_calnet_username>`.
 
 ### Problem set grading {#problem-set-grading .unnumbered}
 

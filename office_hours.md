@@ -6,5 +6,5 @@
      - feel free to schedule an appointment or drop by if my door is open
    - James:
      - TBD
-     - Fridays during unused section time, generally 1-2 pm and 3-3:30 pm (Evans 344)
+     - Fridays during unused section time, generally 2-3 pm and 4-4:30 pm (Evans 344)
 
