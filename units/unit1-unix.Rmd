@@ -57,8 +57,8 @@ recommend [Github Desktop](https://desktop.github.com), available for
 Mac and Windows.
 
 1.  To clone (i.e., copy) a repository (in this case from GitHub)
-    *berkeley-stat243* is the project and *stat243-fall-2021* is the
-    repository:
+    (*berkeley-stat243* is the organization and *stat243-fall-2021* is the
+    repository):
     ```
     git clone https://github.com/berkeley-stat243/stat243-fall-2021
     ```
@@ -67,8 +67,6 @@ Mac and Windows.
     the repository:
     ```
     cd /to/any/directory/within/the/local/repository
-    ```
-    ```
     git pull
     ```
 

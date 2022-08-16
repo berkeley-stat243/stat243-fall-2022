@@ -130,7 +130,7 @@ directory of GitHub repository from when I taught the class in 2021. See
     something a few different ways and define/summarize for yourself what is going
     wrong or where you are getting stuck. 
 
-## Course websites: GitHub, Ed Discussion, GradeScope, and bCourses {#course-websites-github-piazza-gradescope-and-bcourses .unnumbered}
+## Course websites: GitHub, Ed Discussion, Gradescope, and bCourses {#course-websites-github-piazza-gradescope-and-bcourses .unnumbered}
 
 Key websites for the course are:
 
@@ -301,6 +301,23 @@ Gallery tab on the bCourses page for the class.
 
 ## Course requirements and grading {#course-requirements-and-grading .unnumbered}
 
+### Scheduling Conflicts {#scheduling-conflicts .unnumbered}
+
+Campus asks that I include this information about conflicts: Please
+notify me in writing by the second week of the term about any known or
+potential extracurricular conflicts (such as religious observances,
+graduate or medical school interviews, or team activities). I will try
+my best to help you with making accommodations, but I cannot promise them
+in all cases. In the event there is no mutually-workable solution, you
+may be dropped from the class.
+
+The main conflict that would be a problem would be the quizzes, whose
+dates I will determine in late August / early September.
+
+**Quizzes are in-person.** There is no remote option, and the only make-up
+accommodations I will make are for illness or serious personal issues.
+**Do not schedule any travel that may conflict with a quiz.**
+
 ### Course grades {#course-grades .unnumbered}
 
 The grade for this course is primarily based on assignments due every
@@ -338,7 +355,7 @@ There are several rules for submitting your assignments.
         instructions to be provided by the GSI.
 
     **On-time submission will be determined based on the time stamp of
-    when the PDF is submitted to gradeScope.**
+    when the PDF is submitted to Gradescope.**
 
 3.  Answers should consist of textual response or mathematical
     expressions as appropriate, with key chunks of code embedded within
@@ -364,7 +381,7 @@ on the first problem set.
 
 ### Submitting assignments
 
-The file [UNDER CONSTRUCTION][submitting-electronically.txt](./software/submitting-electronically.txt) has information on setting up a Github repository for the class and submitting your assignments by committing your solution to Github. We will discuss this in section on Friday September 2.
+In the first section (September 2), we'll discuss [how to submit your problem sets](software/ps_submission) both on Gradescope and via your class GitHub repository, located at `https:github.berkeley.edu/<your_calnet_username>`.
 
 ### Problem set grading {#problem-set-grading .unnumbered}
 
@@ -432,29 +449,13 @@ Campus Honor Code, which I expect you to follow.
 I welcome comments and suggestions and concerns. Particularly good
 suggestions will count towards your class participation grade.
 
-# Accomodations for Students with Disabilities {#accomodations-for-students-with-disabilities .unnumbered}
+## Accomodations for Students with Disabilities {#accomodations-for-students-with-disabilities .unnumbered}
 
 Please see me as soon as possible if you need particular accommodations,
 and we will work out the necessary arrangements.
 
-# Scheduling Conflicts {#scheduling-conflicts .unnumbered}
 
-Campus asks that I include this information about conflicts: Please
-notify me in writing by the second week of the term about any known or
-potential extracurricular conflicts (such as religious observances,
-graduate or medical school interviews, or team activities). I will try
-my best to help you with making accommodations, but I cannot promise them
-in all cases. In the event there is no mutually-workable solution, you
-may be dropped from the class.
-
-The main conflict that would be a problem would be the quizzes, whose
-dates I will determine in late August / early September.
-
-**Quizzes are in-person.** There is no remote option, and the only make-up
-accommodations I will make are for illness or serious personal issues.
-**Do not schedule any travel that may conflict with a quiz.**
-
-# Campus Honor Code {#campus-honor-code .unnumbered}
+## Campus Honor Code {#campus-honor-code .unnumbered}
 
 *The following is the Campus Honor Code. With regard to collaboration
 and independence, please see my rules regarding problem sets above -- Chris.*
