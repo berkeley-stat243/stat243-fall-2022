@@ -30,6 +30,8 @@ format:
     theme: cosmo
     css: styles.css
     toc: true
-
-
-
+  pdf:
+    documentclass: article
+    margin-left: 30mm
+    margin-right: 30mm
+    toc: true
