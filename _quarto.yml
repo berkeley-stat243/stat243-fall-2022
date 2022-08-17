@@ -24,7 +24,9 @@ website:
       - href: https://statistics.berkeley.edu/computing/training/tutorials
         text: Tutorials
         
-
+output:
+  html
+  
 format:
   html:
     theme: cosmo
