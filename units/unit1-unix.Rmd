@@ -4,7 +4,7 @@ author: "Chris Paciorek"
 date: "2022-08-15"
 ---
 
-There is a [PDF version](./unit1-unix.pdf) of this document available.
+[PDF](./unit1-unix.pdf){.btn .btn-primary}
 
 By UNIX, I mean any UNIX-like operating system, including Linux and Mac
 OS X. On the Mac you can access a UNIX terminal window with the Terminal
