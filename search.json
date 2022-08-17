@@ -4,7 +4,7 @@
     "href": "units/unit1-unix.html",
     "title": "Introduction to UNIX, computers, and key tools",
     "section": "",
-    "text": "By UNIX, I mean any UNIX-like operating system, including Linux and Mac OS X. On the Mac you can access a UNIX terminal window with the Terminal application (via Applications -> Utilities -> Terminal from the Finder). Most modern scientific computing is done on UNIX-based machines, often by remotely logging in to a UNIX-based server.\nThere are a variety of ways to get access to a UNIX-style command line environment, outlined in the software tips on the course website."
+    "text": "There is a PDF version of this document available.\nBy UNIX, I mean any UNIX-like operating system, including Linux and Mac OS X. On the Mac you can access a UNIX terminal window with the Terminal application (via Applications -> Utilities -> Terminal from the Finder). Most modern scientific computing is done on UNIX-based machines, often by remotely logging in to a UNIX-based server.\nThere are a variety of ways to get access to a UNIX-style command line environment, outlined in the software tips on the course website."
   },
   {
     "objectID": "units/unit1-unix.html#some-useful-editors",
