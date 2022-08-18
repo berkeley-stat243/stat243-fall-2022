@@ -2,38 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://github.com/berkeley-stat243/stat243-fall-2022/index.html</loc>
-    <lastmod>2022-08-17T20:23:03.804Z</lastmod>
+    <lastmod>2022-08-18T15:37:48.549Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/berkeley-stat243/stat243-fall-2022/first_three_weeks.html</loc>
-    <lastmod>2022-08-17T20:23:07.696Z</lastmod>
+    <lastmod>2022-08-18T15:37:53.837Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/berkeley-stat243/stat243-fall-2022/units/unit1-unix.html</loc>
-    <lastmod>2022-08-17T20:23:12.684Z</lastmod>
+    <lastmod>2022-08-18T15:37:59.697Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/berkeley-stat243/stat243-fall-2022/units/test.html</loc>
+    <lastmod>2022-08-18T15:38:08.049Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/berkeley-stat243/stat243-fall-2022/units/unit2-dataTech.html</loc>
-    <lastmod>2022-08-17T20:23:19.948Z</lastmod>
+    <lastmod>2022-08-18T15:38:30.501Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/berkeley-stat243/stat243-fall-2022/office_hours.html</loc>
-    <lastmod>2022-08-17T20:23:24.424Z</lastmod>
+    <lastmod>2022-08-18T15:38:57.297Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/berkeley-stat243/stat243-fall-2022/syllabus.html</loc>
-    <lastmod>2022-08-17T20:23:28.360Z</lastmod>
+    <lastmod>2022-08-18T15:39:02.565Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/berkeley-stat243/stat243-fall-2022/schedule_first_weeks.html</loc>
-    <lastmod>2022-08-17T20:23:34.200Z</lastmod>
+    <lastmod>2022-08-18T15:39:09.749Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/berkeley-stat243/stat243-fall-2022/rubric.html</loc>
-    <lastmod>2022-08-17T20:23:38.000Z</lastmod>
+    <lastmod>2022-08-18T15:39:14.669Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/berkeley-stat243/stat243-fall-2022/software.html</loc>
-    <lastmod>2022-08-17T20:23:41.748Z</lastmod>
+    <lastmod>2022-08-18T15:39:20.237Z</lastmod>
   </url>
 </urlset>

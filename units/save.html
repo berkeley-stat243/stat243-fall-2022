@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Chris Paciorek">
+<meta name="dcterms.date" content="2022-08-15">
+
+<title>Statistics 243 Fall 2022 - Data technologies, formats, and structures</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Statistics 243 Fall 2022</span>
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html">Home</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../syllabus.html">Syllabus</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../office_hours.html">Office hours</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../software.html">Software</a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-units" role="button" data-bs-toggle="dropdown" aria-expanded="false">Units</a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-units">    
+        <li>
+    <a class="dropdown-item" href="../units/unit1-unix.html">
+ <span class="dropdown-text">Unit 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../units/unit2-dataTech.html">
+ <span class="dropdown-text">Unit 2</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="https://edstem.org/us/courses/25090/discussion/">Discussion</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://statistics.berkeley.edu/computing/training/tutorials">Tutorials</a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#optional-videos" id="toc-optional-videos" class="nav-link active" data-scroll-target="#optional-videos">(Optional) Videos</a></li>
+  <li><a href="#data-storage-and-file-formats-on-a-computer" id="toc-data-storage-and-file-formats-on-a-computer" class="nav-link" data-scroll-target="#data-storage-and-file-formats-on-a-computer">Data storage and file formats on a computer</a>
+  <ul class="collapse">
+  <li><a href="#text-and-binary-files" id="toc-text-and-binary-files" class="nav-link" data-scroll-target="#text-and-binary-files">Text and binary files</a></li>
+  <li><a href="#common-file-types" id="toc-common-file-types" class="nav-link" data-scroll-target="#common-file-types">Common file types</a></li>
+  </ul></li>
+  <li><a href="#reading-data-from-text-files-into-r" id="toc-reading-data-from-text-files-into-r" class="nav-link" data-scroll-target="#reading-data-from-text-files-into-r">Reading data from text files into R</a>
+  <ul class="collapse">
+  <li><a href="#core-r-functions" id="toc-core-r-functions" class="nav-link" data-scroll-target="#core-r-functions">Core R functions</a></li>
+  <li><a href="#knitr-readcsv" id="toc-knitr-readcsv" class="nav-link" data-scroll-target="#knitr-readcsv"><span class="citation" data-cites="knitr">@knitr</span> readcsv</a></li>
+  </ul></li>
+  <li><a href="#using-colclasses" id="toc-using-colclasses" class="nav-link" data-scroll-target="#using-colclasses">using ‘colClasses’</a>
+  <ul class="collapse">
+  <li><a href="#file-paths" id="toc-file-paths" class="nav-link" data-scroll-target="#file-paths">File paths</a></li>
+  <li><a href="#the-readr-package" id="toc-the-readr-package" class="nav-link" data-scroll-target="#the-readr-package">The <em>readr</em> package</a></li>
+  <li><a href="#reading-data-quickly" id="toc-reading-data-quickly" class="nav-link" data-scroll-target="#reading-data-quickly">Reading data quickly</a></li>
+  </ul></li>
+  <li><a href="#output-from-r" id="toc-output-from-r" class="nav-link" data-scroll-target="#output-from-r">Output from R</a>
+  <ul class="collapse">
+  <li><a href="#writing-output-to-files" id="toc-writing-output-to-files" class="nav-link" data-scroll-target="#writing-output-to-files">Writing output to files</a></li>
+  <li><a href="#formatting-output" id="toc-formatting-output" class="nav-link" data-scroll-target="#formatting-output">Formatting output</a></li>
+  <li><a href="#input" id="toc-input" class="nav-link" data-scroll-target="#input">input</a></li>
+  </ul></li>
+  <li><a href="#webscraping-and-working-with-html-xml-and-json" id="toc-webscraping-and-working-with-html-xml-and-json" class="nav-link" data-scroll-target="#webscraping-and-working-with-html-xml-and-json">Webscraping and working with HTML, XML, and JSON</a>
+  <ul class="collapse">
+  <li><a href="#reading-html" id="toc-reading-html" class="nav-link" data-scroll-target="#reading-html">Reading HTML</a></li>
+  <li><a href="#xml" id="toc-xml" class="nav-link" data-scroll-target="#xml">XML</a></li>
+  <li><a href="#alternatively-extract-only-the-loans-info-and-use-pipes" id="toc-alternatively-extract-only-the-loans-info-and-use-pipes" class="nav-link" data-scroll-target="#alternatively-extract-only-the-loans-info-and-use-pipes">alternatively, extract only the ‘loans’ info (and use pipes)</a></li>
+  <li><a href="#suppose-we-only-want-the-country-locations-of-the-loans-using-xpath" id="toc-suppose-we-only-want-the-country-locations-of-the-loans-using-xpath" class="nav-link" data-scroll-target="#suppose-we-only-want-the-country-locations-of-the-loans-using-xpath">suppose we only want the country locations of the loans (using XPath)</a></li>
+  <li><a href="#or-extract-the-geographic-coordinates" id="toc-or-extract-the-geographic-coordinates" class="nav-link" data-scroll-target="#or-extract-the-geographic-coordinates">or extract the geographic coordinates</a></li>
+  <li><a href="#webscraping-and-web-apis" id="toc-webscraping-and-web-apis" class="nav-link" data-scroll-target="#webscraping-and-web-apis">Webscraping and web APIs</a>
+  <ul class="collapse">
+  <li><a href="#webscraping-ethics-and-best-practices" id="toc-webscraping-ethics-and-best-practices" class="nav-link" data-scroll-target="#webscraping-ethics-and-best-practices">Webscraping ethics and best practices</a></li>
+  <li><a href="#what-is-http" id="toc-what-is-http" class="nav-link" data-scroll-target="#what-is-http">What is HTTP?</a></li>
+  <li><a href="#apis-rest--and-soap-based-web-services" id="toc-apis-rest--and-soap-based-web-services" class="nav-link" data-scroll-target="#apis-rest--and-soap-based-web-services">APIs: REST- and SOAP-based web services</a></li>
+  <li><a href="#http-requests-by-deconstructing-an-undocumented-api" id="toc-http-requests-by-deconstructing-an-undocumented-api" class="nav-link" data-scroll-target="#http-requests-by-deconstructing-an-undocumented-api">HTTP requests by deconstructing an (undocumented) API</a></li>
+  </ul></li>
+  <li><a href="#example-url" id="toc-example-url" class="nav-link" data-scroll-target="#example-url">example URL:</a></li>
+  <li><a href="#httpdata.un.orghandlersdownloadhandler.ashxdatafilteritemcode526" id="toc-httpdata.un.orghandlersdownloadhandler.ashxdatafilteritemcode526" class="nav-link" data-scroll-target="#httpdata.un.orghandlersdownloadhandler.ashxdatafilteritemcode526">http://data.un.org/Handlers/DownloadHandler.ashx?DataFilter=itemCode:526;</a>
+  <ul class="collapse">
+  <li><a href="#packaged-access-to-an-api" id="toc-packaged-access-to-an-api" class="nav-link" data-scroll-target="#packaged-access-to-an-api">Packaged access to an API</a></li>
+  <li><a href="#accessing-dynamic-pages" id="toc-accessing-dynamic-pages" class="nav-link" data-scroll-target="#accessing-dynamic-pages">Accessing dynamic pages</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#file-and-string-encodings" id="toc-file-and-string-encodings" class="nav-link" data-scroll-target="#file-and-string-encodings">File and string encodings</a>
+  <ul class="collapse">
+  <li><a href="#d-in-hexadecimal-is-m" id="toc-d-in-hexadecimal-is-m" class="nav-link" data-scroll-target="#d-in-hexadecimal-is-m">4d in hexadecimal is ‘M’</a></li>
+  <li><a href="#a-is-a-newline-at-least-in-linuxmac" id="toc-a-is-a-newline-at-least-in-linuxmac" class="nav-link" data-scroll-target="#a-is-a-newline-at-least-in-linuxmac">0a is a newline (at least in Linux/Mac)</a></li>
+  <li><a href="#x-is-how-we-tell-r-we-are-using-hexadecimal" id="toc-x-is-how-we-tell-r-we-are-using-hexadecimal" class="nav-link" data-scroll-target="#x-is-how-we-tell-r-we-are-using-hexadecimal">“0x” is how we tell R we are using hexadecimal</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Data technologies, formats, and structures</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Chris Paciorek </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 15, 2022</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<p><a href="./unit2-dataTech.pdf" class="btn btn-primary">PDF</a></p>
+<p>References:</p>
+<ul>
+<li><p>Adler</p></li>
+<li><p>Nolan and Temple Lang, XML and Web Technologies for Data Sciences with R.</p></li>
+<li><p>Chambers</p></li>
+<li><p><a href="http://cran.r-project.org/doc/manuals/R-intro.html">R intro manual</a> on CRAN (R-intro).</p></li>
+<li><p>Venables and Ripley, Modern Applied Statistics with S</p></li>
+<li><p>Murrell, Introduction to Data Technologies.</p></li>
+<li><p><a href="http://cran.r-project.org/doc/manuals/R-data.html">R Data Import/Export manual</a> on CRAN (R-data).</p></li>
+<li><p>SCF tutorial on “Working with large datasets in SQL, R, and Python”, available from<br>
+<a href="http://statistics.berkeley.edu/computing/training/tutorials" class="uri">http://statistics.berkeley.edu/computing/training/tutorials</a>.</p></li>
+</ul>
+<section id="optional-videos" class="level1 unnumbered">
+<h1 class="unnumbered">(Optional) Videos</h1>
+<p>There are four videos from 2020 in the bCourses Media Gallery that you can use for reference if you want to:</p>
+<ol type="1">
+<li><p>Text files and ASCII</p></li>
+<li><p>Encodings and UTF-8</p></li>
+<li><p>HTML</p></li>
+<li><p>XML and JSON</p></li>
+</ol>
+</section>
+<section id="data-storage-and-file-formats-on-a-computer" class="level1">
+<h1>Data storage and file formats on a computer</h1>
+<p>We’re going to start early in the data analysis pipeline: getting data, reading data in, writing data out to disk, and webscraping. We’ll focus on doing these manipulations in R, but the concepts and tools involved are common to other languages, so familarity with these in R should allow you to pick up other tools more easily. The main downside to working with datasets in R (true for Python as well) is that the entire dataset resides in memory, so R is not so good for dealing with very large datasets. More on alternatives in a later unit. Another common frustration is controlling how the variables are interpreted (numeric, character, factor) when reading data into a data frame. R (and similar languages) has the capability to read in a wide variety of file formats.</p>
+<section id="text-and-binary-files" class="level2">
+<h2 class="anchored" data-anchor-id="text-and-binary-files">Text and binary files</h2>
+<p>In general, files can be divided into text files and binary files. In both cases, information is stored as a series of bits. Recall that a bit is a single value in base 2 (i.e., a 0 or a 1), while a byte is 8 bits.</p>
+<p>A <strong>text file</strong> is one in which the bits in the file encode individual characters. Note that the characters can include the digit characters 0-9, so one can include numbers in a text file by writing down the digits needed for the number of interest. Examples of text file formats include CSV, XML, HTML, and JSON.</p>
+<p>Text files may be simple ASCII files (i.e., files encoded using ASCII) or in other encodings such as UTF-8, both covered in Section 4. <a href="http://en.wikipedia.org/wiki/ASCII">ASCII</a> files have 8 bits (1 byte) per character and can represent 128 characters (the 52 lower and upper case letters in English, 10 digits, punctuation and a few other things – basically what you see on a standard US keyboard). UTF-8 files have between 1 and 4 bytes per character.</p>
+<p>A <strong>binary file</strong> is one in which the bits in the file encode the information in a custom format and not simply individual characters. Binary formats are not (easily) human readable but can be more space-efficient and faster to work with (because it can allow random access into the data rather than requiring sequential reading). The meaning of the bytes in such files depends on the specific binary format being used and a program that uses the file needs to know how the format represents information. Examples of binary files include netCDF files, R data (e.g., .Rda) files, and compiled code files.</p>
+<p>Numbers in binary files are usually stored as 8 bytes per number. We’ll discuss this much more in Unit 6.</p>
+</section>
+<section id="common-file-types" class="level2">
+<h2 class="anchored" data-anchor-id="common-file-types">Common file types</h2>
+<p>Here are some of the common file types. Any of these types can be categorized as text or binary.</p>
+<ol type="1">
+<li><p>‘Flat’ text files: data are often provided as simple text files. Often one has one record or observation per row and each column or field is a different variable or type of information about the record. Such files can either have a fixed number of characters in each field (fixed width format) or a special character (a delimiter) that separates the fields in each row. Common delimiters are tabs, commas, one or more spaces, and the pipe (|). Common file extensions are <em>.txt</em> and <em>.csv</em>. Metadata (information about the data) are often stored in a separate file. CSV files are quite common, but if you have files where the data contain commas, other delimiters can be good. Text can be put in quotes in CSV files, and this can allow use of commas within the data. This is difficult to deal with in bash, but <em>read.table()</em> in R handles this situation.</p>
+<ul>
+<li>One occasionally tricky difficulty is as follows. If you have a text file created in Windows, the line endings are coded differently than in UNIX (a newline (the ASCII character <em>\n</em>) and a carriage return (the ASCII character <em>\r</em>) in Windows vs. only a newline in UNIX). There are UNIX utilities (<em>fromdos</em> in Ubuntu, including the SCF Linux machines and <em>dos2unix</em> in other Linux distributions) that can do the necessary conversion. If you see <em>^M</em> at the end of the lines in a file, that’s the tool you need. Alternatively, if you open a UNIX file in Windows, it may treat all the lines as a single line. You can fix this with <em>todos</em> or <em>unix2dos</em>.</li>
+</ul></li>
+<li><p>In some contexts, such as textual data and bioinformatics data, the data may in a text file with one piece of information per row, but without meaningful columns/fields.</p></li>
+<li><p>In scientific contexts, netCDF (<em>.nc</em>) (and the related HDF5) are popular format for gridded data that allows for highly-efficient storage and contains the metadata within the file. The basic structure of a netCDF file is that each variable is an array with multiple dimensions (e.g., latitude, longitude, and time), and one can also extract the values of and metadata about each dimension. The <em>ncdf4</em> package in R nicely handles working with netCDF files.</p></li>
+<li><p>Data may also be in text files in formats designed for data interchange between various languages, in particular XML or JSON. These formats are “self-describing”; namely the metadata is part of the file. The <em>XML2, rvest</em>, and <em>jsonlite</em> packages are useful for reading and writing from these formats.</p></li>
+<li><p>You may be scraping information on the web, so dealing with text files in various formats, including HTML. The <em>XML2</em> and <em>rvest</em> packages are also useful for reading HTML.</p></li>
+<li><p>Data may already be in a database or in the data storage of another statistical package (<em>Stata</em>, <em>SAS</em>, <em>SPSS</em>, etc.). The <em>foreign</em> package in R has excellent capabilities for importing Stata (<em>read.dta()</em>), SPSS (<em>read.spss()</em>), and SAS (<em>read.ssd()</em> and, for XPORT files, <em>read.xport()</em>), among others.</p></li>
+<li><p>For Excel, there are capabilities to read an Excel file (see the <em>readxl</em> and <em>XLConnect</em> package among others), but you can also just go into Excel and export as a CSV file or the like and then read that into R. In general, it’s best not to pass around data files as Excel or other spreadsheet format files because (1) Excel is proprietary, so someone may not have Excel and the format is subject to change, (2) Excel imposes limits on the number of rows, (3) one can easily manipulate text files such as CSV using UNIX tools, but this is not possible with an Excel file, (4) Excel files often have more than one sheet, graphs, macros, etc., so they’re not a data storage format per se.</p></li>
+<li><p>R can easily interact with databases (SQLite, PostgreSQL, MySQL, Oracle, etc.), querying the database using SQL and returning results to R. More in the big data unit and in the large datasets tutorial mentioned above.</p></li>
+</ol>
+</section>
+</section>
+<section id="reading-data-from-text-files-into-r" class="level1">
+<h1>Reading data from text files into R</h1>
+<section id="core-r-functions" class="level2">
+<h2 class="anchored" data-anchor-id="core-r-functions">Core R functions</h2>
+<p><em>read.table()</em> is probably the most commonly-used function for reading in data. It reads in delimited files (<em>read.csv()</em> and <em>read.delim()</em> are special cases of <em>read.table()</em>). The key arguments are the delimiter (the <em>sep</em> argument) and whether the file contains a header, a line with the variable names. We can use <em>read.fwf()</em> to read from a fixed width text file into a data frame.</p>
+<p>The most difficult part of reading in such files can be dealing with how R determines the classes of the fields that are read in. There are a number of arguments to <em>read.table()</em> and <em>read.fwf()</em> that allow the user to control the classes. One difficulty in older versions of R was that character fields were read in as factors.</p>
+<p>Let’s work through a couple examples. Before we do that, let’s look at the arguments to <em>read.table()</em>. Note that <em>sep=“</em> separates on any amount of white space. In the code chunk below, I’ve told <em>knitr</em> not to print the output to the PDF; you can see the full output by running the code yourself.</p>
+</section>
+<section id="knitr-readcsv" class="level2">
+<h2 class="anchored" data-anchor-id="knitr-readcsv"><span class="citation" data-cites="knitr">@knitr</span> readcsv</h2>
+<p>dat &lt;- read.table(file.path(‘..’, ‘data’, ‘RTADataSub.csv’), sep = ‘,’, header = TRUE) sapply(dat, class) ## whoops, there is an ‘x’, presumably indicating missingness: unique(dat[ , 2]) ## let’s treat ‘x’ as a missing value indicator dat2 &lt;- read.table(file.path(‘..’, ‘data’, ‘RTADataSub.csv’), sep = ‘,’, header = TRUE, na.strings = c(“NA”, “x”)) unique(dat2[ ,2]) ## hmmm, what happened to the blank values this time? which(dat[ ,2] == ““) dat2[which(dat[, 2] == ““)[1], ] # pull out a line with a missing string</p>
+</section>
+</section>
+<section id="using-colclasses" class="level1">
+<h1>using ‘colClasses’</h1>
+<p>sequ &lt;- read.table(file.path(‘..’, ‘data’, ‘hivSequ.csv’), sep = ‘,’, header = TRUE, colClasses = c(‘integer’,‘integer’,‘character’, ‘character’,‘numeric’,‘integer’)) ## let’s make sure the coercion worked - sometimes R is obstinant sapply(sequ, class) ## that made use of the fact that a data frame is a list</p>
+<pre><code>
+Note that you can avoid reading in one or more columns by specifying
+*NULL* as the column class for those columns to be omitted. Also,
+specifying the *colClasses* argument explicitly should make for faster
+file reading. Finally, setting `stringsAsFactors=FALSE` is standard
+practice and is the default in R as of version 4.0. (*readr::read_csv()*
+has always set `stringsAsFactors=FALSE`.
+
+If possible, it's a good idea to look through the input file in the
+shell or in an editor before reading into R to catch such issues in
+advance. Using *less* on *RTADataSub.csv* would have revealed these
+various issues, but note that *RTADataSub.csv* is a 1000-line subset of
+a much larger file of data available from the kaggle.com website. So
+more sophisticated use of UNIX utilities as we saw in Unit 2 is often
+useful before trying to read something into R.
+
+The basic function *scan()* simply reads everything in, ignoring lines,
+which works well and very quickly if you are reading in a numeric vector
+or matrix. *scan()* is also useful if your file is free format - i.e.,
+if it's not one line per observation, but just all the data one value
+after another; in this case you can use *scan()* to read it in and then
+format the resulting character or numeric vector as a matrix with as
+many columns as fields in the dataset. Remember that the default is to
+fill the matrix by column.
+
+If the file is not nicely arranged by field (e.g., if it has ragged
+lines), we'll need to do some more work. *readLines()* will read in each
+line into a separate character vector, after which we can process the
+lines using text manipulation. Here's an example from some US
+meteorological data where I know from metadata (not provided here) that
+the 4-11th values are an identifier, the 17-20th are the year, the
+22-23rd the month, etc.
+
+```{r, readLines
+dat &lt;- readLines(file.path('..', 'data', 'precip.txt'))
+id &lt;- as.factor(substring(dat, 4, 11) )
+year &lt;- substring(dat, 18, 21)
+year[1:5]
+class(year)
+year &lt;- as.integer(substring(dat, 18, 21))
+month &lt;- as.integer(substring(dat, 22, 23))
+nvalues &lt;- as.integer(substring(dat, 28, 30))</code></pre>
+<p>Actually, that file, <em>precip.txt</em>, is in a fixed-width format (i.e., every element in a given column has the exact same number of characters),so reading in using <em>read.fwf()</em> would be a good strategy.</p>
+<p>R allows you to read in not just from a file but from a more general construct called a <em>connection</em>. Here are some examples of connections:</p>
+<p><code>{r, connections dat &lt;- readLines(pipe("ls -al")) dat &lt;- read.table(pipe("unzip dat.zip")) dat &lt;- read.csv(gzfile("dat.csv.gz")) dat &lt;- readLines("http://www.stat.berkeley.edu/~paciorek/index.html")</code></p>
+<p>In some cases, you might need to create the connection using <em>url()</em> or using the <em>curl()</em> function from the <em>curl</em> package. Though for the example here, simply passing the URL to <em>readLines()</em> does work. (In general, <em>curl::curl()</em> provides some nice features for reading off the internet.)</p>
+<p><code>{r, curl wikip1 &lt;- readLines("https://wikipedia.org") wikip2 &lt;- readLines(url("https://wikipedia.org")) library(curl) wikip3 &lt;- readLines(curl("https://wikipedia.org"))</code></p>
+<p>If a file is large, we may want to read it in in chunks (of lines), do some computations to reduce the size of things, and iterate. <em>read.table()</em>, <em>read.fwf()</em> and <em>readLines()</em> all have the arguments that let you read in a fixed number of lines. To read-on-the-fly in blocks, we need to first establish the connection and then read from it sequentially. (If you don’t, you’ll read from the start of the file every time you read from the file.)</p>
+<p><code>{r, streaming con &lt;- file(file.path("..", "data", "precip.txt"), "r") ## "r" for 'read' - you can also open files for writing with "w" ## (or "a" for appending) class(con) blockSize &lt;- 1000 # obviously this would be large in any real application nLines &lt;- 300000 for(i in 1:ceiling(nLines / blockSize)){     lines &lt;- readLines(con, n = blockSize)     # manipulate the lines and store the key stuff } close(con)</code> &nbsp;</p>
+<p>Here’s an example of using <em>curl()</em> to do this for a file on the web.</p>
+<p><code>{r, stream-curl URL &lt;- "https://www.stat.berkeley.edu/share/paciorek/2008.csv.gz" con &lt;- gzcon(curl(URL, open = "r")) ## url() in place of curl() works too for(i in 1:8) {     print(i)     print(system.time(tmp &lt;- readLines(con, n = 100000)))     print(tmp[1]) } close(con)</code></p>
+<p>More details on sequential (on-line) processing of large files can be found in the tutorial on large datasets mentioned in the reference list above.</p>
+<p>One cool trick that can come in handy is to create a <em>text connection</em>. This lets you ‘read’ from an R character vector as if it were a text file and could be handy for processing text. For example, you could then use <em>read.fwf()</em> applied to <em>con</em>.</p>
+<p><code>{r, text-connection dat &lt;- readLines('../data/precip.txt') con &lt;- textConnection(dat[1], "r") read.fwf(con, c(3,8,4,2,4,2))</code></p>
+<p>We can create connections for writing output too. Just make sure to open the connection first.</p>
+<section id="file-paths" class="level2">
+<h2 class="anchored" data-anchor-id="file-paths">File paths</h2>
+<p>A few notes on file paths, related to ideas of reproducibility.</p>
+<ol type="1">
+<li><p>In general, you don’t want to hard-code absolute paths into your code files because those absolute paths won’t be available on the machines of anyone you share the code with. Instead, use paths relative to the directory the code file is in, or relative to a baseline directory for the project, e.g.:<br>
+</p>
+<p><code>{r, relative-paths dat &lt;- read.csv('../data/cpds.csv')</code></p></li>
+<li><p>Be careful with the directory separator in Windows files: you can either do <em>“C:\\mydir\\file.txt”</em> or <em>“C:/mydir/file.txt”</em>, but not <em>“C:\mydir\file.txt”</em>, and note the next comment about avoiding use of ‘\\’ for portability.</p></li>
+<li><p>Using UNIX style directory separators will work in Windows, Mac or Linux, but using Windows style separators is not portable across operating systems.<br>
+</p>
+<p>```{r, path-separators</p>
+<h2 id="good-will-work-on-windows" class="anchored">good: will work on Windows</h2>
+<p>dat &lt;- read.csv(‘../data/cpds.csv’) ## bad: won’t work on Mac or Linux dat &lt;- read.csv(‘..\data\cpds.csv’)<br>
+``` &nbsp;</p></li>
+<li><p>Even better, use <em>file.path()</em> so that paths are constructed specifically for the operating system the user is using:<br>
+</p>
+<p>```{r, file.path</p>
+<h2 id="good-operating-system-independent" class="anchored">good: operating-system independent</h2>
+<p>dat &lt;- read.csv(file.path(‘..’, ‘data’, ‘cpds.csv’))<br>
+``` &nbsp;</p></li>
+</ol>
+</section>
+<section id="the-readr-package" class="level2">
+<h2 class="anchored" data-anchor-id="the-readr-package">The <em>readr</em> package</h2>
+<p><em>readr</em> is intended to deal with some of the shortcomings of the base R functions, such as defaulting to <code>stringsAsFactors=FALSE</code> (no longer relevant with R 4.0), leaving column names unmodified, and recognizing dates/times. It reads data in much more quickly than the base R equivalents. See <a href="http://blog.rstudio.org/2015/04/09/readr-0-1-0/">this blog post</a>. Some of the readr functions that are analogs to the comparably-named base R functions are <em>read_csv()</em>, <em>read_fwf()</em>, <em>read_lines()</em>, and <em>read_table()</em>.</p>
+<p>Let’s try out <em>read_csv()</em> on the airline dataset used in the R bootcamp.</p>
+<p><code>{r, readr library(readr) ## I'm violating the rule about absolute paths here!! ## (airline.csv is big enough that I don't want to put it in the ##    course repository) setwd('~/staff/workshops/r-bootcamp-fall-2020/data')  system.time(dat &lt;- read.csv('airline.csv', stringsAsFactors = FALSE))  system.time(dat2 &lt;- read_csv('airline.csv'))</code></p>
+</section>
+<section id="reading-data-quickly" class="level2">
+<h2 class="anchored" data-anchor-id="reading-data-quickly">Reading data quickly</h2>
+<p>In addition to the tips above, there are a number of packages that allow one to read large data files quickly, in particular <em>data.table</em>, <em>ff</em>, and <em>bigmemory</em>. In general, these provide the ability to load datasets into R without having them in memory, but rather stored in clever ways on disk that allow for fast access. Metadata is stored in R. More on this in the unit on big data and in the tutorial on large datasets mentioned in the reference list above.</p>
+</section>
+</section>
+<section id="output-from-r" class="level1">
+<h1>Output from R</h1>
+<section id="writing-output-to-files" class="level2">
+<h2 class="anchored" data-anchor-id="writing-output-to-files">Writing output to files</h2>
+<p>Functions for text output are generally analogous to those for input. <em>write.table()</em>, <em>write.csv()</em>, and <em>writeLines()</em> are analogs of <em>read.table()</em>, <em>read.csv()</em>, and <em>readLines()</em>. <em>write_csv()</em> is the <em>readr</em> version of write.csv. <em>write()</em> can be used to write a matrix to a file, specifying the number of columns desired. <em>cat()</em> can be used when you want fine control of the format of what is written out and allows for outputting to a connection (e.g., a file).</p>
+<p><em>toJSON()</em> in the <em>jsonlite</em> package will output R objects as JSON. One use of JSON as output from R would be to <em>serialize</em> the information in an R object such that it could be read into another program.</p>
+<p>And of course you can always save to an R data file using <em>save.image()</em> (to save all the objects in the workspace or <em>save()</em> to save only some objects. Happily this is platform-independent so can be used to transfer R objects between different OS.</p>
+</section>
+<section id="formatting-output" class="level2">
+<h2 class="anchored" data-anchor-id="formatting-output">Formatting output</h2>
+<p><em>cat()</em> is a good choice for printing a message to the screen, often better than <em>print()</em>, which is an object-oriented method. You generally won’t have control over how the output of a <em>print()</em> statement is actually printed.</p>
+<p><code>{r, print val &lt;- 1.5 cat('My value is ', val, '.\n', sep = '') print(paste('My value is ', val, '.', sep = ''))</code></p>
+<p>We can do more to control formatting with <em>cat()</em>:</p>
+<p>```{r, cat</p>
+</section>
+<section id="input" class="level2">
+<h2 class="anchored" data-anchor-id="input">input</h2>
+<p>x &lt;- 7 n &lt;- 5 ## display powers cat(“Powers of”, x, “”) cat(“exponent result”) result &lt;- 1 for (i in 1:n) { result &lt;- result * x cat(format(i, width = 8), format(result, width = 10), “”, sep = ““) } x &lt;- 7 n &lt;- 5 ## display powers cat(”Powers of”, x, “”) cat(“exponent result”) result &lt;- 1 for (i in 1:n) { result &lt;- result * x cat(i, ‘, result,’‘, sep =’’) }</p>
+<pre><code>
+
+One thing to be aware of when writing out numerical data is how many
+digits are included. For example, the default with *write()* and ****
+*cat()* is the number of digits that R displays to the screen,
+controlled by `options()$digits`. But note that `options()$digits` seems
+to have some variability in behavior across operating systems. If you
+want finer control, use *sprintf()*, e.g., to print out print out
+temperatures as reals ("*f*"=floating points) with four decimal places
+and nine total character positions, followed by a C for Celsius:
+
+```{r, sprintf
+temps &lt;- c(12.5, 37.234324, 1342434324.79997234, 2.3456e-6, 1e10)
+sprintf("%9.4f C", temps)
+city &lt;- "Boston"
+sprintf("The temperature in %s was %.4f C.", city, temps[1])
+sprintf("The temperature in %s was %9.4f C.", city, temps[1])</code></pre>
+<p>Note, to change the number of digits printed to the screen, do<code>``options(digits = 5)</code> or specify as an argument to <em>print()</em> or use <em>sprintf()</em>.</p>
+</section>
+</section>
+<section id="webscraping-and-working-with-html-xml-and-json" class="level1">
+<h1>Webscraping and working with HTML, XML, and JSON</h1>
+<p>The book <em>XML and Web Technologies for Data Sciences with R</em> by Deb Nolan (UCB Stats faculty) and Duncan Temple Lang (UCB Stats PhD alumnus and UC Davis Stats faculty) provides extensive information about getting and processing data off of the web, including interacting with web services such as REST and SOAP and programmatically handling authentication.</p>
+<p>Here are some UNIX command-line tools to help in webscraping and working with files in formats such as JSON, XML, and HTML: <a href="http://jeroenjanssens.com/2013/09/19/seven-command-line-tools-for-data-science.html" class="uri">http://jeroenjanssens.com/2013/09/19/seven-command-line-tools-for-data-science.html</a>.</p>
+<p>We’ll cover a few basic examples in this section, but HTML and XML formatting and navigating the structure of such pages in great detail is beyond the scope of what we can cover. The key thing is to see the main concepts and know that the tools exist so that you can learn how to use them if faced with such formats.</p>
+<section id="reading-html" class="level2">
+<h2 class="anchored" data-anchor-id="reading-html">Reading HTML</h2>
+<p>HTML (Hypertext Markup Language) is the standard markup language used for displaying content in a web browser. In simple webpages (ignoring the more complicated pages that involve Javascript), what you see in your browser is simply a rendering of a text file containing HTML.</p>
+<p>However, instead of rendering the HTML in a browser, we might want to use code to extract information from the HTML.</p>
+<p>Let’s see a brief example of reading in HTML tables.</p>
+<p>Note that before doing any coding, it can be helpful to look at the raw HTML source code for a given page. We can explore the underlying HTML source in advance of writing our code by looking at the page source directly in the browser (e.g., in Firefox under the 3-lines “open menu” symbol, see <code>Web Developer (or More Tools) -&gt; Page Source</code> and in Chrome <code>View -&gt; Developer -&gt; View Source</code>), or by downloading the webpage and looking at it in an editor, although in some cases (such as the nytimes.com case), what we might see is a lot of JavaScript.</p>
+<p>One lesson here is not to write a lot of your own code to do something that someone else has probably already written a package for. We’ll use the <em>rvest</em> package.</p>
+<p><code>{r, https library(rvest)  # uses xml2 URL &lt;- "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_population" html &lt;- read_html(URL) tbls &lt;- html_table(html_elements(html, "table")) sapply(tbls, nrow) pop &lt;- tbls[[1]] head(pop)</code></p>
+<p><em>read_html()</em> works by reading in the HTML as text and then parsing it to build up a tree containing the HTML elements. Then <em>html_nodes()</em> finds the HTML tables and <em>html_table()</em> converts them to data frames. rvest is part of the tidyverse, so it’s often used with piping, e.g.,</p>
+<p><code>{r, https-pipe library(magrittr) ## Turns out that html_table can take the entire html doc as input tbls &lt;- URL %&gt;% read_html() %&gt;% html_table()</code></p>
+<p>It’s often useful to be able to extract the hyperlinks in an HTML document. We’ll find the link using <a href="https://www.w3schools.com/cssref/css_selectors.asp">CSS selectors</a>, which allow you to search for elements within HTML:</p>
+<p>```{r, htmlLinks</p>
+<p>URL &lt;- “http://www1.ncdc.noaa.gov/pub/data/ghcn/daily/by_year” ## approach 1: search for elements with ‘href’ attribute links &lt;- read_html(URL) %&gt;% html_elements(“[href]”) %&gt;% html_attr(‘href’) ## approach 2: search for HTML ‘a’ tags links &lt;- read_html(URL) %&gt;% html_elements(“a”) %&gt;% html_attr(‘href’) head(links, n = 10)</p>
+<pre><code>
+More generally, we may want to read an HTML document, parse it into its
+components (i.e., the HTML elements), and navigate through the tree
+structure of the HTML. Here we use the *XPath* language to specify
+elements rather than CSS selectors. XPath can also be used for
+navigating through XML documents.
+
+```{r, XPath
+## find all 'a' elements that have attribute 'href'; then
+## extract the 'href' attribute
+links &lt;- read_html(URL) %&gt;% html_elements(xpath = "//a[@href]") %&gt;%
+    html_attr('href')
+head(links)
+
+## we can extract various information
+listOfANodes &lt;- read_html(URL) %&gt;% html_elements(xpath = "//a[@href]")
+listOfANodes %&gt;% html_attr('href') %&gt;% head(n = 10)
+listOfANodes %&gt;% html_name() %&gt;% head(n = 10)
+listOfANodes %&gt;% html_text()  %&gt;% head(n = 10)</code></pre>
+<p>Here’s another example of extracting specific components of information from a webpage (results not shown, since headlines will vary from day to day).</p>
+<p><code>{r, XPath2 URL &lt;- "https://www.nytimes.com" headlines2 &lt;- read_html(URL) %&gt;% html_elements("h2") %&gt;% html_text() head(headlines2) headlines3 &lt;- read_html(URL) %&gt;% html_elements("h3") %&gt;% html_text() head(headlines3)</code></p>
+</section>
+<section id="xml" class="level2">
+<h2 class="anchored" data-anchor-id="xml">XML</h2>
+<p>XML is a markup language used to store data in self-describing (no metadata needed) format, often with a hierarchical structure. It consists of sets of elements (also known as nodes because they generally occur in a hierarchical structure and therefore have parents, children, etc.) with tags that identify/name the elements, with some similarity to HTML. Some examples of the use of XML include serving as the underlying format for Microsoft Office and Google Docs documents and for the KML language used for spatial information in Google Earth.</p>
+<p>Here’s a brief example. The book with id attribute <em>bk101</em> is an element; the author of the book is also an element that is a child element of the book. The id attribute allows us to uniquely identify the element.</p>
+<pre><code>    &lt;?xml version="1.0"?&gt;
+    &lt;catalog&gt;
+       &lt;book id="bk101"&gt;
+          &lt;author&gt;Gambardella, Matthew&lt;/author&gt;
+          &lt;title&gt;XML Developer's Guide&lt;/title&gt;
+          &lt;genre&gt;Computer&lt;/genre&gt;
+          &lt;price&gt;44.95&lt;/price&gt;
+          &lt;publish_date&gt;2000-10-01&lt;/publish_date&gt;
+          &lt;description&gt;An in-depth look at creating applications with XML.&lt;/description&gt;
+       &lt;/book&gt;
+       &lt;book id="bk102"&gt;
+          &lt;author&gt;Ralls, Kim&lt;/author&gt;
+          &lt;title&gt;Midnight Rain&lt;/title&gt;
+          &lt;genre&gt;Fantasy&lt;/genre&gt;
+          &lt;price&gt;5.95&lt;/price&gt;
+          &lt;publish_date&gt;2000-12-16&lt;/publish_date&gt;
+         &lt;description&gt;A former architect battles corporate zombies, an evil sorceress, and her own childhood to become queen of the world.&lt;/description&gt;
+       &lt;/book&gt;
+    &lt;/catalog&gt;</code></pre>
+<p>We can read XML documents into R using <code>xml2::read_xml()</code> and then manipulate it using other functions from the <em>xml2</em> package. Here’s an example of working with lending data from the Kiva lending non-profit. You can see the XML format in a browser at</p>
+<p><a href="http://api.kivaws.org/v1/loans/newest.xml" class="uri">http://api.kivaws.org/v1/loans/newest.xml</a>.</p>
+<p>XML documents have a tree structure with information at nodes. As above with HTML, one can use the <em>XPath</em> language for navigating the tree and finding and extracting information from the node(s) of interest. Here is some example code for extracting loan info from the Kiva data.</p>
+<p>```{r, xml library(xml2) doc &lt;- read_xml(“https://api.kivaws.org/v1/loans/newest.xml”) data &lt;- as_list(doc) names(data) names(data<span class="math inline">\(response) length(data\)</span>response<span class="math inline">\(loans) data\)</span>response$loans[[2]][c(‘name’, ‘activity’, ‘sector’, ‘location’, ‘loan_amount’)]</p>
+</section>
+<section id="alternatively-extract-only-the-loans-info-and-use-pipes" class="level2">
+<h2 class="anchored" data-anchor-id="alternatively-extract-only-the-loans-info-and-use-pipes">alternatively, extract only the ‘loans’ info (and use pipes)</h2>
+<p>loansNode &lt;- doc %&gt;% html_elements(‘loans’) loanInfo &lt;- loansNode %&gt;% xml_children() %&gt;% as_list() length(loanInfo) names(loanInfo[[1]]) names(loanInfo[[1]]$location)</p>
+</section>
+<section id="suppose-we-only-want-the-country-locations-of-the-loans-using-xpath" class="level2">
+<h2 class="anchored" data-anchor-id="suppose-we-only-want-the-country-locations-of-the-loans-using-xpath">suppose we only want the country locations of the loans (using XPath)</h2>
+<p>xml_find_all(loansNode, ‘//location//country’) xml_find_all(loansNode, ‘//location//country’) %&gt;% xml_text()</p>
+</section>
+<section id="or-extract-the-geographic-coordinates" class="level2">
+<h2 class="anchored" data-anchor-id="or-extract-the-geographic-coordinates">or extract the geographic coordinates</h2>
+<p>xml_find_all(loansNode, ‘//location//geo/pairs’)</p>
+<pre><code>
+## JSON
+
+JSON files are structured as "attribute-value" pairs (aka "key-value"
+pairs), often with a hierarchical structure. Here's a brief example:
+</code></pre>
+<pre><code>{
+  "firstName": "John",
+  "lastName": "Smith",
+  "isAlive": true,
+  "age": 25,
+  "address": {
+    "streetAddress": "21 2nd Street",
+    "city": "New York",
+    "state": "NY",
+    "postalCode": "10021-3100"
+  },
+  "phoneNumbers": [
+    {
+      "type": "home",
+      "number": "212 555-1234"
+    },
+    {
+      "type": "office",
+      "number": "646 555-4567"
+    }
+  ],
+  "children": [],
+  "spouse": null
+}</code></pre>
+<pre><code>
+A set of key-value pairs is a named array and is placed inside braces
+(squiggly brackets). Note the nestedness of arrays within arrays (e.g.,
+address within the overarching person array and the use of square
+brackets for unnamed arrays (i.e., vectors of information), as well as
+the use of different types: character strings, numbers, null, and (not
+shown) boolean/logical values. JSON and XML can be used in similar ways,
+but JSON is less verbose than XML.
+
+We can read JSON into R using *fromJSON()* in the *jsonlite* package.
+Let's play again with the Kiva data. The same data that we had worked
+with in XML format is also available in JSON format:
+&lt;http://api.kivaws.org/v1/loans/newest.json&gt;.
+
+```{r, json
+library(jsonlite)
+data &lt;- fromJSON("http://api.kivaws.org/v1/loans/newest.json")
+class(data)
+names(data)
+class(data$loans) # nice!
+head(data$loans)
+
+data$loans[1, 'location.geo.pairs'] # hmmm...
+data$loans[1, 'location']</code></pre>
+<p>One disadvantage of JSON is that it is not set up to deal with missing values, infinity, etc.</p>
+</section>
+<section id="webscraping-and-web-apis" class="level2">
+<h2 class="anchored" data-anchor-id="webscraping-and-web-apis">Webscraping and web APIs</h2>
+<p>Here we’ll see some examples of making requests over the Web to get data. We’ll use APIs to systematically query a website for information. Ideally, but not always, the API will be documented. In many cases that simply amounts to making an HTTP GET request, which is done by constructing a URL.</p>
+<p>The packages <em>RCurl</em> and <em>httr</em> are useful for a wide variety of such functionality. Note that much of the functionality I describe below is also possible within bash using either <em>wget</em> or <em>curl</em>.</p>
+<section id="webscraping-ethics-and-best-practices" class="level3">
+<h3 class="anchored" data-anchor-id="webscraping-ethics-and-best-practices">Webscraping ethics and best practices</h3>
+<p>Webscraping is the process of extracting data from the web, either directly from a website or using a web API (application programming interface).</p>
+<ol type="1">
+<li><p><strong>Should you webscrape?</strong> In general, if we can avoid webscraping (particularly if there is not an API) and instead directly download a data file from a website, that is greatly preferred.</p></li>
+<li><p><strong>May you webscrape?</strong> Before you set up any automated downloading of materials/data from the web you should make sure that what you are about to do is consistent with the rules provided by the website.</p></li>
+</ol>
+<p>Some places to look for information on what the website allows are:</p>
+<ul>
+<li><p>legal pages such as Terms of Service or Terms and Conditions on the website.</p></li>
+<li><p>check the robots.txt file (e.g., <a href="https://scholar.google.com/robots.txt" class="uri">https://scholar.google.com/robots.txt</a>) to see what a web crawler is allowed to do, and whether the site requires a particular delay between requests to the sites</p></li>
+<li><p>potentially contact the site owner if you plan to scrape a large amount of data</p></li>
+</ul>
+<p>Here are some links with useful information:</p>
+<ul>
+<li><p><a href="http://feedproxy.google.com/~r/RBloggers/~3/RZGJ8Trv5Xw/?utm_source=feedburner&amp;utm_medium=email">A blog post overview on webscraping and robots.txt</a></p></li>
+<li><p><a href="https://towardsdatascience.com/ethics-in-web-scraping-b96b18136f01">Blog post on webscraping ethics</a></p></li>
+<li><p><a href="https://www.promptcloud.com/blog/how-to-read-and-respect-robots-file">Some information on how to understand a robots.txt file</a></p></li>
+</ul>
+<p>In many cases you will want to include a time delay between your automated requests to a site, including if you are not actually crawling a site but just want to automate a small number of queries.</p>
+</section>
+<section id="what-is-http" class="level3">
+<h3 class="anchored" data-anchor-id="what-is-http">What is HTTP?</h3>
+<p>HTTP (hypertext transfer protocol) is a system for communicating information from a server (i.e., the website of interest) to a client (e.g., your laptop). The client sends a request and the server sends a response.</p>
+<p>When you go to a website in a browser, your browser makes an HTTP GET request to the website. Similarly, when we did some downloading of html from webpages above, we used an HTTP GET request.</p>
+<p>Anytime the URL you enter includes ‘param’ information (<code>www.somewebsite.com?param=arg</code>), you are using an API.</p>
+<p>The response to an HTTP request will include a status code, which can be interpreted based on <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">this information</a>.</p>
+<p>The response will generally contain content in the form of text (e.g., HTML, XML, JSON) or raw bytes.</p>
+</section>
+<section id="apis-rest--and-soap-based-web-services" class="level3">
+<h3 class="anchored" data-anchor-id="apis-rest--and-soap-based-web-services">APIs: REST- and SOAP-based web services</h3>
+<p>Ideally a web service documents their API (Applications Programming Interface) that serves data or allows other interactions. REST and SOAP are popular API standards/styles. Both REST and SOAP use HTTP requests; we’ll focus on REST as it is more common and simpler. The API will (hopefully) document what information it expects from the user and will return the result in a standard format (e.g., a particular file format rather than producing a webpage).</p>
+<p>When using REST, we access <em>resources</em>, which might be a Facebook account or a database of stock quotes. The resource may return information in the form of an HTML file or JSON, CSV or something else.</p>
+<p>Often the format of the request is a URL (aka an endpoint) plus a query string, passed as a GET request. Let’s search for plumbers near Berkeley, and we’ll see the GET request, in the form:</p>
+<p><a href="https://www.yelp.com/search?find_desc=plumbers&amp;find_loc=Berkeley+CA&amp;ns=1" class="uri">https://www.yelp.com/search?find_desc=plumbers&amp;find_loc=Berkeley+CA&amp;ns=1</a></p>
+<ul>
+<li><p>the query string begins with ?</p></li>
+<li><p>there are one or more <code>Parameter=Argument</code> pairs</p></li>
+<li><p>pairs are separated by &amp;</p></li>
+<li><p>+ is used in place of each space</p></li>
+</ul>
+<p>We don’t always get HTML back - try searching for “Purple Rain” at <em>apple.com</em>. What format do you get back?</p>
+<p>Let’s see an example of accessing climate model output data from the World Bank. The API is documented by following some links from here: <a href="http://datahelpdesk.worldbank.org/knowledgebase" class="uri">http://datahelpdesk.worldbank.org/knowledgebase</a>. Following that documentation we can download monthly average precipitation predictions for 2080-2099 for the US (ISO3 code ‘USA’) based on global climate model simulations. In this case our REST-based query is simply constructing a straightforward URL.</p>
+<p><code>{r, REST times &lt;- c(2080, 2099) countryCode &lt;- 'USA' baseURL &lt;- "http://climatedataapi.worldbank.org/climateweb/rest/v1/country" ##" http://climatedataapi.worldbank.org/climateweb/rest/v1/country" type &lt;- "mavg" var &lt;- "pr" data &lt;- read.csv(paste(baseURL, type, var, times[1], times[2],                        paste0(countryCode, '.csv'), sep = '/')) head(data)</code></p>
+<p>As another example, here we can see the <a href="https://build.kiva.org/api">Kiva API</a>, which allows us to construct queries on the Kiva data that we saw some of earlier.</p>
+<p>The Nolan and Temple Lang book provides a number of examples of different ways of authenticating with web services that control access to the service.</p>
+<p>Finally, some web services allow us to pass information to the service in addition to just getting data or information. E.g., you can programmatically interact with your Facebook, Dropbox, and Google Drive accounts using REST based on HTTP POST, PUT, and DELETE requests. Authentication is of course important in these contexts and some times you would first authenticate with your login and password and receive a “token”. This token would then be used in subsequent interactions in the same session.</p>
+<p>I created your <em>github.berkeley.edu</em> accounts from Python by interacting with the <a href="https://docs.github.com/en/rest/reference/repos">Github API</a> using the <em>requests</em> package.</p>
+</section>
+<section id="http-requests-by-deconstructing-an-undocumented-api" class="level3">
+<h3 class="anchored" data-anchor-id="http-requests-by-deconstructing-an-undocumented-api">HTTP requests by deconstructing an (undocumented) API</h3>
+<p>In some cases an API may not be documented or we might be lazy and not use the documentation. Instead we might deconstruct the queries a browser makes and then mimic that behavior, in some cases having to parse HTML output to get at data. Note that if the webpage changes even a little bit, our carefully constructed query syntax may fail.</p>
+<p>Let’s look at some UN data (agricultural crop data). By going to<br>
+<a href="http://data.un.org/Explorer.aspx?d=FAO" class="uri">http://data.un.org/Explorer.aspx?d=FAO</a>, and clicking on “Crops”, we’ll see a bunch of agricultural products with “View data” links. Click on “apricots” as an example and you’ll see a “Download” button that allows you to download a CSV of the data. Let’s select a range of years and then try to download “by hand”. Sometimes we can right-click on the link that will download the data and directly see the URL that is being accessed and then one can deconstruct it so that you can create URLs programmatically to download the data you want.</p>
+<p>In this case, we can’t see the full URL that is being used because there’s some Javascript involved. Therefore, rather than looking at the URL associated with a link we need to view the actual HTTP request sent by our browser to the server. We can do this using features of the browser (e.g., in Firefox see <code>Web Developer -&gt; Network</code> and in Chrome <code>More tools -&gt; Developer tools</code> <code>-&gt; Network</code>) (or right-click on the webpage and select <code>Inspect</code> and then <code>Network</code>). Based on this we can see that an HTTP GET request is being used with a URL such as:<br>
+<a href="http://data.un.org/Handlers/DownloadHandler.ashx?DataFilter=itemCode:526;year:2012,2013,2014,2015,2016,2017&amp;DataMartId=FAO&amp;Format=csv&amp;c=2,4,5,6,7&amp;s=countryName:asc,elementCode:asc,year:desc" class="uri">http://data.un.org/Handlers/DownloadHandler.ashx?DataFilter=itemCode:526;year:2012,2013,2014,2015,2016,2017&amp;DataMartId=FAO&amp;Format=csv&amp;c=2,4,5,6,7&amp;s=countryName:asc,elementCode:asc,year:desc</a>.</p>
+<p>We’e now able to easily download the data using that URL, which we can fairly easily construct using string processing in bash, R, or Python, such as this:</p>
+<p>```{r, http-byURL</p>
+</section>
+</section>
+<section id="example-url" class="level2">
+<h2 class="anchored" data-anchor-id="example-url">example URL:</h2>
+</section>
+<section id="httpdata.un.orghandlersdownloadhandler.ashxdatafilteritemcode526" class="level2">
+<h2 class="anchored" data-anchor-id="httpdata.un.orghandlersdownloadhandler.ashxdatafilteritemcode526">http://data.un.org/Handlers/DownloadHandler.ashx?DataFilter=itemCode:526;</h2>
+<p>##year:2012,2013,2014,2015,2016,2017&amp;DataMartId=FAO&amp;Format=csv&amp;c=2,4,5,6,7&amp; ##s=countryName:asc,elementCode:asc,year:desc itemCode &lt;- 526 baseURL &lt;- “http://data.un.org/Handlers/DownloadHandler.ashx” yrs &lt;- paste(as.character(2012:2017), collapse = “,”) filter &lt;- paste0(“?DataFilter=itemCode:”, itemCode, “;year:”, yrs) args1 &lt;- “&amp;DataMartId=FAO&amp;Format=csv&amp;c=2,3,4,5,6,7&amp;” args2 &lt;- “s=countryName:asc,elementCode:asc,year:desc” url &lt;- paste0(baseURL, filter, args1, args2) ## if the website provided a CSV we could just do this: ## apricots &lt;- read.csv(url) ## but it zips the file temp &lt;- tempfile() ## give name for a temporary file download.file(url, temp) dat &lt;- read.csv(unzip(temp)) ## using a connection (see Section 2)</p>
+<p>head(dat)</p>
+<pre><code>
+So, what have we achieved?
+
+1. We have a reproducible workflow we can share with others (perhaps ourself in the future).
+
+2. We can automate the process of downloading many such files.
+
+
+### More details on HTTP requests
+
+A more sophisticated way to do the download is to pass the request in a structured way with named input parameters. This request is easier to construct programmatically. Here what is returned is a zip file, which is represented in R as a sequence of “raw” bytes. We can use httr's GET(), followed by writing to disk and reading back in, as follows (for some reason knitr won't print the output...):
+
+```{r, http-get2
+library(httr)
+output2 &lt;- GET(baseURL, query = list(
+               DataFilter = paste0("itemCode:", itemCode, ";year:", yrs),
+               DataMartID = "FAO", Format = "csv", c = "2,3,4,5,6,7",
+               s = "countryName:asc,elementCode:asc,year:desc"))
+temp &lt;- tempfile()  ## give name for a temporary file
+writeBin(content(output2, 'raw'), temp)  ## write out as zip file
+dat &lt;- read.csv(unzip(temp))
+head(dat)</code></pre>
+<p>In some cases we may need to send a lot of information as part of the URL in a GET request. If it gets to be too long (e.g,, more than 2048 characters) many web servers will reject the request. Instead we may need to use an HTTP POST request (POST requests are often used for submitting web forms). A typical request would have syntax like this search (using <em>RCurl</em>):</p>
+<p><code>{r, http-post if(url.exists('http://www.wormbase.org/db/searches/advanced/dumper')) {       x = postForm('http://www.wormbase.org/db/searches/advanced/dumper',               species="briggsae",               list="",               flank3="0",               flank5="0",               feature="Gene Models",               dump = "Plain TEXT",               orientation = "Relative to feature",               relative = "Chromsome",               DNA ="flanking sequences only",               .cgifields = paste(c("feature", "orientation", "DNA",                                    "dump","relative"), collapse=", ")) }</code></p>
+<p>Unfortunately that specific search doesn’t work because the server URL and/or API seem to have changed. But it gives you an idea of what the format would look like.</p>
+<p><em>httr</em> and <em>RCurl</em> can handle other kinds of HTTP requests such as PUT and DELETE. Finally, some websites use cookies to keep track of users and you may need to download a cookie in the first interaction with the HTTP server and then send that cookie with later interactions. More details are available in the Nolan and Temple Lang book.</p>
+<section id="packaged-access-to-an-api" class="level3">
+<h3 class="anchored" data-anchor-id="packaged-access-to-an-api">Packaged access to an API</h3>
+<p>For popular websites/data sources, a developer may have packaged up the API calls in a user-friendly fashion for use from R, Python or other software. For example there are Python (twitter) and R (twitteR) packages for interfacing with Twitter via its API.</p>
+<p>Here’s some example code for Python (the Python package seems to be more fully-featured than the R package). This looks up the US senators’ Twitter names and then downloads a portion of each of their timelines, i.e., the time series of their tweets. Note that Twitter has limits on how much one can download at once.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> twitter</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># You will need to set the following variables with your</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># personal information.  To do this you will need to create</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># a personal account on Twitter (if you don't already have</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># one).  Once you've created an account, create a new</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># application here:</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">#    https://dev.twitter.com/apps</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co"># You can manage your applications here:</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co">#    https://apps.twitter.com/</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Select your application and then under the section labeled</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co"># "Key and Access Tokens", you will find the information needed</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co"># below.  Keep this information private.</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>CONSUMER_KEY       <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>CONSUMER_SECRET    <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>OAUTH_TOKEN        <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>OAUTH_TOKEN_SECRET <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>auth <span class="op">=</span> twitter.oauth.OAuth(OAUTH_TOKEN, OAUTH_TOKEN_SECRET,</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>                           CONSUMER_KEY, CONSUMER_SECRET)</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>api <span class="op">=</span> twitter.Twitter(auth<span class="op">=</span>auth)</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="co"># get the list of senators</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>senators <span class="op">=</span> api.lists.members(owner_screen_name<span class="op">=</span><span class="st">"gov"</span>, slug<span class="op">=</span><span class="st">"us-senate"</span>, count<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="co"># get all the senators' timelines</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>names <span class="op">=</span> [d[<span class="st">"screen_name"</span>] <span class="cf">for</span> d <span class="kw">in</span> senators[<span class="st">"users"</span>]]</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>timelines <span class="op">=</span> [api.statuses.user_timeline(screen_name<span class="op">=</span>name, count <span class="op">=</span> <span class="dv">500</span>) </span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>             <span class="cf">for</span> name <span class="kw">in</span> names]</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a><span class="co"># save information out to JSON</span></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"senators-list.json"</span>, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>    json.dump(senators, f, indent<span class="op">=</span><span class="dv">4</span>, sort_keys<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"timelines.json"</span>, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>    json.dump(timelines, f, indent<span class="op">=</span><span class="dv">4</span>, sort_keys<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="accessing-dynamic-pages" class="level3">
+<h3 class="anchored" data-anchor-id="accessing-dynamic-pages">Accessing dynamic pages</h3>
+<p>Some websites dynamically change in reaction to the user behavior. In these cases you need a tool that can mimic the behavior of a human interacting with a site. Some options are:</p>
+<ul>
+<li><p><em>selenium</em> (and the <em>RSelenium</em> wrapper for R) is a popular tool for doing this.</p></li>
+<li><p><em>splash</em> (and the <em>splashr</em> wrapper for R) is another approach.</p></li>
+<li><p><em>htmlunit</em> is another tool for this.</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="file-and-string-encodings" class="level1">
+<h1>File and string encodings</h1>
+<p>Text (either in the form of a file with regular language in it or a data file with fields of character strings) will often contain characters that are not part of the <a href="http://en.wikipedia.org/wiki/ASCII">limited ASCII set of characters</a>, which has <span class="math inline">\(2^{7}=128\)</span> characters and control codes; basically what you see on a standard US keyboard. Each character takes up one byte (8 bits) of space (there is an unused bit that comes in handy in the UTF-8 context). We can actually hand-generate an ASCII file using the binary representation of each character in R as an illustration.</p>
+<p>The letter “M” is encoded based on the ASCII standard in bits as “01001101” as seen in the link above. For convenience, this is often written as two base-16 numbers (i.e., hexadecimal), where “0100”=“4” and “1101”=“d”, hence we have “4d” in hexadecimal.</p>
+<p>```{r, ascii</p>
+<section id="d-in-hexadecimal-is-m" class="level2">
+<h2 class="anchored" data-anchor-id="d-in-hexadecimal-is-m">4d in hexadecimal is ‘M’</h2>
+</section>
+<section id="a-is-a-newline-at-least-in-linuxmac" class="level2">
+<h2 class="anchored" data-anchor-id="a-is-a-newline-at-least-in-linuxmac">0a is a newline (at least in Linux/Mac)</h2>
+</section>
+<section id="x-is-how-we-tell-r-we-are-using-hexadecimal" class="level2">
+<h2 class="anchored" data-anchor-id="x-is-how-we-tell-r-we-are-using-hexadecimal">“0x” is how we tell R we are using hexadecimal</h2>
+<p>x &lt;- as.raw(c(‘0x4d’,‘0x6f’, ‘0x6d’,‘0x0a’)) ## i.e., “Mom” in ascii x charToRaw(‘Mom’)<br>
+writeBin(x, ‘tmp.txt’) readLines(‘tmp.txt’) system(‘ls -l tmp.txt’, intern = TRUE) system(‘cat tmp.txt’)</p>
+<pre><code>
+
+When encountering non-ASCII files, in some cases you may need to deal
+with the text encoding (the mapping of individual characters (including
+tabs, returns, etc.) to a set of numeric codes). There are a variety of
+different encodings for text files, with different ones common on
+different operating systems.
+[UTF-8](https://en.wikipedia.org/wiki/UTF-8) is an encoding for the
+Unicode characters that includes more than 110,000 characters from 100
+different alphabets/scripts. It's widely used on the web. Latin-1
+encodes a small subset of Unicode and contains the characters used in
+many European languages (e.g., letters with accents). Here's an example
+of using a non-ASCII Unicode character:
+
+```{r, unicode-example
+
+## n-tilde and division symbol as Unicode 'code points'
+x2 &lt;- 'Pe\u00f1a 3\u00f72' 
+Encoding(x2) 
+x2
+writeBin(x2, 'tmp2.txt')
+## here n-tilde and division symbol take up two bytes
+## but there is an extraneous null byte in there; not sure why
+system('ls -l tmp2.txt') 
+## so the system knows how to interpret the UTF-8 encoded file
+## and represent the Unicode character on the screen:
+system('cat tmp2.txt')
+</code></pre>
+<p>(I have turned off evaluation of that chunk as something strange is going on when I create the PDF.)</p>
+<p>UTF-8 is cleverly designed in terms of the bit-wise representation of characters such that ASCII characters still take up one byte, and most other characters take two bytes, but some take four bytes. In fact it is even more clever than that - the representation is such that the bits of a one-byte character never appears within the representation of a two- or three- or four-byte character (and similarly for two-byte characters in three- or four-byte characters, etc.).</p>
+<p>The UNIX utility <em>file</em>, e.g.&nbsp;<code>file tmp.txt</code> can help provide some information. <em>read.table()</em> in R takes arguments <em>fileEncoding</em> and <em>encoding</em> that allow one to specify the encoding as one reads text in. The UNIX utility <em>iconv</em> and the R function <em>iconv()</em> can help with conversions.</p>
+<p>In US installations of R, the default encoding is UTF-8; note below that various types of information are interpreted in US English with the encoding UTF-8:</p>
+<p><code>{r, locale Sys.getlocale()</code></p>
+<p>With strings already in R, you can convert between encodings with <em>iconv()</em>:</p>
+<p>```{r, iconv text &lt;- “Melhore sua seguran7a” Encoding(text) Encoding(text) &lt;- “latin1” text ## this prints out correctly in R, but is not correct in the PDF</p>
+<p>text &lt;- “Melhore sua seguran7a” textUTF8 &lt;- iconv(text, from = “latin1”, to = “UTF-8”) Encoding(textUTF8) textUTF8 iconv(text, from = “latin1”, to = “ASCII”, sub = “???”)</p>
+<pre><code>
+
+You can also mark a string with an encoding, so R knows how to display
+it correctly (again, this prints out incorrectly in the PDF):
+
+```{r, encoding
+x &lt;- "fa\xE7ile" 
+Encoding(x) &lt;- "latin1" 
+x
+## playing around... 
+x &lt;- "\xa1 \xa2 \xa3 \xf1 \xf2" 
+Encoding(x) &lt;- "latin1" 
+x </code></pre>
+<p>An R error message with multi-byte string in the message often indicates an encoding issue. In particular errors often arise when trying to do string manipulations in R on character vectors for which the encoding is not properly set. Here’s an example with some Internet logging data that we used a few years ago in class in a problem set and which caused some problems.</p>
+<p>```{r, encoding-error load(‘../data/IPs.RData’) # loads in an object named ‘text’ tmp &lt;- substring(text, 1, 15) ## the issue occurs with the 6402th element (found by trial and error): tmp &lt;- substring(text[1:6401],1,15) tmp &lt;- substring(text[1:6402],1,15) text[6402] # note the Latin-1 character</p>
+<p>table(Encoding(text)) ## Option 1 Encoding(text) &lt;- “latin1” tmp &lt;- substring(text, 1, 15) tmp[6402] ## Option 2 load(‘../data/IPs.RData’) # loads in an object named ‘text’ tmp &lt;- substring(text, 1, 15) text &lt;- iconv(text, from = “latin1”, to = “UTF-8”) tmp &lt;- substring(text, 1, 15) ```</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
