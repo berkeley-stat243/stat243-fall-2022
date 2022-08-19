@@ -1,6 +1,12 @@
 #!/bin/bash
 
-## Manual workflow as `quarto publish github-pages` not working.
+## Notes
+
+## Publish without re-rendering all files after individually rendering file(s)
+## quarto render file.Rmd
+## quarto publish --no-render
+
+## Manual workflow as `quarto publish github-pages` was not working.
 
 ## Step 1: Make changes to source (md/qmd/Rmd) files in main branch.
 ## Step 2: Render individual files to html with `quarto render file.ext`, which puts rendered files in _site. Don't commit anything in _site.

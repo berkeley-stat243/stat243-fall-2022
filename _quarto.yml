@@ -17,7 +17,7 @@ website:
         text: Software
       - text: "Units"
         menu:
-          - file: units/unit1-unix.Rmd
+          - file: units/unit1-intro.Rmd
             text: "Unit 1"
           - file: units/unit2-dataTech.Rmd
             text: "Unit 2"
