@@ -6,6 +6,9 @@ date: "2022-08-15"
 
 [PDF](./unit1-unix.pdf){.btn .btn-primary}
 
+
+# UNIX basics
+
 By UNIX, I mean any UNIX-like operating system, including Linux and Mac
 OS X. On the Mac you can access a UNIX terminal window with the Terminal
 application (via `Applications -> Utilities -> Terminal` from the
@@ -14,9 +17,6 @@ machines, often by remotely logging in to a UNIX-based server.
 
 There are a variety of ways to get access to a UNIX-style command line
 environment, outlined in the software tips on the course website.
-
-
-# UNIX basics
 
 Please see the material in [our tutorial on the basics of
 UNIX](https://berkeley-scf.github.io/tutorial-unix-basics) to get up
@@ -28,7 +28,7 @@ Friday August 26 to work on the problems at the end of the tutorial and
 be able to ask questins of the GSI and other students.
 
 For an alternative introduction (which also includes some of the topics
-we'll discuss in Unit 4 on shell scripting), see [this Software
+we'll discuss in Unit 3 on shell scripting), see [this Software
 Carpentry tutorial](https://swcarpentry.github.io/shell-novice).
 
 # Version control
