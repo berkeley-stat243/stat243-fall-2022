@@ -277,7 +277,7 @@
     "href": "schedule.html",
     "title": "Statistics 243 Fall 2022",
     "section": "",
-    "text": "Week\nDay\nDate\nTime\nActivity/Assignment\n\n\n\n\n1\nThursday\n2022-08-25\n4:00-5:30 pm\nOptional: Introduction to LaTeX session run by the library (see Details below)\n\n\n\nFriday\n2022-08-26\nnoon\nRequired (part of your class participation): class survey\n\n\n\nFriday\n2022-08-26\nnoon\nRequired: office hour time survey\n\n\n\nFriday\n2022-08-26\nnoon\nOptional: survey for time for extra R help session\n\n\n\nFriday\n2022-08-26\nlab (1:00-4:30 pm)\nOptional: Lab 0 help session for software installation/setup and UNIX command line basics (see Details below)\n\n\n2\nMonday\n2022-08-29\n10 am\nRequired: read first three sections of Unit 2 (sections before ‘Webscraping’)\n\n\n\nMonday\n2022-08-29\n\nOptional: work through the UNIX basics tutorial and answer (for yourself) the questions at the end\n\n\n\nTBD\nTBD\nTBD\nOptional: R help session (see Details below)\n\n\n\nFriday\n2022-09-02\n10 am\nRequired: Bash shell tutorial and exercises (see Details below)\n\n\n\nFriday\n2022-09-02\nlab\nRequired: Lab 1 on using course tools and problem set submission (see Details below)\n\n\n3\nWednesday\n2022-09-07\n4:00-5:30 pm\nOptional: Introduction to LaTeX session run by the library (see Details below)\n\n\n\nFriday\n2022-09-09\n10 am\nRegular expression tutorial and exercises (see Details below)\n\n\n\nFriday\n2022-09-09\nlab\nRequired: Lab 2 on assertions and testing"
+    "text": "Week\nDay\nDate\nTime\nActivity/Assignment\n\n\n\n\n1\nThursday\n2022-08-25\n4:00-5:30 pm\nOptional: Introduction to LaTeX session run by the library (see Details below)\n\n\n\nFriday\n2022-08-26\nnoon\nRequired (part of your class participation): class survey\n\n\n\n\n\nnoon\nRequired: office hour time survey\n\n\n\n\n\nnoon\nOptional: survey for time for extra R help session\n\n\n\n\n\nlab (1:00-4:30 pm)\nOptional: Lab 0 help session for software installation/setup and UNIX command line basics (see Details below)\n\n\n2\nMonday\n2022-08-29\n10 am\nRequired: read first three sections of Unit 2 (sections before ‘Webscraping’)\n\n\n\n\n\nnone\nOptional: work through the UNIX basics tutorial and answer (for yourself) the questions at the end\n\n\n\nTBD\nTBD\nTBD\nOptional: R help session (see Details below)\n\n\n\nFriday\n2022-09-02\n10 am\nRequired: Bash shell tutorial and exercises (see Details below)\n\n\n\n\n\nlab\nRequired: Lab 1 on using course tools and problem set submission (see Details below)\n\n\n3\nWednesday\n2022-09-07\n4:00-5:30 pm\nOptional: Introduction to LaTeX session run by the library (see Details below)\n\n\n\nFriday\n2022-09-09\n10 am\nRegular expression tutorial and exercises (see Details below)\n\n\n\n\n\nlab\nRequired: Lab 2 on assertions and testing"
   },
   {
     "objectID": "schedule.html#notes-on-assignments-and-activities",
@@ -299,5 +299,26 @@
     "title": "Statistics 243 Fall 2022",
     "section": "Project schedule",
     "text": "Project schedule\nDue date: TBD, but due either the reading week or the exam week."
+  },
+  {
+    "objectID": "units/unit1-intro.html",
+    "href": "units/unit1-intro.html",
+    "title": "Introduction to UNIX, computers, and key tools",
+    "section": "",
+    "text": "PDF\nBy UNIX, I mean any UNIX-like operating system, including Linux and Mac OS X. On the Mac you can access a UNIX terminal window with the Terminal application (via Applications -> Utilities -> Terminal from the Finder). Most modern scientific computing is done on UNIX-based machines, often by remotely logging in to a UNIX-based server.\nThere are a variety of ways to get access to a UNIX-style command line environment, outlined in the software tips on the course website."
+  },
+  {
+    "objectID": "units/unit1-intro.html#some-useful-editors",
+    "href": "units/unit1-intro.html#some-useful-editors",
+    "title": "Introduction to UNIX, computers, and key tools",
+    "section": "Some useful editors",
+    "text": "Some useful editors\n\nvarious editors available on all operating systems:\n\ntraditional editors born in UNIX: emacs, vim\nsome newer editors: Atom, Sublime Text (Sublime is proprietary/not free)\n\nWindows-specific: WinEdt\nMac-specific: Aquamacs Emacs, TextMate, TextEdit\nRStudio provides a built-in editor for R code and R Markdown files. (Note: RStudio as a whole is an IDE (integrated development environment. The editor is just the editing window where you edit code (and R Markdown) files.)\nVSCode has a powerful code editor that is customized to work with various languages.\n\nAs you get started it’s ok to use a very simple text editor such as Notepad in Windows, but you should take the time in the next few weeks to try out more powerful editors such as one of those listed above. It will be well worth your time over the course of your graduate work and then your career.\nBe careful in Windows - file suffixes are often hidden."
+  },
+  {
+    "objectID": "units/unit1-intro.html#optional-basic-emacs",
+    "href": "units/unit1-intro.html#optional-basic-emacs",
+    "title": "Introduction to UNIX, computers, and key tools",
+    "section": "(Optional) Basic emacs",
+    "text": "(Optional) Basic emacs\nEmacs is one option as an editor. I use Emacs a fair amount, so I’m including some tips here, but other editors listed above are just as good.\n\nEmacs has special modes for different types of files: R code files, C code files, Latex files – it’s worth your time to figure out how to set this up on your machine for the kinds of files you often work on\n\nFor working with R, ESS (emacs speaks statistics) mode is helpful. This is built into Aquamacs Emacs.\n\nTo open emacs in the terminal window rather than as a new window, which is handy when it’s too slow (or impossible) to pass (i.e., tunnel) the graphical emacs window through ssh: emacs -nw file.txt\nSome helpful keystroke sequence shorcuts\n\n\n\n\n\n\n\n\nSequence\nResult\n\n\n\n\nC-x,C-c\nClose the file\n\n\nC-x,C-s\nSave the file\n\n\nC-x,C-w\nSave with a new name\n\n\nC-s\nSearch\n\n\nESC\nGet out of command buffer at bottom of screen\n\n\nC-a\nGo to beginning of line\n\n\nC-e\nGo to end of line\n\n\nC-k\nDelete the rest of the line from cursor forward\n\n\nC-space, then move to end of block\nHighlight a block of text\n\n\nC-w\nRemove the highlighted block, putting it in the kill buffer\n\n\nC-y (after using C-k or C-w)\nPaste from kill buffer (‘y’ is for ‘yank’)"
   }
 ]
