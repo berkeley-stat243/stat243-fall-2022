@@ -501,7 +501,7 @@ Attaching package: 'readr'</code></pre>
 <span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">file.path</span>(dir, <span class="st">'airline.csv'</span>), <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  3.093   0.084   3.182 </code></pre>
+  3.162   0.082   3.252 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(dat2 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(dir, <span class="st">'airline.csv'</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -518,7 +518,7 @@ dbl (24): Year, Month, DayOfMonth, DayOfWeek, DepTime, CRSDepTime, ArrTime, ...
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  4.040   0.104   1.353 </code></pre>
+  3.987   0.140   1.514 </code></pre>
 </div>
 </div>
 </section>
@@ -775,17 +775,17 @@ Attaching package: 'rvest'</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>$name
 $name[[1]]
-[1] "Leonora"
+[1] "Alelie Grace"
 
 
 $activity
 $activity[[1]]
-[1] "Pigs"
+[1] "Fishing"
 
 
 $sector
 $sector[[1]]
-[1] "Agriculture"
+[1] "Food"
 
 
 $location
@@ -801,7 +801,7 @@ $location$country[[1]]
 
 $location$town
 $location$town[[1]]
-[1] "Dalaguete, Cebu"
+[1] "Roxas Palawan"
 
 
 $location$geo
@@ -812,7 +812,7 @@ $location$geo$level[[1]]
 
 $location$geo$pairs
 $location$geo$pairs[[1]]
-[1] "9.783662 123.505602"
+[1] "10.306908 119.256946"
 
 
 $location$geo$type
@@ -824,7 +824,7 @@ $location$geo$type[[1]]
 
 $loan_amount
 $loan_amount[[1]]
-[1] "200"</code></pre>
+[1] "550"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="do">## alternatively, extract only the 'loans' info (and use pipes)</span></span>
 <span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>loansNode <span class="ot">&lt;-</span> doc <span class="sc">%&gt;%</span> <span class="fu">html_elements</span>(<span class="st">'loans'</span>)</span>
@@ -865,7 +865,7 @@ $loan_amount[[1]]
  [9] &lt;country&gt;Philippines&lt;/country&gt;
 [10] &lt;country&gt;Philippines&lt;/country&gt;
 [11] &lt;country&gt;Philippines&lt;/country&gt;
-[12] &lt;country&gt;Guatemala&lt;/country&gt;
+[12] &lt;country&gt;Philippines&lt;/country&gt;
 [13] &lt;country&gt;Philippines&lt;/country&gt;
 [14] &lt;country&gt;Philippines&lt;/country&gt;
 [15] &lt;country&gt;Philippines&lt;/country&gt;
@@ -879,7 +879,7 @@ $loan_amount[[1]]
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "Philippines" "Philippines" "Philippines" "Philippines" "Philippines"
  [6] "Philippines" "Philippines" "Philippines" "Philippines" "Philippines"
-[11] "Philippines" "Guatemala"   "Philippines" "Philippines" "Philippines"
+[11] "Philippines" "Philippines" "Philippines" "Philippines" "Philippines"
 [16] "Philippines" "Philippines" "Philippines" "Philippines" "Philippines"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="do">## or extract the geographic coordinates</span></span>
@@ -887,25 +887,25 @@ $loan_amount[[1]]
 <div class="cell-output cell-output-stdout">
 <pre><code>{xml_nodeset (20)}
  [1] &lt;pairs&gt;10.752818 123.087562&lt;/pairs&gt;
- [2] &lt;pairs&gt;9.783662 123.505602&lt;/pairs&gt;
- [3] &lt;pairs&gt;11.254339 124.961687&lt;/pairs&gt;
- [4] &lt;pairs&gt;9.967216 118.78551&lt;/pairs&gt;
- [5] &lt;pairs&gt;10.878345 123.408176&lt;/pairs&gt;
- [6] &lt;pairs&gt;11.254339 124.961687&lt;/pairs&gt;
- [7] &lt;pairs&gt;9.783662 123.505602&lt;/pairs&gt;
- [8] &lt;pairs&gt;9.942986 122.58252&lt;/pairs&gt;
- [9] &lt;pairs&gt;11.254339 124.961687&lt;/pairs&gt;
-[10] &lt;pairs&gt;11.254339 124.961687&lt;/pairs&gt;
-[11] &lt;pairs&gt;10.752818 123.087562&lt;/pairs&gt;
-[12] &lt;pairs&gt;15.348285 -90.799649&lt;/pairs&gt;
-[13] &lt;pairs&gt;9.942986 122.58252&lt;/pairs&gt;
-[14] &lt;pairs&gt;9.783662 123.505602&lt;/pairs&gt;
-[15] &lt;pairs&gt;9.599584 124.013979&lt;/pairs&gt;
+ [2] &lt;pairs&gt;10.306908 119.256946&lt;/pairs&gt;
+ [3] &lt;pairs&gt;9.783662 123.505602&lt;/pairs&gt;
+ [4] &lt;pairs&gt;9.719789 122.492009&lt;/pairs&gt;
+ [5] &lt;pairs&gt;10.752818 123.087562&lt;/pairs&gt;
+ [6] &lt;pairs&gt;9.719789 122.492009&lt;/pairs&gt;
+ [7] &lt;pairs&gt;10.878345 123.408176&lt;/pairs&gt;
+ [8] &lt;pairs&gt;9.719789 122.492009&lt;/pairs&gt;
+ [9] &lt;pairs&gt;10.878345 123.408176&lt;/pairs&gt;
+[10] &lt;pairs&gt;10.752818 123.087562&lt;/pairs&gt;
+[11] &lt;pairs&gt;9.783662 123.505602&lt;/pairs&gt;
+[12] &lt;pairs&gt;11.254339 124.961687&lt;/pairs&gt;
+[13] &lt;pairs&gt;9.967216 118.78551&lt;/pairs&gt;
+[14] &lt;pairs&gt;10.878345 123.408176&lt;/pairs&gt;
+[15] &lt;pairs&gt;11.254339 124.961687&lt;/pairs&gt;
 [16] &lt;pairs&gt;9.783662 123.505602&lt;/pairs&gt;
 [17] &lt;pairs&gt;9.942986 122.58252&lt;/pairs&gt;
-[18] &lt;pairs&gt;9.967216 118.78551&lt;/pairs&gt;
-[19] &lt;pairs&gt;9.783662 123.505602&lt;/pairs&gt;
-[20] &lt;pairs&gt;10.878345 123.408176&lt;/pairs&gt;</code></pre>
+[18] &lt;pairs&gt;11.254339 124.961687&lt;/pairs&gt;
+[19] &lt;pairs&gt;11.254339 124.961687&lt;/pairs&gt;
+[20] &lt;pairs&gt;10.752818 123.087562&lt;/pairs&gt;</code></pre>
 </div>
 </div>
 </section>
@@ -955,20 +955,20 @@ $loan_amount[[1]]
 </div>
 <div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data<span class="sc">$</span>loans)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>       id      name languages      status funded_amount basket_amount image.id
-1 2417739     Mercy        en fundraising             0             0  4054841
-2 2417733   Leonora        en fundraising             0             0  4901957
-3 2417734     Nelia        en fundraising             0             0  4901964
-4 2417735 Vergelita        en fundraising             0             0  4901965
-5 2417736     Myrna        en fundraising             0             0  4901960
-6 2417738    Shirly        en fundraising             0             0  4901969
-  image.template_id      activity      sector
-1                 1 General Store      Retail
-2                 1          Pigs Agriculture
-3                 1 General Store      Retail
-4                 1 General Store      Retail
-5                 1   Food Market        Food
-6                 1          Food        Food
+<pre><code>       id         name languages      status funded_amount basket_amount
+1 2417761     Teresita        en fundraising             0             0
+2 2417758 Alelie Grace        en fundraising             0             0
+3 2416514       Margie        en fundraising             0             0
+4 2416515    Genevieve        en fundraising             0             0
+5 2417740        Mercy        en fundraising             0             0
+6 2417757         Erma        en fundraising             0             0
+  image.id image.template_id            activity sector
+1  4901993                 1       General Store Retail
+2  4901994                 1             Fishing   Food
+3  4900333                 1 Fruits &amp; Vegetables   Food
+4  4900336                 1       General Store Retail
+5  4901966                 1                Food   Food
+6  4901995                 1       General Store Retail
                                         themes
 1 Underfunded Areas, Start-Up, Rural Exclusion
 2 Underfunded Areas, Start-Up, Rural Exclusion
@@ -978,32 +978,32 @@ $loan_amount[[1]]
 6 Underfunded Areas, Start-Up, Rural Exclusion
                                                                                          use
 1 to buy items like canned goods, personal care products, etc. to sell in her general store.
-2                                           to buy feed and other supplies to raise her pig.
-3            to buy items like canned goods, snack foods, etc. to sell in her general store.
-4    to purchase additional stocks of groceries including drinks and personal care products.
-5                                                          to buy additional spices to sell.
-6                                       to buy ingredients for her food production business.
-  location.country_code location.country                  location.town
-1                    PH      Philippines       Silay, Negros Occidental
-2                    PH      Philippines                Dalaguete, Cebu
-3                    PH      Philippines           Tacloban City, Leyte
-4                    PH      Philippines Puerto Princesa North, Palawan
-5                    PH      Philippines       Sagay, Negros Occidental
-6                    PH      Philippines           Tacloban City, Leyte
+2                  to buy fishing materials, fishing nets, tackle and gasoline for her boat.
+3                                               to buy vegetables to sell in her food stall.
+4                         to buy items to sell like canned goods and personal care products.
+5                                   to purchase additional packs of frozen products to sell.
+6                    to purchase items like canned goods and personal care products to sell.
+  location.country_code location.country                   location.town
+1                    PH      Philippines        Silay, Negros Occidental
+2                    PH      Philippines                   Roxas Palawan
+3                    PH      Philippines                 Dalaguete, Cebu
+4                    PH      Philippines Sipalay City, Negros Occidental
+5                    PH      Philippines        Silay, Negros Occidental
+6                    PH      Philippines Sipalay City, Negros Occidental
   location.geo.level   location.geo.pairs location.geo.type partner_id
 1               town 10.752818 123.087562             point        145
-2               town  9.783662 123.505602             point        145
-3               town 11.254339 124.961687             point        145
-4               town   9.967216 118.78551             point        145
-5               town 10.878345 123.408176             point        145
-6               town 11.254339 124.961687             point        145
+2               town 10.306908 119.256946             point        145
+3               town  9.783662 123.505602             point        145
+4               town  9.719789 122.492009             point        145
+5               town 10.752818 123.087562             point        145
+6               town  9.719789 122.492009             point        145
            posted_date planned_expiration_date loan_amount borrower_count
-1 2022-08-19T23:10:13Z    2022-09-23T23:10:13Z         375              1
-2 2022-08-19T23:10:12Z    2022-09-23T23:10:12Z         200              1
-3 2022-08-19T23:10:12Z    2022-09-23T23:10:12Z         275              1
-4 2022-08-19T23:10:12Z    2022-09-23T23:10:12Z         375              1
-5 2022-08-19T23:10:12Z    2022-09-23T23:10:12Z         200              1
-6 2022-08-19T23:10:12Z    2022-09-23T23:10:12Z         200              1
+1 2022-08-19T23:30:17Z    2022-09-23T23:30:17Z         225              1
+2 2022-08-19T23:30:13Z    2022-09-23T23:30:13Z         550              1
+3 2022-08-19T23:30:11Z    2022-09-23T23:30:11Z         275              1
+4 2022-08-19T23:30:11Z    2022-09-23T23:30:11Z         550              1
+5 2022-08-19T23:30:11Z    2022-09-23T23:30:11Z         200              1
+6 2022-08-19T23:30:11Z    2022-09-23T23:30:11Z         375              1
   lender_count bonus_credit_eligibility
 1            0                     TRUE
 2            0                     TRUE
@@ -1011,13 +1011,13 @@ $loan_amount[[1]]
 4            0                     TRUE
 5            0                     TRUE
 6            0                     TRUE
-                                            tags
-1                                           NULL
-2                                           NULL
-3 #Woman-Owned Business, #Repeat Borrower, 6, 28
-4         #Woman-Owned Business, #Widowed, 6, 12
-5                                           NULL
-6                           #Repeat Borrower, 28</code></pre>
+                                                       tags
+1                                                      NULL
+2                                                      NULL
+3                                                      NULL
+4                                                      NULL
+5 #Woman-Owned Business, #Parent, #Single Parent, 6, 16, 17
+6            #Woman-Owned Business, #Repeat Borrower, 6, 28</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>loans[<span class="dv">1</span>, <span class="st">'location.geo.pairs'</span>] <span class="co"># hmmm...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1288,7 +1288,7 @@ Attaching package: 'httr'</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system</span>(<span class="st">'ls -l tmp.txt'</span>, <span class="at">intern =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "-rw-r--r-- 1 paciorek scfstaff 4 Aug 19 16:33 tmp.txt"</code></pre>
+<pre><code>[1] "-rw-r--r-- 1 paciorek scfstaff 4 Aug 19 16:40 tmp.txt"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb122"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system</span>(<span class="st">'cat tmp.txt'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
