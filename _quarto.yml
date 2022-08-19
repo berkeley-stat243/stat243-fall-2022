@@ -11,6 +11,8 @@ website:
         text: Syllabus
       - file: office_hours.md
         text: "Office hours"
+      - file: schedule.md
+        text: Schedule
       - file: software.md
         text: Software
       - text: "Units"

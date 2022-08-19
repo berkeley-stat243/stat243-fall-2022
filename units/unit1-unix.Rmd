@@ -151,7 +151,7 @@ or Markdown/R Markdown/LaTeX.**
     -   some newer editors: *Atom*, *Sublime Text* (Sublime is
         proprietary/not free)
 -   Windows-specific: *WinEdt*
--   Mac-specific: *Aquamacs Emacs, TextMate, TextEdit*
+-   Mac-specific: *Aquamacs Emacs*, *TextMate*, *TextEdit*
 -   RStudio provides a built-in editor for R code and R Markdown files.
     (Note: RStudio as a whole is an IDE (integrated development environment.
     The editor is just the editing window where you edit code (and R
