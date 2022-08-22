@@ -6,7 +6,7 @@
 | 1 | Thursday | 2022-08-25 | 4:00-5:30 pm | Optional: [Introduction to LaTeX session](https://berkeley.libcal.com/calendar/workshops) run by the library (see Details below)|
 |     | Friday | 2022-08-26 | noon | Required (part of your class participation): [class survey](https://forms.gle/SVm9thpkh16Zps2h6)                                             |
 |      |  |  | noon | Required: [office hour time survey](http://whenisgood.net/jxstc5k)                                                                           |
-|      |  |  | noon | Optional: [survey for time for extra R help session](TBD)                                                                                    |
+|      |  |  | noon | Optional: [survey for time for extra R help session](https://whenisgood.net/r3sgffx)                                                                                    |
 |      |  |  | lab (1:00-4:30 pm)  | Optional: Lab 0 help session for software installation/setup and UNIX command line basics (see Details below)                                                        |
 | 2    | Monday | 2022-08-29 | 10 am     | Required: read first three sections of Unit 2 (sections before 'Webscraping')                                                                                                        |
 |      |  |  | none     | Optional: work through the [UNIX basics tutorial](https://berkeley-scf.github.io/tutorial-unix-basics) and answer (for yourself) the questions at the end |
