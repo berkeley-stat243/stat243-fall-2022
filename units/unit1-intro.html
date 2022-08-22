@@ -123,7 +123,7 @@ ul.task-list{list-style: none;}
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#unix-basics" id="toc-unix-basics" class="nav-link active" data-scroll-target="#unix-basics">UNIX basics</a></li>
+  <li><a href="#unix-command-line-basics" id="toc-unix-command-line-basics" class="nav-link active" data-scroll-target="#unix-command-line-basics">UNIX command line basics</a></li>
   <li><a href="#version-control" id="toc-version-control" class="nav-link" data-scroll-target="#version-control">Version control</a></li>
   <li><a href="#parts-of-a-computer" id="toc-parts-of-a-computer" class="nav-link" data-scroll-target="#parts-of-a-computer">Parts of a computer</a></li>
   <li><a href="#connecting-to-other-machines" id="toc-connecting-to-other-machines" class="nav-link" data-scroll-target="#connecting-to-other-machines">Connecting to other machines</a></li>
@@ -131,6 +131,7 @@ ul.task-list{list-style: none;}
   <ul class="collapse">
   <li><a href="#some-useful-editors" id="toc-some-useful-editors" class="nav-link" data-scroll-target="#some-useful-editors">Some useful editors</a></li>
   <li><a href="#optional-basic-emacs" id="toc-optional-basic-emacs" class="nav-link" data-scroll-target="#optional-basic-emacs">(Optional) Basic emacs</a></li>
+  <li><a href="#optional-emacs-keystroke-sequence-shortcuts." id="toc-optional-emacs-keystroke-sequence-shortcuts." class="nav-link" data-scroll-target="#optional-emacs-keystroke-sequence-shortcuts.">(Optional) Emacs keystroke sequence shortcuts.</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -166,32 +167,28 @@ ul.task-list{list-style: none;}
 
 </header>
 
-<p><a href="./unit1-unix.pdf" class="btn btn-primary">PDF</a></p>
-<p>By UNIX, I mean any UNIX-like operating system, including Linux and Mac OS X. On the Mac you can access a UNIX terminal window with the Terminal application (via <code>Applications -&gt; Utilities -&gt; Terminal</code> from the Finder). Most modern scientific computing is done on UNIX-based machines, often by remotely logging in to a UNIX-based server.</p>
-<p>There are a variety of ways to get access to a UNIX-style command line environment, outlined in the software tips on the course website.</p>
-<section id="unix-basics" class="level1">
-<h1>UNIX basics</h1>
-<p>Please see the material in <a href="https://berkeley-scf.github.io/tutorial-unix-basics">our tutorial on the basics of UNIX</a> to get up to speed on working in a UNIX-style command line environment. We’ll do a bit of demo in the first class. If what you see seems quite familiar, you can probably skip that tutorial. If what you see is not familiar, please work through the tutorial and (optionally) attend section on Friday August 26 to work on the problems at the end of the tutorial and be able to ask questins of the GSI and other students.</p>
-<p>For an alternative introduction (which also includes some of the topics we’ll discuss in Unit 4 on shell scripting), see <a href="https://swcarpentry.github.io/shell-novice">this Software Carpentry tutorial</a>.</p>
+<p><a href="./unit1-intro.pdf" class="btn btn-primary">PDF</a></p>
+<section id="unix-command-line-basics" class="level1">
+<h1>UNIX command line basics</h1>
+<p>By UNIX, I mean any UNIX-like operating system, including Linux and MacOS. Most modern scientific computing is done on UNIX-based machines, often by remotely logging in to a UNIX-based server.</p>
+<p>There are a variety of ways to get access to a UNIX-style command line environment, outlined in the course <a href="software">software</a> tips.</p>
+<p>Please see the material in <a href="https://berkeley-scf.github.io/tutorial-unix-basics">our tutorial on the basics of UNIX</a> to get up to speed on working in a UNIX-style command line environment. We’ll do a bit of demo in the first class. If what you see seems quite familiar, you can probably skip that tutorial. If what you see is not familiar, please work through the tutorial by Monday August 29 and (optionally) attend section on Friday August 26 to work on the problems at the end of the tutorial and be able to ask questions of the GSI and other students.</p>
+<p>For an alternative introduction (which also includes some of the topics we’ll discuss in Unit 3 on shell scripting), see <a href="https://swcarpentry.github.io/shell-novice">this Software Carpentry tutorial</a>.</p>
 </section>
 <section id="version-control" class="level1">
 <h1>Version control</h1>
 <p>Version control refers to the process of keeping track of changes to your materials on a computer, often code files but other files as well. It generally works well with text files because version control operates based on differences between two versions of a file, and those differences are kept track of on a line-by-line basis. Version control is a central concept/practice in modern scientific computing.</p>
 <p>A very popular and powerful tool for version control is Git. We’ll be using Git extensively for version control.</p>
-<p>More information is available in the tutorial on the basics of using Git. You’ll have a chance to work through the tutorial and practice with Git in the first section/lab. During the course, you’ll make use of Git for submitting problem sets and for doing the final project. I recommend you practice using it more generally while preparing your problem set solutions.</p>
-<p>Git stores the files for a project in a <em>repository</em>. Here are some basic Git commands you can use to access the class materials from the command line. There are also <a href="https://git-scm.com/downloads">graphical interfaces to Git</a> that you can explore. That said, I recommend <a href="https://desktop.github.com">Github Desktop</a>, available for Mac and Windows.</p>
+<p>Git stores the files for a project in a <em>repository</em>. Here are some basic Git commands you can use to access the class materials from the command line. There are also <a href="https://git-scm.com/downloads">graphical interfaces to Git</a> that you can explore. I’ve heard good things(albeit a few years ago) about <a href="https://desktop.github.com">Github Desktop</a>, available for Mac and Windows.</p>
 <ol type="1">
-<li><p>To clone (i.e., copy) a repository (in this case from GitHub) (<em>berkeley-stat243</em> is the organization and <em>stat243-fall-2021</em> is the repository): <code>git clone https://github.com/berkeley-stat243/stat243-fall-2021</code></p></li>
-<li><p>To update a repository to reflect changes made in a remote copy of the repository: <code>cd /to/any/directory/within/the/local/repository     git pull</code></p></li>
+<li><p>To clone (i.e., copy) a repository (in this case from GitHub) (<em>berkeley-stat243</em> is the organization and <em>stat243-fall-2022</em> is the repository): <code>git clone https://github.com/berkeley-stat243/stat243-fall-2022</code></p></li>
+<li><p>To update a repository to reflect changes made in a remote copy of the repository:</p>
+<pre><code>    cd /to/any/directory/within/the/local/repository
+    ```</code></pre>
+<pre><code>git pull
+```</code></pre></li>
 </ol>
-<p>We’ll see a lot more about Git in Section sessions, where you’ll learn to set up a repository, make changes to repositories and work with local and remote versons of the repository. The section material will follow our tutorial on the basics of Git, Github, and version control.</p>
-<p>Some links to more resources:</p>
-<ul>
-<li><p>Git for Scientists: A Tutorial: <a href="http://nyuccl.org/pages/GitTutorial/" class="uri">http://nyuccl.org/pages/GitTutorial/</a></p></li>
-<li><p>Gitwash: workflow for scientific Python projects:<br>
-<a href="http://matthew-brett.github.io/pydagogue/gitwash_build.html" class="uri">http://matthew-brett.github.io/pydagogue/gitwash_build.html</a></p></li>
-<li><p>Git branching demo: <a href="http://pcottle.github.io/learnGitBranching/" class="uri">http://pcottle.github.io/learnGitBranching/</a></p></li>
-</ul>
+<p>More information is available in the <a href="https://github.com/berkeley-scf/tutorial-git-basics">tutorial on the basics of using Git</a>, as well as lots of information/tutorials online. We’ll see a lot more about Git in Section sessions, where you’ll learn to set up a repository, make changes to repositories and work with local and remote versons of the repository. In particular, you’ll have a chance to work through the tutorial and practice with Git in the first section/lab (September 2). During the course, you’ll make use of Git for submitting problem sets and for doing the final project. I recommend you practice using it more generally while preparing your problem set solutions.</p>
 </section>
 <section id="parts-of-a-computer" class="level1">
 <h1>Parts of a computer</h1>
@@ -208,17 +205,19 @@ ul.task-list{list-style: none;}
 </section>
 <section id="connecting-to-other-machines" class="level1">
 <h1>Connecting to other machines</h1>
-<p>To connect to a remote machine, you need to use SSH. SSH is available as <code>ssh</code> when you are on the UNIX command line. There are also SSH clients for Windows. For more information on SSH client programs and on using SSH, please see <a href="http://statistics.berkeley.edu/computing/ssh">this webpage</a>. Here’s an example of connecting to one of the SCF machines (this assumes you have an SCF account, which you may, and that your user name is paciorek, which it is not).</p>
+<p>To connect to a remote machine, you generally need to use SSH. SSH is available as <code>ssh</code> when you are on the UNIX command line. There are also SSH clients for Windows. The SCF has <a href="http://statistics.berkeley.edu/computing/ssh">more information on SSH client programs and on using SSH</a>. Here’s an example of connecting to one of the SCF machines (this assumes you have an SCF account, which you may, and that your user name is paciorek, which it is not).</p>
 <pre><code>ssh paciorek@radagast.berkeley.edu</code></pre>
-<p>To copy files between machines, we can use <em>scp</em>, which has similar options to <em>cp</em>. The first command here copies a local file to a remote machine. The second copies from a remote machine to the machine you are on. You can use relative paths to refer to locations on the local machine. On the remote machine all paths need to be absolute or to be relative to your home directory on that machine. Again, this assumes you have an SCF account.</p>
-<pre><code>scp file.txt paciorek@radagast.berkeley.edu:~/research/.
-scp paciorek@radagast.berkeley.edu:/data/file.txt \
+<p>To copy files between machines, we can use <em>scp</em>, which has similar options to <em>cp</em>. Here’s how we can copy a local file to a remote machine.</p>
+<pre><code>scp file.txt paciorek@radagast.berkeley.edu:~/research/.</code></pre>
+<p>And here’s how we can copy from a remote machine to the machine you are on.</p>
+<pre><code>scp paciorek@radagast.berkeley.edu:/data/file.txt \
   ~/research/renamed.txt</code></pre>
+<p>You can use relative paths to refer to locations on the local machine. On the remote machine all paths need to be absolute or to be relative to your home directory on that machine.</p>
 <p>There are also client programs for file transfer; see <a href="http://statistics.berkeley.edu/computing/copying-files">this webpage</a>.</p>
 </section>
 <section id="editors" class="level1">
 <h1>Editors</h1>
-<p>For statistical computing, we need a text editor, not a word processor, because we’re going to be operating on files of code and data files (which are plain text files), for which word processing formatting gets in the way. <strong>Don’t use Microsoft Word or Google Docs to edit code files or Markdown/R Markdown/LaTeX.</strong></p>
+<p>For statistical computing, we need a text editor, not a word processor, because we’re going to be operating on code files, plain-text data files, , for which word processing formatting gets in the way. <strong>Don’t use Microsoft Word or Google Docs to edit code files or Markdown/R Markdown/LaTeX.</strong></p>
 <section id="some-useful-editors" class="level2">
 <h2 class="anchored" data-anchor-id="some-useful-editors">Some useful editors</h2>
 <ul>
@@ -244,8 +243,13 @@ scp paciorek@radagast.berkeley.edu:/data/file.txt \
 <li>For working with R, ESS (emacs speaks statistics) mode is helpful. This is built into Aquamacs Emacs.</li>
 </ul></li>
 <li>To open emacs in the terminal window rather than as a new window, which is handy when it’s too slow (or impossible) to pass (i.e., tunnel) the graphical emacs window through ssh: <code>emacs -nw file.txt</code></li>
-<li>Some helpful keystroke sequence shorcuts</li>
 </ul>
+</section>
+<section id="optional-emacs-keystroke-sequence-shortcuts." class="level2">
+<h2 class="anchored" data-anchor-id="optional-emacs-keystroke-sequence-shortcuts.">(Optional) Emacs keystroke sequence shortcuts.</h2>
+<blockquote class="blockquote">
+<p><strong>Note</strong> Several of these (Ctrl-a, Ctrl-e, Ctrl-k, Ctrl-y) work in the command line and other places as well.</p>
+</blockquote>
 <table class="table">
 <colgroup>
 <col style="width: 39%">
@@ -259,19 +263,19 @@ scp paciorek@radagast.berkeley.edu:/data/file.txt \
 </thead>
 <tbody>
 <tr class="odd">
-<td><code>C-x,C-c</code></td>
+<td><code>Ctrl-x,Ctrl-c</code></td>
 <td>Close the file</td>
 </tr>
 <tr class="even">
-<td><code>C-x,C-s</code></td>
+<td><code>Ctrl-x,Ctrl-s</code></td>
 <td>Save the file</td>
 </tr>
 <tr class="odd">
-<td><code>C-x,C-w</code></td>
+<td><code>Ctrl-x,Ctrl-w</code></td>
 <td>Save with a new name</td>
 </tr>
 <tr class="even">
-<td><code>C-s</code></td>
+<td><code>Ctrl-s</code></td>
 <td>Search</td>
 </tr>
 <tr class="odd">
@@ -279,27 +283,27 @@ scp paciorek@radagast.berkeley.edu:/data/file.txt \
 <td>Get out of command buffer at bottom of screen</td>
 </tr>
 <tr class="even">
-<td><code>C-a</code></td>
+<td><code>Ctrl-a</code></td>
 <td>Go to beginning of line</td>
 </tr>
 <tr class="odd">
-<td><code>C-e</code></td>
+<td><code>Ctrl-e</code></td>
 <td>Go to end of line</td>
 </tr>
 <tr class="even">
-<td><code>C-k</code></td>
+<td><code>Ctrl-k</code></td>
 <td>Delete the rest of the line from cursor forward</td>
 </tr>
 <tr class="odd">
-<td><code>C-space</code><em>,</em> then move to end of block</td>
+<td><code>Ctrl-space</code><em>,</em> then move to end of block</td>
 <td>Highlight a block of text</td>
 </tr>
 <tr class="even">
-<td><code>C-w</code></td>
+<td><code>Ctrl-w</code></td>
 <td>Remove the highlighted block, putting it in the kill buffer</td>
 </tr>
 <tr class="odd">
-<td><code>C-y</code> <em>(</em>after using <code>C-k</code> or <code>C-w</code><em>)</em></td>
+<td><code>Ctrl-y</code> <em>(</em>after using <code>Ctrl-k</code> or <code>Ctrl-w</code><em>)</em></td>
 <td>Paste from kill buffer (‘y’ is for ‘yank’)</td>
 </tr>
 </tbody>
