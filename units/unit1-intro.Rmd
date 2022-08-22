@@ -4,28 +4,25 @@ author: "Chris Paciorek"
 date: "2022-08-15"
 ---
 
-[PDF](./unit1-unix.pdf){.btn .btn-primary}
+[PDF](./unit1-intro.pdf){.btn .btn-primary}
 
 
-# UNIX basics
+# UNIX command line basics
 
-By UNIX, I mean any UNIX-like operating system, including Linux and Mac
-OS X. On the Mac you can access a UNIX terminal window with the Terminal
-application (via `Applications -> Utilities -> Terminal` from the
-Finder). Most modern scientific computing is done on UNIX-based
+By UNIX, I mean any UNIX-like operating system, including Linux and MacOS. Most modern scientific computing is done on UNIX-based
 machines, often by remotely logging in to a UNIX-based server.
 
 There are a variety of ways to get access to a UNIX-style command line
-environment, outlined in the software tips on the course website.
+environment, outlined in the course [software](software) tips.
 
 Please see the material in [our tutorial on the basics of
 UNIX](https://berkeley-scf.github.io/tutorial-unix-basics) to get up
 to speed on working in a UNIX-style command line environment. We'll do a
 bit of demo in the first class. If what you see seems quite familiar,
 you can probably skip that tutorial. If what you see is not familiar,
-please work through the tutorial and (optionally) attend section on
+please work through the tutorial by Monday August 29 and (optionally) attend section on
 Friday August 26 to work on the problems at the end of the tutorial and
-be able to ask questins of the GSI and other students.
+be able to ask questions of the GSI and other students.
 
 For an alternative introduction (which also includes some of the topics
 we'll discuss in Unit 3 on shell scripting), see [this Software
@@ -43,48 +40,38 @@ is a central concept/practice in modern scientific computing.
 A very popular and powerful tool for version control is Git. We'll be
 using Git extensively for version control.
 
-More information is available in the tutorial on the basics of using
-Git. You'll have a chance to work through the tutorial and practice with
-Git in the first section/lab. During the course, you'll make use of Git
-for submitting problem sets and for doing the final project. I recommend
-you practice using it more generally while preparing your problem set
-solutions.
-
 Git stores the files for a project in a *repository*. Here are some
 basic Git commands you can use to access the class materials from the
 command line. There are also [graphical interfaces to
-Git](https://git-scm.com/downloads) that you can explore. That said, I
-recommend [Github Desktop](https://desktop.github.com), available for
+Git](https://git-scm.com/downloads) that you can explore. I've heard good things(albeit a few years ago) about [Github Desktop](https://desktop.github.com), available for
 Mac and Windows.
 
 1.  To clone (i.e., copy) a repository (in this case from GitHub)
-    (*berkeley-stat243* is the organization and *stat243-fall-2021* is the
+    (*berkeley-stat243* is the organization and *stat243-fall-2022* is the
     repository):
+    
     ```
-    git clone https://github.com/berkeley-stat243/stat243-fall-2021
+    git clone https://github.com/berkeley-stat243/stat243-fall-2022
     ```
 
 2.  To update a repository to reflect changes made in a remote copy of
     the repository:
+    
     ```
     cd /to/any/directory/within/the/local/repository
     git pull
     ```
 
+More information is available in the [tutorial on the basics of using
+Git](https://github.com/berkeley-scf/tutorial-git-basics), as well as lots
+of information/tutorials online.
 We'll see a lot more about Git in Section sessions, where you'll learn to set up
 a repository, make changes to repositories and work with local and
-remote versons of the repository. The section material will follow our
-tutorial on the basics of Git, Github, and version control.
-
-Some links to more resources:
-
--   Git for Scientists: A Tutorial:
-    <http://nyuccl.org/pages/GitTutorial/>
-
--   Gitwash: workflow for scientific Python projects:\
-    <http://matthew-brett.github.io/pydagogue/gitwash_build.html>
-
--   Git branching demo: <http://pcottle.github.io/learnGitBranching/>
+remote versons of the repository. In particular, you'll have a chance to
+work through the tutorial and practice with
+Git in the first section/lab (September 2). During the course, you'll make use of Git for submitting problem sets and for doing the final project. I recommend
+you practice using it more generally while preparing your problem set
+solutions.
 
 # Parts of a computer
 
@@ -106,11 +93,10 @@ main idea.
 
 # Connecting to other machines
 
-To connect to a remote machine, you need to use SSH. SSH is available as
+To connect to a remote machine, you generally need to use SSH. SSH is available as
 `ssh` when you are on the UNIX command line. There are also SSH clients
-for Windows. For more information on SSH client programs and on using
-SSH, please see [this
-webpage](http://statistics.berkeley.edu/computing/ssh). Here's an
+for Windows. The SCF has [more information on SSH client programs and on using
+SSH](http://statistics.berkeley.edu/computing/ssh). Here's an
 example of connecting to one of the SCF machines (this assumes you have
 an SCF account, which you may, and that your user name is paciorek,
 which it is not).
@@ -120,18 +106,24 @@ ssh paciorek@radagast.berkeley.edu
 ```
 
 To copy files between machines, we can use *scp*, which has similar
-options to *cp*. The first command here copies a local file to a remote
-machine. The second copies from a remote machine to the machine you are
-on. You can use relative paths to refer to locations on the local
-machine. On the remote machine all paths need to be absolute or to be
-relative to your home directory on that machine. Again, this assumes you
-have an SCF account.
+options to *cp*. Here's how we can copy a local file to a remote
+machine.
 
 ```
 scp file.txt paciorek@radagast.berkeley.edu:~/research/.
+```
+
+And here's how we can copy from a remote machine to the machine you are
+on.
+
+```
 scp paciorek@radagast.berkeley.edu:/data/file.txt \
   ~/research/renamed.txt
 ```
+
+You can use relative paths to refer to locations on the local
+machine. On the remote machine all paths need to be absolute or to be
+relative to your home directory on that machine.
 
 There are also client programs for file transfer; see [this
 webpage](http://statistics.berkeley.edu/computing/copying-files).
@@ -139,8 +131,7 @@ webpage](http://statistics.berkeley.edu/computing/copying-files).
 # Editors
 
 For statistical computing, we need a text editor, not a word processor,
-because we're going to be operating on files of code and data files
-(which are plain text files), for which word processing formatting gets
+because we're going to be operating on code files, plain-text data files, , for which word processing formatting gets
 in the way. **Don't use Microsoft Word or Google Docs to edit code files
 or Markdown/R Markdown/LaTeX.**
 
@@ -185,20 +176,24 @@ good.
     ```
     emacs -nw file.txt 
     ```
--   Some helpful keystroke sequence shorcuts
+
+## (Optional) Emacs keystroke sequence shortcuts.
+
+> **Note**
+> Several of these (Ctrl-a, Ctrl-e, Ctrl-k, Ctrl-y) work in the command line and other places as well.
 
 |                      Sequence               |                             Result                     |
 |----------------------------------------|-------------------------------------------------------------|
-|                     `C-x,C-c`            |                            Close the file|
-|                     `C-x,C-s`             |                            Save the file|
-|                     `C-x,C-w`             |                        Save with a new name|
-|                       `C-s`               |                               Search|
+|                     `Ctrl-x,Ctrl-c`            |                            Close the file|
+|                     `Ctrl-x,Ctrl-s`             |                            Save the file|
+|                     `Ctrl-x,Ctrl-w`             |                        Save with a new name|
+|                       `Ctrl-s`               |                               Search|
 |                       `ESC`               |            Get out of command buffer at bottom of screen|
-|                       `C-a`               |                       Go to beginning of line|
-|                       `C-e`               |                          Go to end of line|
-|                       `C-k`               |           Delete the rest of the line from cursor forward|
-|       `C-space`*,* then move to end of block   |                 Highlight a block of text|
-|                       `C-w`                 |   Remove the highlighted block, putting it in the kill buffer|
-|       `C-y` *(*after using `C-k` or `C-w`*)*   |        Paste from kill buffer ('y' is for 'yank')|
+|                       `Ctrl-a`               |                       Go to beginning of line|
+|                       `Ctrl-e`               |                          Go to end of line|
+|                       `Ctrl-k`               |           Delete the rest of the line from cursor forward|
+|       `Ctrl-space`*,* then move to end of block   |                 Highlight a block of text|
+|                       `Ctrl-w`                 |   Remove the highlighted block, putting it in the kill buffer|
+|       `Ctrl-y` *(*after using `Ctrl-k` or `Ctrl-w`*)*   |        Paste from kill buffer ('y' is for 'yank')|
 
- 
+

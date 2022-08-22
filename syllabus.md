@@ -17,10 +17,9 @@ operating on remote servers, as well as a moderate amount of Python.
 
 ### What the course is not
 
-While the course is taught using R and you will learn a lot about using
-R at an advanced level, this is not a course about learning R.
-Rather the focus of the course is computing for
-statistics and data science more generally, using R to illustrate the concepts. Also, this is not a course that will cover specific statistical/machine learning/data analysis methods.
+ - While the course is taught using R and you will learn a lot about using
+R at an advanced level, this is not a course about learning R. Rather the focus of the course is computing for statistics and data science more generally, using R to illustrate the concepts. 
+ - This is not a course that will cover specific statistical/machine learning/data analysis methods. 
 
 ### Prerequisites
 
@@ -34,7 +33,7 @@ will know the basics of R, at the level of the Modules 1-5 in the
 [R bootcamp](https://berkeley-scf.github.io/r-bootcamp-fall-2022)
 offered Aug. 20-21, 2022. If you don't have that background
 you'll need to spend time in the initial couple weeks getting up to
-speed. I may also be able to give access to the bootcamp videos. In addition, we'll have an
+speed. In addition, we'll have an
 optional hands-on practice session during the second or third week of
 class, and the GSI can also provide assistance.
 
@@ -51,7 +50,7 @@ We'll be following university policy through the semester.
     will not affect your grade in any way.
 
 2.  Masks are not required at the moment, but you are welcome to wear
-   one. For the sake of communicating most clearly I won't wear one while teaching.
+   one. For the sake of communicating most clearly (and because I had Covid in June) I won't wear one while teaching.
 
 ## Objectives of the course {#objectives-of-the-course .unnumbered}
 
@@ -62,8 +61,7 @@ able to:
     compute clusters;
 
 -   have a solid understanding of general programming concepts
-    and principles, and be able to program effectively in R with an advanced knowledge of R
-    functionality;
+    and principles, and be able to program effectively (including having an advanced knowledge of R functionality);
 
 -   be familiar with concepts and tools for reproducible research and
     good scientific computing practices; and
@@ -88,17 +86,17 @@ The 'days' here are (roughly) class sessions, as general guidance.
     regular expressions, object-oriented programming,
     functions and variable scope, efficient programming, memory use (9 days)
 
-6.  Computer arithmetic/representation of numbers on a computer (3 days)
+6.  Parallel processing (2 days)
 
-7.  Parallel processing (2 days)
+7.  Working with databases, hashing, and big data (3 days)
 
-8.  Working with databases, hashing, and big data (3 days)
+8.  Computer arithmetic/representation of numbers on a computer (3 days)
 
 9.  Numerical linear algebra (5 days)
 
 10. Simulation studies and Monte Carlo (2 days)
 
-11. Optimization (7 days)
+11. Optimization (6 days)
 
 12. Numerical integration and differentiation (1 day)
 
@@ -106,8 +104,7 @@ The 'days' here are (roughly) class sessions, as general guidance.
 
 If you want to get a sense of what material we will cover in more
 detail, in advance, you can take a look at the materials in the *units*
-directory of GitHub repository from when I taught the class in 2021. See
-<https://github.com/berkeley-stat243/stat243-fall-2021>.
+directory of [GitHub repository from when I taught the class in 2021](https://github.com/berkeley-stat243/stat243-fall-2021).
 
 ## Personnel {#personnel .unnumbered}
 
@@ -145,11 +142,10 @@ Key websites for the course are:
     materials:
     <https://bcourses.berkeley.edu/courses/1507757>.
 
--   Gradescope for assignments (also linked from bCourses): \[UNDER
-    CONSTRUCTION\]<https://www.gradescope.com/courses/XYZ>
+-   Gradescope for assignments (also linked from bCourses): 
+    <https://www.gradescope.com/courses/425343>
 
-All course materials will be posted on here / on GitHub except for video content,
-which will be in bCourses.
+All course materials will be posted on here on the website (and on GitHub) except for video content, which will be in bCourses.
 
 ### Course discussion
 
@@ -157,13 +153,14 @@ We will use the course Ed Discussion site for communication (announcements,
 questions, and discussion). You should ask questions about class
 material and problem sets through the site. Please use this site for your
 questions so that either James or I can respond and so that everyone
-can benefit from the discussion. I suggest you to modify your settings
-on Ed Discussion so you are informed by email of postings. I strongly encourage
+can benefit from the discussion. **I suggest you to modify your settings
+on Ed Discussion so you are informed by email of postings. In particular you are responsible for
+keeping track of all course announcements, which we'll make on the Discussion forum.** I strongly encourage
 you to respond to or comment on each other's questions as well (this
 will help your class participation grade), although of course you should
 not provide a solution to a problem set problem. If you have a specific
 administrative question you need to direct just to me, it's fine to
-email me directly or post private on the Discussion site. But if you simply want to privately ask a question
+email me directly or post privately on the Discussion site. But if you simply want to privately ask a question
 about content, then just come to an office hour or see me after class or James during/after section.
 
 If you're enrolled in the class you should be a member of the group and be able to access it. If you're auditing or not yet enrolled and would like access, make sure to fill out the [course survey](https://forms.gle/SVm9thpkh16Zps2h6) and I will add you. 
@@ -171,49 +168,41 @@ In addition, we will use Gradescope for viewing grades.
 
 ## Course material  {#course-material .unnumbered}
 
--   Primary materials: Course notes on GitHub, SCF tutorials, and
+-   Primary materials: Course notes on course webpage/GitHub, SCF tutorials, and
     potentially pre-recorded videos on bCourses.
 
--   Back-up textbooks:
+-   Back-up textbooks (generally available via UC Library via links below):
 
     -   For bash: Newham, Cameron and Rosenblatt, Bill. Learning the
-        bash Shell (available electronically through OskiCat:
-        <http://uclibs.org/PID/77225>)
+        bash Shell [available electronically through UC Library](https://learning.oreilly.com/library/view/learning-the-bash/0596009658/?ar=)
 
     -   For R:
 
-        -   Adler, Joseph; R in a Nutshell (available electronically
-            through OskiCat: <http://uclibs.org/PID/151634>)
+        -   Adler, Joseph; R in a Nutshell [available electronically
+            through UC Library](https://learning.oreilly.com/library/view/r-in-a/9781449377502/?ar=)
 
-        -   Wickham, Hadley: Advanced R: <http://adv-r.had.co.nz/>
+        -   Wickham, Hadley: [Advanced R](http://adv-r.had.co.nz/)
 
     -   For statistical computing topics:
 
-        -   Gentle, James. Computational Statistics (available
-            electronically through OskiCat:
-            <http://dx.doi.org/10.1007/978-0-387-98144-4>)
+        -   Gentle, James. [Computational Statistics](http://dx.doi.org/10.1007/978-0-387-98144-4)
 
-        -   Gentle, James. Matrix Algebra
-            <https://link-springer-com.libproxy.berkeley.edu/book/10.1007%2F978-3-319-64867-5>
-            or Numerical Linear Algebra with Applications in Statistics
-            <https://link-springer-com.libproxy.berkeley.edu/chapter/10.1007/978-1-4612-0623-1_1>
+        -   Gentle, James. [Matrix Algebra](https://link-springer-com.libproxy.berkeley.edu/book/10.1007%2F978-3-319-64867-5)
+            or [Numerical Linear Algebra with Applications in Statistics](https://link-springer-com.libproxy.berkeley.edu/chapter/10.1007/978-1-4612-0623-1_1)
 
     -   Other resources with more details on particular aspects of R:
 
-        -   Chambers, John; Software for Data Analysis: Programming with
-            R (available electronically through OskiCat:
-            <http://dx.doi.org/10.1007/978-0-387-75936-4>)
+        -   Chambers, John; [Software for Data Analysis: Programming with
+            R](http://dx.doi.org/10.1007/978-0-387-75936-4)
 
-        -   Xie, Yihui; Dynamic documents with R and knitr. (available
-            [electronically through
-            Oskicat](http://oskicat.berkeley.edu/search~S1?/tDynamic+documents+with+R+and+knitr/tdynamic+documents+with+r+and+knitr/1%2C1%2C4%2CB/frameset&FF=tdynamic+documents+with+r+and+knitr&3%2C%2C4))
+        -   Xie, Yihui; [Dynamic documents with R and knitr](https://learning.oreilly.com/library/view/dynamic-documents-with/9781315360706/?ar=) 
+        
+        -   [The Quarto reference guide](https://quarto.org/docs/guide)
 
-        -   Nolan, Deborah and Temple Lang, Duncan. XML and Web
-            Technologies for Data Sciences with R.
-            <https://link.springer.com/book/10.1007%2F978-1-4614-7900-0>
+        -   Nolan, Deborah and Temple Lang, Duncan. [XML and Web
+            Technologies for Data Sciences with R](https://link.springer.com/book/10.1007%2F978-1-4614-7900-0)
 
-        -   The R-intro and R-lang documentation.
-            <https://www.cran.r-project.org/manuals.html>
+        -   The [R-intro and R-lang documentation](https://cran.r-project.org/manuals.html)
 
         -   Murrell, Paul; R Graphics, 2nd ed.
             [http://www.stat.auckland.ac.nz/$\sim$paul/RG2e/](http://www.stat.auckland.ac.nz/~paul/RG2e/)
@@ -225,13 +214,9 @@ In addition, we will use Gradescope for viewing grades.
         statistical computing concepts:
 
         -   Lange, Kenneth; Numerical Analysis for Statisticians, 2nd
-            ed. (first edition is available electronically through
-            OskiCat:\
-            <https://link.springer.com/book/10.1007%2Fb98850>)
+            ed. [First edition available through UC library](https://link.springer.com/book/10.1007%2Fb98850)
 
-        -   Monahan, John; Numerical Methods of Statistics (available
-            electronically through OskiCat:\
-            <http://dx.doi.org/10.1017/CBO9780511977176>)
+        -   Monahan, John; [Numerical Methods of Statistics](https://www.cambridge.org/core/books/numerical-methods-of-statistics/ED2D1845F52AF845CCF560E3526B9B56)
 
 ## Section {#section .unnumbered}
 
@@ -242,7 +227,7 @@ the GSI or for troubleshooting software during the early weeks. The
 discussion sections will vary in format and topic, but material will
 include demonstrations on various topics (version control, debugging,
 testing, etc.), group work on these topics, discussion of relevant
-papers, and discussion of problem set solutions. **The first section (noon - 2 pm)
+papers, and discussion of problem set solutions. **The first section (1-3 pm)
 generally has more demand, so to avoid having too many people in the
 room, you should go to your assigned section unless you talk to me
 first.**
@@ -328,8 +313,7 @@ Google forms questions, as well as occasional brief questions that I
 will ask you to answer in advance of the next class.
 
 Grades will generally be As and Bs. An A involves doing all the work,
-getting full credit on most of the problem sets, showing competence on
-the quizzes, and doing a thorough job on the final project.
+getting full credit on most of the problem sets, doing well on the quizzes, and doing a thorough job on the final project.
 
 ### Problem sets {#problem-sets .unnumbered}
 
@@ -378,7 +362,7 @@ on the first problem set.
 
 ### Submitting assignments
 
-In the first section (September 2), we'll discuss [how to submit your problem sets](ps_submission) both on Gradescope and via your class GitHub repository, located at `https:github.berkeley.edu/<your_calnet_username>`.
+In the first section (September 2), we'll discuss [how to submit your problem sets](software) both on Gradescope and via your class GitHub repository, located at `https://github.berkeley.edu/<your_calnet_username>`.
 
 ### Problem set grading {#problem-set-grading .unnumbered}
 
