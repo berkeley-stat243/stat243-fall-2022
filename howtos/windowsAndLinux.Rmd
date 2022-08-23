@@ -1,9 +1,6 @@
 ---
 title: "Windows 10 and the Ubuntu Subsystem"
 author: "Jared Bennett"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
-output: github_document
-urlcolor: magenta
 ---
 
 ```{r setup, include=FALSE}
@@ -31,7 +28,10 @@ has to be enabled prior to installing Linux. There are two ways to do it.
   * **CMD Line**  
   The simplest way to enable the Linux subsystem is through PowerShell.  
     * Open PowerShell as Administrator
-    * Run `Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux`
+    * Run the following (on one line):
+  ```bash
+  Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+  ```
     * Restart the computer
   * **GUI**  
   If you don't wish to use PowerShell, you can work your way through the control 
@@ -117,8 +117,10 @@ This is slightly more tricky than getting from Linux to Windows. Windows stores 
 7. **DO NOT MODIFY THESE FILES FROM WINDOWS**
     * Data corruption is a possibility.
     
-So, the final path to find your home directory from windows will look like:  
-`%userprofile%\AppData\Local\Packages\<Distro-Folder>\LocalStat\rootfs\home\<your-user-name>\`
+So, the final path to find your home directory from windows will look like:
+```
+%userprofile%\AppData\Local\Packages\<Distro-Folder>\LocalStat\rootfs\home\<your-user-name>\
+```
 
 ## Installing R on the Linux Subsystem
 
@@ -138,12 +140,28 @@ several versions of Ubuntu.
   * [CRAN](https://cran.r-project.org/) guide for Ubuntu
   * [Digital Ocean](https://www.digitalocean.com/community/tutorials/how-to-install-r-on-ubuntu-18-04) quick tutorial  
   
-1. In a bash window, type `sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9`
+1. In a bash window, type: 
+
+    ```bash
+    sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
+    ```
+
     * This adds the key to "sign", or validate, the R repository
-2. Then, type `sudo add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/'`
-    * `cloud.r-project.org` is the default mirror, however, it is prudent to connect 
+
+2. Then, type: 
+
+    ```bash
+    sudo add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/'
+    ```
+
+    * [cloud.r-project.org](https://cloud.r-project.org) is the default mirror, however, it is prudent to connect 
     to the mirror closest to you geographically. Berkeley has it's own mirror, so 
-    the command with the Berkeley mirror would look like `sudo add-apt-repository 'deb https://cran.r-project.org/bin/linux/ubuntu/bionic-cran40/'`
+    the command with the Berkeley mirror would look like 
+
+    ```bash
+    sudo add-apt-repository 'deb https://cran.r-project.org/bin/linux/ubuntu/bionic-cran40/'
+    ```
+
 3. Finally, type `sudo apt install r-base`, and press `y` to confirm installation
 4. To test that it worked, type `R` into the console, and an R session should begin
     * Type `q()` to quit the R session
@@ -151,7 +169,9 @@ several versions of Ubuntu.
 
 ## Installing Rstudio on the Linux Subsystem
 
-**THIS NO LONGER WORKS**  
+:::{.callout-warning}
+THIS NO LONGER WORKS
+:::
 As of Rstudio 1.5.x, it does not run on WSL. [Link](https://github.com/rstudio/rstudio/issues/3615#issuecomment-427914311)  
 Also possible issues, WSL has no GUI, and therefore can't support anything that uses a GUI.  
 These instructions work, but Rstudio doesn't run.  
@@ -179,15 +199,16 @@ Desktop version.
 
 
 ## Installing LaTeX on the Linux Subsystem
-    
-IMPORTANT: This section is only if you'd like to try using LaTeX under Linux. For class, using LaTeX (or R Markdown) under Windows should be fine.
+
+:::{.callout-important}
+This section is only if you'd like to try using LaTeX under Linux. For class, using LaTeX (or R Markdown) under Windows should be fine.
+:::
 
 LaTeX is a text-markup language used when generating documents from .Rmd files. 
-**Source**  
-  [LaTeX](https://www.latex-project.org/)  
+
+**Source** [LaTeX](https://www.latex-project.org/)  
 
 1. Type `sudo apt-get install texlive-full`, press `y` to confirm installation
 
 Generally, if you want to create and edit R Markdown documents you 
 will also need a text editor to go with your LaTeX installation, but we won't go into that here.
-

@@ -1,4 +1,9 @@
-You have several options for UNIX command-line access. You'll need to choose one of these and get it working.
+---
+title: Accessing the Unix Command Line
+---
+
+You have several options for UNIX command-line access. You'll need to choose one
+of these and get it working.
 
 ### Mac OS (on your personal machine):
 
@@ -12,15 +17,16 @@ Open a Terminal by going to Applications -> Utilities -> Terminal
 
     Please see these links for more information:
 
-    http://blog.revolutionanalytics.com/2017/12/r-in-the-windows-subsystem-for-linux.html
-
-    https://msdn.microsoft.com/en-us/commandline/wsl/install_guide
+    - [http://blog.revolutionanalytics.com/2017/12/r-in-the-windows-subsystem-for-linux.html](http://blog.revolutionanalytics.com/2017/12/r-in-the-windows-subsystem-for-linux.html)
+    - [https://msdn.microsoft.com/en-us/commandline/wsl/install_guide](https://msdn.microsoft.com/en-us/commandline/wsl/install_guide)
     
-    For more detailed instructions, see the [Windows and Linux](./windowsAndLinux.md) tutorial.
+    For more detailed instructions, see the [Installing the Linux Subsystem on Windows](windowsAndLinux.Rmd) tutorial.
 
 2. (Not recommended) There's an older program called cygwin that provides a UNIX command-line interface.
 
-Note that when you install Git on Windows, you will get Git Bash. While you can use this to control Git, the functionality is limited so this will not be enough for general UNIX command-line access for the course.
+Note that when you install Git on Windows, you will get Git Bash. While you can
+use this to control Git, the functionality is limited so this will not be enough
+for general UNIX command-line access for the course.
 
 ### Linux (on your personal machine):
 
@@ -35,11 +41,11 @@ If you have access to a Linux machine, you very likely know how to access a term
 
 ### Access via the Statistical Computing Facility (SCF)
 
-With an SCF account (available [here](https://scf.berkeley.edu/account), you can access a bash shell in the ways listed below. 
+With an SCF account (available [here](https://scf.berkeley.edu/account)), you can access a bash shell in the ways listed below. 
 
 Those of you in the Statistics Department should be in the process of getting an SCF account. Everyone else will need an SCF account when we get to the unit on parallel computing, but you can request an account now if you prefer.
 
 1. You can login to our various Linux servers and access a bash shell that way. Please see [http://statistics.berkeley.edu/computing/access](http://statistics.berkeley.edu/computing/access).
 
-2. You can also access a bash shell via the SCF JupyterHub interface; please see the `accessingPython.md` instructions but when you click on `New`, choose `Terminal`. This is very similar to the DataHub functionality discussed above. 
+2. You can also access a bash shell via the SCF JupyterHub interface; please see the [Accessing Python](accessingPython.md) instructions but when you click on `New`, choose `Terminal`. This is very similar to the DataHub functionality discussed above. 
 

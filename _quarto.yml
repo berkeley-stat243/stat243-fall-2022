@@ -31,7 +31,6 @@ website:
           text: "Unit 2"
     - id: software
       title: "Software"
-      collapse-level: 1
       contents:
         - file: howtos/RandRStudioInstall.Rmd
           text: Installing R & RStudio
@@ -59,6 +58,8 @@ format:
     theme: cosmo
     css: styles.css
     toc: true
+    code-copy: true
+    code-block-background: true
   pdf:
     documentclass: article
     margin-left: 30mm
