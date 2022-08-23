@@ -3,7 +3,7 @@ title: Accessing Python
 ---
 
 
-We recommend using the [Anaconda distribution of Python](https://www.anaconda.com/distribution/), though that is not required. You can download it [here](https://www.anaconda.com/distribution/#download-section). Make sure to choose Python 3.7 or 3.8 and not Python 2.7.
+We recommend using the [Anaconda distribution of Python](https://www.anaconda.com/distribution/), though that is not required. You can download it [here](https://www.anaconda.com/distribution/). Make sure to use Python 3.7, 3.8, or 3.9 and not Python 2.*.
 
 Once you've installed Python, please install the following packages: 
 - numpy
