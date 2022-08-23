@@ -326,7 +326,7 @@
     "href": "howtos/accessingPython.html",
     "title": "Accessing Python",
     "section": "",
-    "text": "We recommend using the Anaconda distribution of Python, though that is not required. You can download it here. Make sure to choose Python 3.7 or 3.8 and not Python 2.7.\nOnce you’ve installed Python, please install the following packages: - numpy - scipy - pandas - dask - dask.distributed - dask.bag - dask.array - dask.dataframe - dask.multiprocessing\nAssuming you installed the Anaconda Python, you should be able to do this:"
+    "text": "We recommend using the Anaconda distribution of Python, though that is not required. You can download it here. Make sure to use Python 3.7, 3.8, or 3.9 and not Python 2.*.\nOnce you’ve installed Python, please install the following packages: - numpy - scipy - pandas - dask - dask.distributed - dask.bag - dask.array - dask.dataframe - dask.multiprocessing\nAssuming you installed the Anaconda Python, you should be able to do this:"
   },
   {
     "objectID": "howtos/accessingPython.html#python-from-the-command-line",
