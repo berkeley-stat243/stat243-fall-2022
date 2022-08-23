@@ -7,7 +7,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jared Bennett">
-<meta name="dcterms.date" content="2022-08-23">
 
 <title>Statistics 243 Fall 2022 - R/Rstudio on Windows</title>
 <style>
@@ -241,12 +240,6 @@ ul.task-list{list-style: none;}
           </div>
   </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">August 23, 2022</p>
-    </div>
-  </div>
     
   </div>
   
@@ -254,13 +247,24 @@ ul.task-list{list-style: none;}
 </header>
 
 <p>While R was built/designed for UNIX systems, it has been well adapted for Windows. Here, we’ll start with the basics of installing <a href="https://www.r-project.org/">R</a> on Windows. Then, we’ll cover the recommended editor (<a href="https://rstudio.com/">Rstudio</a>), and how to build pdf documents using <a href="https://miktex.org/">MikTeX</a>.</p>
-<p><strong>NOTE:</strong> This tutorial installs Windows-only versions of everything. Modern Windows systems have an Ubuntu subsystem available that we highly recommend. See the <a href="./windowsAndLinux.md">Windows and Linux</a> tutorial for setting up that configuration.</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This tutorial installs Windows-only versions of everything. Modern Windows systems have an Ubuntu subsystem available that we highly recommend. See the <a href="../howtos/windowsAndLinux.html">Installing the Linux Subsystem on Windows</a> tutorial for setting up that configuration.</p>
+</div>
+</div>
 <section id="installing-r" class="level3">
 <h3 class="anchored" data-anchor-id="installing-r">Installing R</h3>
 <p>The first step in installing the R language. This is available on CRAN (Comprehensive R Archive Network).</p>
 <ul>
-<li>Go to the <a href="https://www.r-project.org/">CRAN</a> webpage, https://www.r-project.org<br>
-</li>
+<li>Go to the <a href="https://www.r-project.org/">CRAN</a> webpage, <a href="https://www.r-project.org/">www.r-project.org</a></li>
 <li>In the first paragraph, click the link <strong>download R</strong></li>
 <li>You’re now on a page titled <strong>CRAN Mirrors</strong>, choose the mirror located closest to your geographic location
 <ul>
@@ -277,10 +281,10 @@ ul.task-list{list-style: none;}
 </section>
 <section id="installing-rstudio" class="level3">
 <h3 class="anchored" data-anchor-id="installing-rstudio">Installing RStudio</h3>
-<p><a href="https://rstudio.com/">RStudio</a> is one of the best text editors for coding in R. It is our recommended option for beginning. After you are comfortable with the language, or if you use other languages as well, you may want to explore <a href="https://atom.io/">Atom</a> or <a href="https://www.sublimetext.com/">Sublime</a>.<br>
-To install RStudio:</p>
+<p><a href="https://rstudio.com/">RStudio</a> is one of the best text editors for coding in R. It is our recommended option for beginning. After you are comfortable with the language, or if you use other languages as well, you may want to explore <a href="https://atom.io/">Atom</a> or <a href="https://www.sublimetext.com/">Sublime</a>. More advanced options include <a href="https://www.gnu.org/software/emacs/">Emacs</a> with [ESS package][https://ess.r-project.org/] and <a href="https://www.vim.org/">vim</a> with the <a href="https://github.com/jalvesaq/Nvim-R">Nvim-R plugin</a>.</p>
+<p>To install RStudio:</p>
 <ul>
-<li>Go to the <a href="https://rstudio.com/products/rstudio/download/#download">RStudio Desktop</a> download page, https://rstudio.com/products/rstudio/download/#download</li>
+<li>Go to the <a href="https://rstudio.com/products/rstudio/download/#download">RStudio Desktop</a> download page, <a href="https://rstudio.com/products/rstudio/download/#download">rstudio.com/products/rstudio/download/#download</a></li>
 <li>Choose the download for your OS, most likely the <strong>Windows 10/8/7</strong> one</li>
 <li>Follow the instructions for setup. If you are unsure of anything, leave the default settings</li>
 <li>Open RStudio (R will run automatically in the background)
@@ -304,14 +308,25 @@ To install RStudio:</p>
 <h3 class="anchored" data-anchor-id="compiling-pdf-documents">Compiling PDF Documents</h3>
 <p>For the purposes of this class, you will be submitting homeworks as PDF documents that blend written text, code, and code-generated output. These documents are RMarkdown documents, and are <em>dynamic documents</em> that provide a convenient method for documenting your work (more on this in one of the lab sections). To do this, you need a <a href="https://www.latex-project.org/">LaTeX</a> renderer. We recommend <a href="https://miktex.org/">MiKTeX</a> for Windows.</p>
 <ul>
-<li><p>Go to <a href="https://miktex.org/download">Getting MiKTeX</a> to download MiKTeX for Windows, https://miktex.org/download<br>
-</p></li>
-<li><p>The first page should be <strong>Install on Windows</strong>, click <strong>Download</strong> at the bottom of the page<br>
-</p></li>
-<li><p>Click the download to begin<br>
-</p></li>
-<li><p><strong>FOLLOW THESE INSTALL INSTRUCTIONS</strong><br>
-The default options are fine in most places, but there is one that will cause problems.</p>
+<li>Go to <a href="https://miktex.org/download">Getting MiKTeX</a> to download MiKTeX for Windows, <a href="https://miktex.org/download">miktex.org/download</a></li>
+<li>The first page should be <strong>Install on Windows</strong>, click <strong>Download</strong> at the bottom of the page<br>
+</li>
+<li>Click the download to begin</li>
+</ul>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>FOLLOW THESE INSTALL INSTRUCTIONS.</p>
+<p>The default options are fine in most places, but there is one that will cause problems.</p>
+</div>
+</div>
 <ol type="1">
 <li>Accept the Copying Conditions, click next</li>
 <li>Install only for you, click next</li>
@@ -323,10 +338,8 @@ The default options are fine in most places, but there is one that will cause pr
 <li>Because we are using MiKTeX as an external renderer, it can’t ask you to install missing packages, and will then fail, so we have to set that installation as automatic.</li>
 </ul>
 <ol start="5" type="1">
-<li>Click start</li>
-</ol></li>
-<li><p>(Optional, but highly recommended) Open RStudio, select a new .Rmd document, and then choose <strong>knit</strong>. This may take some time, because MiKTeX is installing new libraries, but it ensures that your pipeline is setup correctly</p></li>
-</ul>
+<li>Click start (Optional, but highly recommended) Open RStudio, select a new .Rmd document, d then choose <strong>knit</strong>. This may take some time, because MiKTeX is installing new braries, but it ensures that your pipeline is setup correctly</li>
+</ol>
 
 
 </section>

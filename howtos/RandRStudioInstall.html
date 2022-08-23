@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Statistics 243 Fall 2022 – randrstudioinstall</title>
+<title>Statistics 243 Fall 2022 - Installing R &amp; RStudio</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -146,7 +146,7 @@ ul.task-list{list-style: none;}
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">(Untitled)</h1>
+      <h1 class="quarto-secondary-nav-title">Installing R &amp; RStudio</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -187,12 +187,12 @@ ul.task-list{list-style: none;}
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">Windows</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Windows</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../howtos/windowsAndLinux.html" class="sidebar-item-text sidebar-link">Installing the Linux Subsystem on Windows</a>
@@ -222,28 +222,42 @@ ul.task-list{list-style: none;}
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">Installing R &amp; RStudio</h1>
+</div>
 
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
 
 <section id="on-your-laptop" class="level3">
 <h3 class="anchored" data-anchor-id="on-your-laptop">On your laptop</h3>
 <p>If your version of R is older than 4.0.0, please install the latest version. For the most part R 3.5 or 3.6 would be fine but there are a couple topics in Unit 5 that will assume you are using R 4.0.0 or later.</p>
 <p>To install R, see:</p>
 <ul>
-<li>MacOS: install the R-4.1.0.pkg from https://cran.rstudio.com/bin/macosx</li>
-<li>Windows: https://cran.rstudio.com/bin/windows/base/</li>
-<li>Linux: https://cran.rstudio.com/bin/linux/</li>
+<li>MacOS: install the R-4.2.1.pkg from <a href="https://cran.rstudio.com/bin/macosx">https://cran.rstudio.com/bin/macosx</a></li>
+<li>Windows: <a href="https://cran.rstudio.com/bin/windows/base/">https://cran.rstudio.com/bin/windows/base/</a></li>
+<li>Linux: <a href="https://cran.rstudio.com/bin/linux/">https://cran.rstudio.com/bin/linux/</a></li>
 </ul>
-<p>Then install RStudio. To do so, see https://www.rstudio.com/ide/download/desktop, scrolling down to the “Installers for Supported Platforms” section and selecting the Installer for your operating system.</p>
+<p>Then install RStudio. To do so, see <a href="https://www.rstudio.com/ide/download/desktop">https://www.rstudio.com/ide/download/desktop</a>, scrolling down to the “Installers for Supported Platforms” section and selecting the Installer for your operating system.</p>
 <p>Verify that you can install add-on R packages by installing the ‘fields’ package. In RStudio, go to ‘Tools-&gt;Install Packages’. In the resulting dialog box, enter ‘fields’ (without quotes) in the ‘Packages’ field. Depending on the location specified in the ‘Install to Library’ field, you may need to enter your administrator password. To be able to install packages to the directory of an individual user, you may need to do the following:</p>
 <ul>
 <li>In R, enter the command <code>Sys.getenv()['R_LIBS_USER']</code>.</li>
 <li>Create the directory specified in the result that R returns, e.g., on a Mac, this might be <code>~/Library/R/4.0/library</code>.</li>
 </ul>
-<p>For more detailed installation instructions for Windows, see the windowsInstall.html file.</p>
+<p>For more detailed installation instructions for Windows, see <a href="../howtos/windowsInstall.html">Using R, RStudio, and LaTeX on Windows</a> file.</p>
 </section>
 <section id="via-datahub" class="level3">
 <h3 class="anchored" data-anchor-id="via-datahub">Via DataHub</h3>
-<p>See the instructions in <code>accessingUnixCommandLine.html</code> for how to login to Datahub. Then in the mid-upper right, click on <code>New</code> and <code>RStudio</code>. Alternatively, to go directly to RStudio, go to <a href="https://r.datahub.berkeley.edu">https://r.datahub.berkeley.edu</a>.</p>
+<p>See the instructions in <a href="accessingUnixCommandLine.html">Accessing the Unix Command Line</a> for how to login to Datahub. Then in the mid-upper right, click on <code>New</code> and <code>RStudio</code>. Alternatively, to go directly to RStudio, go to <a href="https://r.datahub.berkeley.edu">https://r.datahub.berkeley.edu</a>.</p>
 
 
 </section>
