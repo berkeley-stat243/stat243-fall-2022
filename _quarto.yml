@@ -3,6 +3,7 @@ project:
 
 website:
   title: "Statistics 243 Fall 2022"
+  page-navigation: true
   navbar:
     left:
       - file: index.qmd
@@ -13,19 +14,43 @@ website:
         text: "Office hours"
       - file: schedule.md
         text: Schedule
-      - file: software.md
-        text: Software
-      - text: "Units"
-        menu:
-          - file: units/unit1-intro.Rmd
-            text: "Unit 1"
-          - file: units/unit2-dataTech.Rmd
-            text: "Unit 2"
+      - sidebar:units
+      - sidebar:software
       - href: https://edstem.org/us/courses/25090/discussion/
         text: "Discussion"
       - href: https://statistics.berkeley.edu/computing/training/tutorials
         text: Tutorials
-        
+
+  sidebar:
+    - id: units
+      title: "Units"
+      contents:
+        - file: units/unit1-intro.Rmd
+          text: "Unit 1"
+        - file: units/unit2-dataTech.Rmd
+          text: "Unit 2"
+    - id: software
+      title: "Software"
+      collapse-level: 1
+      contents:
+        - file: howtos/RandRStudioInstall.Rmd
+          text: Installing R & RStudio
+        - file: howtos/accessingPython.md
+          text: Accessing Python
+        - file: howtos/accessingUnixCommandLine.md
+          text: Accessing the Unix Command Line
+        - file: howtos/gitInstall.Rmd
+          text: Installing Git
+        - file: howtos/ps-submission.qmd
+          text: Problem Set Submissions
+        - text: "---"
+        - section: "Windows"
+          contents:
+            - file: howtos/windowsAndLinux.Rmd
+              text: Installing the Linux Subsystem on Windows
+            - file: howtos/windowsInstall.Rmd
+              text: Using R, RStudio, and LaTeX on Windows
+
 output:
   html
   
