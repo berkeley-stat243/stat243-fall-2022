@@ -1,7 +1,7 @@
 ---
 title: "Introduction to UNIX, computers, and key tools"
 author: "Chris Paciorek"
-date: "2022-08-15"
+date: "2022-08-22"
 ---
 
 [PDF](./unit1-intro.pdf){.btn .btn-primary}
@@ -12,8 +12,8 @@ date: "2022-08-15"
 By UNIX, I mean any UNIX-like operating system, including Linux and MacOS. Most modern scientific computing is done on UNIX-based
 machines, often by remotely logging in to a UNIX-based server.
 
-There are a variety of ways to get access to a UNIX-style command line
-environment, outlined in the course [software](software) tips.
+There are a [variety of ways to get access to a UNIX-style command line
+environment](../howtos/accessingUnixCommandLine).
 
 Please see the material in [our tutorial on the basics of
 UNIX](https://berkeley-scf.github.io/tutorial-unix-basics) to get up

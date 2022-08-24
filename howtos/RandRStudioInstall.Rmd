@@ -4,9 +4,7 @@ title: Installing R & RStudio
 
 ### On your laptop
 
-If your version of R is older than 4.0.0, please install the latest version. For
-the most part R 3.5 or 3.6 would be fine but there are a couple topics in Unit 5
-that will assume you are using R 4.0.0 or later.
+If your version of R is older than 4.0.0, please install the latest version. 
 
 To install R, see:
 

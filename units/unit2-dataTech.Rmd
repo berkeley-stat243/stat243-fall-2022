@@ -1,64 +1,47 @@
 ---
 title: "Data technologies, formats, and structures"
 author: "Chris Paciorek"
-date: "2022-08-15"
+date: "2022-08-23"
 ---
 
 
 [PDF](./unit2-dataTech.pdf){.btn .btn-primary}
 
-> **Warning**
-> This Unit is still under construction; do not rely on it except to get a sense of what we will cover.
-
-References:
+References (see [syllabus](../syllabus) for links):
 
 -   Adler
-
 -   Nolan and Temple Lang, XML and Web Technologies for Data Sciences
     with R.
-
 -   Chambers
-
 -   [R intro manual](http://cran.r-project.org/doc/manuals/R-intro.html)
     on CRAN (R-intro).
-
 -   Venables and Ripley, Modern Applied Statistics with S
-
 -   Murrell, Introduction to Data Technologies.
-
 -   [R Data Import/Export
     manual](http://cran.r-project.org/doc/manuals/R-data.html) on CRAN
     (R-data).
+-   SCF tutorial: [Working with large datasets in SQL, R, and Python](https://berkeley-scf.github.io/tutorial-databases/)
 
--   SCF tutorial on "Working with large datasets in SQL, R, and Python",
-    available from\
-    <http://statistics.berkeley.edu/computing/training/tutorials>.
-
-# (Optional) Videos {#optional-videos .unnumbered}
+(Optional) Videos
 
 There are four videos from 2020 in the bCourses Media Gallery that you
 can use for reference if you want to:
 
 1.  Text files and ASCII
-
 2.  Encodings and UTF-8
-
 3.  HTML
-
 4.  XML and JSON
 
-# Data storage and file formats on a computer
+# 1. Data storage and file formats on a computer
 
 We're going to start early in the data analysis pipeline: getting data,
 reading data in, writing data out to disk, and webscraping. We'll focus
 on doing these manipulations in R, but the concepts and tools involved
 are common to other languages, so familarity with these in R should
-allow you to pick up other tools more easily. The main downside to
-working with datasets in R (true for Python as well) is that the entire
+allow you to pick up other tools easily. The main downside to
+working with datasets in R (true for Python and most other languages as well) is that the entire
 dataset resides in memory, so R is not so good for dealing with very
-large datasets. More on alternatives in a later unit. Another common
-frustration is controlling how the variables are interpreted (numeric,
-character, factor) when reading data into a data frame. R (and similar
+large datasets. More on alternatives in a later unit. R (and similar
 languages) has the capability to read in a wide variety of file formats.
 
 ## Text and binary files
@@ -74,7 +57,7 @@ digits needed for the number of interest. Examples of text file formats
 include CSV, XML, HTML, and JSON.
 
 Text files may be simple ASCII files (i.e., files encoded using ASCII)
-or in other encodings such as UTF-8, both covered in Section 4.
+or in other encodings such as UTF-8, both covered in Section 5.
 [ASCII](http://en.wikipedia.org/wiki/ASCII) files have 8 bits (1 byte)
 per character and can represent 128 characters (the 52 lower and upper
 case letters in English, 10 digits, punctuation and a few other things
@@ -89,21 +72,20 @@ access into the data rather than requiring sequential reading). The
 meaning of the bytes in such files depends on the specific binary format
 being used and a program that uses the file needs to know how the format
 represents information. Examples of binary files include netCDF files, R
-data (e.g., .Rda) files, and compiled code files.
+data (e.g., .Rda) files, Python pickle files, and compiled code files.
 
 Numbers in binary files are usually stored as 8 bytes per number. We'll
-discuss this much more in Unit 6.
+discuss this much more in Unit 8.
 
 ## Common file types
 
-Here are some of the common file types. Any of these types can be
-categorized as text or binary.
+Here are some of the common file types, some of which are text formats and some of which are binary formats.
 
 1.  'Flat' text files: data are often provided as simple text files.
     Often one has one record or observation per row and each column or
     field is a different variable or type of information about the
     record. Such files can either have a fixed number of characters in
-    each field (fixed width format) or a special character (a delimiter)
+    each field (*fixed width format*) or a special character (a *delimiter*)
     that separates the fields in each row. Common delimiters are tabs,
     commas, one or more spaces, and the pipe (\|). Common file
     extensions are *.txt* and *.csv*. Metadata (information about the
@@ -111,22 +93,24 @@ categorized as text or binary.
     common, but if you have files where the data contain commas, other
     delimiters can be good. Text can be put in quotes in CSV files, and
     this can allow use of commas within the data. This is difficult to
-    deal with in bash, but *read.table()* in R handles this situation.
+    deal with from the command line, but *read.table()* in R handles this situation.
 
     -   One occasionally tricky difficulty is as follows. If you have a
         text file created in Windows, the line endings are coded
-        differently than in UNIX (a newline (the ASCII character *\\n*)
-        and a carriage return (the ASCII character *\\r*) in Windows vs.
-        only a newline in UNIX). There are UNIX utilities (*fromdos* in
-        Ubuntu, including the SCF Linux machines and *dos2unix* in other
+        differently than in UNIX. Windows uses a newline
+        (the ASCII character `\n`)
+        and a carriage return (the ASCII character `\r`) whereas
+        UNIX uses onlyl a  newline in UNIX). There are
+        UNIX utilities (`fromdos` in
+        Ubuntu, including the SCF Linux machines and `dos2unix` in other
         Linux distributions) that can do the necessary conversion. If
         you see *\^M* at the end of the lines in a file, that's the tool
         you need. Alternatively, if you open a UNIX file in Windows, it
         may treat all the lines as a single line. You can fix this with
-        *todos* or *unix2dos*.
+        `todos` or `unix2dos`.
 
 2.  In some contexts, such as textual data and bioinformatics data, the
-    data may in a text file with one piece of information per row, but
+    data may be in a text file with one piece of information per row, but
     without meaningful columns/fields.
 
 3.  In scientific contexts, netCDF (*.nc*) (and the related HDF5) are
@@ -141,13 +125,13 @@ categorized as text or binary.
     interchange between various languages, in particular XML or JSON.
     These formats are "self-describing"; namely the metadata is part of
     the file. The *XML2, rvest*, and *jsonlite* packages are useful for
-    reading and writing from these formats.
+    reading and writing from these formats. More in Section 4.
 
 5.  You may be scraping information on the web, so dealing with text
     files in various formats, including HTML. The *XML2* and *rvest*
     packages are also useful for reading HTML.
 
-6.  Data may already be in a database or in the data storage of another
+6.  Data may already be in a database or in the data storage format of another
     statistical package (*Stata*, *SAS*, *SPSS*, etc.). The *foreign*
     package in R has excellent capabilities for importing Stata
     (*read.dta()*), SPSS (*read.spss()*), and SAS (*read.ssd()* and, for
@@ -170,7 +154,7 @@ categorized as text or binary.
     to R. More in the big data unit and in the large datasets tutorial
     mentioned above.
 
-# Reading data from text files into R
+# 2. Reading data from text files into R
 
 ## Core R functions
 
@@ -188,27 +172,28 @@ user to control the classes. One difficulty in older versions of R was
 that character fields were read in as factors.
 
 Let's work through a couple examples. Before we do that, let's look at
-the arguments to *read.table()*. Note that *sep="* separates on any
-amount of white space. In the code chunk below, I've told *knitr* not to
-print the output to the PDF; you can see the full output by running the
-code yourself.
+the arguments to *read.table()*. Note that `sep=''` separates on any
+amount of white space. 
 
-```{r, readcsv, eval=FALSE}
+```{r, readcsv, eval = TRUE}
 dat <- read.table(file.path('..', 'data', 'RTADataSub.csv'),
                   sep = ',', header = TRUE)
-sapply(dat, class)
+sapply(dat, class)[1:10]  # What are the classes of the columns?
 ## whoops, there is an 'x', presumably indicating missingness:
 unique(dat[ , 2])
 ## let's treat 'x' as a missing value indicator
 dat2 <- read.table(file.path('..', 'data', 'RTADataSub.csv'),
                    sep = ',', header = TRUE,
                    na.strings = c("NA", "x"))
-unique(dat2[ ,2])
-## hmmm, what happened to the blank values this time?
-which(dat[ ,2] == "")
+unique(dat2[ , 2])
+## Let's check that the empty strings from 'dat' are now NAs in 'dat2'
+which(dat[ , 2] == "")[1:10]
 dat2[which(dat[, 2] == "")[1], ] # pull out a line with a missing string
+```
 
-# using 'colClasses'
+Using `colClasses` is a good way to control how data are read in.
+
+```{r, colClasses}
 sequ <- read.table(file.path('..', 'data', 'hivSequ.csv'),
   sep = ',', header = TRUE,
   colClasses = c('integer','integer','character',
@@ -223,15 +208,15 @@ Note that you can avoid reading in one or more columns by specifying
 specifying the *colClasses* argument explicitly should make for faster
 file reading. Finally, setting `stringsAsFactors=FALSE` is standard
 practice and is the default in R as of version 4.0. (*readr::read_csv()*
-has always set `stringsAsFactors=FALSE`.
+has always set `stringsAsFactors=FALSE`).
 
 If possible, it's a good idea to look through the input file in the
 shell or in an editor before reading into R to catch such issues in
-advance. Using *less* on *RTADataSub.csv* would have revealed these
+advance. Using the UNIX command *less* on *RTADataSub.csv* would have revealed these
 various issues, but note that *RTADataSub.csv* is a 1000-line subset of
 a much larger file of data available from the kaggle.com website. So
-more sophisticated use of UNIX utilities as we saw in Unit 2 is often
-useful before trying to read something into R.
+more sophisticated use of UNIX utilities (as we will see in Unit 3) is often
+useful before trying to read something into a program.
 
 The basic function *scan()* simply reads everything in, ignoring lines,
 which works well and very quickly if you are reading in a numeric vector
@@ -266,8 +251,12 @@ Actually, that file, *precip.txt*, is in a fixed-width format (i.e.,
 every element in a given column has the exact same number of
 characters),so reading in using *read.fwf()* would be a good strategy.
 
+## Connections
+
 R allows you to read in not just from a file but from a more general
-construct called a *connection*. Here are some examples of connections:
+construct called a *connection*. This can include reading in text from the output of running a shell command and from unzipping a file on the fly.
+
+Here are some examples of connections:
 
 ```{r, connections, eval=FALSE}
 dat <- readLines(pipe("ls -al"))
@@ -290,10 +279,9 @@ library(curl)
 wikip3 <- readLines(curl("https://wikipedia.org"))
 ```
 
-
-
 If a file is large, we may want to read it in in chunks (of lines), do
-some computations to reduce the size of things, and iterate.
+some computations to reduce the size of things, and iterate. This is referred
+to as online processing.
 *read.table()*, *read.fwf()* and *readLines()* all have the arguments
 that let you read in a fixed number of lines. To read-on-the-fly in
 blocks, we need to first establish the connection and then read from it
@@ -322,15 +310,13 @@ Here's an example of using *curl()* to do this for a file on the web.
 URL <- "https://www.stat.berkeley.edu/share/paciorek/2008.csv.gz"
 con <- gzcon(curl(URL, open = "r"))
 ## url() in place of curl() works too
-for(i in 1:8) {
+for(i in 1:4) {   ## Read in first four chunks as an example
 	print(i)
 	print(system.time(tmp <- readLines(con, n = 100000)))
 	print(tmp[1])
 }
 close(con)
 ```
-
-
 
 More details on sequential (on-line) processing of large files can be
 found in the tutorial on large datasets mentioned in the reference list
@@ -361,17 +347,15 @@ A few notes on file paths, related to ideas of reproducibility.
     machines of anyone you share the code with. Instead, use paths
     relative to the directory the code file is in, or relative to a
     baseline directory for the project, e.g.:\
-
     
     ```{r, relative-paths, eval=FALSE}
     dat <- read.csv('../data/cpds.csv')
     ```    
-    
 
 2.  Be careful with the directory separator in Windows files: you can
-    either do *"C:\\\\mydir\\\\file.txt"* or *"C:/mydir/file.txt"*, but
-    not *"C:\\mydir\\file.txt"*, and note the next comment about
-    avoiding use of '\\\\' for portability.
+    either do `C:\\mydir\\file.txt` or `C:/mydir/file.txt`, but
+    not `C:\mydir\file.txt`, and note the next comment about
+    avoiding use of '\\' for portability.
 
 3.  Using UNIX style directory separators will work in Windows, Mac or
     Linux, but using Windows style separators is not portable across
@@ -384,8 +368,6 @@ A few notes on file paths, related to ideas of reproducibility.
     ## bad: won't work on Mac or Linux
     dat <- read.csv('..\\data\\cpds.csv')  
     ```
-     
-    
 
 4.  Even better, use *file.path()* so that paths are constructed
     specifically for the operating system the user is using:\
@@ -395,14 +377,11 @@ A few notes on file paths, related to ideas of reproducibility.
     ## good: operating-system independent
     dat <- read.csv(file.path('..', 'data', 'cpds.csv'))  
     ```
-     
-    
 
 ## The *readr* package
 
 *readr* is intended to deal with some of the shortcomings of the base R
-functions, such as defaulting to `stringsAsFactors=FALSE` (no longer
-relevant with R 4.0), leaving column names unmodified, and recognizing
+functions, such as leaving column names unmodified, and recognizing
 dates/times. It reads data in much more quickly than the base R
 equivalents. See [this blog
 post](http://blog.rstudio.org/2015/04/09/readr-0-1-0/). Some of the
@@ -428,14 +407,14 @@ system.time(dat2 <- read_csv(file.path(dir, 'airline.csv')))
 ## Reading data quickly
 
 In addition to the tips above, there are a number of packages that allow
-one to read large data files quickly, in particular *data.table*, *ff*,
-and *bigmemory*. In general, these provide the ability to load datasets
+one to read large data files quickly, in particular *data.table*, *arrow*,
+and *fst*. In general, these provide the ability to load datasets
 into R without having them in memory, but rather stored in clever ways
 on disk that allow for fast access. Metadata is stored in R. More on
 this in the unit on big data and in the tutorial on large datasets
 mentioned in the reference list above.
 
-# Output from R
+# 3. Output from R
 
 ## Writing output to files
 
@@ -451,7 +430,7 @@ allows for outputting to a connection (e.g., a file).
 use of JSON as output from R would be to *serialize* the information in
 an R object such that it could be read into another program.
 
-And of course you can always save to an R data file using *save.image()*
+And of course you can always save to an R data file (a binary file format) using *save.image()*
 (to save all the objects in the workspace or *save()* to save only some
 objects. Happily this is platform-independent so can be used to transfer
 R objects between different OS.
@@ -482,30 +461,20 @@ cat("Powers of", x, "\n")
 cat("exponent   result\n\n")
 result <- 1
 for (i in 1:n) {
-	result <- result * x
-	cat(format(i, width = 8), format(result, width = 10),
+    result <- result * x
+    cat(format(i, width = 8), format(result, width = 10),
             "\n", sep = "")
-}
-x <- 7
-n <- 5
-## display powers
-cat("Powers of", x, "\n")
-cat("exponent result\n\n")
-result <- 1
-for (i in 1:n) {
-	result <- result * x
-	cat(i, '\t', result, '\n', sep = '')
 }
 ```
 
 
 One thing to be aware of when writing out numerical data is how many
-digits are included. For example, the default with *write()* and ****
-*cat()* is the number of digits that R displays to the screen,
+digits are included. For example, the default with `write` and
+`cat` is the number of digits that R displays to the screen,
 controlled by `options()$digits`. But note that `options()$digits` seems
 to have some variability in behavior across operating systems. If you
-want finer control, use *sprintf()*, e.g., to print out print out
-temperatures as reals ("*f*"=floating points) with four decimal places
+want finer control, use `sprintf`. For example, here we print out
+temperatures as reals ("f"=floating point) with four decimal places
 and nine total character positions, followed by a C for Celsius:
 
 ```{r, sprintf}
@@ -516,11 +485,11 @@ sprintf("The temperature in %s was %.4f C.", city, temps[1])
 sprintf("The temperature in %s was %9.4f C.", city, temps[1])
 ```
 
-Note, to change the number of digits printed to the screen,
-do`  ``options(digits = 5)` or specify as an argument to *print()* or
-use *sprintf()*.
+To change the number of digits printed to the screen,
+do `options(digits = 5)` or specify as an argument to `print` or
+use `sprintf`.
 
-# Webscraping and working with HTML, XML, and JSON
+# 4. Webscraping and working with HTML, XML, and JSON
 
 The book *XML and Web Technologies for Data Sciences with R* by Deb
 Nolan (UCB Stats faculty) and Duncan Temple Lang (UCB Stats PhD alumnus
@@ -544,7 +513,7 @@ them if faced with such formats.
 HTML (Hypertext Markup Language) is the standard markup language used
 for displaying content in a web browser. In simple webpages (ignoring
 the more complicated pages that involve Javascript), what you see in
-your browser is simply a rendering of a text file containing HTML.
+your browser is simply a *rendering* (by the browser) of a text file containing HTML.
 
 However, instead of rendering the HTML in a browser, we might want to
 use code to extract information from the HTML.
@@ -565,7 +534,7 @@ that someone else has probably already written a package for. We'll use
 the *rvest* package.
 
 ```{r, https}
-library(rvest)  # uses xml2
+library(rvest, quietly = TRUE)  # uses xml2
 URL <- "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_population"
 html <- read_html(URL)
 tbls <- html_table(html_elements(html, "table"))
@@ -574,16 +543,16 @@ pop <- tbls[[1]]
 head(pop)
 ```
 
+(Caution here -- notice what format the columns are stored in...)
 
 *read_html()* works by reading in the HTML as text and then parsing it
-to build up a tree containing the HTML elements. Then *html_nodes()*
+to build up a tree containing the HTML elements. Then *html_elements()*
 finds the HTML tables and *html_table()* converts them to data frames.
 rvest is part of the tidyverse, so it's often used with piping, e.g.,
 
 ```{r, https-pipe}
-library(magrittr)
 ## Turns out that html_table can take the entire html doc as input
-tbls <- URL %>% read_html() %>% html_table()
+tbls <- URL |> read_html() |> html_table()
 ```
 
 It's often useful to be able to extract the hyperlinks in an HTML
@@ -680,8 +649,11 @@ You can see the XML format in a browser at
 
 XML documents have a tree structure with information at nodes. As above
 with HTML, one can use the *XPath* language for navigating the tree and
-finding and extracting information from the node(s) of interest. Here is
-some example code for extracting loan info from the Kiva data.
+finding and extracting information from the node(s) of interest.
+
+Here is some example code for extracting loan info from the Kiva data.
+We'll first show the 'brute force' approach of working with the data as a
+list and then the better approach of using XPath.
 
 ```{r, xml}
 library(xml2)
@@ -746,7 +718,7 @@ address within the overarching person array and the use of square
 brackets for unnamed arrays (i.e., vectors of information), as well as
 the use of different types: character strings, numbers, null, and (not
 shown) boolean/logical values. JSON and XML can be used in similar ways,
-but JSON is less verbose than XML.
+but JSON is less *verbose* than XML.
 
 We can read JSON into R using *fromJSON()* in the *jsonlite* package.
 Let's play again with the Kiva data. The same data that we had worked
@@ -778,7 +750,7 @@ constructing a URL.
 
 The packages *RCurl* and *httr* are useful for a wide variety of such
 functionality. Note that much of the functionality I describe below is
-also possible within bash using either *wget* or *curl*.
+also possible within the shell using either *wget* or *curl*.
 
 ### Webscraping ethics and best practices
 
@@ -819,7 +791,10 @@ Here are some links with useful information:
 -   [Some information on how to understand a robots.txt
     file](https://www.promptcloud.com/blog/how-to-read-and-respect-robots-file)
 
-In many cases you will want to include a time delay between your
+Tips for when you make automated requests:
+
+- When debugging code that processes the result of such a request, just run the request once, save (i.e., cache) the result, and then work on the processing code applied to the result. Don't make the same request over and over again.
+- In many cases you will want to include a time delay between your
 automated requests to a site, including if you are not actually crawling
 a site but just want to automate a small number of queries.
 
@@ -834,8 +809,8 @@ When you go to a website in a browser, your browser makes an HTTP GET
 request to the website. Similarly, when we did some downloading of html
 from webpages above, we used an HTTP GET request.
 
-Anytime the URL you enter includes 'param' information
-(`www.somewebsite.com?param=arg`), you are using an API.
+Anytime the URL you enter includes parameter information after a question mark
+(`www.somewebsite.com?param1=arg1&param2=arg2`), you are using an API.
 
 The response to an HTTP request will include a status code, which can be
 interpreted based on [this
@@ -849,14 +824,11 @@ HTML, XML, JSON) or raw bytes.
 Ideally a web service documents their API (Applications Programming
 Interface) that serves data or allows other interactions. REST and SOAP
 are popular API standards/styles. Both REST and SOAP use HTTP requests;
-we'll focus on REST as it is more common and simpler. The API will
+we'll focus on REST as it is more common and simpler. When using REST, we access *resources*, which might be a Facebook
+account or a database of stock quotes. The API will
 (hopefully) document what information it expects from the user and will
-return the result in a standard format (e.g., a particular file format
+return the result in a standard format (often a particular file format
 rather than producing a webpage).
-
-When using REST, we access *resources*, which might be a Facebook
-account or a database of stock quotes. The resource may return
-information in the form of an HTML file or JSON, CSV or something else.
 
 Often the format of the request is a URL (aka an endpoint) plus a query
 string, passed as a GET request. Let's search for plumbers near
@@ -872,36 +844,41 @@ Berkeley, and we'll see the GET request, in the form:
 
 -   \+ is used in place of each space
 
-We don't always get HTML back - try searching for "Purple Rain" at
-*apple.com*. What format do you get back?
 
-Let's see an example of accessing climate model output data from the
-World Bank. The API is documented by following some links from here:
-<http://datahelpdesk.worldbank.org/knowledgebase>. Following that
-documentation we can download monthly average precipitation predictions
-for 2080-2099 for the US (ISO3 code 'USA') based on global climate model
-simulations. In this case our REST-based query is simply constructing a
-straightforward URL.
+Let's see an example of accessing economic data from the
+World Bank, using the [documentation for their API](https://datahelpdesk.worldbank.org/knowledgebase/topics/125589-developer-information). Following the [API call structure](https://datahelpdesk.worldbank.org/knowledgebase/articles/898581-api-basic-call-structures), we can download (for example), data on various countries. The documentation indicates that our REST-based query can use either a URL structure or an argument-based structure.
 
-[TODO: the URL for the API is no longer working - 2022-08-18 // CJP]
+```{r, REST, eval=TRUE}
+## Queries based on the documentation
+api_url <- "http://api.worldbank.org/V2/incomeLevel/LIC/country"
+api_args <- "http://api.worldbank.org/V2/country?incomeLevel=LIC"
 
-```{r, REST, eval=FALSE}
-times <- c(2080, 2099)
-countryCode <- 'USA'
-baseURL <- "http://data.worldbank.org/developers/climate-data-api
-baseURL <- "http://climatedataapi.worldbank.org/climateweb/rest/v1/country"
-##" http://climatedataapi.worldbank.org/climateweb/rest/v1/country"
-type <- "mavg"
-var <- "pr"
-data <- read.csv(paste(baseURL, type, var, times[1], times[2],
-                       paste0(countryCode, '.csv'), sep = '/'))
-head(data)
+## Generalizing a bit
+req <- "http://api.worldbank.org/V2/country?incomeLevel=MIC&format=json"
+data <- fromJSON(req)
+## Be careful of data truncation/pagination
+req <- "http://api.worldbank.org/V2/country?incomeLevel=MIC&format=json&per_page=1000"
+data <- fromJSON(req)
+
+## Programmatic control
+baseURL <- "http://api.worldbank.org/V2/country"
+group <- 'MIC'
+format <- 'json'
+args <- c(incomeLevel = group, format = format, per_page = 1000)
+url <- paste0(baseURL, "?",
+    paste(  paste(names(args), args, sep = "="),  collapse = "&"))
+   
+data <- fromJSON(url)
+class(data)
+length(data)
+names(data)
+head(data[[2]])
 ```
 
+APIs can change and disappear. Last year the example above involved the World Bank's Climate Data API, which I can no longer find!
 
-As another example, here we can see the [Kiva
-API](https://build.kiva.org/api), which allows us to construct queries
-on the Kiva data that we saw some of earlier.
+
+As another example, here we can see the [US Treasury Department API](https://fiscaldata.treasury.gov/api-documentation/), which allows us to construct queries for federal financial data.
 
 The Nolan and Temple Lang book provides a number of examples of
 different ways of authenticating with web services that control access
@@ -917,7 +894,7 @@ you would first authenticate with your login and password and receive a
 same session.
 
 I created your *github.berkeley.edu* accounts from Python by interacting
-with the [Github API](https://docs.github.com/en/rest/reference/repos)
+with the [GitHub API](https://docs.github.com/en/rest/reference/repos)
 using the *requests* package.
 
 ### HTTP requests by deconstructing an (undocumented) API
@@ -1100,7 +1077,7 @@ interacting with a site. Some options are:
 
 -   *htmlunit* is another tool for this.
 
-# File and string encodings
+# 5. File and string encodings
 
 Text (either in the form of a file with regular language in it or a data
 file with fields of character strings) will often contain characters
@@ -1144,32 +1121,27 @@ encodes a small subset of Unicode and contains the characters used in
 many European languages (e.g., letters with accents). Here's an example
 of using a non-ASCII Unicode character:
 
-```{r, unicode-example, eval=FALSE}
+```{r, unicode-example, eval=TRUE}
 
 ## n-tilde and division symbol as Unicode 'code points'
 x2 <- 'Pe\u00f1a 3\u00f72' 
 Encoding(x2) 
 x2
 writeBin(x2, 'tmp2.txt')
-## here n-tilde and division symbol take up two bytes
-## but there is an extraneous null byte in there; not sure why
+## Here n-tilde and division symbol take up two bytes
+## but there is an extraneous null byte in there; not sure why.
 system('ls -l tmp2.txt') 
-## so the system knows how to interpret the UTF-8 encoded file
+## The system knows how to interpret the UTF-8 encoded file
 ## and represent the Unicode character on the screen:
 system('cat tmp2.txt')
 
 ```
 
-
-
-(I have turned off evaluation of that chunk as something strange is
-going on when I create the PDF.)
-
 UTF-8 is cleverly designed in terms of the bit-wise representation of
 characters such that ASCII characters still take up one byte, and most
 other characters take two bytes, but some take four bytes. In fact it is
 even more clever than that - the representation is such that the bits of
-a one-byte character never appears within the representation of a two-
+a one-byte character never appear within the representation of a two-
 or three- or four-byte character (and similarly for two-byte characters
 in three- or four-byte characters, etc.).
 
@@ -1246,3 +1218,54 @@ text <- iconv(text, from = "latin1", to = "UTF-8")
 tmp <- try(substring(text, 1, 15))
 ```
 
+# 6. Data structures
+
+As we're reading data into R or other languages, it's important to think about the data structures we'll use to store the information. The data structure we choose can affect:
+
+- the amount of memory we need, 
+- how quickly we can access the information in the data structure,
+- how much copying needs to be done to add information to or remove information from the data structure,
+- how efficiently we can use the data in subsequent computations.
+
+This means that what you plan to do with the data should guide what kind of structure you store the data in.
+
+## Standard data structures in R and Python
+
+- In R and Python, one often ends up working with dataframes, lists, and vectors/matrices/arrays/tensors.
+- In R, if we are not working with rectangular datasets or standard numerical objects, we often end up using lists or enhanced versions of lists, sometimes with deeply nested structures.
+- In Python we commonly work with data structures that are part of additional packages, in particular numpy arrays and pandas dataframes.
+- Dictionaries in Python allow for easy use of key-value pairs where one can access values based on their key/label. In R one can do something similar with named vectors or named lists or (more efficiently) by using environments.
+
+In Unit 7, we'll talk about *distributed* data structures that allow one to easily work with data distributed across multiple computers.
+
+## Other kinds of data structures
+
+You may have heard of various other kinds of data structures, such as linked lists, trees, graphs, queues, and stacks. One of the key aspects that differentiate such data structures is how one navigates through the elements.
+
+*Sets* are collections of elements that don't have any duplicates (like a mathematical set).
+
+With a *linked list*, with each element (or node) has a value and a pointer (reference) to the location of the next element. (With a doubly-linked list, there is also a pointer back to the previous element.) One big advantage of this is that one can insert an element by simply modifying the pointers involved at the site of the insertion, without copying any of the other elements in the list. A big disadvantage is that to get to an element you have to navigate through the list. 
+
+![Linked list (courtesy of computersciencewiki.org)](linked-list.png)
+
+
+Both *trees* and *graphs* are collections of nodes (vertices) and links (edges). A tree involves a set of nodes and links to child nodes (also possibly containing information linking the child nodes to their parent nodes). With a graph, the links might not be directional, and there can be cycles.
+
+![Tree (courtesy of computersciencewiki.org)](tree.png)
+
+
+![Graph (courtesy of computersciencewiki.org)](graph.png)
+
+
+A *stack* is a collection of elements that behave like a stack of lunch trays. You can only access the top element directly("last in, first out"), so the operations are that you can push a new element onto the stack or pop the top element off the stack. In fact, nested function calls behave as stacks, and the memory used in the process of evaluating the function calls is called the 'stack'.
+
+A *queue* is like the line at a grocery store, behaving as "first in, first out".
+
+One can use such data structures either directly or via add-on packages in R and Python, though I don't think they're all that commonly used in R. This is probably because statistical/data science/machine learning workflows often involve either 'rectangular' data (i.e., dataframe-style data) and/or mathematical computations with arrays. That said, trees and graphs are widely used.
+
+Some related concepts that we'll discuss further in Unit 5 include:
+
+ - types: this refers to how a given piece of information is stored and what operations can be done with the information.
+    - 'primitive' types are the most basic types that often relate directly to how data are stored in memory or on disk (e.g., booleans, integers, numeric (real-valued), character, pointer (address, reference).
+ - pointers: references to other locations (addresses) in memory. One often uses pointers to avoid unnecessary copying of data. 
+ - hashes: hashing involves fast lookup of the value associated with a key (a label), using a hash function, which allows one to convert the key to an address. This avoids having to find the value associated with a specific key by looking through all the keys until the key of interest is found (an O(n) operation).

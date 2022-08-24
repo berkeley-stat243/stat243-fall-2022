@@ -391,7 +391,7 @@ A in the class despite this.
 
 Your total score for the PS is a weighted sum of the scores for the
 three components. If you turn in a PS late, I'll bump you down by two
-points (out of the available). If you turn it in really late (i.e.,
+points (out of the available). If you turn it in really late (e.g.,
 after we start grading them), I will bump you down by four points. No
 credit after solutions are distributed.
 
@@ -415,7 +415,7 @@ share code syntax (generally not more than one line) on how to do small individu
   - **You should not ask another student for complete code or solutions, or look at their code/solution.**
   - **You should not share complete code or solutions with another student or on Ed Discussion.**
 - You must provide attribution for ideas obtained elsewhere, including other students. 
-  - **If you got a specific idea for how to do part of a problem from a fellow student, you should note that in your solution in the appropriate place** (for specific syntax ideas, note this in a code comment), just as you would cite a book or URL.
+  - **If you got a specific idea for how to do part of a problem from a fellow student (or some other resource), you should note that in your solution in the appropriate place** (for specific syntax ideas, note this in a code comment), just as you would cite a book or URL.
    - **You MUST note on your problem set solution any fellow students who you worked/consulted
 with.**
    - You do not need to cite any Ed Discussion posts nor any discussions with Chris or James.
