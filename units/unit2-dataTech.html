@@ -252,6 +252,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#reading-data-from-text-files-into-r" id="toc-reading-data-from-text-files-into-r" class="nav-link" data-scroll-target="#reading-data-from-text-files-into-r">2. Reading data from text files into R</a>
   <ul class="collapse">
   <li><a href="#core-r-functions" id="toc-core-r-functions" class="nav-link" data-scroll-target="#core-r-functions">Core R functions</a></li>
+  <li><a href="#connections" id="toc-connections" class="nav-link" data-scroll-target="#connections">Connections</a></li>
   <li><a href="#file-paths" id="toc-file-paths" class="nav-link" data-scroll-target="#file-paths">File paths</a></li>
   <li><a href="#the-readr-package" id="toc-the-readr-package" class="nav-link" data-scroll-target="#the-readr-package">The <em>readr</em> package</a></li>
   <li><a href="#reading-data-quickly" id="toc-reading-data-quickly" class="nav-link" data-scroll-target="#reading-data-quickly">Reading data quickly</a></li>
@@ -318,10 +319,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </header>
 
 <p><a href="./unit2-dataTech.pdf" class="btn btn-primary">PDF</a></p>
-<blockquote class="blockquote">
-<p><strong>Warning</strong> This Unit is mostly complete but still undergoing final editing.</p>
-</blockquote>
-<p>References (see <a href="syllabus">syllabus</a> for links):</p>
+<p>References (see <a href="../syllabus">syllabus</a> for links):</p>
 <ul>
 <li>Adler</li>
 <li>Nolan and Temple Lang, XML and Web Technologies for Data Sciences with R.</li>
@@ -342,7 +340,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <section id="data-storage-and-file-formats-on-a-computer" class="level1">
 <h1>1. Data storage and file formats on a computer</h1>
-<p>We’re going to start early in the data analysis pipeline: getting data, reading data in, writing data out to disk, and webscraping. We’ll focus on doing these manipulations in R, but the concepts and tools involved are common to other languages, so familarity with these in R should allow you to pick up other tools more easily. The main downside to working with datasets in R (true for Python as well) is that the entire dataset resides in memory, so R is not so good for dealing with very large datasets. More on alternatives in a later unit. Another common frustration is controlling how the variables are interpreted (numeric, character, factor) when reading data into a data frame. R (and similar languages) has the capability to read in a wide variety of file formats.</p>
+<p>We’re going to start early in the data analysis pipeline: getting data, reading data in, writing data out to disk, and webscraping. We’ll focus on doing these manipulations in R, but the concepts and tools involved are common to other languages, so familarity with these in R should allow you to pick up other tools easily. The main downside to working with datasets in R (true for Python and most other languages as well) is that the entire dataset resides in memory, so R is not so good for dealing with very large datasets. More on alternatives in a later unit. R (and similar languages) has the capability to read in a wide variety of file formats.</p>
 <section id="text-and-binary-files" class="level2">
 <h2 class="anchored" data-anchor-id="text-and-binary-files">Text and binary files</h2>
 <p>In general, files can be divided into text files and binary files. In both cases, information is stored as a series of bits. Recall that a bit is a single value in base 2 (i.e., a 0 or a 1), while a byte is 8 bits.</p>
@@ -353,17 +351,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="common-file-types" class="level2">
 <h2 class="anchored" data-anchor-id="common-file-types">Common file types</h2>
-<p>Here are some of the common file types. Any of these types can be categorized as text or binary.</p>
+<p>Here are some of the common file types, some of which are text formats and some of which are binary formats.</p>
 <ol type="1">
-<li><p>‘Flat’ text files: data are often provided as simple text files. Often one has one record or observation per row and each column or field is a different variable or type of information about the record. Such files can either have a fixed number of characters in each field (fixed width format) or a special character (a delimiter) that separates the fields in each row. Common delimiters are tabs, commas, one or more spaces, and the pipe (|). Common file extensions are <em>.txt</em> and <em>.csv</em>. Metadata (information about the data) are often stored in a separate file. CSV files are quite common, but if you have files where the data contain commas, other delimiters can be good. Text can be put in quotes in CSV files, and this can allow use of commas within the data. This is difficult to deal with from the command line, but <em>read.table()</em> in R handles this situation.</p>
+<li><p>‘Flat’ text files: data are often provided as simple text files. Often one has one record or observation per row and each column or field is a different variable or type of information about the record. Such files can either have a fixed number of characters in each field (<em>fixed width format</em>) or a special character (a <em>delimiter</em>) that separates the fields in each row. Common delimiters are tabs, commas, one or more spaces, and the pipe (|). Common file extensions are <em>.txt</em> and <em>.csv</em>. Metadata (information about the data) are often stored in a separate file. CSV files are quite common, but if you have files where the data contain commas, other delimiters can be good. Text can be put in quotes in CSV files, and this can allow use of commas within the data. This is difficult to deal with from the command line, but <em>read.table()</em> in R handles this situation.</p>
 <ul>
-<li>One occasionally tricky difficulty is as follows. If you have a text file created in Windows, the line endings are coded differently than in UNIX (a newline (the ASCII character <em>\n</em>) and a carriage return (the ASCII character <em>\r</em>) in Windows vs. only a newline in UNIX). There are UNIX utilities (<em>fromdos</em> in Ubuntu, including the SCF Linux machines and <em>dos2unix</em> in other Linux distributions) that can do the necessary conversion. If you see <em>^M</em> at the end of the lines in a file, that’s the tool you need. Alternatively, if you open a UNIX file in Windows, it may treat all the lines as a single line. You can fix this with <em>todos</em> or <em>unix2dos</em>.</li>
+<li>One occasionally tricky difficulty is as follows. If you have a text file created in Windows, the line endings are coded differently than in UNIX. Windows uses a newline (the ASCII character <code>\n</code>) and a carriage return (the ASCII character <code>\r</code>) whereas UNIX uses onlyl a newline in UNIX). There are UNIX utilities (<code>fromdos</code> in Ubuntu, including the SCF Linux machines and <code>dos2unix</code> in other Linux distributions) that can do the necessary conversion. If you see <em>^M</em> at the end of the lines in a file, that’s the tool you need. Alternatively, if you open a UNIX file in Windows, it may treat all the lines as a single line. You can fix this with <code>todos</code> or <code>unix2dos</code>.</li>
 </ul></li>
-<li><p>In some contexts, such as textual data and bioinformatics data, the data may in a text file with one piece of information per row, but without meaningful columns/fields.</p></li>
+<li><p>In some contexts, such as textual data and bioinformatics data, the data may be in a text file with one piece of information per row, but without meaningful columns/fields.</p></li>
 <li><p>In scientific contexts, netCDF (<em>.nc</em>) (and the related HDF5) are popular format for gridded data that allows for highly-efficient storage and contains the metadata within the file. The basic structure of a netCDF file is that each variable is an array with multiple dimensions (e.g., latitude, longitude, and time), and one can also extract the values of and metadata about each dimension. The <em>ncdf4</em> package in R nicely handles working with netCDF files.</p></li>
-<li><p>Data may also be in text files in formats designed for data interchange between various languages, in particular XML or JSON. These formats are “self-describing”; namely the metadata is part of the file. The <em>XML2, rvest</em>, and <em>jsonlite</em> packages are useful for reading and writing from these formats.</p></li>
+<li><p>Data may also be in text files in formats designed for data interchange between various languages, in particular XML or JSON. These formats are “self-describing”; namely the metadata is part of the file. The <em>XML2, rvest</em>, and <em>jsonlite</em> packages are useful for reading and writing from these formats. More in Section 4.</p></li>
 <li><p>You may be scraping information on the web, so dealing with text files in various formats, including HTML. The <em>XML2</em> and <em>rvest</em> packages are also useful for reading HTML.</p></li>
-<li><p>Data may already be in a database or in the data storage of another statistical package (<em>Stata</em>, <em>SAS</em>, <em>SPSS</em>, etc.). The <em>foreign</em> package in R has excellent capabilities for importing Stata (<em>read.dta()</em>), SPSS (<em>read.spss()</em>), and SAS (<em>read.ssd()</em> and, for XPORT files, <em>read.xport()</em>), among others.</p></li>
+<li><p>Data may already be in a database or in the data storage format of another statistical package (<em>Stata</em>, <em>SAS</em>, <em>SPSS</em>, etc.). The <em>foreign</em> package in R has excellent capabilities for importing Stata (<em>read.dta()</em>), SPSS (<em>read.spss()</em>), and SAS (<em>read.ssd()</em> and, for XPORT files, <em>read.xport()</em>), among others.</p></li>
 <li><p>For Excel, there are capabilities to read an Excel file (see the <em>readxl</em> and <em>XLConnect</em> package among others), but you can also just go into Excel and export as a CSV file or the like and then read that into R. In general, it’s best not to pass around data files as Excel or other spreadsheet format files because (1) Excel is proprietary, so someone may not have Excel and the format is subject to change, (2) Excel imposes limits on the number of rows, (3) one can easily manipulate text files such as CSV using UNIX tools, but this is not possible with an Excel file, (4) Excel files often have more than one sheet, graphs, macros, etc., so they’re not a data storage format per se.</p></li>
 <li><p>R can easily interact with databases (SQLite, PostgreSQL, MySQL, Oracle, etc.), querying the database using SQL and returning results to R. More in the big data unit and in the large datasets tutorial mentioned above.</p></li>
 </ol>
@@ -375,11 +373,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 class="anchored" data-anchor-id="core-r-functions">Core R functions</h2>
 <p><em>read.table()</em> is probably the most commonly-used function for reading in data. It reads in delimited files (<em>read.csv()</em> and <em>read.delim()</em> are special cases of <em>read.table()</em>). The key arguments are the delimiter (the <em>sep</em> argument) and whether the file contains a header, a line with the variable names. We can use <em>read.fwf()</em> to read from a fixed width text file into a data frame.</p>
 <p>The most difficult part of reading in such files can be dealing with how R determines the classes of the fields that are read in. There are a number of arguments to <em>read.table()</em> and <em>read.fwf()</em> that allow the user to control the classes. One difficulty in older versions of R was that character fields were read in as factors.</p>
-<p>Let’s work through a couple examples. Before we do that, let’s look at the arguments to <em>read.table()</em>. Note that <em>sep=“</em> separates on any amount of white space. In the code chunk below, I’ve told <em>knitr</em> not to print the output to the PDF; you can see the full output by running the code yourself.</p>
+<p>Let’s work through a couple examples. Before we do that, let’s look at the arguments to <em>read.table()</em>. Note that <code>sep=''</code> separates on any amount of white space.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="fu">file.path</span>(<span class="st">'..'</span>, <span class="st">'data'</span>, <span class="st">'RTADataSub.csv'</span>),</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">sep =</span> <span class="st">','</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(dat, class)[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(dat, class)[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]  <span class="co"># What are the classes of the columns?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>X2010.08.02.18.55             X2336              X549             X2086 
       "character"       "character"       "character"       "character" 
@@ -413,7 +411,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>dat2 <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="fu">file.path</span>(<span class="st">'..'</span>, <span class="st">'data'</span>, <span class="st">'RTADataSub.csv'</span>),</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">sep =</span> <span class="st">','</span>, <span class="at">header =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">na.strings =</span> <span class="fu">c</span>(<span class="st">"NA"</span>, <span class="st">"x"</span>))</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(dat2[ ,<span class="dv">2</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(dat2[ , <span class="dv">2</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  [1] 2124 1830 1833 1600 1578 1187 1005  918  865  871  860  883  897  898  893
  [16]  913  870  962  880  875  884  894  836  848  885  851  900  861  866  867
@@ -428,8 +426,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 [151] 2700 2347 2078 2935 3040 1860 1437 1512 1720 1493 1026  928  874  833  850
 [166]   NA</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="do">## hmmm, what happened to the blank values this time?</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(dat[ ,<span class="dv">2</span>] <span class="sc">==</span> <span class="st">""</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Let's check that the empty strings from 'dat' are now NAs in 'dat2'</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(dat[ , <span class="dv">2</span>] <span class="sc">==</span> <span class="st">""</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] 312 313 314 315 317 318 319 320 322 323</code></pre>
 </div>
@@ -446,13 +444,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     X1043 X497 X440 X197 X287 X837 X226 X973
 312    NA   NA   NA   NA   NA   NA   NA   NA</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using 'colClasses'</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>sequ <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="fu">file.path</span>(<span class="st">'..'</span>, <span class="st">'data'</span>, <span class="st">'hivSequ.csv'</span>),</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">sep =</span> <span class="st">','</span>, <span class="at">header =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">colClasses =</span> <span class="fu">c</span>(<span class="st">'integer'</span>,<span class="st">'integer'</span>,<span class="st">'character'</span>,</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'character'</span>,<span class="st">'numeric'</span>,<span class="st">'integer'</span>))</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="do">## let's make sure the coercion worked - sometimes R is obstinant</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(sequ, class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Using <code>colClasses</code> is a good way to control how data are read in.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>sequ <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="fu">file.path</span>(<span class="st">'..'</span>, <span class="st">'data'</span>, <span class="st">'hivSequ.csv'</span>),</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">sep =</span> <span class="st">','</span>, <span class="at">header =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">colClasses =</span> <span class="fu">c</span>(<span class="st">'integer'</span>,<span class="st">'integer'</span>,<span class="st">'character'</span>,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'character'</span>,<span class="st">'numeric'</span>,<span class="st">'integer'</span>))</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="do">## let's make sure the coercion worked - sometimes R is obstinant</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(sequ, class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  PatientID        Resp      PR.Seq      RT.Seq       VL.t0      CD4.t0 
   "integer"   "integer" "character" "character"   "numeric"   "integer" </code></pre>
@@ -460,7 +460,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="do">## that made use of the fact that a data frame is a list</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Note that you can avoid reading in one or more columns by specifying <em>NULL</em> as the column class for those columns to be omitted. Also, specifying the <em>colClasses</em> argument explicitly should make for faster file reading. Finally, setting <code>stringsAsFactors=FALSE</code> is standard practice and is the default in R as of version 4.0. (<em>readr::read_csv()</em> has always set <code>stringsAsFactors=FALSE</code>).</p>
-<p>If possible, it’s a good idea to look through the input file in the shell or in an editor before reading into R to catch such issues in advance. Using <em>less</em> on <em>RTADataSub.csv</em> would have revealed these various issues, but note that <em>RTADataSub.csv</em> is a 1000-line subset of a much larger file of data available from the kaggle.com website. So more sophisticated use of UNIX utilities (as we will see in Unit 3) is often useful before trying to read something into R.</p>
+<p>If possible, it’s a good idea to look through the input file in the shell or in an editor before reading into R to catch such issues in advance. Using the UNIX command <em>less</em> on <em>RTADataSub.csv</em> would have revealed these various issues, but note that <em>RTADataSub.csv</em> is a 1000-line subset of a much larger file of data available from the kaggle.com website. So more sophisticated use of UNIX utilities (as we will see in Unit 3) is often useful before trying to read something into a program.</p>
 <p>The basic function <em>scan()</em> simply reads everything in, ignoring lines, which works well and very quickly if you are reading in a numeric vector or matrix. <em>scan()</em> is also useful if your file is free format - i.e., if it’s not one line per observation, but just all the data one value after another; in this case you can use <em>scan()</em> to read it in and then format the resulting character or numeric vector as a matrix with as many columns as fields in the dataset. Remember that the default is to fill the matrix by column.</p>
 <p>If the file is not nicely arranged by field (e.g., if it has ragged lines), we’ll need to do some more work. <em>readLines()</em> will read in each line into a separate character vector, after which we can process the lines using text manipulation. Here’s an example from some US meteorological data where I know from metadata (not provided here) that the 4-11th values are an identifier, the 17-20th are the year, the 22-23rd the month, etc.</p>
 <div class="cell">
@@ -480,7 +480,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>nvalues <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(<span class="fu">substring</span>(dat, <span class="dv">28</span>, <span class="dv">30</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Actually, that file, <em>precip.txt</em>, is in a fixed-width format (i.e., every element in a given column has the exact same number of characters),so reading in using <em>read.fwf()</em> would be a good strategy.</p>
-<p>R allows you to read in not just from a file but from a more general construct called a <em>connection</em>. Here are some examples of connections:</p>
+</section>
+<section id="connections" class="level2">
+<h2 class="anchored" data-anchor-id="connections">Connections</h2>
+<p>R allows you to read in not just from a file but from a more general construct called a <em>connection</em>. This can include reading in text from the output of running a shell command and from unzipping a file on the fly.</p>
+<p>Here are some examples of connections:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">readLines</span>(<span class="fu">pipe</span>(<span class="st">"ls -al"</span>))</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="fu">pipe</span>(<span class="st">"unzip dat.zip"</span>))</span>
@@ -497,7 +501,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>wikip3 <span class="ot">&lt;-</span> <span class="fu">readLines</span>(<span class="fu">curl</span>(<span class="st">"https://wikipedia.org"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>If a file is large, we may want to read it in in chunks (of lines), do some computations to reduce the size of things, and iterate. <em>read.table()</em>, <em>read.fwf()</em> and <em>readLines()</em> all have the arguments that let you read in a fixed number of lines. To read-on-the-fly in blocks, we need to first establish the connection and then read from it sequentially. (If you don’t, you’ll read from the start of the file every time you read from the file.)</p>
+<p>If a file is large, we may want to read it in in chunks (of lines), do some computations to reduce the size of things, and iterate. This is referred to as online processing. <em>read.table()</em>, <em>read.fwf()</em> and <em>readLines()</em> all have the arguments that let you read in a fixed number of lines. To read-on-the-fly in blocks, we need to first establish the connection and then read from it sequentially. (If you don’t, you’ll read from the start of the file every time you read from the file.)</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> <span class="fu">file</span>(<span class="fu">file.path</span>(<span class="st">".."</span>, <span class="st">"data"</span>, <span class="st">"precip.txt"</span>), <span class="st">"r"</span>)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="do">## "r" for 'read' - you can also open files for writing with "w"</span></span>
@@ -564,7 +568,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">'../data/cpds.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></li>
-<li><p>Be careful with the directory separator in Windows files: you can either do <em>“C:\\mydir\\file.txt”</em> or <em>“C:/mydir/file.txt”</em>, but not <em>“C:\mydir\file.txt”</em>, and note the next comment about avoiding use of ‘\\’ for portability.</p></li>
+<li><p>Be careful with the directory separator in Windows files: you can either do <code>C:\\mydir\\file.txt</code> or <code>C:/mydir/file.txt</code>, but not <code>C:\mydir\file.txt</code>, and note the next comment about avoiding use of ‘\’ for portability.</p></li>
 <li><p>Using UNIX style directory separators will work in Windows, Mac or Linux, but using Windows style separators is not portable across operating systems.<br>
 </p>
 <div class="cell">
@@ -603,7 +607,7 @@ Attaching package: 'readr'</code></pre>
 <span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">file.path</span>(dir, <span class="st">'airline.csv'</span>), <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  3.051   0.075   3.133 </code></pre>
+  3.055   0.087   3.146 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(dat2 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(dir, <span class="st">'airline.csv'</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -620,7 +624,7 @@ dbl (24): Year, Month, DayOfMonth, DayOfWeek, DepTime, CRSDepTime, ArrTime, ...
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  3.835   0.148   1.249 </code></pre>
+  4.022   0.162   1.218 </code></pre>
 </div>
 </div>
 </section>
@@ -635,7 +639,7 @@ dbl (24): Year, Month, DayOfMonth, DayOfWeek, DepTime, CRSDepTime, ArrTime, ...
 <h2 class="anchored" data-anchor-id="writing-output-to-files">Writing output to files</h2>
 <p>Functions for text output are generally analogous to those for input. <em>write.table()</em>, <em>write.csv()</em>, and <em>writeLines()</em> are analogs of <em>read.table()</em>, <em>read.csv()</em>, and <em>readLines()</em>. <em>write_csv()</em> is the <em>readr</em> version of write.csv. <em>write()</em> can be used to write a matrix to a file, specifying the number of columns desired. <em>cat()</em> can be used when you want fine control of the format of what is written out and allows for outputting to a connection (e.g., a file).</p>
 <p><em>toJSON()</em> in the <em>jsonlite</em> package will output R objects as JSON. One use of JSON as output from R would be to <em>serialize</em> the information in an R object such that it could be read into another program.</p>
-<p>And of course you can always save to an R data file using <em>save.image()</em> (to save all the objects in the workspace or <em>save()</em> to save only some objects. Happily this is platform-independent so can be used to transfer R objects between different OS.</p>
+<p>And of course you can always save to an R data file (a binary file format) using <em>save.image()</em> (to save all the objects in the workspace or <em>save()</em> to save only some objects. Happily this is platform-independent so can be used to transfer R objects between different OS.</p>
 </section>
 <section id="formatting-output" class="level2">
 <h2 class="anchored" data-anchor-id="formatting-output">Formatting output</h2>
@@ -679,7 +683,7 @@ dbl (24): Year, Month, DayOfMonth, DayOfWeek, DepTime, CRSDepTime, ArrTime, ...
        5     16807</code></pre>
 </div>
 </div>
-<p>One thing to be aware of when writing out numerical data is how many digits are included. For example, the default with <code>write</code> <code>cat</code> is the number of digits that R displays to the screen, controlled by <code>options()$digits</code>. But note that <code>options()$digits</code> seems to have some variability in behavior across operating systems. If you want finer control, use <code>sprintf</code>, e.g., to print out print out temperatures as reals (“f”=floating points) with four decimal places and nine total character positions, followed by a C for Celsius:</p>
+<p>One thing to be aware of when writing out numerical data is how many digits are included. For example, the default with <code>write</code> and <code>cat</code> is the number of digits that R displays to the screen, controlled by <code>options()$digits</code>. But note that <code>options()$digits</code> seems to have some variability in behavior across operating systems. If you want finer control, use <code>sprintf</code>. For example, here we print out temperatures as reals (“f”=floating point) with four decimal places and nine total character positions, followed by a C for Celsius:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>temps <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">12.5</span>, <span class="fl">37.234324</span>, <span class="fl">1342434324.79997234</span>, <span class="fl">2.3456e-6</span>, <span class="fl">1e10</span>)</span>
 <span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">"%9.4f C"</span>, temps)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -697,7 +701,7 @@ dbl (24): Year, Month, DayOfMonth, DayOfWeek, DepTime, CRSDepTime, ArrTime, ...
 <pre><code>[1] "The temperature in Boston was   12.5000 C."</code></pre>
 </div>
 </div>
-<p>Note, to change the number of digits printed to the screen, do <code>options(digits = 5)</code> or specify as an argument to <code>print</code> or use <code>sprintf</code>.</p>
+<p>To change the number of digits printed to the screen, do <code>options(digits = 5)</code> or specify as an argument to <code>print</code> or use <code>sprintf</code>.</p>
 </section>
 </section>
 <section id="webscraping-and-working-with-html-xml-and-json" class="level1">
@@ -707,13 +711,13 @@ dbl (24): Year, Month, DayOfMonth, DayOfWeek, DepTime, CRSDepTime, ArrTime, ...
 <p>We’ll cover a few basic examples in this section, but HTML and XML formatting and navigating the structure of such pages in great detail is beyond the scope of what we can cover. The key thing is to see the main concepts and know that the tools exist so that you can learn how to use them if faced with such formats.</p>
 <section id="reading-html" class="level2">
 <h2 class="anchored" data-anchor-id="reading-html">Reading HTML</h2>
-<p>HTML (Hypertext Markup Language) is the standard markup language used for displaying content in a web browser. In simple webpages (ignoring the more complicated pages that involve Javascript), what you see in your browser is simply a rendering of a text file containing HTML.</p>
+<p>HTML (Hypertext Markup Language) is the standard markup language used for displaying content in a web browser. In simple webpages (ignoring the more complicated pages that involve Javascript), what you see in your browser is simply a <em>rendering</em> (by the browser) of a text file containing HTML.</p>
 <p>However, instead of rendering the HTML in a browser, we might want to use code to extract information from the HTML.</p>
 <p>Let’s see a brief example of reading in HTML tables.</p>
 <p>Note that before doing any coding, it can be helpful to look at the raw HTML source code for a given page. We can explore the underlying HTML source in advance of writing our code by looking at the page source directly in the browser (e.g., in Firefox under the 3-lines “open menu” symbol, see <code>Web Developer (or More Tools) -&gt; Page Source</code> and in Chrome <code>View -&gt; Developer -&gt; View Source</code>), or by downloading the webpage and looking at it in an editor, although in some cases (such as the nytimes.com case), what we might see is a lot of JavaScript.</p>
 <p>One lesson here is not to write a lot of your own code to do something that someone else has probably already written a package for. We’ll use the <em>rvest</em> package.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rvest)  <span class="co"># uses xml2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rvest, <span class="at">quietly =</span> <span class="cn">TRUE</span>)  <span class="co"># uses xml2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
 Attaching package: 'rvest'</code></pre>
@@ -736,21 +740,21 @@ Attaching package: 'rvest'</code></pre>
 <pre><code># A tibble: 6 × 9
   Rank  `Country / Dependency` Conti…¹ Popul…² Perce…³ Date  Sourc…⁴ Notes ``   
   &lt;chr&gt; &lt;chr&gt;                  &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;lgl&gt;
-1 –     World                  All     7,972,… 100%    23 A… UN pro… ""    NA   
+1 –     World                  All     7,973,… 100%    24 A… UN pro… ""    NA   
 2 1     China                  Asia    1,412,… 17.7%   31 D… Offici… "Exc… NA   
-3 2     India                  Asia    1,380,… 17.3%   31 D… Offici… "The… NA   
-4 3     United States          North … 333,01… 4.18%   23 A… Nation… "The… NA   
-5 4     Indonesia              Asia[b] 272,24… 3.41%   1 Ju… Offici… ""    NA   
+3 2     India                  Asia    1,360,… 17.1%   31 D… Offici… "The… NA   
+4 3     United States          North … 333,02… 4.18%   24 A… Nation… "The… NA   
+5 4     Indonesia              Asia[b] 275,77… 3.46%   1 Ju… Offici… ""    NA   
 6 5     Pakistan               Asia    235,82… 2.96%   1 Ju… UN pro… "The… NA   
 # … with abbreviated variable names ¹​Continent, ²​Population,
 #   ³​`Percentage of the world`, ⁴​`Source (official or from the United Nations)`</code></pre>
 </div>
 </div>
-<p><em>read_html()</em> works by reading in the HTML as text and then parsing it to build up a tree containing the HTML elements. Then <em>html_nodes()</em> finds the HTML tables and <em>html_table()</em> converts them to data frames. rvest is part of the tidyverse, so it’s often used with piping, e.g.,</p>
+<p>(Caution here – notice what format the columns are stored in…)</p>
+<p><em>read_html()</em> works by reading in the HTML as text and then parsing it to build up a tree containing the HTML elements. Then <em>html_elements()</em> finds the HTML tables and <em>html_table()</em> converts them to data frames. rvest is part of the tidyverse, so it’s often used with piping, e.g.,</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
-<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Turns out that html_table can take the entire html doc as input</span></span>
-<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>tbls <span class="ot">&lt;-</span> URL <span class="sc">%&gt;%</span> <span class="fu">read_html</span>() <span class="sc">%&gt;%</span> <span class="fu">html_table</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Turns out that html_table can take the entire html doc as input</span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>tbls <span class="ot">&lt;-</span> URL <span class="sc">|&gt;</span> <span class="fu">read_html</span>() <span class="sc">|&gt;</span> <span class="fu">html_table</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>It’s often useful to be able to extract the hyperlinks in an HTML document. We’ll find the link using <a href="https://www.w3schools.com/cssref/css_selectors.asp">CSS selectors</a>, which allow you to search for elements within HTML:</p>
 <div class="cell">
@@ -832,7 +836,8 @@ Attaching package: 'rvest'</code></pre>
     &lt;/catalog&gt;</code></pre>
 <p>We can read XML documents into R using <code>xml2::read_xml()</code> and then manipulate it using other functions from the <em>xml2</em> package. Here’s an example of working with lending data from the Kiva lending non-profit. You can see the XML format in a browser at</p>
 <p><a href="http://api.kivaws.org/v1/loans/newest.xml" class="uri">http://api.kivaws.org/v1/loans/newest.xml</a>.</p>
-<p>XML documents have a tree structure with information at nodes. As above with HTML, one can use the <em>XPath</em> language for navigating the tree and finding and extracting information from the node(s) of interest. Here is some example code for extracting loan info from the Kiva data.</p>
+<p>XML documents have a tree structure with information at nodes. As above with HTML, one can use the <em>XPath</em> language for navigating the tree and finding and extracting information from the node(s) of interest.</p>
+<p>Here is some example code for extracting loan info from the Kiva data. We’ll first show the ‘brute force’ approach of working with the data as a list and then the better approach of using XPath.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(xml2)</span>
 <span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>doc <span class="ot">&lt;-</span> <span class="fu">read_xml</span>(<span class="st">"https://api.kivaws.org/v1/loans/newest.xml"</span>)</span>
@@ -854,33 +859,33 @@ Attaching package: 'rvest'</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>$name
 $name[[1]]
-[1] "Antiope Group"
+[1] "Albert"
 
 
 $activity
 $activity[[1]]
-[1] "Personal Housing Expenses"
+[1] "Butcher Shop"
 
 
 $sector
 $sector[[1]]
-[1] "Housing"
+[1] "Food"
 
 
 $location
 $location$country_code
 $location$country_code[[1]]
-[1] "SV"
+[1] "MG"
 
 
 $location$country
 $location$country[[1]]
-[1] "El Salvador"
+[1] "Madagascar"
 
 
 $location$town
 $location$town[[1]]
-[1] "Sonsonate"
+[1] "Antananarivo"
 
 
 $location$geo
@@ -891,7 +896,7 @@ $location$geo$level[[1]]
 
 $location$geo$pairs
 $location$geo$pairs[[1]]
-[1] "13.711388 -89.72391"
+[1] "-18.87919 47.507906"
 
 
 $location$geo$type
@@ -903,7 +908,7 @@ $location$geo$type[[1]]
 
 $loan_amount
 $loan_amount[[1]]
-[1] "1300"</code></pre>
+[1] "125"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="do">## alternatively, extract only the 'loans' info (and use pipes)</span></span>
 <span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>loansNode <span class="ot">&lt;-</span> doc <span class="sc">%&gt;%</span> <span class="fu">html_elements</span>(<span class="st">'loans'</span>)</span>
@@ -933,58 +938,58 @@ $loan_amount[[1]]
 <span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a><span class="fu">xml_find_all</span>(loansNode, <span class="st">'//location//country'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>{xml_nodeset (20)}
- [1] &lt;country&gt;El Salvador&lt;/country&gt;
- [2] &lt;country&gt;El Salvador&lt;/country&gt;
- [3] &lt;country&gt;El Salvador&lt;/country&gt;
- [4] &lt;country&gt;Madagascar&lt;/country&gt;
- [5] &lt;country&gt;Colombia&lt;/country&gt;
- [6] &lt;country&gt;Kyrgyzstan&lt;/country&gt;
+ [1] &lt;country&gt;Madagascar&lt;/country&gt;
+ [2] &lt;country&gt;Madagascar&lt;/country&gt;
+ [3] &lt;country&gt;Madagascar&lt;/country&gt;
+ [4] &lt;country&gt;Philippines&lt;/country&gt;
+ [5] &lt;country&gt;Philippines&lt;/country&gt;
+ [6] &lt;country&gt;Philippines&lt;/country&gt;
  [7] &lt;country&gt;Philippines&lt;/country&gt;
  [8] &lt;country&gt;Philippines&lt;/country&gt;
  [9] &lt;country&gt;Philippines&lt;/country&gt;
-[10] &lt;country&gt;Philippines&lt;/country&gt;
-[11] &lt;country&gt;Philippines&lt;/country&gt;
-[12] &lt;country&gt;Philippines&lt;/country&gt;
-[13] &lt;country&gt;Philippines&lt;/country&gt;
-[14] &lt;country&gt;Philippines&lt;/country&gt;
-[15] &lt;country&gt;Paraguay&lt;/country&gt;
-[16] &lt;country&gt;Colombia&lt;/country&gt;
-[17] &lt;country&gt;Colombia&lt;/country&gt;
-[18] &lt;country&gt;Colombia&lt;/country&gt;
-[19] &lt;country&gt;El Salvador&lt;/country&gt;
+[10] &lt;country&gt;Paraguay&lt;/country&gt;
+[11] &lt;country&gt;Madagascar&lt;/country&gt;
+[12] &lt;country&gt;Madagascar&lt;/country&gt;
+[13] &lt;country&gt;Madagascar&lt;/country&gt;
+[14] &lt;country&gt;Madagascar&lt;/country&gt;
+[15] &lt;country&gt;El Salvador&lt;/country&gt;
+[16] &lt;country&gt;Philippines&lt;/country&gt;
+[17] &lt;country&gt;Philippines&lt;/country&gt;
+[18] &lt;country&gt;Philippines&lt;/country&gt;
+[19] &lt;country&gt;Philippines&lt;/country&gt;
 [20] &lt;country&gt;Philippines&lt;/country&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">xml_find_all</span>(loansNode, <span class="st">'//location//country'</span>) <span class="sc">%&gt;%</span> <span class="fu">xml_text</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "El Salvador" "El Salvador" "El Salvador" "Madagascar"  "Colombia"   
- [6] "Kyrgyzstan"  "Philippines" "Philippines" "Philippines" "Philippines"
-[11] "Philippines" "Philippines" "Philippines" "Philippines" "Paraguay"   
-[16] "Colombia"    "Colombia"    "Colombia"    "El Salvador" "Philippines"</code></pre>
+<pre><code> [1] "Madagascar"  "Madagascar"  "Madagascar"  "Philippines" "Philippines"
+ [6] "Philippines" "Philippines" "Philippines" "Philippines" "Paraguay"   
+[11] "Madagascar"  "Madagascar"  "Madagascar"  "Madagascar"  "El Salvador"
+[16] "Philippines" "Philippines" "Philippines" "Philippines" "Philippines"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="do">## or extract the geographic coordinates</span></span>
 <span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a><span class="fu">xml_find_all</span>(loansNode, <span class="st">'//location//geo/pairs'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>{xml_nodeset (20)}
- [1] &lt;pairs&gt;13.866667 -89.916667&lt;/pairs&gt;
- [2] &lt;pairs&gt;13.711388 -89.72391&lt;/pairs&gt;
- [3] &lt;pairs&gt;13.512239 -88.869495&lt;/pairs&gt;
- [4] &lt;pairs&gt;-18.87919 47.507906&lt;/pairs&gt;
- [5] &lt;pairs&gt;6.313861 -76.13181&lt;/pairs&gt;
- [6] &lt;pairs&gt;42.667798 71.809694&lt;/pairs&gt;
- [7] &lt;pairs&gt;9.124253 123.033877&lt;/pairs&gt;
- [8] &lt;pairs&gt;9.25063 118.346195&lt;/pairs&gt;
- [9] &lt;pairs&gt;9.25063 118.346195&lt;/pairs&gt;
-[10] &lt;pairs&gt;9.124253 123.033877&lt;/pairs&gt;
-[11] &lt;pairs&gt;9.967216 118.78551&lt;/pairs&gt;
-[12] &lt;pairs&gt;10.090218 122.868368&lt;/pairs&gt;
-[13] &lt;pairs&gt;10.306908 119.256946&lt;/pairs&gt;
-[14] &lt;pairs&gt;10.165355 124.840341&lt;/pairs&gt;
-[15] &lt;pairs&gt;-26 -57.166667&lt;/pairs&gt;
-[16] &lt;pairs&gt;9.304577 -75.390557&lt;/pairs&gt;
-[17] &lt;pairs&gt;8.095159 -76.728456&lt;/pairs&gt;
-[18] &lt;pairs&gt;7.882761 -76.624692&lt;/pairs&gt;
-[19] &lt;pairs&gt;13.833333 -88.916667&lt;/pairs&gt;
-[20] &lt;pairs&gt;10.090218 122.868368&lt;/pairs&gt;</code></pre>
+ [1] &lt;pairs&gt;-18.87919 47.507906&lt;/pairs&gt;
+ [2] &lt;pairs&gt;-18.87919 47.507906&lt;/pairs&gt;
+ [3] &lt;pairs&gt;-18.87919 47.507906&lt;/pairs&gt;
+ [4] &lt;pairs&gt;9.239182 123.264409&lt;/pairs&gt;
+ [5] &lt;pairs&gt;9.993203 124.448368&lt;/pairs&gt;
+ [6] &lt;pairs&gt;12.037865 124.707767&lt;/pairs&gt;
+ [7] &lt;pairs&gt;11.824043 124.840341&lt;/pairs&gt;
+ [8] &lt;pairs&gt;10.165355 124.840341&lt;/pairs&gt;
+ [9] &lt;pairs&gt;10.82086 122.344761&lt;/pairs&gt;
+[10] &lt;pairs&gt;-23 -60&lt;/pairs&gt;
+[11] &lt;pairs&gt;-18.87919 47.507906&lt;/pairs&gt;
+[12] &lt;pairs&gt;-18.87919 47.507906&lt;/pairs&gt;
+[13] &lt;pairs&gt;-18.87919 47.507906&lt;/pairs&gt;
+[14] &lt;pairs&gt;-18.766947 46.869107&lt;/pairs&gt;
+[15] &lt;pairs&gt;13.833333 -88.916667&lt;/pairs&gt;
+[16] &lt;pairs&gt;10.829146 123.505602&lt;/pairs&gt;
+[17] &lt;pairs&gt;12.070424 124.589721&lt;/pairs&gt;
+[18] &lt;pairs&gt;10.829146 123.505602&lt;/pairs&gt;
+[19] &lt;pairs&gt;9.993203 124.448368&lt;/pairs&gt;
+[20] &lt;pairs&gt;9.993203 124.448368&lt;/pairs&gt;</code></pre>
 </div>
 </div>
 </section>
@@ -1015,7 +1020,7 @@ $loan_amount[[1]]
       "children": [],
       "spouse": null
     }</code></pre>
-<p>A set of key-value pairs is a named array and is placed inside braces (squiggly brackets). Note the nestedness of arrays within arrays (e.g., address within the overarching person array and the use of square brackets for unnamed arrays (i.e., vectors of information), as well as the use of different types: character strings, numbers, null, and (not shown) boolean/logical values. JSON and XML can be used in similar ways, but JSON is less verbose than XML.</p>
+<p>A set of key-value pairs is a named array and is placed inside braces (squiggly brackets). Note the nestedness of arrays within arrays (e.g., address within the overarching person array and the use of square brackets for unnamed arrays (i.e., vectors of information), as well as the use of different types: character strings, numbers, null, and (not shown) boolean/logical values. JSON and XML can be used in similar ways, but JSON is less <em>verbose</em> than XML.</p>
 <p>We can read JSON into R using <em>fromJSON()</em> in the <em>jsonlite</em> package. Let’s play again with the Kiva data. The same data that we had worked with in XML format is also available in JSON format: <a href="http://api.kivaws.org/v1/loans/newest.json" class="uri">http://api.kivaws.org/v1/loans/newest.json</a>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(jsonlite)</span>
@@ -1034,69 +1039,69 @@ $loan_amount[[1]]
 </div>
 <div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data<span class="sc">$</span>loans)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>       id               name languages      status funded_amount basket_amount
-1 2430172 La Esperanza Group    es, en fundraising             0             0
-2 2430174      Antiope Group    es, en fundraising             0             0
-3 2430175  Manantiales Group    es, en fundraising             0             0
-4 2427903  Faraniaina Sabine    fr, en fundraising             0             0
-5 2430130        Nubia Elena    es, en fundraising             0             0
-6 2431679            Nasbubu    ru, en fundraising             0             0
-  image.id image.template_id                  activity      sector
-1  4924296                 1 Personal Housing Expenses     Housing
-2  4924312                 1 Personal Housing Expenses     Housing
-3  4924331                 1 Personal Housing Expenses     Housing
-4  4920155                 1                      Pigs Agriculture
-5  4924119                 1                    Retail      Retail
-6  4927106                 1                   Farming Agriculture
-                                                                        use
-1 to buy bricks, cement, sand, and steel to make improvements to his house.
-2                                          to buy sand, cement, and blocks.
-3                                            to buy construction materials.
-4                                 to buy 4 piglets and feed for their diet.
-5                      to buy lotions, jeans, makeup, shirts, etc. to sell.
-6     her to purchase fertilizers for field work and to purchase livestock.
-  location.country_code location.country                location.town
-1                    SV      El Salvador                   Ahuachapan
-2                    SV      El Salvador                    Sonsonate
-3                    SV      El Salvador                 Zacatecoluca
-4                    MG       Madagascar                 Antananarivo
-5                    CO         Colombia                        Urrao
-6                    KG       Kyrgyzstan Manas district, Talas region
+<pre><code>       id                name languages      status funded_amount basket_amount
+1 2428781 Faraniaina Florence    fr, en fundraising             0             0
+2 2428796              Albert    fr, en fundraising             0             0
+3 2428803      Monique Yvonne    fr, en fundraising             0             0
+4 2422288           Primitiva        en fundraising             0             0
+5 2423498          Victoriana        en fundraising             0             0
+6 2422245                Ruby        en fundraising             0             0
+  image.id image.template_id      activity      sector
+1  4921666                 1        Retail      Retail
+2  4921687                 1  Butcher Shop        Food
+3  4921692                 1 Grocery Store        Food
+4  4908995                 1     Livestock Agriculture
+5  4910947                 1          Pigs Agriculture
+6  4908940                 1 General Store      Retail
+                                                                             use
+1                                             to buy varieties of sale products.
+2                                           to buy kilos of beef and pork offal.
+3         to buy varieties of basic items: sealed oils, bags of flour and pasta.
+4                         to buy feed and other supplies to raise her livestock.
+5                              to buy feed and other supplies to raise her pigs.
+6 to buy items like canned goods, junk foods, etc. to sell in her general store.
+  location.country_code location.country          location.town
+1                    MG       Madagascar           Antananarivo
+2                    MG       Madagascar           Antananarivo
+3                    MG       Madagascar           Antananarivo
+4                    PH      Philippines                 Bacong
+5                    PH      Philippines            Ubay, Bohol
+6                    PH      Philippines Santa Margarita, Samar
   location.geo.level   location.geo.pairs location.geo.type partner_id
-1               town 13.866667 -89.916667             point        627
-2               town  13.711388 -89.72391             point        627
-3               town 13.512239 -88.869495             point        627
-4               town  -18.87919 47.507906             point        443
-5               town   6.313861 -76.13181             point        177
-6               town  42.667798 71.809694             point        171
+1               town  -18.87919 47.507906             point        443
+2               town  -18.87919 47.507906             point        443
+3               town  -18.87919 47.507906             point        443
+4               town  9.239182 123.264409             point        145
+5               town  9.993203 124.448368             point        145
+6               town 12.037865 124.707767             point        145
            posted_date planned_expiration_date loan_amount borrower_count
-1 2022-08-23T23:50:23Z    2022-09-27T23:50:23Z        1150              4
-2 2022-08-23T23:50:23Z    2022-09-27T23:50:23Z        1300              3
-3 2022-08-23T23:50:23Z    2022-09-27T23:50:23Z        1050              3
-4 2022-08-23T23:50:22Z    2022-09-27T23:50:22Z         100              1
-5 2022-08-23T23:50:21Z    2022-09-27T23:50:21Z         375              1
-6 2022-08-23T23:50:15Z    2022-09-27T23:50:15Z        1000              1
+1 2022-08-24T15:50:10Z    2022-09-28T15:50:10Z         100              1
+2 2022-08-24T15:50:10Z    2022-09-28T15:50:10Z         125              1
+3 2022-08-24T15:50:10Z    2022-09-28T15:50:10Z         125              1
+4 2022-08-24T15:50:09Z    2022-09-28T15:50:08Z         275              1
+5 2022-08-24T15:50:09Z    2022-09-28T15:50:09Z         450              1
+6 2022-08-24T15:50:08Z    2022-09-28T15:50:08Z         225              1
   lender_count bonus_credit_eligibility
 1            0                    FALSE
 2            0                    FALSE
 3            0                    FALSE
-4            0                    FALSE
+4            0                     TRUE
 5            0                     TRUE
 6            0                     TRUE
-                                                                    tags
-1 user_favorite, #Elderly, #Single, #Repair Renew Replace, 4, 13, 14, 39
-2                                                                   NULL
-3                                                                   NULL
-4           #Woman-Owned Business, #Animals, #Repeat Borrower, 6, 11, 28
-5                                               #Woman-Owned Business, 6
-6                                                                   NULL
-                                 themes
-1                                  NULL
-2                                  NULL
-3                                  NULL
-4                                  NULL
-5 Refugees/Displaced, Vulnerable Groups
-6             Green, Earth Day Campaign</code></pre>
+                                                               tags
+1                             #Woman-Owned Business, #Parent, 6, 16
+2                                                       #Parent, 16
+3                             #Woman-Owned Business, #Parent, 6, 16
+4                                                              NULL
+5 #Woman-Owned Business, #Animals, #Elderly, #Parent, 6, 11, 13, 16
+6                                                              NULL
+                                        themes
+1                                         NULL
+2                                         NULL
+3                                         NULL
+4 Underfunded Areas, Start-Up, Rural Exclusion
+5 Underfunded Areas, Start-Up, Rural Exclusion
+6 Underfunded Areas, Start-Up, Rural Exclusion</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb106"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>loans[<span class="dv">1</span>, <span class="st">'location.geo.pairs'</span>] <span class="co"># hmmm...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1104,8 +1109,8 @@ $loan_amount[[1]]
 </div>
 <div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>loans[<span class="dv">1</span>, <span class="st">'location'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  country_code     country       town geo.level            geo.pairs geo.type
-1           SV El Salvador Ahuachapan      town 13.866667 -89.916667    point</code></pre>
+<pre><code>  country_code    country         town geo.level           geo.pairs geo.type
+1           MG Madagascar Antananarivo      town -18.87919 47.507906    point</code></pre>
 </div>
 </div>
 <p>One disadvantage of JSON is that it is not set up to deal with missing values, infinity, etc.</p>
@@ -1133,20 +1138,23 @@ $loan_amount[[1]]
 <li><p><a href="https://towardsdatascience.com/ethics-in-web-scraping-b96b18136f01">Blog post on webscraping ethics</a></p></li>
 <li><p><a href="https://www.promptcloud.com/blog/how-to-read-and-respect-robots-file">Some information on how to understand a robots.txt file</a></p></li>
 </ul>
-<p>In many cases you will want to include a time delay between your automated requests to a site, including if you are not actually crawling a site but just want to automate a small number of queries.</p>
+<p>Tips for when you make automated requests:</p>
+<ul>
+<li>When debugging code that processes the result of such a request, just run the request once, save (i.e., cache) the result, and then work on the processing code applied to the result. Don’t make the same request over and over again.</li>
+<li>In many cases you will want to include a time delay between your automated requests to a site, including if you are not actually crawling a site but just want to automate a small number of queries.</li>
+</ul>
 </section>
 <section id="what-is-http" class="level3">
 <h3 class="anchored" data-anchor-id="what-is-http">What is HTTP?</h3>
 <p>HTTP (hypertext transfer protocol) is a system for communicating information from a server (i.e., the website of interest) to a client (e.g., your laptop). The client sends a request and the server sends a response.</p>
 <p>When you go to a website in a browser, your browser makes an HTTP GET request to the website. Similarly, when we did some downloading of html from webpages above, we used an HTTP GET request.</p>
-<p>Anytime the URL you enter includes ‘param’ information (<code>www.somewebsite.com?param=arg</code>), you are using an API.</p>
+<p>Anytime the URL you enter includes parameter information after a question mark (<code>www.somewebsite.com?param1=arg1&amp;param2=arg2</code>), you are using an API.</p>
 <p>The response to an HTTP request will include a status code, which can be interpreted based on <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">this information</a>.</p>
 <p>The response will generally contain content in the form of text (e.g., HTML, XML, JSON) or raw bytes.</p>
 </section>
 <section id="apis-rest--and-soap-based-web-services" class="level3">
 <h3 class="anchored" data-anchor-id="apis-rest--and-soap-based-web-services">APIs: REST- and SOAP-based web services</h3>
-<p>Ideally a web service documents their API (Applications Programming Interface) that serves data or allows other interactions. REST and SOAP are popular API standards/styles. Both REST and SOAP use HTTP requests; we’ll focus on REST as it is more common and simpler. The API will (hopefully) document what information it expects from the user and will return the result in a standard format (e.g., a particular file format rather than producing a webpage).</p>
-<p>When using REST, we access <em>resources</em>, which might be a Facebook account or a database of stock quotes. The resource may return information in the form of an HTML file or JSON, CSV or something else.</p>
+<p>Ideally a web service documents their API (Applications Programming Interface) that serves data or allows other interactions. REST and SOAP are popular API standards/styles. Both REST and SOAP use HTTP requests; we’ll focus on REST as it is more common and simpler. When using REST, we access <em>resources</em>, which might be a Facebook account or a database of stock quotes. The API will (hopefully) document what information it expects from the user and will return the result in a standard format (often a particular file format rather than producing a webpage).</p>
 <p>Often the format of the request is a URL (aka an endpoint) plus a query string, passed as a GET request. Let’s search for plumbers near Berkeley, and we’ll see the GET request, in the form:</p>
 <p><a href="https://www.yelp.com/search?find_desc=plumbers&amp;find_loc=Berkeley+CA&amp;ns=1" class="uri">https://www.yelp.com/search?find_desc=plumbers&amp;find_loc=Berkeley+CA&amp;ns=1</a></p>
 <ul>
@@ -1155,7 +1163,6 @@ $loan_amount[[1]]
 <li><p>pairs are separated by &amp;</p></li>
 <li><p>+ is used in place of each space</p></li>
 </ul>
-<p>We don’t always get HTML back; sometimes we might get JSON, XML or other formats.</p>
 <p>Let’s see an example of accessing economic data from the World Bank, using the <a href="https://datahelpdesk.worldbank.org/knowledgebase/topics/125589-developer-information">documentation for their API</a>. Following the <a href="https://datahelpdesk.worldbank.org/knowledgebase/articles/898581-api-basic-call-structures">API call structure</a>, we can download (for example), data on various countries. The documentation indicates that our REST-based query can use either a URL structure or an argument-based structure.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb110"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Queries based on the documentation</span></span>
@@ -1425,7 +1432,7 @@ Attaching package: 'httr'</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb133"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb133-1"><a href="#cb133-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system</span>(<span class="st">'ls -l tmp.txt'</span>, <span class="at">intern =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "-rw-r--r-- 1 paciorek scfstaff 4 Aug 23 17:15 tmp.txt"</code></pre>
+<pre><code>[1] "-rw-r--r-- 1 paciorek scfstaff 4 Aug 24 08:59 tmp.txt"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb135"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb135-1"><a href="#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system</span>(<span class="st">'cat tmp.txt'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1442,14 +1449,14 @@ Attaching package: 'httr'</code></pre>
 <pre><code>[1] "Peña 3÷2"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb140"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb140-1"><a href="#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="fu">writeBin</span>(x2, <span class="st">'tmp2.txt'</span>)</span>
-<span id="cb140-2"><a href="#cb140-2" aria-hidden="true" tabindex="-1"></a><span class="do">## here n-tilde and division symbol take up two bytes</span></span>
-<span id="cb140-3"><a href="#cb140-3" aria-hidden="true" tabindex="-1"></a><span class="do">## but there is an extraneous null byte in there; not sure why</span></span>
+<span id="cb140-2"><a href="#cb140-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Here n-tilde and division symbol take up two bytes</span></span>
+<span id="cb140-3"><a href="#cb140-3" aria-hidden="true" tabindex="-1"></a><span class="do">## but there is an extraneous null byte in there; not sure why.</span></span>
 <span id="cb140-4"><a href="#cb140-4" aria-hidden="true" tabindex="-1"></a><span class="fu">system</span>(<span class="st">'ls -l tmp2.txt'</span>) </span>
-<span id="cb140-5"><a href="#cb140-5" aria-hidden="true" tabindex="-1"></a><span class="do">## so the system knows how to interpret the UTF-8 encoded file</span></span>
+<span id="cb140-5"><a href="#cb140-5" aria-hidden="true" tabindex="-1"></a><span class="do">## The system knows how to interpret the UTF-8 encoded file</span></span>
 <span id="cb140-6"><a href="#cb140-6" aria-hidden="true" tabindex="-1"></a><span class="do">## and represent the Unicode character on the screen:</span></span>
 <span id="cb140-7"><a href="#cb140-7" aria-hidden="true" tabindex="-1"></a><span class="fu">system</span>(<span class="st">'cat tmp2.txt'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>UTF-8 is cleverly designed in terms of the bit-wise representation of characters such that ASCII characters still take up one byte, and most other characters take two bytes, but some take four bytes. In fact it is even more clever than that - the representation is such that the bits of a one-byte character never appears within the representation of a two- or three- or four-byte character (and similarly for two-byte characters in three- or four-byte characters, etc.).</p>
+<p>UTF-8 is cleverly designed in terms of the bit-wise representation of characters such that ASCII characters still take up one byte, and most other characters take two bytes, but some take four bytes. In fact it is even more clever than that - the representation is such that the bits of a one-byte character never appear within the representation of a two- or three- or four-byte character (and similarly for two-byte characters in three- or four-byte characters, etc.).</p>
 <p>The UNIX utility <em>file</em>, e.g.&nbsp;<code>file tmp.txt</code> can help provide some information. <em>read.table()</em> in R takes arguments <em>fileEncoding</em> and <em>encoding</em> that allow one to specify the encoding as one reads text in. The UNIX utility <em>iconv</em> and the R function <em>iconv()</em> can help with conversions.</p>
 <p>In US installations of R, the default encoding is UTF-8; note below that various types of information are interpreted in US English with the encoding UTF-8:</p>
 <div class="cell">
@@ -1601,7 +1608,7 @@ unknown
 <li>‘primitive’ types are the most basic types that often relate directly to how data are stored in memory or on disk (e.g., booleans, integers, numeric (real-valued), character, pointer (address, reference).</li>
 </ul></li>
 <li>pointers: references to other locations (addresses) in memory. One often uses pointers to avoid unnecessary copying of data.</li>
-<li>hashes: hashing involves fast lookup of the value associated with a key (a label), using a hash function, which allows one to convert the key to an address.</li>
+<li>hashes: hashing involves fast lookup of the value associated with a key (a label), using a hash function, which allows one to convert the key to an address. This avoids having to find the value associated with a specific key by looking through all the keys until the key of interest is found (an O(n) operation).</li>
 </ul>
 
 
