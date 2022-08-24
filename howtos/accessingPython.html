@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Statistics 243 Fall 2022 - Accessing Python</title>
+<title>Statistics 243 Fall 2022 – accessingpython</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -147,7 +147,7 @@ ul.task-list{list-style: none;}
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Accessing Python</h1>
+      <h1 class="quarto-secondary-nav-title">(Untitled)</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -188,12 +188,12 @@ ul.task-list{list-style: none;}
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Windows</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">Windows</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../howtos/windowsAndLinux.html" class="sidebar-item-text sidebar-link">Installing the Linux Subsystem on Windows</a>
@@ -215,7 +215,8 @@ ul.task-list{list-style: none;}
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#access-via-the-scf" id="toc-access-via-the-scf" class="nav-link active" data-scroll-target="#access-via-the-scf">Access via the SCF</a>
+  <li><a href="#access-on-your-laptop-via-anaconda" id="toc-access-on-your-laptop-via-anaconda" class="nav-link active" data-scroll-target="#access-on-your-laptop-via-anaconda">Access on your laptop via Anaconda</a></li>
+  <li><a href="#access-via-the-scf" id="toc-access-via-the-scf" class="nav-link" data-scroll-target="#access-via-the-scf">Access via the SCF</a>
   <ul class="collapse">
   <li><a href="#python-from-the-command-line" id="toc-python-from-the-command-line" class="nav-link" data-scroll-target="#python-from-the-command-line">Python from the command line</a></li>
   <li><a href="#python-via-jupyter-notebook" id="toc-python-via-jupyter-notebook" class="nav-link" data-scroll-target="#python-via-jupyter-notebook">Python via Jupyter notebook</a></li>
@@ -226,26 +227,15 @@ ul.task-list{list-style: none;}
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title d-none d-lg-block">Accessing Python</h1>
-</div>
 
 
-
-<div class="quarto-title-meta">
-
-    
-    
-  </div>
-  
-
-</header>
-
-<p>We recommend using the <a href="https://www.anaconda.com/distribution/">Anaconda distribution of Python</a>, though that is not required. You can download it <a href="https://www.anaconda.com/distribution/">here</a>. Make sure to use Python 3.7, 3.8, or 3.9 and not Python 2.*.</p>
-<p>Once you’ve installed Python, please install the following packages: - numpy - scipy - pandas - dask - dask.distributed - dask.bag - dask.array - dask.dataframe - dask.multiprocessing</p>
+<section id="access-on-your-laptop-via-anaconda" class="level1">
+<h1>Access on your laptop via Anaconda</h1>
+<p>We recommend using the <a href="https://www.anaconda.com/distribution/">Anaconda distribution of Python</a>, though that is not required. You can download it <a href="https://www.anaconda.com/distribution/#download-section">here</a>. Make sure to choose Python 3.7 or 3.8 and not Python 2.7.</p>
+<p>Once you’ve installed Python, please install the following packages: numpy, scipy, pandas, dask, dask.distributed, dask.bag, dask.array, dask.dataframe, dask.multiprocessing.</p>
 <p>Assuming you installed the Anaconda Python, you should be able to do this:</p>
 <pre><code>conda install numpy scipy pandas dask</code></pre>
+</section>
 <section id="access-via-the-scf" class="level1">
 <h1>Access via the SCF</h1>
 <section id="python-from-the-command-line" class="level2">
