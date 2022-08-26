@@ -607,7 +607,7 @@ Attaching package: 'readr'</code></pre>
 <span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">file.path</span>(dir, <span class="st">'airline.csv'</span>), <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  3.055   0.087   3.146 </code></pre>
+  3.321   0.092   3.416 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(dat2 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(dir, <span class="st">'airline.csv'</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -624,7 +624,7 @@ dbl (24): Year, Month, DayOfMonth, DayOfWeek, DepTime, CRSDepTime, ArrTime, ...
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  4.022   0.162   1.218 </code></pre>
+  3.920   0.091   1.258 </code></pre>
 </div>
 </div>
 </section>
@@ -859,33 +859,33 @@ Attaching package: 'rvest'</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>$name
 $name[[1]]
-[1] "Albert"
+[1] "Tolgonai"
 
 
 $activity
 $activity[[1]]
-[1] "Butcher Shop"
+[1] "Livestock"
 
 
 $sector
 $sector[[1]]
-[1] "Food"
+[1] "Agriculture"
 
 
 $location
 $location$country_code
 $location$country_code[[1]]
-[1] "MG"
+[1] "KG"
 
 
 $location$country
 $location$country[[1]]
-[1] "Madagascar"
+[1] "Kyrgyzstan"
 
 
 $location$town
 $location$town[[1]]
-[1] "Antananarivo"
+[1] "Aksy district, Jalalabad region"
 
 
 $location$geo
@@ -896,7 +896,7 @@ $location$geo$level[[1]]
 
 $location$geo$pairs
 $location$geo$pairs[[1]]
-[1] "-18.87919 47.507906"
+[1] "41.673257 72.046816"
 
 
 $location$geo$type
@@ -908,7 +908,7 @@ $location$geo$type[[1]]
 
 $loan_amount
 $loan_amount[[1]]
-[1] "125"</code></pre>
+[1] "3100"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="do">## alternatively, extract only the 'loans' info (and use pipes)</span></span>
 <span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>loansNode <span class="ot">&lt;-</span> doc <span class="sc">%&gt;%</span> <span class="fu">html_elements</span>(<span class="st">'loans'</span>)</span>
@@ -923,12 +923,12 @@ $loan_amount[[1]]
  [3] "description"              "status"                  
  [5] "funded_amount"            "basket_amount"           
  [7] "image"                    "activity"                
- [9] "sector"                   "use"                     
-[11] "location"                 "partner_id"              
-[13] "posted_date"              "planned_expiration_date" 
-[15] "loan_amount"              "borrower_count"          
-[17] "lender_count"             "bonus_credit_eligibility"
-[19] "tags"                    </code></pre>
+ [9] "sector"                   "themes"                  
+[11] "use"                      "location"                
+[13] "partner_id"               "posted_date"             
+[15] "planned_expiration_date"  "loan_amount"             
+[17] "borrower_count"           "lender_count"            
+[19] "bonus_credit_eligibility" "tags"                    </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(loanInfo[[<span class="dv">1</span>]]<span class="sc">$</span>location)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -938,58 +938,58 @@ $loan_amount[[1]]
 <span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a><span class="fu">xml_find_all</span>(loansNode, <span class="st">'//location//country'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>{xml_nodeset (20)}
- [1] &lt;country&gt;Madagascar&lt;/country&gt;
- [2] &lt;country&gt;Madagascar&lt;/country&gt;
- [3] &lt;country&gt;Madagascar&lt;/country&gt;
- [4] &lt;country&gt;Philippines&lt;/country&gt;
- [5] &lt;country&gt;Philippines&lt;/country&gt;
- [6] &lt;country&gt;Philippines&lt;/country&gt;
- [7] &lt;country&gt;Philippines&lt;/country&gt;
- [8] &lt;country&gt;Philippines&lt;/country&gt;
+ [1] &lt;country&gt;Lesotho&lt;/country&gt;
+ [2] &lt;country&gt;Kyrgyzstan&lt;/country&gt;
+ [3] &lt;country&gt;Lesotho&lt;/country&gt;
+ [4] &lt;country&gt;Lesotho&lt;/country&gt;
+ [5] &lt;country&gt;Lesotho&lt;/country&gt;
+ [6] &lt;country&gt;Lesotho&lt;/country&gt;
+ [7] &lt;country&gt;Lesotho&lt;/country&gt;
+ [8] &lt;country&gt;Lesotho&lt;/country&gt;
  [9] &lt;country&gt;Philippines&lt;/country&gt;
-[10] &lt;country&gt;Paraguay&lt;/country&gt;
-[11] &lt;country&gt;Madagascar&lt;/country&gt;
-[12] &lt;country&gt;Madagascar&lt;/country&gt;
-[13] &lt;country&gt;Madagascar&lt;/country&gt;
-[14] &lt;country&gt;Madagascar&lt;/country&gt;
-[15] &lt;country&gt;El Salvador&lt;/country&gt;
+[10] &lt;country&gt;Philippines&lt;/country&gt;
+[11] &lt;country&gt;Tajikistan&lt;/country&gt;
+[12] &lt;country&gt;Philippines&lt;/country&gt;
+[13] &lt;country&gt;Philippines&lt;/country&gt;
+[14] &lt;country&gt;Philippines&lt;/country&gt;
+[15] &lt;country&gt;Philippines&lt;/country&gt;
 [16] &lt;country&gt;Philippines&lt;/country&gt;
-[17] &lt;country&gt;Philippines&lt;/country&gt;
-[18] &lt;country&gt;Philippines&lt;/country&gt;
-[19] &lt;country&gt;Philippines&lt;/country&gt;
-[20] &lt;country&gt;Philippines&lt;/country&gt;</code></pre>
+[17] &lt;country&gt;Burkina Faso&lt;/country&gt;
+[18] &lt;country&gt;Burkina Faso&lt;/country&gt;
+[19] &lt;country&gt;Lesotho&lt;/country&gt;
+[20] &lt;country&gt;Uganda&lt;/country&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">xml_find_all</span>(loansNode, <span class="st">'//location//country'</span>) <span class="sc">%&gt;%</span> <span class="fu">xml_text</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "Madagascar"  "Madagascar"  "Madagascar"  "Philippines" "Philippines"
- [6] "Philippines" "Philippines" "Philippines" "Philippines" "Paraguay"   
-[11] "Madagascar"  "Madagascar"  "Madagascar"  "Madagascar"  "El Salvador"
-[16] "Philippines" "Philippines" "Philippines" "Philippines" "Philippines"</code></pre>
+<pre><code> [1] "Lesotho"      "Kyrgyzstan"   "Lesotho"      "Lesotho"      "Lesotho"     
+ [6] "Lesotho"      "Lesotho"      "Lesotho"      "Philippines"  "Philippines" 
+[11] "Tajikistan"   "Philippines"  "Philippines"  "Philippines"  "Philippines" 
+[16] "Philippines"  "Burkina Faso" "Burkina Faso" "Lesotho"      "Uganda"      </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="do">## or extract the geographic coordinates</span></span>
 <span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a><span class="fu">xml_find_all</span>(loansNode, <span class="st">'//location//geo/pairs'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>{xml_nodeset (20)}
- [1] &lt;pairs&gt;-18.87919 47.507906&lt;/pairs&gt;
- [2] &lt;pairs&gt;-18.87919 47.507906&lt;/pairs&gt;
- [3] &lt;pairs&gt;-18.87919 47.507906&lt;/pairs&gt;
- [4] &lt;pairs&gt;9.239182 123.264409&lt;/pairs&gt;
- [5] &lt;pairs&gt;9.993203 124.448368&lt;/pairs&gt;
- [6] &lt;pairs&gt;12.037865 124.707767&lt;/pairs&gt;
- [7] &lt;pairs&gt;11.824043 124.840341&lt;/pairs&gt;
- [8] &lt;pairs&gt;10.165355 124.840341&lt;/pairs&gt;
- [9] &lt;pairs&gt;10.82086 122.344761&lt;/pairs&gt;
-[10] &lt;pairs&gt;-23 -60&lt;/pairs&gt;
-[11] &lt;pairs&gt;-18.87919 47.507906&lt;/pairs&gt;
-[12] &lt;pairs&gt;-18.87919 47.507906&lt;/pairs&gt;
-[13] &lt;pairs&gt;-18.87919 47.507906&lt;/pairs&gt;
-[14] &lt;pairs&gt;-18.766947 46.869107&lt;/pairs&gt;
-[15] &lt;pairs&gt;13.833333 -88.916667&lt;/pairs&gt;
-[16] &lt;pairs&gt;10.829146 123.505602&lt;/pairs&gt;
-[17] &lt;pairs&gt;12.070424 124.589721&lt;/pairs&gt;
-[18] &lt;pairs&gt;10.829146 123.505602&lt;/pairs&gt;
-[19] &lt;pairs&gt;9.993203 124.448368&lt;/pairs&gt;
-[20] &lt;pairs&gt;9.993203 124.448368&lt;/pairs&gt;</code></pre>
+ [1] &lt;pairs&gt;-29.315077 27.486923&lt;/pairs&gt;
+ [2] &lt;pairs&gt;41.673257 72.046816&lt;/pairs&gt;
+ [3] &lt;pairs&gt;-29.315077 27.486923&lt;/pairs&gt;
+ [4] &lt;pairs&gt;-29.681724 27.402676&lt;/pairs&gt;
+ [5] &lt;pairs&gt;-29.601652 27.120298&lt;/pairs&gt;
+ [6] &lt;pairs&gt;-29.523898 28.608975&lt;/pairs&gt;
+ [7] &lt;pairs&gt;-29.400969 27.763725&lt;/pairs&gt;
+ [8] &lt;pairs&gt;-29.523898 28.608975&lt;/pairs&gt;
+ [9] &lt;pairs&gt;10.432923 124.994751&lt;/pairs&gt;
+[10] &lt;pairs&gt;10.432923 124.994751&lt;/pairs&gt;
+[11] &lt;pairs&gt;38.598056 68.977778&lt;/pairs&gt;
+[12] &lt;pairs&gt;10.432923 124.994751&lt;/pairs&gt;
+[13] &lt;pairs&gt;10.432923 124.994751&lt;/pairs&gt;
+[14] &lt;pairs&gt;10.432923 124.994751&lt;/pairs&gt;
+[15] &lt;pairs&gt;12.619862 125.016787&lt;/pairs&gt;
+[16] &lt;pairs&gt;12.619862 125.016787&lt;/pairs&gt;
+[17] &lt;pairs&gt;12.371428 -1.51966&lt;/pairs&gt;
+[18] &lt;pairs&gt;12.371428 -1.51966&lt;/pairs&gt;
+[19] &lt;pairs&gt;-29.779915 27.288186&lt;/pairs&gt;
+[20] &lt;pairs&gt;1.064444 34.179444&lt;/pairs&gt;</code></pre>
 </div>
 </div>
 </section>
@@ -1039,69 +1039,69 @@ $loan_amount[[1]]
 </div>
 <div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data<span class="sc">$</span>loans)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>       id                name languages      status funded_amount basket_amount
-1 2428781 Faraniaina Florence    fr, en fundraising             0             0
-2 2428796              Albert    fr, en fundraising             0             0
-3 2428803      Monique Yvonne    fr, en fundraising             0             0
-4 2422288           Primitiva        en fundraising             0             0
-5 2423498          Victoriana        en fundraising             0             0
-6 2422245                Ruby        en fundraising             0             0
-  image.id image.template_id      activity      sector
-1  4921666                 1        Retail      Retail
-2  4921687                 1  Butcher Shop        Food
-3  4921692                 1 Grocery Store        Food
-4  4908995                 1     Livestock Agriculture
-5  4910947                 1          Pigs Agriculture
-6  4908940                 1 General Store      Retail
-                                                                             use
-1                                             to buy varieties of sale products.
-2                                           to buy kilos of beef and pork offal.
-3         to buy varieties of basic items: sealed oils, bags of flour and pasta.
-4                         to buy feed and other supplies to raise her livestock.
-5                              to buy feed and other supplies to raise her pigs.
-6 to buy items like canned goods, junk foods, etc. to sell in her general store.
-  location.country_code location.country          location.town
-1                    MG       Madagascar           Antananarivo
-2                    MG       Madagascar           Antananarivo
-3                    MG       Madagascar           Antananarivo
-4                    PH      Philippines                 Bacong
-5                    PH      Philippines            Ubay, Bohol
-6                    PH      Philippines Santa Margarita, Samar
+<pre><code>       id         name languages      status funded_amount basket_amount
+1 2430686 Motsukunyane        en fundraising             0             0
+2 2432992     Tolgonai    ru, en fundraising             0             0
+3 2430680       Khotso        en fundraising             0            25
+4 2430652    Matebello        en fundraising            25             0
+5 2430659    Makeletso        en fundraising            25             0
+6 2430662  Masehlomeng        en fundraising             0             0
+  image.id image.template_id    activity       sector
+1  4925389                 1 Home Energy Personal Use
+2  4928728                 1   Livestock  Agriculture
+3  4925368                 1 Home Energy Personal Use
+4  4925270                 1 Home Energy Personal Use
+5  4925286                 1 Home Energy Personal Use
+6  4925296                 1 Home Energy Personal Use
+                                   themes
+1 Green, Earth Day Campaign, Clean Energy
+2               Green, Earth Day Campaign
+3 Green, Earth Day Campaign, Clean Energy
+4 Green, Earth Day Campaign, Clean Energy
+5 Green, Earth Day Campaign, Clean Energy
+6 Green, Earth Day Campaign, Clean Energy
+                                                                                                                               use
+1 to purchase the ACE One hybrid energy system for cooking, lighting and charging in a way that is safer, cleaner and saves money.
+2                                                            to purchase livestock to increase her income from breeding livestock.
+3 to purchase the ACE One hybrid energy system for cooking, lighting and charging in a way that is safer, cleaner and saves money.
+4 to purchase the ACE One hybrid energy system for cooking, lighting and charging in a way that is safer, cleaner and saves money.
+5 to purchase the ACE One hybrid energy system for cooking, lighting and charging in a way that is safer, cleaner and saves money.
+6 to purchase the ACE One hybrid energy system for cooking, lighting and charging in a way that is safer, cleaner and saves money.
+  location.country_code location.country                   location.town
+1                    LS          Lesotho            Popa Tholang, Maseru
+2                    KG       Kyrgyzstan Aksy district, Jalalabad region
+3                    LS          Lesotho            Popa Tholang, Maseru
+4                    LS          Lesotho              Mahareng, Mafeteng
+5                    LS          Lesotho       Thabana mohlomi, Mafeteng
+6                    LS          Lesotho        Methalaneng, Thaba-Tseka
   location.geo.level   location.geo.pairs location.geo.type partner_id
-1               town  -18.87919 47.507906             point        443
-2               town  -18.87919 47.507906             point        443
-3               town  -18.87919 47.507906             point        443
-4               town  9.239182 123.264409             point        145
-5               town  9.993203 124.448368             point        145
-6               town 12.037865 124.707767             point        145
+1               town -29.315077 27.486923             point        452
+2               town  41.673257 72.046816             point        171
+3               town -29.315077 27.486923             point        452
+4               town -29.681724 27.402676             point        452
+5               town -29.601652 27.120298             point        452
+6               town -29.523898 28.608975             point        452
            posted_date planned_expiration_date loan_amount borrower_count
-1 2022-08-24T15:50:10Z    2022-09-28T15:50:10Z         100              1
-2 2022-08-24T15:50:10Z    2022-09-28T15:50:10Z         125              1
-3 2022-08-24T15:50:10Z    2022-09-28T15:50:10Z         125              1
-4 2022-08-24T15:50:09Z    2022-09-28T15:50:08Z         275              1
-5 2022-08-24T15:50:09Z    2022-09-28T15:50:09Z         450              1
-6 2022-08-24T15:50:08Z    2022-09-28T15:50:08Z         225              1
+1 2022-08-26T18:50:08Z    2022-09-30T18:50:08Z         100              1
+2 2022-08-26T18:50:03Z    2022-09-30T18:50:03Z        3100              1
+3 2022-08-26T18:30:12Z    2022-09-30T18:30:11Z         100              1
+4 2022-08-26T18:30:11Z    2022-09-30T18:30:11Z         100              1
+5 2022-08-26T18:30:11Z    2022-09-30T18:30:11Z         100              1
+6 2022-08-26T18:30:11Z    2022-09-30T18:30:11Z         100              1
   lender_count bonus_credit_eligibility
 1            0                    FALSE
-2            0                    FALSE
+2            0                     TRUE
 3            0                    FALSE
-4            0                     TRUE
-5            0                     TRUE
-6            0                     TRUE
-                                                               tags
-1                             #Woman-Owned Business, #Parent, 6, 16
-2                                                       #Parent, 16
-3                             #Woman-Owned Business, #Parent, 6, 16
-4                                                              NULL
-5 #Woman-Owned Business, #Animals, #Elderly, #Parent, 6, 11, 13, 16
-6                                                              NULL
-                                        themes
-1                                         NULL
-2                                         NULL
-3                                         NULL
-4 Underfunded Areas, Start-Up, Rural Exclusion
-5 Underfunded Areas, Start-Up, Rural Exclusion
-6 Underfunded Areas, Start-Up, Rural Exclusion</code></pre>
+4            1                    FALSE
+5            1                    FALSE
+6            0                    FALSE
+                                                                                                                      tags
+1              volunteer_pick, #Eco-friendly, #Health and Sanitation, #Technology, #Repair Renew Replace, 1, 9, 27, 38, 39
+2                                                      #Sustainable Ag, #Animals, #Parent, #Repeat Borrower, 8, 11, 16, 28
+3              volunteer_pick, #Eco-friendly, #Health and Sanitation, #Technology, #Repair Renew Replace, 1, 9, 27, 38, 39
+4              volunteer_pick, #Eco-friendly, #Health and Sanitation, #Technology, #Repair Renew Replace, 1, 9, 27, 38, 39
+5 volunteer_pick, #Eco-friendly, #Parent, #Health and Sanitation, #Technology, #Repair Renew Replace, 1, 9, 16, 27, 38, 39
+6              volunteer_pick, #Eco-friendly, #Health and Sanitation, #Technology, #Repair Renew Replace, 1, 9, 27, 38, 39</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb106"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>loans[<span class="dv">1</span>, <span class="st">'location.geo.pairs'</span>] <span class="co"># hmmm...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1109,8 +1109,10 @@ $loan_amount[[1]]
 </div>
 <div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>loans[<span class="dv">1</span>, <span class="st">'location'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  country_code    country         town geo.level           geo.pairs geo.type
-1           MG Madagascar Antananarivo      town -18.87919 47.507906    point</code></pre>
+<pre><code>  country_code country                 town geo.level            geo.pairs
+1           LS Lesotho Popa Tholang, Maseru      town -29.315077 27.486923
+  geo.type
+1    point</code></pre>
 </div>
 </div>
 <p>One disadvantage of JSON is that it is not set up to deal with missing values, infinity, etc.</p>
@@ -1247,9 +1249,9 @@ $loan_amount[[1]]
 <p>In some cases an API may not be documented or we might be lazy and not use the documentation. Instead we might deconstruct the queries a browser makes and then mimic that behavior, in some cases having to parse HTML output to get at data. Note that if the webpage changes even a little bit, our carefully constructed query syntax may fail.</p>
 <p>Let’s look at some UN data (agricultural crop data). By going to<br>
 <a href="http://data.un.org/Explorer.aspx?d=FAO" class="uri">http://data.un.org/Explorer.aspx?d=FAO</a>, and clicking on “Crops”, we’ll see a bunch of agricultural products with “View data” links. Click on “apricots” as an example and you’ll see a “Download” button that allows you to download a CSV of the data. Let’s select a range of years and then try to download “by hand”. Sometimes we can right-click on the link that will download the data and directly see the URL that is being accessed and then one can deconstruct it so that you can create URLs programmatically to download the data you want.</p>
-<p>In this case, we can’t see the full URL that is being used because there’s some Javascript involved. Therefore, rather than looking at the URL associated with a link we need to view the actual HTTP request sent by our browser to the server. We can do this using features of the browser (e.g., in Firefox see <code>Web Developer -&gt; Network</code> and in Chrome <code>More tools -&gt; Developer tools</code> <code>-&gt; Network</code>) (or right-click on the webpage and select <code>Inspect</code> and then <code>Network</code>). Based on this we can see that an HTTP GET request is being used with a URL such as:<br>
+<p>In this case, we can’t see the full URL that is being used because there’s some Javascript involved. Therefore, rather than looking at the URL associated with a link we need to view the actual HTTP request sent by our browser to the server. We can do this using features of the browser (e.g., in Firefox see <code>Web Developer -&gt; Network</code> and in Chrome <code>View -&gt; Developer -&gt; Developer tools</code> and choose the <code>Network</code> tab) (or right-click on the webpage and select <code>Inspect</code> and then <code>Network</code>). Based on this we can see that an HTTP GET request is being used with a URL such as:<br>
 <a href="http://data.un.org/Handlers/DownloadHandler.ashx?DataFilter=itemCode:526;year:2012,2013,2014,2015,2016,2017&amp;DataMartId=FAO&amp;Format=csv&amp;c=2,4,5,6,7&amp;s=countryName:asc,elementCode:asc,year:desc" class="uri">http://data.un.org/Handlers/DownloadHandler.ashx?DataFilter=itemCode:526;year:2012,2013,2014,2015,2016,2017&amp;DataMartId=FAO&amp;Format=csv&amp;c=2,4,5,6,7&amp;s=countryName:asc,elementCode:asc,year:desc</a>.</p>
-<p>We’e now able to easily download the data using that URL, which we can fairly easily construct using string processing in bash, R, or Python, such as this:</p>
+<p>We’e now able to easily download the data using that URL, which we can fairly easily construct using string processing in bash, R, or Python, such as this (here I just paste it together directly, but using more structured syntax such as I used for the World Bank example would be better):</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="do">## example URL:</span></span>
 <span id="cb118-2"><a href="#cb118-2" aria-hidden="true" tabindex="-1"></a><span class="do">## http://data.un.org/Handlers/DownloadHandler.ashx?DataFilter=itemCode:526;</span></span>
@@ -1432,126 +1434,140 @@ Attaching package: 'httr'</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb133"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb133-1"><a href="#cb133-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system</span>(<span class="st">'ls -l tmp.txt'</span>, <span class="at">intern =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "-rw-r--r-- 1 paciorek scfstaff 4 Aug 24 08:59 tmp.txt"</code></pre>
+<pre><code>[1] "-rw-r--r-- 1 paciorek scfstaff 4 Aug 26 11:54 tmp.txt"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb135"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb135-1"><a href="#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system</span>(<span class="st">'cat tmp.txt'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>When encountering non-ASCII files, in some cases you may need to deal with the text encoding (the mapping of individual characters (including tabs, returns, etc.) to a set of numeric codes). There are a variety of different encodings for text files, with different ones common on different operating systems. <a href="https://en.wikipedia.org/wiki/UTF-8">UTF-8</a> is an encoding for the Unicode characters that includes more than 110,000 characters from 100 different alphabets/scripts. It’s widely used on the web. Latin-1 encodes a small subset of Unicode and contains the characters used in many European languages (e.g., letters with accents). Here’s an example of using a non-ASCII Unicode character:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb136"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb136-1"><a href="#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="do">## n-tilde and division symbol as Unicode 'code points'</span></span>
-<span id="cb136-2"><a href="#cb136-2" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> <span class="st">'Pe\u00f1a 3\u00f72'</span> </span>
-<span id="cb136-3"><a href="#cb136-3" aria-hidden="true" tabindex="-1"></a><span class="fu">Encoding</span>(x2) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb136-2"><a href="#cb136-2" aria-hidden="true" tabindex="-1"></a>x2_unicode <span class="ot">&lt;-</span> <span class="st">'Pe\u00f1a 3\u00f72'</span> </span>
+<span id="cb136-3"><a href="#cb136-3" aria-hidden="true" tabindex="-1"></a><span class="fu">Encoding</span>(x2_unicode) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "UTF-8"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb138"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb138-1"><a href="#cb138-1" aria-hidden="true" tabindex="-1"></a>x2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb138"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb138-1"><a href="#cb138-1" aria-hidden="true" tabindex="-1"></a>x2_unicode</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Peña 3÷2"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb140"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb140-1"><a href="#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="fu">writeBin</span>(x2, <span class="st">'tmp2.txt'</span>)</span>
-<span id="cb140-2"><a href="#cb140-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Here n-tilde and division symbol take up two bytes</span></span>
-<span id="cb140-3"><a href="#cb140-3" aria-hidden="true" tabindex="-1"></a><span class="do">## but there is an extraneous null byte in there; not sure why.</span></span>
-<span id="cb140-4"><a href="#cb140-4" aria-hidden="true" tabindex="-1"></a><span class="fu">system</span>(<span class="st">'ls -l tmp2.txt'</span>) </span>
-<span id="cb140-5"><a href="#cb140-5" aria-hidden="true" tabindex="-1"></a><span class="do">## The system knows how to interpret the UTF-8 encoded file</span></span>
-<span id="cb140-6"><a href="#cb140-6" aria-hidden="true" tabindex="-1"></a><span class="do">## and represent the Unicode character on the screen:</span></span>
-<span id="cb140-7"><a href="#cb140-7" aria-hidden="true" tabindex="-1"></a><span class="fu">system</span>(<span class="st">'cat tmp2.txt'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb140"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb140-1"><a href="#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="fu">charToRaw</span>(x2_unicode)        </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 50 65 c3 b1 61 20 33 c3 b7 32</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb142"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb142-1"><a href="#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="fu">charToRaw</span>(<span class="st">'\u00f1'</span>)    <span class="co"># indeed - two bytes, not one</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] c3 b1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb144"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb144-1"><a href="#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="do">## specified directly as hexadecimal in UTF-8 encoding </span></span>
+<span id="cb144-2"><a href="#cb144-2" aria-hidden="true" tabindex="-1"></a>x2_utf8 <span class="ot">&lt;-</span> <span class="st">'Pe</span><span class="sc">\xc3\xb1a</span><span class="st"> 3</span><span class="sc">\xc3\xb72</span><span class="st">'</span> </span>
+<span id="cb144-3"><a href="#cb144-3" aria-hidden="true" tabindex="-1"></a>x2_utf8</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Peña 3÷2"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb146"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb146-1"><a href="#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="fu">writeBin</span>(x2_unicode, <span class="st">'tmp2.txt'</span>)</span>
+<span id="cb146-2"><a href="#cb146-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Here n-tilde and division symbol take up two bytes</span></span>
+<span id="cb146-3"><a href="#cb146-3" aria-hidden="true" tabindex="-1"></a><span class="do">## but there is an extraneous null byte in there; not sure why.</span></span>
+<span id="cb146-4"><a href="#cb146-4" aria-hidden="true" tabindex="-1"></a><span class="fu">system</span>(<span class="st">'ls -l tmp2.txt'</span>) </span>
+<span id="cb146-5"><a href="#cb146-5" aria-hidden="true" tabindex="-1"></a><span class="do">## The system knows how to interpret the UTF-8 encoded file</span></span>
+<span id="cb146-6"><a href="#cb146-6" aria-hidden="true" tabindex="-1"></a><span class="do">## and represent the Unicode character on the screen:</span></span>
+<span id="cb146-7"><a href="#cb146-7" aria-hidden="true" tabindex="-1"></a><span class="fu">system</span>(<span class="st">'cat tmp2.txt'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>UTF-8 is cleverly designed in terms of the bit-wise representation of characters such that ASCII characters still take up one byte, and most other characters take two bytes, but some take four bytes. In fact it is even more clever than that - the representation is such that the bits of a one-byte character never appear within the representation of a two- or three- or four-byte character (and similarly for two-byte characters in three- or four-byte characters, etc.).</p>
 <p>The UNIX utility <em>file</em>, e.g.&nbsp;<code>file tmp.txt</code> can help provide some information. <em>read.table()</em> in R takes arguments <em>fileEncoding</em> and <em>encoding</em> that allow one to specify the encoding as one reads text in. The UNIX utility <em>iconv</em> and the R function <em>iconv()</em> can help with conversions.</p>
 <p>In US installations of R, the default encoding is UTF-8; note below that various types of information are interpreted in US English with the encoding UTF-8:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb141"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb141-1"><a href="#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.getlocale</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb147"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb147-1"><a href="#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.getlocale</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "LC_CTYPE=en_US.UTF-8;LC_NUMERIC=C;LC_TIME=en_US.UTF-8;LC_COLLATE=en_US.UTF-8;LC_MONETARY=en_US.UTF-8;LC_MESSAGES=en_US.UTF-8;LC_PAPER=en_US.UTF-8;LC_NAME=C;LC_ADDRESS=C;LC_TELEPHONE=C;LC_MEASUREMENT=en_US.UTF-8;LC_IDENTIFICATION=C"</code></pre>
 </div>
 </div>
 <p>With strings already in R, you can convert between encodings with <em>iconv()</em>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb143"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb143-1"><a href="#cb143-1" aria-hidden="true" tabindex="-1"></a>text <span class="ot">&lt;-</span> <span class="st">"Melhore sua seguran</span><span class="sc">\xe7a</span><span class="st">"</span></span>
-<span id="cb143-2"><a href="#cb143-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Encoding</span>(text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb149"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb149-1"><a href="#cb149-1" aria-hidden="true" tabindex="-1"></a>text <span class="ot">&lt;-</span> <span class="st">"Melhore sua seguran</span><span class="sc">\xe7a</span><span class="st">"</span></span>
+<span id="cb149-2"><a href="#cb149-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Encoding</span>(text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "unknown"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb145"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb145-1"><a href="#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Encoding</span>(text) <span class="ot">&lt;-</span> <span class="st">"latin1"</span></span>
-<span id="cb145-2"><a href="#cb145-2" aria-hidden="true" tabindex="-1"></a>text  <span class="do">## this prints out correctly in R, but is not correct in the PDF</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb151"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb151-1"><a href="#cb151-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Encoding</span>(text) <span class="ot">&lt;-</span> <span class="st">"latin1"</span></span>
+<span id="cb151-2"><a href="#cb151-2" aria-hidden="true" tabindex="-1"></a>text  <span class="do">## this prints out correctly in R, but is not correct in the PDF</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Melhore sua segurança"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb147"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb147-1"><a href="#cb147-1" aria-hidden="true" tabindex="-1"></a>text <span class="ot">&lt;-</span> <span class="st">"Melhore sua seguran</span><span class="sc">\xe7a</span><span class="st">"</span></span>
-<span id="cb147-2"><a href="#cb147-2" aria-hidden="true" tabindex="-1"></a>textUTF8 <span class="ot">&lt;-</span> <span class="fu">iconv</span>(text, <span class="at">from =</span> <span class="st">"latin1"</span>, <span class="at">to =</span> <span class="st">"UTF-8"</span>)</span>
-<span id="cb147-3"><a href="#cb147-3" aria-hidden="true" tabindex="-1"></a><span class="fu">Encoding</span>(textUTF8)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb153"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb153-1"><a href="#cb153-1" aria-hidden="true" tabindex="-1"></a>text <span class="ot">&lt;-</span> <span class="st">"Melhore sua seguran</span><span class="sc">\xe7a</span><span class="st">"</span></span>
+<span id="cb153-2"><a href="#cb153-2" aria-hidden="true" tabindex="-1"></a>textUTF8 <span class="ot">&lt;-</span> <span class="fu">iconv</span>(text, <span class="at">from =</span> <span class="st">"latin1"</span>, <span class="at">to =</span> <span class="st">"UTF-8"</span>)</span>
+<span id="cb153-3"><a href="#cb153-3" aria-hidden="true" tabindex="-1"></a><span class="fu">Encoding</span>(textUTF8)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "UTF-8"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb149"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb149-1"><a href="#cb149-1" aria-hidden="true" tabindex="-1"></a>textUTF8</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb155"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb155-1"><a href="#cb155-1" aria-hidden="true" tabindex="-1"></a>textUTF8</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Melhore sua segurança"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb151"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb151-1"><a href="#cb151-1" aria-hidden="true" tabindex="-1"></a><span class="fu">iconv</span>(text, <span class="at">from =</span> <span class="st">"latin1"</span>, <span class="at">to =</span> <span class="st">"ASCII"</span>, <span class="at">sub =</span> <span class="st">"???"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb157"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb157-1"><a href="#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="fu">iconv</span>(text, <span class="at">from =</span> <span class="st">"latin1"</span>, <span class="at">to =</span> <span class="st">"ASCII"</span>, <span class="at">sub =</span> <span class="st">"???"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Melhore sua seguran???a"</code></pre>
 </div>
 </div>
 <p>You can also mark a string with an encoding, so R knows how to display it correctly (again, this prints out incorrectly in the PDF):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb153"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb153-1"><a href="#cb153-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="st">"fa</span><span class="sc">\xE7</span><span class="st">ile"</span> </span>
-<span id="cb153-2"><a href="#cb153-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Encoding</span>(x) <span class="ot">&lt;-</span> <span class="st">"latin1"</span> </span>
-<span id="cb153-3"><a href="#cb153-3" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb159"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb159-1"><a href="#cb159-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="st">"fa</span><span class="sc">\xE7</span><span class="st">ile"</span> </span>
+<span id="cb159-2"><a href="#cb159-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Encoding</span>(x) <span class="ot">&lt;-</span> <span class="st">"latin1"</span> </span>
+<span id="cb159-3"><a href="#cb159-3" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "façile"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb155"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb155-1"><a href="#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="do">## playing around... </span></span>
-<span id="cb155-2"><a href="#cb155-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="st">"</span><span class="sc">\xa1</span><span class="st"> </span><span class="sc">\xa2</span><span class="st"> </span><span class="sc">\xa3</span><span class="st"> </span><span class="sc">\xf1</span><span class="st"> </span><span class="sc">\xf2</span><span class="st">"</span> </span>
-<span id="cb155-3"><a href="#cb155-3" aria-hidden="true" tabindex="-1"></a><span class="fu">Encoding</span>(x) <span class="ot">&lt;-</span> <span class="st">"latin1"</span> </span>
-<span id="cb155-4"><a href="#cb155-4" aria-hidden="true" tabindex="-1"></a>x </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb161"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb161-1"><a href="#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="do">## playing around... </span></span>
+<span id="cb161-2"><a href="#cb161-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="st">"</span><span class="sc">\xa1</span><span class="st"> </span><span class="sc">\xa2</span><span class="st"> </span><span class="sc">\xa3</span><span class="st"> </span><span class="sc">\xf1</span><span class="st"> </span><span class="sc">\xf2</span><span class="st">"</span> </span>
+<span id="cb161-3"><a href="#cb161-3" aria-hidden="true" tabindex="-1"></a><span class="fu">Encoding</span>(x) <span class="ot">&lt;-</span> <span class="st">"latin1"</span> </span>
+<span id="cb161-4"><a href="#cb161-4" aria-hidden="true" tabindex="-1"></a>x </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "¡ ¢ £ ñ ò"</code></pre>
 </div>
 </div>
 <p>An R error message with multi-byte string in the message often indicates an encoding issue. In particular errors often arise when trying to do string manipulations in R on character vectors for which the encoding is not properly set. Here’s an example with some Internet logging data that we used a few years ago in class in a problem set and which caused some problems.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb157"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb157-1"><a href="#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">'../data/IPs.RData'</span>) <span class="co"># loads in an object named 'text'</span></span>
-<span id="cb157-2"><a href="#cb157-2" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">try</span>(<span class="fu">substring</span>(text, <span class="dv">1</span>, <span class="dv">15</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb163"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb163-1"><a href="#cb163-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">'../data/IPs.RData'</span>) <span class="co"># loads in an object named 'text'</span></span>
+<span id="cb163-2"><a href="#cb163-2" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">try</span>(<span class="fu">substring</span>(text, <span class="dv">1</span>, <span class="dv">15</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Error in substring(text, 1, 15) : 
   invalid multibyte string at '&lt;bf&gt;a7lw8&lt;6c&gt;z2nX,%@ [128.32.244.179] by ncpc-email with ESMTP
 (SMTPD32-7.04) id A06E24A0116; Mon, 10 Jun 2002 11:43:42 +0800'</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb159"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb159-1"><a href="#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="do">## the issue occurs with the 6402th element (found by trial and error):</span></span>
-<span id="cb159-2"><a href="#cb159-2" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">try</span>(<span class="fu">substring</span>(text[<span class="dv">1</span><span class="sc">:</span><span class="dv">6401</span>],<span class="dv">1</span>,<span class="dv">15</span>))</span>
-<span id="cb159-3"><a href="#cb159-3" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">try</span>(<span class="fu">substring</span>(text[<span class="dv">1</span><span class="sc">:</span><span class="dv">6402</span>],<span class="dv">1</span>,<span class="dv">15</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb165"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb165-1"><a href="#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="do">## the issue occurs with the 6402th element (found by trial and error):</span></span>
+<span id="cb165-2"><a href="#cb165-2" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">try</span>(<span class="fu">substring</span>(text[<span class="dv">1</span><span class="sc">:</span><span class="dv">6401</span>],<span class="dv">1</span>,<span class="dv">15</span>))</span>
+<span id="cb165-3"><a href="#cb165-3" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">try</span>(<span class="fu">substring</span>(text[<span class="dv">1</span><span class="sc">:</span><span class="dv">6402</span>],<span class="dv">1</span>,<span class="dv">15</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Error in substring(text[1:6402], 1, 15) : 
   invalid multibyte string at '&lt;bf&gt;a7lw8&lt;6c&gt;z2nX,%@ [128.32.244.179] by ncpc-email with ESMTP
 (SMTPD32-7.04) id A06E24A0116; Mon, 10 Jun 2002 11:43:42 +0800'</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb161"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb161-1"><a href="#cb161-1" aria-hidden="true" tabindex="-1"></a>text[<span class="dv">6402</span>] <span class="co"># note the Latin-1 character</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb167"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb167-1"><a href="#cb167-1" aria-hidden="true" tabindex="-1"></a>text[<span class="dv">6402</span>] <span class="co"># note the Latin-1 character</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "from 5#c\xbfa7lw8lz2nX,%@ [128.32.244.179] by ncpc-email with ESMTP\n(SMTPD32-7.04) id A06E24A0116; Mon, 10 Jun 2002 11:43:42 +0800"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb163"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb163-1"><a href="#cb163-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">Encoding</span>(text))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb169"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb169-1"><a href="#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">Encoding</span>(text))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 unknown 
    6936 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb165"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb165-1"><a href="#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Option 1</span></span>
-<span id="cb165-2"><a href="#cb165-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Encoding</span>(text) <span class="ot">&lt;-</span> <span class="st">"latin1"</span></span>
-<span id="cb165-3"><a href="#cb165-3" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">try</span>(<span class="fu">substring</span>(text, <span class="dv">1</span>, <span class="dv">15</span>))</span>
-<span id="cb165-4"><a href="#cb165-4" aria-hidden="true" tabindex="-1"></a>tmp[<span class="dv">6402</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb171"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb171-1"><a href="#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Option 1</span></span>
+<span id="cb171-2"><a href="#cb171-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Encoding</span>(text) <span class="ot">&lt;-</span> <span class="st">"latin1"</span></span>
+<span id="cb171-3"><a href="#cb171-3" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">try</span>(<span class="fu">substring</span>(text, <span class="dv">1</span>, <span class="dv">15</span>))</span>
+<span id="cb171-4"><a href="#cb171-4" aria-hidden="true" tabindex="-1"></a>tmp[<span class="dv">6402</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "from 5#c¿a7lw8l"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb167"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb167-1"><a href="#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Option 2</span></span>
-<span id="cb167-2"><a href="#cb167-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">'../data/IPs.RData'</span>) <span class="co"># loads in an object named 'text'</span></span>
-<span id="cb167-3"><a href="#cb167-3" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">try</span>(<span class="fu">substring</span>(text, <span class="dv">1</span>, <span class="dv">15</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb173"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb173-1"><a href="#cb173-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Option 2</span></span>
+<span id="cb173-2"><a href="#cb173-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">'../data/IPs.RData'</span>) <span class="co"># loads in an object named 'text'</span></span>
+<span id="cb173-3"><a href="#cb173-3" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">try</span>(<span class="fu">substring</span>(text, <span class="dv">1</span>, <span class="dv">15</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Error in substring(text, 1, 15) : 
   invalid multibyte string at '&lt;bf&gt;a7lw8&lt;6c&gt;z2nX,%@ [128.32.244.179] by ncpc-email with ESMTP
 (SMTPD32-7.04) id A06E24A0116; Mon, 10 Jun 2002 11:43:42 +0800'</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb169"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb169-1"><a href="#cb169-1" aria-hidden="true" tabindex="-1"></a>text <span class="ot">&lt;-</span> <span class="fu">iconv</span>(text, <span class="at">from =</span> <span class="st">"latin1"</span>, <span class="at">to =</span> <span class="st">"UTF-8"</span>)</span>
-<span id="cb169-2"><a href="#cb169-2" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">try</span>(<span class="fu">substring</span>(text, <span class="dv">1</span>, <span class="dv">15</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb175"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb175-1"><a href="#cb175-1" aria-hidden="true" tabindex="-1"></a>text <span class="ot">&lt;-</span> <span class="fu">iconv</span>(text, <span class="at">from =</span> <span class="st">"latin1"</span>, <span class="at">to =</span> <span class="st">"UTF-8"</span>)</span>
+<span id="cb175-2"><a href="#cb175-2" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">try</span>(<span class="fu">substring</span>(text, <span class="dv">1</span>, <span class="dv">15</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="data-structures" class="level1">
