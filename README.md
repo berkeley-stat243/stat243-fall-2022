@@ -24,7 +24,7 @@ The first three weeks involve a lot of moving pieces, in part related to trying 
    - For html versions of the Units, see the navigation bar above.
    - For PDF versions of the Units, clone the [GitHub repository](https://github.com/berkeley-stat243/stat243-fall-2022), or if you're not yet familiar with Git, [Download a zip file](https://github.com/berkeley-stat243/stat243-fall-2022/archive/refs/heads/main.zip).
  - [Various SCF tutorials](http://statistics.berkeley.edu/computing/training/tutorials): These include the various tutorials referred to in the class materials (e.g., the UNIX and bash shell tutorials, the dynamic documents tutorial, the Git tutorial, the string processing tutorial, etc.).
- - bCourses: links to class course captures and any pre-recorded material.
+ - bCourses: links to class course captures and any pre-recorded material via the Media Gallery.
 
 If you're not yet familiar with Git, go to the upper right of this page and click on 'Clone or download' and then 'Download ZIP'.
 

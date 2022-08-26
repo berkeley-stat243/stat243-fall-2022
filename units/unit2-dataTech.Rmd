@@ -920,14 +920,15 @@ there's some Javascript involved. Therefore, rather than looking at the
 URL associated with a link we need to view the actual HTTP request sent
 by our browser to the server. We can do this using features of the
 browser (e.g., in Firefox see `Web Developer -> Network` and in Chrome
-`More tools -> Developer tools` `-> Network`) (or right-click on the
+`View -> Developer -> Developer tools` and choose the `Network` tab) (or right-click on the
 webpage and select `Inspect` and then `Network`). Based on this we can
 see that an HTTP GET request is being used with a URL such as:\
 <http://data.un.org/Handlers/DownloadHandler.ashx?DataFilter=itemCode:526;year:2012,2013,2014,2015,2016,2017&DataMartId=FAO&Format=csv&c=2,4,5,6,7&s=countryName:asc,elementCode:asc,year:desc>.
 
 We'e now able to easily download the data using that URL, which we can
 fairly easily construct using string processing in bash, R, or Python,
-such as this:
+such as this (here I just paste it together directly, but using more structured syntax
+such as I used for the World Bank example would be better):
 
 ```{r, http-byURL}
 
@@ -1122,19 +1123,23 @@ many European languages (e.g., letters with accents). Here's an example
 of using a non-ASCII Unicode character:
 
 ```{r, unicode-example, eval=TRUE}
-
 ## n-tilde and division symbol as Unicode 'code points'
-x2 <- 'Pe\u00f1a 3\u00f72' 
-Encoding(x2) 
-x2
-writeBin(x2, 'tmp2.txt')
+x2_unicode <- 'Pe\u00f1a 3\u00f72' 
+Encoding(x2_unicode) 
+x2_unicode
+charToRaw(x2_unicode)        
+charToRaw('\u00f1')    # indeed - two bytes, not one
+## specified directly as hexadecimal in UTF-8 encoding 
+x2_utf8 <- 'Pe\xc3\xb1a 3\xc3\xb72' 
+x2_utf8
+
+writeBin(x2_unicode, 'tmp2.txt')
 ## Here n-tilde and division symbol take up two bytes
 ## but there is an extraneous null byte in there; not sure why.
 system('ls -l tmp2.txt') 
 ## The system knows how to interpret the UTF-8 encoded file
 ## and represent the Unicode character on the screen:
 system('cat tmp2.txt')
-
 ```
 
 UTF-8 is cleverly designed in terms of the bit-wise representation of

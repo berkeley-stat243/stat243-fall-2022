@@ -6,8 +6,9 @@
 | 1 | Thursday | 2022-08-25 | 4:00-5:30 pm | Optional: [Introduction to LaTeX session](https://berkeley.libcal.com/calendar/workshops) run by the library (see Details below)|
 |     | Friday | 2022-08-26 | noon | Required (part of your class participation): [class survey](https://forms.gle/SVm9thpkh16Zps2h6)                                             |
 |      |  |  | noon | Required: [office hour time survey](http://whenisgood.net/jxstc5k)                                                                           |
+|      |  |  | noon | Required: Go to github.berkeley.edu and login with your Calnet credentials (that's all -- it will allow me to create your repository) | 
 |      |  |  | noon | Optional: [survey for time for extra R help session](https://whenisgood.net/r3sgffx)                                                                                    |
-|      |  |  | lab (1:00-4:30 pm)  | Optional: Lab 0 help session for software installation/setup and UNIX command line basics (see Details below)                                                        |
+|      |  |  | lab (1:00-4:30 pm)  | Optional: Lab 0 help session for software installation/setup and UNIX command line basics (see Details below)         |
 | 2    | Monday | 2022-08-29 | 10 am     | Required: read first three sections of Unit 2 (sections before 'Webscraping')                                                                                                        |
 |      |  |  | none     | Optional: work through the [UNIX basics tutorial](https://berkeley-scf.github.io/tutorial-unix-basics) and answer (for yourself) the questions at the end |
 |     | TBD | TBD | TBD | Optional: R help session (see Details below) |
@@ -28,9 +29,19 @@ the modules. If you'd like help and an opportunity for extra practice,
 please attend the special R catch-up session listed above. Some other
 resources for R are listed at the end of module 11 of the bootcamp
 materials, so you could also use those resources. You should do this by the end of the week of September 6.
-- **Bash shell tutorial and exercises**: (by September 2), read through this [tutorial on using the bash shell](https://berkeley-scf.github.io/tutorial-using-bash). See the notes in Unit 3 on what topics you can skip; in particular you can skip the pages on Regular Expressions and Managing Processes. Work through the first 10 problems in the [exercises](https://berkeley-scf.github.io/tutorial-using-bash/exercises) the end of the tutorial and [submit answers via TBD](TBD) as text. This is not a formal problem set, so you don't need to worry about formatting nor about explaining/commenting your answers, nor do you need to put your answers in your GitHub class repository. In fact it's even fine with me if you hand-write the answers and scan them to an electronic document. I just want to make sure you've worked through the tutorial. I'll be doing demonstrations on using the bash shell in class starting on Wednesday August 31, so that will be helpful as you work through the tutorial.
+- **Bash shell tutorial and exercises**: (by September 2), read through this [tutorial on using the bash shell](https://berkeley-scf.github.io/tutorial-using-bash). See the notes in Unit 3 on what topics you can skip; in particular you can skip the pages on Regular Expressions and Managing Processes. Work through the first 10 problems in the [exercises](https://berkeley-scf.github.io/tutorial-using-bash/exercises) and submit your answers via Gradescope. This is not a formal problem set, so you don't need to worry about formatting nor about explaining/commenting your answers, nor do you need to put your answers in your GitHub class repository. In fact it's even fine with me if you hand-write the answers and scan them to an electronic document. I just want to make sure you've worked through the tutorial. I'll be doing demonstrations on using the bash shell in class starting on Wednesday August 31, so that will be helpful as you work through the tutorial.
 - **Lab 1**: (September 2) First section/lab on using Git, setting up your GitHub repository for problem sets, and using R Markdown/Quarto/knitr to generate dynamic documents. **Please come only to the section you are registered for given space limits in the room, unless you have talked with Chris and have his permission.** 
 - **Regular expression tutorial and exercises**: (by September 9), read the regular expression material in the [tutorial on using the bash shell](https://berkeley-scf.github.io/tutorial-using-bash/regex). Also read Section 2.1 of the [string processing tutorial](https://berkeley-scf.github.io/tutorial-string-processing) (you can focus on Section 2.1.2 on stringr if you wish). Then answer the regular expressions (regex) [practice problems and submit your answers via TBD](TBD). This is not one of the graded problem sets but rather an 'assignment' that will simply be noted as being completed or not.
+
+## Assignments and problem sets
+
+Submit your solutions on Gradescope and (for problem sets but not assignments) via your Git repository. 
+
+| Assignment or PS | Date | Time | Notes |
+|----|----|----|----|
+| bash shell problems | Friday Sep. 2 | 10 am | I recomend you do at least some of the tutorial reading before class on Aug. 31 |
+| PS 1 | TBD | TBD | |
+| regex problems | TBD | TBD | |
 
 ## Quiz schedule
 

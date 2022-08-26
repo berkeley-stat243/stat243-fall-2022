@@ -42,7 +42,7 @@ class, and the GSI can also provide assistance.
 We'll be following university policy through the semester. 
 
 1. Class and section are in person. I will be recording class (but not
-    section) via the room's course capture capabilities so if anyone
+    section) via the room's course capture capabilities (find the recordings in the bCourses Media Gallery) so if anyone
     needs to miss a class they should be able to catch up. There is
     in-class discussion and problem-solving so I expect students to
     attend class in general. **However, please do not come to class if
@@ -138,7 +138,7 @@ Key websites for the course are:
 -   Ed Discussion site for discussions/Q&A:
     <https://edstem.org/us/courses/25090/discussion/>
 
--   bCourses site for course capture recordings and possibly some other
+-   bCourses site for course capture recordings (see Media Gallery) and possibly some other
     materials:
     <https://bcourses.berkeley.edu/courses/1507757>.
 
