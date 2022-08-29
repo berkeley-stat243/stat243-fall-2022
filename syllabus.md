@@ -362,7 +362,7 @@ on the first problem set.
 
 ### Submitting assignments
 
-In the first section (September 2), we'll discuss [how to submit your problem sets](software) both on Gradescope and via your class GitHub repository, located at `https://github.berkeley.edu/<your_calnet_username>`.
+In the first section (September 2), we'll discuss [how to submit your problem sets](howtos/ps-submission) both on Gradescope and via your class GitHub repository, located at `https://github.berkeley.edu/<your_calnet_username>`.
 
 ### Problem set grading {#problem-set-grading .unnumbered}
 
