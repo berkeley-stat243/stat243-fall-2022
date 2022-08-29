@@ -62,8 +62,3 @@ format:
     toc: true
     code-copy: true
     code-block-background: true
-  pdf:
-    documentclass: article
-    margin-left: 30mm
-    margin-right: 30mm
-    toc: true
