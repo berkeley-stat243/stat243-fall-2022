@@ -397,7 +397,7 @@ library(readr)
 ## I'm violating the rule about absolute paths here!!
 ## (airline.csv is big enough that I don't want to put it in the
 ##    course repository)
-dir <- "~/staff/workshops/r-bootcamp-fall-2020/data"
+dir <- "../data"
 system.time(dat <- read.csv(file.path(dir, 'airline.csv'), stringsAsFactors = FALSE)) 
 system.time(dat2 <- read_csv(file.path(dir, 'airline.csv')))
 ```
