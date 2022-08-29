@@ -90,6 +90,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../units/unit4-goodPractices.html" rel="next">
 <link href="../units/unit1-intro.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -162,6 +163,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <a class="dropdown-item" href="../units/unit2-dataTech.html">
  <span class="dropdown-text">Unit 2</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../units/unit4-goodPractices.html">
+ <span class="dropdown-text">Unit 4</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -233,6 +238,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../units/unit2-dataTech.html" class="sidebar-item-text sidebar-link active">Unit 2</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../units/unit4-goodPractices.html" class="sidebar-item-text sidebar-link">Unit 4</a>
   </div>
 </li>
     </ul>
@@ -607,7 +617,7 @@ Attaching package: 'readr'</code></pre>
 <span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">file.path</span>(dir, <span class="st">'airline.csv'</span>), <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  3.321   0.092   3.416 </code></pre>
+  3.034   0.079   3.124 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(dat2 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(dir, <span class="st">'airline.csv'</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -624,7 +634,7 @@ dbl (24): Year, Month, DayOfMonth, DayOfWeek, DepTime, CRSDepTime, ArrTime, ...
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  3.920   0.091   1.258 </code></pre>
+  3.890   0.110   1.136 </code></pre>
 </div>
 </div>
 </section>
@@ -740,10 +750,10 @@ Attaching package: 'rvest'</code></pre>
 <pre><code># A tibble: 6 × 9
   Rank  `Country / Dependency` Conti…¹ Popul…² Perce…³ Date  Sourc…⁴ Notes ``   
   &lt;chr&gt; &lt;chr&gt;                  &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;lgl&gt;
-1 –     World                  All     7,973,… 100%    24 A… UN pro… ""    NA   
-2 1     China                  Asia    1,412,… 17.7%   31 D… Offici… "Exc… NA   
-3 2     India                  Asia    1,360,… 17.1%   31 D… Offici… "The… NA   
-4 3     United States          North … 333,02… 4.18%   24 A… Nation… "The… NA   
+1 –     World                  All     7,974,… 100%    29 A… UN pro… ""    NA   
+2 1     China                  Asia    1,412,… 17.7%   31 D… Offici… "The… NA   
+3 2     India                  Asia    1,375,… 17.3%   1 Ma… Offici… "The… NA   
+4 3     United States          America 333,04… 4.18%   29 A… Nation… "The… NA   
 5 4     Indonesia              Asia[b] 275,77… 3.46%   1 Ju… Offici… ""    NA   
 6 5     Pakistan               Asia    235,82… 2.96%   1 Ju… UN pro… "The… NA   
 # … with abbreviated variable names ¹​Continent, ²​Population,
@@ -859,12 +869,12 @@ Attaching package: 'rvest'</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>$name
 $name[[1]]
-[1] "Tolgonai"
+[1] "Bernadette"
 
 
 $activity
 $activity[[1]]
-[1] "Livestock"
+[1] "Farming"
 
 
 $sector
@@ -875,17 +885,17 @@ $sector[[1]]
 $location
 $location$country_code
 $location$country_code[[1]]
-[1] "KG"
+[1] "MG"
 
 
 $location$country
 $location$country[[1]]
-[1] "Kyrgyzstan"
+[1] "Madagascar"
 
 
 $location$town
 $location$town[[1]]
-[1] "Aksy district, Jalalabad region"
+[1] "Faravohitra"
 
 
 $location$geo
@@ -896,7 +906,7 @@ $location$geo$level[[1]]
 
 $location$geo$pairs
 $location$geo$pairs[[1]]
-[1] "41.673257 72.046816"
+[1] "-18.909749 47.530918"
 
 
 $location$geo$type
@@ -908,7 +918,7 @@ $location$geo$type[[1]]
 
 $loan_amount
 $loan_amount[[1]]
-[1] "3100"</code></pre>
+[1] "150"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="do">## alternatively, extract only the 'loans' info (and use pipes)</span></span>
 <span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>loansNode <span class="ot">&lt;-</span> doc <span class="sc">%&gt;%</span> <span class="fu">html_elements</span>(<span class="st">'loans'</span>)</span>
@@ -938,58 +948,61 @@ $loan_amount[[1]]
 <span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a><span class="fu">xml_find_all</span>(loansNode, <span class="st">'//location//country'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>{xml_nodeset (20)}
- [1] &lt;country&gt;Lesotho&lt;/country&gt;
- [2] &lt;country&gt;Kyrgyzstan&lt;/country&gt;
- [3] &lt;country&gt;Lesotho&lt;/country&gt;
- [4] &lt;country&gt;Lesotho&lt;/country&gt;
- [5] &lt;country&gt;Lesotho&lt;/country&gt;
- [6] &lt;country&gt;Lesotho&lt;/country&gt;
- [7] &lt;country&gt;Lesotho&lt;/country&gt;
- [8] &lt;country&gt;Lesotho&lt;/country&gt;
+ [1] &lt;country&gt;Indonesia&lt;/country&gt;
+ [2] &lt;country&gt;Madagascar&lt;/country&gt;
+ [3] &lt;country&gt;Kenya&lt;/country&gt;
+ [4] &lt;country&gt;Madagascar&lt;/country&gt;
+ [5] &lt;country&gt;Kenya&lt;/country&gt;
+ [6] &lt;country&gt;Kenya&lt;/country&gt;
+ [7] &lt;country&gt;Kenya&lt;/country&gt;
+ [8] &lt;country&gt;Philippines&lt;/country&gt;
  [9] &lt;country&gt;Philippines&lt;/country&gt;
 [10] &lt;country&gt;Philippines&lt;/country&gt;
-[11] &lt;country&gt;Tajikistan&lt;/country&gt;
-[12] &lt;country&gt;Philippines&lt;/country&gt;
-[13] &lt;country&gt;Philippines&lt;/country&gt;
-[14] &lt;country&gt;Philippines&lt;/country&gt;
-[15] &lt;country&gt;Philippines&lt;/country&gt;
-[16] &lt;country&gt;Philippines&lt;/country&gt;
-[17] &lt;country&gt;Burkina Faso&lt;/country&gt;
-[18] &lt;country&gt;Burkina Faso&lt;/country&gt;
-[19] &lt;country&gt;Lesotho&lt;/country&gt;
-[20] &lt;country&gt;Uganda&lt;/country&gt;</code></pre>
+[11] &lt;country&gt;Dominican Republic&lt;/country&gt;
+[12] &lt;country&gt;Dominican Republic&lt;/country&gt;
+[13] &lt;country&gt;Guatemala&lt;/country&gt;
+[14] &lt;country&gt;Indonesia&lt;/country&gt;
+[15] &lt;country&gt;Kenya&lt;/country&gt;
+[16] &lt;country&gt;Madagascar&lt;/country&gt;
+[17] &lt;country&gt;Madagascar&lt;/country&gt;
+[18] &lt;country&gt;Madagascar&lt;/country&gt;
+[19] &lt;country&gt;Kenya&lt;/country&gt;
+[20] &lt;country&gt;Madagascar&lt;/country&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">xml_find_all</span>(loansNode, <span class="st">'//location//country'</span>) <span class="sc">%&gt;%</span> <span class="fu">xml_text</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "Lesotho"      "Kyrgyzstan"   "Lesotho"      "Lesotho"      "Lesotho"     
- [6] "Lesotho"      "Lesotho"      "Lesotho"      "Philippines"  "Philippines" 
-[11] "Tajikistan"   "Philippines"  "Philippines"  "Philippines"  "Philippines" 
-[16] "Philippines"  "Burkina Faso" "Burkina Faso" "Lesotho"      "Uganda"      </code></pre>
+<pre><code> [1] "Indonesia"          "Madagascar"         "Kenya"             
+ [4] "Madagascar"         "Kenya"              "Kenya"             
+ [7] "Kenya"              "Philippines"        "Philippines"       
+[10] "Philippines"        "Dominican Republic" "Dominican Republic"
+[13] "Guatemala"          "Indonesia"          "Kenya"             
+[16] "Madagascar"         "Madagascar"         "Madagascar"        
+[19] "Kenya"              "Madagascar"        </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="do">## or extract the geographic coordinates</span></span>
 <span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a><span class="fu">xml_find_all</span>(loansNode, <span class="st">'//location//geo/pairs'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>{xml_nodeset (20)}
- [1] &lt;pairs&gt;-29.315077 27.486923&lt;/pairs&gt;
- [2] &lt;pairs&gt;41.673257 72.046816&lt;/pairs&gt;
- [3] &lt;pairs&gt;-29.315077 27.486923&lt;/pairs&gt;
- [4] &lt;pairs&gt;-29.681724 27.402676&lt;/pairs&gt;
- [5] &lt;pairs&gt;-29.601652 27.120298&lt;/pairs&gt;
- [6] &lt;pairs&gt;-29.523898 28.608975&lt;/pairs&gt;
- [7] &lt;pairs&gt;-29.400969 27.763725&lt;/pairs&gt;
- [8] &lt;pairs&gt;-29.523898 28.608975&lt;/pairs&gt;
- [9] &lt;pairs&gt;10.432923 124.994751&lt;/pairs&gt;
-[10] &lt;pairs&gt;10.432923 124.994751&lt;/pairs&gt;
-[11] &lt;pairs&gt;38.598056 68.977778&lt;/pairs&gt;
-[12] &lt;pairs&gt;10.432923 124.994751&lt;/pairs&gt;
-[13] &lt;pairs&gt;10.432923 124.994751&lt;/pairs&gt;
-[14] &lt;pairs&gt;10.432923 124.994751&lt;/pairs&gt;
-[15] &lt;pairs&gt;12.619862 125.016787&lt;/pairs&gt;
-[16] &lt;pairs&gt;12.619862 125.016787&lt;/pairs&gt;
-[17] &lt;pairs&gt;12.371428 -1.51966&lt;/pairs&gt;
-[18] &lt;pairs&gt;12.371428 -1.51966&lt;/pairs&gt;
-[19] &lt;pairs&gt;-29.779915 27.288186&lt;/pairs&gt;
-[20] &lt;pairs&gt;1.064444 34.179444&lt;/pairs&gt;</code></pre>
+ [1] &lt;pairs&gt;-6.178056 106.63&lt;/pairs&gt;
+ [2] &lt;pairs&gt;-18.909749 47.530918&lt;/pairs&gt;
+ [3] &lt;pairs&gt;-1.516667 37.266667&lt;/pairs&gt;
+ [4] &lt;pairs&gt;-18.909749 47.530918&lt;/pairs&gt;
+ [5] &lt;pairs&gt;0.948567 35.508461&lt;/pairs&gt;
+ [6] &lt;pairs&gt;0.566667 34.566667&lt;/pairs&gt;
+ [7] &lt;pairs&gt;0.566667 34.566667&lt;/pairs&gt;
+ [8] &lt;pairs&gt;10.959151 125.00577&lt;/pairs&gt;
+ [9] &lt;pairs&gt;11.293241 123.000095&lt;/pairs&gt;
+[10] &lt;pairs&gt;10.959151 125.00577&lt;/pairs&gt;
+[11] &lt;pairs&gt;18.47207 -69.299673&lt;/pairs&gt;
+[12] &lt;pairs&gt;18.47207 -69.299673&lt;/pairs&gt;
+[13] &lt;pairs&gt;14.782827 -90.793702&lt;/pairs&gt;
+[14] &lt;pairs&gt;-6.564396 106.252214&lt;/pairs&gt;
+[15] &lt;pairs&gt;-1.267026 37.320133&lt;/pairs&gt;
+[16] &lt;pairs&gt;-18.909749 47.530918&lt;/pairs&gt;
+[17] &lt;pairs&gt;-18.909749 47.530918&lt;/pairs&gt;
+[18] &lt;pairs&gt;-19.873008 47.029116&lt;/pairs&gt;
+[19] &lt;pairs&gt;-1.267026 37.320133&lt;/pairs&gt;
+[20] &lt;pairs&gt;-18.909749 47.530918&lt;/pairs&gt;</code></pre>
 </div>
 </div>
 </section>
@@ -1039,69 +1052,62 @@ $loan_amount[[1]]
 </div>
 <div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data<span class="sc">$</span>loans)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>       id         name languages      status funded_amount basket_amount
-1 2430686 Motsukunyane        en fundraising             0             0
-2 2432992     Tolgonai    ru, en fundraising             0             0
-3 2430680       Khotso        en fundraising             0            25
-4 2430652    Matebello        en fundraising            25             0
-5 2430659    Makeletso        en fundraising            25             0
-6 2430662  Masehlomeng        en fundraising             0             0
-  image.id image.template_id    activity       sector
-1  4925389                 1 Home Energy Personal Use
-2  4928728                 1   Livestock  Agriculture
-3  4925368                 1 Home Energy Personal Use
-4  4925270                 1 Home Energy Personal Use
-5  4925286                 1 Home Energy Personal Use
-6  4925296                 1 Home Energy Personal Use
-                                   themes
-1 Green, Earth Day Campaign, Clean Energy
-2               Green, Earth Day Campaign
-3 Green, Earth Day Campaign, Clean Energy
-4 Green, Earth Day Campaign, Clean Energy
-5 Green, Earth Day Campaign, Clean Energy
-6 Green, Earth Day Campaign, Clean Energy
-                                                                                                                               use
-1 to purchase the ACE One hybrid energy system for cooking, lighting and charging in a way that is safer, cleaner and saves money.
-2                                                            to purchase livestock to increase her income from breeding livestock.
-3 to purchase the ACE One hybrid energy system for cooking, lighting and charging in a way that is safer, cleaner and saves money.
-4 to purchase the ACE One hybrid energy system for cooking, lighting and charging in a way that is safer, cleaner and saves money.
-5 to purchase the ACE One hybrid energy system for cooking, lighting and charging in a way that is safer, cleaner and saves money.
-6 to purchase the ACE One hybrid energy system for cooking, lighting and charging in a way that is safer, cleaner and saves money.
-  location.country_code location.country                   location.town
-1                    LS          Lesotho            Popa Tholang, Maseru
-2                    KG       Kyrgyzstan Aksy district, Jalalabad region
-3                    LS          Lesotho            Popa Tholang, Maseru
-4                    LS          Lesotho              Mahareng, Mafeteng
-5                    LS          Lesotho       Thabana mohlomi, Mafeteng
-6                    LS          Lesotho        Methalaneng, Thaba-Tseka
-  location.geo.level   location.geo.pairs location.geo.type partner_id
-1               town -29.315077 27.486923             point        452
-2               town  41.673257 72.046816             point        171
-3               town -29.315077 27.486923             point        452
-4               town -29.681724 27.402676             point        452
-5               town -29.601652 27.120298             point        452
-6               town -29.523898 28.608975             point        452
-           posted_date planned_expiration_date loan_amount borrower_count
-1 2022-08-26T18:50:08Z    2022-09-30T18:50:08Z         100              1
-2 2022-08-26T18:50:03Z    2022-09-30T18:50:03Z        3100              1
-3 2022-08-26T18:30:12Z    2022-09-30T18:30:11Z         100              1
-4 2022-08-26T18:30:11Z    2022-09-30T18:30:11Z         100              1
-5 2022-08-26T18:30:11Z    2022-09-30T18:30:11Z         100              1
-6 2022-08-26T18:30:11Z    2022-09-30T18:30:11Z         100              1
-  lender_count bonus_credit_eligibility
-1            0                    FALSE
-2            0                     TRUE
-3            0                    FALSE
-4            1                    FALSE
-5            1                    FALSE
-6            0                    FALSE
-                                                                                                                      tags
-1              volunteer_pick, #Eco-friendly, #Health and Sanitation, #Technology, #Repair Renew Replace, 1, 9, 27, 38, 39
-2                                                      #Sustainable Ag, #Animals, #Parent, #Repeat Borrower, 8, 11, 16, 28
-3              volunteer_pick, #Eco-friendly, #Health and Sanitation, #Technology, #Repair Renew Replace, 1, 9, 27, 38, 39
-4              volunteer_pick, #Eco-friendly, #Health and Sanitation, #Technology, #Repair Renew Replace, 1, 9, 27, 38, 39
-5 volunteer_pick, #Eco-friendly, #Parent, #Health and Sanitation, #Technology, #Repair Renew Replace, 1, 9, 16, 27, 38, 39
-6              volunteer_pick, #Eco-friendly, #Health and Sanitation, #Technology, #Repair Renew Replace, 1, 9, 27, 38, 39</code></pre>
+<pre><code>       id          name languages      status funded_amount basket_amount
+1 2435556        Arsiah        en fundraising             0             0
+2 2434086    Bernadette    fr, en fundraising             0             0
+3 2435447         Grace        en fundraising             0             0
+4 2433975 Marie Perline    fr, en fundraising             0             0
+5 2435453        Sheila        en fundraising             0             0
+6 2435559       Deborah        en fundraising             0             0
+  image.id image.template_id activity      sector
+1  4932776                 1 Computer   Education
+2  4657878                 1  Farming Agriculture
+3  4909491                 1  Poultry Agriculture
+4  4368365                 1     Pigs Agriculture
+5  4932624                 1  Farming Agriculture
+6  4932781                 1  Farming Agriculture
+                                     themes
+1 Youth, Underfunded Areas, Islamic Finance
+2                                      NULL
+3                                      NULL
+4                                      NULL
+5           Crop Insurance, Rural Exclusion
+6           Crop Insurance, Rural Exclusion
+                                                                                                                                    use
+1                                                           to buy a smartphone for her child's online education needs during Covid-19.
+2                                                                                         to buy the necessary inputs to grow potatoes.
+3                                                                                                                 to buy poultry feeds.
+4                                                                                                  to buy three pigs and 90 kg of feed.
+5 to buy quality farm inputs such as high quality seeds and fertilizers to help a forward-looking mom improve productivity on her farm.
+6                  to purchase modern farm inputs such as certified seeds and organic fertilizers to improve the quality of her output.
+  location.country_code location.country location.town location.geo.level
+1                    ID        Indonesia     Tangerang               town
+2                    MG       Madagascar   Faravohitra               town
+3                    KE            Kenya      Machakos               town
+4                    MG       Madagascar   Faravohitra               town
+5                    KE            Kenya      Kapsowar               town
+6                    KE            Kenya       Bungoma               town
+    location.geo.pairs location.geo.type partner_id          posted_date
+1     -6.178056 106.63             point        406 2022-08-29T20:10:09Z
+2 -18.909749 47.530918             point        359 2022-08-29T20:10:08Z
+3  -1.516667 37.266667             point        388 2022-08-29T20:10:08Z
+4 -18.909749 47.530918             point        359 2022-08-29T20:10:06Z
+5   0.948567 35.508461             point        156 2022-08-29T20:10:06Z
+6   0.566667 34.566667             point        156 2022-08-29T20:10:06Z
+  planned_expiration_date loan_amount borrower_count lender_count
+1    2022-10-03T20:10:09Z         150              1            0
+2    2022-10-03T20:10:08Z         150              1            0
+3    2022-10-03T20:10:08Z          75              1            0
+4    2022-10-03T20:10:06Z         150              1            0
+5    2022-10-03T20:10:06Z         175              1            0
+6    2022-10-03T20:10:06Z         275              1            0
+  bonus_credit_eligibility                                                tags
+1                    FALSE                                                NULL
+2                    FALSE                   #Parent, #Repeat Borrower, 16, 28
+3                    FALSE #Woman-Owned Business, #Animals, #Parent, 6, 11, 16
+4                    FALSE     #Animals, #Parent, #Repeat Borrower, 11, 16, 28
+5                     TRUE                            #Woman-Owned Business, 6
+6                     TRUE                            #Woman-Owned Business, 6</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb106"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>loans[<span class="dv">1</span>, <span class="st">'location.geo.pairs'</span>] <span class="co"># hmmm...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1109,10 +1115,8 @@ $loan_amount[[1]]
 </div>
 <div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>loans[<span class="dv">1</span>, <span class="st">'location'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  country_code country                 town geo.level            geo.pairs
-1           LS Lesotho Popa Tholang, Maseru      town -29.315077 27.486923
-  geo.type
-1    point</code></pre>
+<pre><code>  country_code   country      town geo.level        geo.pairs geo.type
+1           ID Indonesia Tangerang      town -6.178056 106.63    point</code></pre>
 </div>
 </div>
 <p>One disadvantage of JSON is that it is not set up to deal with missing values, infinity, etc.</p>
@@ -1434,7 +1438,7 @@ Attaching package: 'httr'</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb133"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb133-1"><a href="#cb133-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system</span>(<span class="st">'ls -l tmp.txt'</span>, <span class="at">intern =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "-rw-r--r-- 1 paciorek scfstaff 4 Aug 26 11:54 tmp.txt"</code></pre>
+<pre><code>[1] "-rw-r--r-- 1 paciorek scfstaff 4 Aug 29 13:18 tmp.txt"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb135"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb135-1"><a href="#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system</span>(<span class="st">'cat tmp.txt'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1736,6 +1740,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../units/unit4-goodPractices.html" class="pagination-link">
+        <span class="nav-page-text">Unit 4</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
