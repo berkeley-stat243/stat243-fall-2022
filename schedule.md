@@ -23,7 +23,7 @@
 - **Optional library LaTeX sessions**: I highly recommend (in particular if you are a Statistics graduate student) that you know how to create equations in LaTeX.
 - **Optional Lab 0 software/command line help session**: (August 26 in Evans 344) Help session for installing software, accessing a UNIX-style command line, and basic UNIX usage (e.g., the UNIX basics tutorial). You should have software installed, be able to accesss the command line, and have started to become familiar with basic UNIX usage before class on Wednesday August 31.
 - **Optional R help session**: (date/location TBD) If you are not familiar with R at the level of [modules
-1-5 of the R bootcamp](https://berkeley-scf.github.com/berkeley-scf/r-bootcamp-fall-2022/schedule),
+1-5 of the R bootcamp](https://berkeley-scf.github.io/r-bootcamp-fall-2022/schedule),
 work through those modules and the breakout problems associated with
 the modules. If you'd like help and an opportunity for extra practice,
 please attend the special R catch-up session listed above. Some other
