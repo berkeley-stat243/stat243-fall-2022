@@ -50,3 +50,6 @@ vignettes/*.pdf
 # Quarto publishing files (these will be committed into gh-pages)
 _site/*
 /.quarto/
+
+# data
+/data/airline.csv

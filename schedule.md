@@ -11,7 +11,7 @@
 |      |  |  | lab (1:00-4:30 pm)  | Optional: Lab 0 help session for software installation/setup and UNIX command line basics (see Details below)         |
 | 2    | Monday | 2022-08-29 | 10 am     | Required: read first three sections of Unit 2 (sections before 'Webscraping')                                                                                                        |
 |      |  |  | none     | Optional: work through the [UNIX basics tutorial](https://berkeley-scf.github.io/tutorial-unix-basics) and answer (for yourself) the questions at the end |
-|     | TBD | TBD | TBD | Optional: R help session (see Details below) |
+|     | Tuesday | 2022-08-30 | 4-6pm | Optional: R help session (see Details below) |
 |     | Friday | 2022-09-02 | 10 am | Required: Bash shell tutorial and exercises (see Details below) |
 |     | |  | lab | Required: Lab 1 on using course tools and problem set submission (see Details below)|
 | 3 | Wednesday | 2022-09-07 | 4:00-5:30 pm | Optional: [Introduction to LaTeX session](https://berkeley.libcal.com/calendar/workshops) run by the library (see Details below)|
@@ -22,7 +22,7 @@
 
 - **Optional library LaTeX sessions**: I highly recommend (in particular if you are a Statistics graduate student) that you know how to create equations in LaTeX.
 - **Optional Lab 0 software/command line help session**: (August 26 in Evans 344) Help session for installing software, accessing a UNIX-style command line, and basic UNIX usage (e.g., the UNIX basics tutorial). You should have software installed, be able to accesss the command line, and have started to become familiar with basic UNIX usage before class on Wednesday August 31.
-- **Optional R help session**: (date/location TBD) If you are not familiar with R at the level of [modules
+- **Optional R help session**: (August 30 in Evans 334) If you are not familiar with R at the level of [modules
 1-5 of the R bootcamp](https://berkeley-scf.github.io/r-bootcamp-fall-2022/schedule),
 work through those modules and the breakout problems associated with
 the modules. If you'd like help and an opportunity for extra practice,

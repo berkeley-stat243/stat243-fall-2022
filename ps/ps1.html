@@ -141,20 +141,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>This problem explores file sizes in light of understanding storage in ASCII plain text versus binary formats and the fact that numbers are (generally) stored as 8 bytes per number in binary format.</p>
 <ol type="a">
 <li><p>Explain the sizes of the two files created below. In discussing the CSV text file, how many characters do you expect to be in the file (i.e., you should be able to estimate this very accurately from first principles <em>without</em> using <code>wc</code> or any explicit program that counts characters). Hint: what do we know about numbers drawn from a standard normal distribution?</p>
-<div class="cell" data-hash="ps1_cache/html/ps2a_3a0ea4e44c9734d01edb0b87ace2a41a">
+<div class="cell" data-hash="ps1_cache/html/ps2a_1544bd5c346feadc06e866d6753be161">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span>  <span class="fl">1e7</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(n), <span class="at">ncol =</span> <span class="dv">100</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">round</span>(a, <span class="dv">10</span>)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>fn_csv <span class="ot">&lt;-</span> <span class="fu">tempfile</span>(<span class="at">fileext =</span> <span class="st">'csv'</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>fn_csv <span class="ot">&lt;-</span> <span class="fu">tempfile</span>(<span class="at">fileext =</span> <span class="st">'.csv'</span>)</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(a, <span class="at">file =</span> fn_csv, <span class="at">quote=</span><span class="cn">FALSE</span>, <span class="at">row.names=</span><span class="cn">FALSE</span>,</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">col.names =</span> <span class="cn">FALSE</span>, <span class="at">sep=</span><span class="st">','</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>fn_rda <span class="ot">&lt;-</span> <span class="fu">tempfile</span>(<span class="at">fileext =</span> <span class="st">'Rda'</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>fn_rda <span class="ot">&lt;-</span> <span class="fu">tempfile</span>(<span class="at">fileext =</span> <span class="st">'.Rda'</span>)</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(a, <span class="at">file =</span> fn_rda, <span class="at">compress =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">file.size</span>(fn_csv)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 133886504</code></pre>
+<pre><code>[1] 133887853</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">file.size</span>(fn_rda)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -162,15 +162,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div></li>
 <li><p>Now consider saving out the numbers one row per number. Given we no longer have to save all the commas, why is the file size unchanged?</p>
-<div class="cell" data-hash="ps1_cache/html/ps2b_9fd5559aff8e6ec1e439c8c63cd77951">
+<div class="cell" data-hash="ps1_cache/html/ps2b_5549e437b7aa3e70ccfef2f746c9c129">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> a</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(b) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1e7</span>, <span class="dv">1</span>)  <span class="do">## change to one column by adjusting attribute</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>fn_csv_onecol <span class="ot">&lt;-</span> <span class="fu">tempfile</span>(<span class="at">fileext =</span> <span class="st">'csv'</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>fn_csv_onecol <span class="ot">&lt;-</span> <span class="fu">tempfile</span>(<span class="at">fileext =</span> <span class="st">'.csv'</span>)</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(b, <span class="at">file =</span> fn_csv_onecol, <span class="at">quote=</span><span class="cn">FALSE</span>,</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">row.names=</span><span class="cn">FALSE</span>, <span class="at">col.names =</span> <span class="cn">FALSE</span>, <span class="at">sep=</span><span class="st">','</span>)</span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">file.size</span>(fn_csv_onecol)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 133886504</code></pre>
+<pre><code>[1] 133887853</code></pre>
 </div>
 </div></li>
 <li><p>Consider the following ways of reading the data into R (though similar results would be obtained in other languages). Explain the difference in speed between the three situations. Side note: in this case <code>readr::read_csv()</code> is rather faster than <code>read.csv()</code>.</p>
@@ -193,15 +193,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div></li>
 <li><p>Explain why <code>tmp.Rda</code> is so much bigger than <code>tmp2.Rda</code> given they both contain the same number of numeric values.</p>
-<div class="cell" data-hash="ps1_cache/html/ps2d_175adadfba75cac4e99a967cd07007d2">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>fn1_rda <span class="ot">&lt;-</span> <span class="fu">tempfile</span>(<span class="at">fileext =</span> <span class="st">'Rda'</span>)</span>
+<div class="cell" data-hash="ps1_cache/html/ps2d_b5edd0cc0f1d923beb45591637d4ddfe">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>fn1_rda <span class="ot">&lt;-</span> <span class="fu">tempfile</span>(<span class="at">fileext =</span> <span class="st">'.Rda'</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(a, <span class="at">file =</span> fn1_rda)</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">file.size</span>(fn1_rda)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 76780178</code></pre>
+<pre><code>[1] 76778669</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">rnorm</span>(<span class="dv">1</span>), <span class="fl">1e7</span>)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>fn2_rda <span class="ot">&lt;-</span> <span class="fu">tempfile</span>(<span class="at">fileext =</span> <span class="st">'Rda'</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>fn2_rda <span class="ot">&lt;-</span> <span class="fu">tempfile</span>(<span class="at">fileext =</span> <span class="st">'.Rda'</span>)</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(b, <span class="at">file =</span> fn2_rda)</span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">file.size</span>(fn2_rda)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
