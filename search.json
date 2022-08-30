@@ -523,5 +523,47 @@
     "title": "Statistics 243 Fall 2022",
     "section": "Project schedule",
     "text": "Project schedule\nDue date: TBD, but due either the reading week or the exam week."
+  },
+  {
+    "objectID": "units/unit3-bash.html",
+    "href": "units/unit3-bash.html",
+    "title": "The bash shell and UNIX utilities",
+    "section": "",
+    "text": "PDF\nReference:\nNote that it can be difficult to distinguish what is shell-specific and what is just part of the operating system (i.e., a UNIX-style operating system). Some of the material here is not bash-specific but general to UNIX. I’ll use ‘UNIX’ to refer to the family of operating systems that descend from the path-breaking UNIX operating system developed at AT&T’s Bell Labs in the 1970s. These include MacOS and various flavors of Linux (e.g., Ubuntu, Debian, CentOS, Fedora).\nFor your work on this unit, either bash on a Linux machine, the older version of bash on MacOS, or zsh on MacOS (or Linux) are fine. I’ll probably demo everything using bash on a Linux machine, and there are some annoying differences from the older bash on MacOS that may be occasionally confusing (in particular the options to various commands can differ on MacOS)."
+  },
+  {
+    "objectID": "units/unit3-bash.html#first-challenge",
+    "href": "units/unit3-bash.html#first-challenge",
+    "title": "The bash shell and UNIX utilities",
+    "section": "4.1 First challenge",
+    "text": "4.1 First challenge\nConsider the file cpds.csv. How would you write a shell command that returns “There are 8 occurrences of the word ‘Belgium’ in this file.”.\nExtra: make your code into a function that can operate on any file indicated by the user and any word of interest."
+  },
+  {
+    "objectID": "units/unit3-bash.html#second-challenge",
+    "href": "units/unit3-bash.html#second-challenge",
+    "title": "The bash shell and UNIX utilities",
+    "section": "4.2 Second challenge",
+    "text": "4.2 Second challenge\nConsider the data in the RTADataSub.csv file. This is a subset of data giving freeway travel times for segments of a freeway in an Australian city. The data are from a kaggle.com competition. We want to try to understand the kinds of data in each field of the file. The following would be particularly useful if the data were in many files or the data were many gigabytes in size.\nFirst, take the fourth column. Figure out the unique values in that column.\nNext, automate the process of determining if any of the values are non-numeric so that you don’t have to scan through all of the unique values looking for non-numbers. You’ll need to look for the following regular expression pattern [^0-9], which is interpreted as NOT any of the numbers 0 through 9.\nNow, do it for all the fields, except the first one. Have your code print out the result in a human-readable way understandable by someone who didn’t write the code."
+  },
+  {
+    "objectID": "units/unit3-bash.html#third-challenge",
+    "href": "units/unit3-bash.html#third-challenge",
+    "title": "The bash shell and UNIX utilities",
+    "section": "4.3 Third challenge",
+    "text": "4.3 Third challenge\n\nFor Belgium, determine the minimum unemployment value (field #6) in cpds.csv in a programmatic way.\nHave what is printed out to the screen look like “Belgium 6.2”.\nNow store the unique values of the countries in a variable, first stripping out the quotation marks and removing the space in “New Zealand”, which causes problems because of the space in its name.\nFigure out how to automate step 1 to do the calculation for all the countries and print to the screen.\nHow would you instead store the results in a new file?"
+  },
+  {
+    "objectID": "units/unit3-bash.html#fourth-challenge",
+    "href": "units/unit3-bash.html#fourth-challenge",
+    "title": "The bash shell and UNIX utilities",
+    "section": "4.4 Fourth challenge",
+    "text": "4.4 Fourth challenge\nHere’s an advanced one - you’ll probably need to use sed, but the brief examples of text substitution in the using bash tutorial should be sufficient to solve the problem.\nConsider a CSV file that has rows that look like this:\n    1,\"America, United States of\",45,96.1,\"continental, coastal\" \n    2,\"France\",33,807.1,\"continental, coastal\"\nWhile R would be able to handle this using read.table(), using cut in UNIX won’t work because of the commas embedded within the fields. The challenge is to convert this file to one that we can use cut on, as follows.\nFigure out a way to make this into a new delimited file in which the delimiter is not a comma. At least one solution that will work for this particular two-line dataset does not require you to use regular expressions, just simple replacement of fixed patterns."
+  },
+  {
+    "objectID": "units/tmp.html",
+    "href": "units/tmp.html",
+    "title": "The bash shell and UNIX utilities",
+    "section": "",
+    "text": "Reference:\n\nNewham and Rosenblatt, Learning the bash Shell, 2nd ed.\n\nNote that it can be difficult to distinguish what is shell-specific and what is just part of the operating system (i.e., a UNIX-style operating system). Some of the material here is not bash-specific but general to UNIX. I’ll use ‘UNIX’ to refer to the family of operating systems that descend from the path-breaking UNIX operating system developed at AT&T’s Bell Labs in the 1970s. These include MacOS and various flavors of Linux (e.g., Ubuntu, Debian, CentOS, Fedora).\nFor your work on this unit, either bash on a Linux machine, the older version of bash on MacOS, or zsh on MacOS (or Linux) are fine. I’ll probably demo everything using bash on a Linux machine, and there are some annoying differences from the older bash on MacOS that may be occasionally confusing (in particular the options to various commands can differ on MacOS).\n\n1. Shell basics\nThe shell is the interface between you and the UNIX operating system. When you are working in a terminal window (i.e., a window providing the command line interface), you’re interacting with a shell.\nThere are multiple shells (sh, bash, zsh, csh, tcsh, ksh). We’ll assume usage of bash, as this is a very commonly-used shell in Linux, plus it’s the default for Mac OS X (until Catalina, for which zsh is the default), the SCF machines, and the UC Berkeley campus cluster (Savio). It’s fine for you to use zsh.\nUNIX shell commands are designed to each do a specific task really well and really fast. They are modular and composable, so you can build up complicated operations by combining the commands. These tools were designed decades ago, so using the shell might seem old-fashioned, but the shell still lies at the heart of modern scientific computing. By using the shell you can automate your work and make it reproducible. And once you know how to use it, you’ll find that enter commands quickly and without a lot of typing.\n\n\n2. Using the bash shell\nFor this Unit, we’ll rely on the bash shell tutorial for the details of how to use the shell. We won’t cover the page on Managing Processes. For the moment, we won’t cover the page on Regular Expressions, but when we talk about string processing and regular expressions in Unit 5, we’ll come back to that material.\n\n\n3. bash shell examples\nHere we’ll work through a few examples to start to give you a feel for using the bash shell to manage your workflows and process data.\nFirst let’s get the files from the 243 class in 2021 so we have a sufficient body of files we can do interesting things with.\n\ngit clone https://github.com/berkeley-stat243/stat243-fall-2021\n\nOur first mission is some basic manipulation of a data file. Suppose we want to get a sense for the number of weather stations in different states using the coop.txt file.\n\na <- 3\n\n\ncd stat243-fall-2021/data\ngzip -cd coop.txt.gz | less\ngunzip coop.txt.gz\ncut -b50-70 coop.txt | less \ncut -b60-61 coop.txt | sort | uniq\ncut -b60-61 coop.txt | sort | uniq -c\n## all in one line with no change to the original file:\ngzip -cd coop.txt.gz | cut -b60-61 coop.txt | sort | uniq -c"
   }
 ]
