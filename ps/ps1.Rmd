@@ -1,8 +1,9 @@
 ---
 title: "Problem Set 1"
 subtitle: "Due Wednesday Sep. 7, 10 am"
+execute:
+  freeze: auto
 ---
-
 
 ## Comments
 

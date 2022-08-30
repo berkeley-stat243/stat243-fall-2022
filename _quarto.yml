@@ -25,7 +25,7 @@ website:
     - id: units
       title: "Units"
       contents:
-        - file: units/unit1-intro.Rmd
+        - file: units/unit1-intro.md
           text: "Unit 1"
         - file: units/unit2-dataTech.Rmd
           text: "Unit 2"
@@ -62,8 +62,3 @@ format:
     toc: true
     code-copy: true
     code-block-background: true
-  pdf:
-    documentclass: article
-    margin-left: 30mm
-    margin-right: 30mm
-    toc: true

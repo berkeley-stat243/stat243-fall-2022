@@ -2,10 +2,21 @@
 title: "Introduction to UNIX, computers, and key tools"
 author: "Chris Paciorek"
 date: "2022-08-22"
+format:
+  pdf:
+    documentclass: article
+    margin-left: 30mm
+    margin-right: 30mm
+    toc: true
+  html:
+    theme: cosmo
+    css: ../styles.css
+    toc: true
+    code-copy: true
+    code-block-background: true
 ---
 
 [PDF](./unit1-intro.pdf){.btn .btn-primary}
-
 
 # UNIX command line basics
 
