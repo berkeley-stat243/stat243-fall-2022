@@ -3,10 +3,6 @@ title: "Windows 10 and the Ubuntu Subsystem"
 author: "Jared Bennett"
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 Windows 10 has a powerful new feature that allows a full Linux system to be installed and run from within Windows. This is incredibly useful for building/testing code in Linux, without having a dedicated Linux machine, but it poses strange new behaviors as two very different operating systems coexist in one place. Initially, this document mirrors the [Windows Install](./windowsInstall.Rmd) tutorial, showing you how to install Ubuntu and setting up R, RStudio, and LaTex. Then, we cover some of the issues of running two systems together, starting with finding files, finding the Ubuntu subsystem, and file modifications.  
 
 ## Installing Ubuntu
