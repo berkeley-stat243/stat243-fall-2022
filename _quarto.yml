@@ -34,22 +34,22 @@ website:
     - id: software
       title: "Software"
       contents:
-        - file: howtos/RandRStudioInstall.Rmd
+        - file: howtos/RandRStudioInstall.md
           text: Installing R & RStudio
         - file: howtos/accessingPython.md
           text: Accessing Python
         - file: howtos/accessingUnixCommandLine.md
           text: Accessing the Unix Command Line
-        - file: howtos/gitInstall.Rmd
+        - file: howtos/gitInstall.md
           text: Installing Git
-        - file: howtos/ps-submission.qmd
+        - file: howtos/ps-submission.md
           text: Problem Set Submissions
         - text: "---"
         - section: "Windows"
           contents:
-            - file: howtos/windowsAndLinux.Rmd
+            - file: howtos/windowsAndLinux.md
               text: Installing the Linux Subsystem on Windows
-            - file: howtos/windowsInstall.Rmd
+            - file: howtos/windowsInstall.md
               text: Using R, RStudio, and LaTeX on Windows
 
 output:

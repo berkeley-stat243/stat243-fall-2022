@@ -3,10 +3,6 @@ title: "R/Rstudio on Windows"
 author: "Jared Bennett"
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 While R was built/designed for UNIX systems, it has been well adapted for Windows. 
 Here, we'll start with the basics of installing [R](https://www.r-project.org/) on 
 Windows. Then, we'll cover the recommended editor ([Rstudio](https://rstudio.com/)), 
