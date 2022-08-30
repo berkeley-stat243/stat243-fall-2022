@@ -47,8 +47,10 @@ Submit your solutions on Gradescope and (for problem sets but not assignments) v
 
 Quizzes are in-person only. 
 
-Quiz 1: Monday October 24 in class.
-Quiz 2: Monday November 21 in class.
+- Quiz 1: Monday October 24 in class.
+  - Review session Friday October 21 in Lab.
+- Quiz 2: Monday November 21 in class.
+  - Review session Friday November 18 in Lab.
 
 ## Project schedule
 
