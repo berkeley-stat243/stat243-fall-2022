@@ -1,9 +1,22 @@
 ---
 title: "Problem Set 1"
 subtitle: "Due Wednesday Sep. 7, 10 am"
+format:
+  pdf:
+    documentclass: article
+    margin-left: 30mm
+    margin-right: 30mm
+    toc: false
+  html:
+    theme: cosmo
+    css: ../styles.css
+    toc: false
+    code-copy: true
+    code-block-background: true
 execute:
   freeze: auto
 ---
+
 
 ## Comments
 
@@ -33,10 +46,10 @@ execute:
        a <- matrix(rnorm(n), ncol = 100)
        a <- round(a, 10)
 
-       fn_csv <- tempfile(fileext = 'csv')
+       fn_csv <- tempfile(fileext = '.csv')
        write.table(a, file = fn_csv, quote=FALSE, row.names=FALSE,
                       col.names = FALSE, sep=',')
-       fn_rda <- tempfile(fileext = 'Rda')
+       fn_rda <- tempfile(fileext = '.Rda')
        save(a, file = fn_rda, compress = FALSE)
 
        file.size(fn_csv)
@@ -48,7 +61,7 @@ execute:
        ```{r, ps2b, cache=TRUE}
        b <- a
        dim(b) <- c(1e7, 1)  ## change to one column by adjusting attribute
-       fn_csv_onecol <- tempfile(fileext = 'csv')
+       fn_csv_onecol <- tempfile(fileext = '.csv')
        write.table(b, file = fn_csv_onecol, quote=FALSE,
             row.names=FALSE, col.names = FALSE, sep=',')
        file.size(fn_csv_onecol)
@@ -66,11 +79,11 @@ execute:
     d. Explain why `tmp.Rda` is so much bigger than `tmp2.Rda` given they both contain the same number of numeric values. 
 
        ```{r, ps2d, cache=TRUE}
-       fn1_rda <- tempfile(fileext = 'Rda')
+       fn1_rda <- tempfile(fileext = '.Rda')
        save(a, file = fn1_rda)
        file.size(fn1_rda)
        b <- rep(rnorm(1), 1e7)
-       fn2_rda <- tempfile(fileext = 'Rda')
+       fn2_rda <- tempfile(fileext = '.Rda')
        save(b, file = fn2_rda)
        file.size(fn2_rda)
        ```
@@ -111,8 +124,7 @@ execute:
         extract the Scholar ID (and possibly for other things) from the
         output of the various *rvest* functions. I recommend functions
         from the `stringr` package (we'll see these in Unit 5 and you
-        can find information in Section 2.1.2 of the string processing
-        tutorial), in particular: `str_detect()`, `str_extract()`,
+        can find information in the [string processing tutorial](https://berkeley-scf.github.io/tutorial-string-processing/text-manipulation)), in particular: `str_detect()`, `str_extract()`,
         `str_split()`, and `str_replace()`. You should NOT need to use
         regular expressions (which we'll cover in Unit 5), but you can
         if you want/know how to. Finally if you get an error message
