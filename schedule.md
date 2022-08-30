@@ -40,14 +40,15 @@ Submit your solutions on Gradescope and (for problem sets but not assignments) v
 | Assignment or PS | Date | Time | Notes |
 |----|----|----|----|
 | bash shell problems | Friday Sep. 2 | 10 am | I recomend you do at least some of the tutorial reading before class on Aug. 31 |
-| PS 1 | TBD | TBD | |
+| PS 1 | Wednesday Sep. 9 | 10 am | |
 | regex problems | TBD | TBD | |
 
 ## Quiz schedule
 
 Quizzes are in-person only. 
 
-Dates: TBD
+Quiz 1: Monday October 24 in class.
+Quiz 2: Monday November 21 in class.
 
 ## Project schedule
 

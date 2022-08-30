@@ -29,6 +29,8 @@ website:
           text: "Unit 1"
         - file: units/unit2-dataTech.Rmd
           text: "Unit 2"
+        - file: units/unit3-bash.Rmd
+          text: "Unit 3"
         - file: units/unit4-goodPractices.md
           text: "Unit 4"
     - id: software
