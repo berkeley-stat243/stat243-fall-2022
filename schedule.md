@@ -39,7 +39,7 @@ Submit your solutions on Gradescope and (for problem sets but not assignments) v
 
 | Assignment or PS | Date | Time | Notes |
 |----|----|----|----|
-| bash shell problems | Friday Sep. 2 | 10 am | I recomend you do at least some of the tutorial reading before class on Aug. 31 |
+| [bash shell problems (first 10)](https://berkeley-scf.github.io/tutorial-using-bash/exercises) | Friday Sep. 2 | 10 am | I recomend you do at least some of the tutorial reading before class on Aug. 31 |
 | PS 1 [HTML](ps/ps1.html)[PDF](ps/ps1.pdf) | Wednesday Sep. 9 | 10 am | |
 | regex problems | TBD | TBD | |
 
