@@ -2,6 +2,18 @@
 title: "Good practices: coding practices, debugging, and reproducible research"
 author: "Chris Paciorek"
 date: "2022-08-29"
+format:
+  pdf:
+    documentclass: article
+    margin-left: 30mm
+    margin-right: 30mm
+    toc: true
+  html:
+    theme: cosmo
+    css: ../styles.css
+    toc: true
+    code-copy: true
+    code-block-background: true
 ---
 
 [PDF](./unit4-goodPractices.pdf){.btn .btn-primary}

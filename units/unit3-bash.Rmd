@@ -2,9 +2,23 @@
 title: "The bash shell and UNIX utilities"
 author: "Chris Paciorek"
 date: "2022-08-30"
+format:
+  pdf:
+    documentclass: article
+    margin-left: 30mm
+    margin-right: 30mm
+    toc: true
+  html:
+    theme: cosmo
+    css: ../styles.css
+    toc: true
+    code-copy: true
+    code-block-background: true
+execute:
+  freeze: auto
 ---
 
-[PDF](./unit4-bash.pdf){.btn .btn-primary}
+[PDF](./unit3-bash.pdf){.btn .btn-primary}
 
 Reference:
 
