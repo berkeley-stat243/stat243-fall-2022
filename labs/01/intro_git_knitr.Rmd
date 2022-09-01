@@ -166,10 +166,10 @@ In summary, if you want to use git add files to a GitHub repo, the steps are:
 
 **Step 4:** _Push_ the update to the main branch.
 
-### Exercises
+### Practice exercises
 
 :::{.callout-tip collapse="true"}
-## Exercise 1: Add a `.gitignore` to your PS submission repo.
+## Practice exercise 1: Add a `.gitignore` to your PS submission repo.
 
 Now that you know how to clone a repo, add files, commit, and push to GitHub, try the following on your laptop:
 
@@ -193,7 +193,10 @@ a. Add the changes, commit with an informative message, and push them to the rem
 :::
 
 :::{.callout-tip collapse="true"}
-## Exercise 2: Clone your PS submission repo on the SCF.
+## Practice exercise 2: Clone your PS submission repo on the SCF.
+
+In general, you can feel free to work with your repo on your laptop. But in case
+you need the code on the SCF, you can try the following steps:
 
 a. `ssh` to one of the SCF machines.
 
