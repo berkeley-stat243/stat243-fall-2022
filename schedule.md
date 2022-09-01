@@ -15,6 +15,7 @@
 |     | Friday | 2022-09-02 | 10 am | Required: Bash shell tutorial and exercises (see Details below) |
 |     | |  | lab | Required: Lab 1 on using course tools and problem set submission (see Details below)|
 | 3 | Wednesday | 2022-09-07 | 4:00-5:30 pm | Optional: [Introduction to LaTeX session](https://berkeley.libcal.com/calendar/workshops) run by the library (see Details below)|
+| | Wednesday | 2022-09-07 | 10 am | PS1 due | on Gradescope and via GitHub commit |
 |     | Friday | 2022-09-09 | 10 am | Regular expression tutorial and exercises (see Details below) |
 |     |  |  | lab | Required: Lab 2 on assertions and testing |
 
