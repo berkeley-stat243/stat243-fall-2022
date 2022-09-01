@@ -15,6 +15,7 @@ website:
       - file: schedule.md
         text: Schedule
       - sidebar:units
+      - sidebar:labs
       - sidebar:software
       - href: https://edstem.org/us/courses/25090/discussion/
         text: "Discussion"
@@ -33,6 +34,11 @@ website:
           text: "Unit 3"
         - file: units/unit4-goodPractices.md
           text: "Unit 4"
+    - id: labs
+      title: "Labs"
+      contents:
+        - file: labs/01/intro_git_knitr.Rmd
+          text: "Lab 1"
     - id: software
       title: "Software"
       contents:
