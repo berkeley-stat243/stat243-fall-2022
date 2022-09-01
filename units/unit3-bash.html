@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.165">
+<meta name="generator" content="quarto-1.1.168">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -387,8 +387,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><code>man grep</code> also indicates it can take input from a FILE or from <em>stdin</em>. However, we want grep to operate on the content of the files indicated in stdin. So we use <em>xargs</em> to convert <em>stdin</em> to be recognized as arguments, which then are the FILE inputs to <em>grep</em>.</p>
 <p>Here are some of the ways we can pass information from a command to somewhere else:</p>
 <ul>
-<li>piping allows us to pass information from one command to another command</li>
-<li><code>$()</code> allows us to store the result of a command in a variable</li>
+<li>piping allows us to pass information from one command to another command via stdout to stdin</li>
+<li><code>$()</code> allows us to store the result of a command in a variable
+<ul>
+<li>also used to create a temporary variable to pass the output from one command as an option or argument (e.g., the FILE argument) of another command</li>
+</ul></li>
 <li>file redirection operators such as <code>&gt;</code> and <code>&gt;&gt;</code> allow us to pass information from a command into a file</li>
 </ul>
 <p><strong>Our fourth mission</strong>: write a function that will move the most recent <em>n</em> files in your Downloads directory to another directory.</p>
