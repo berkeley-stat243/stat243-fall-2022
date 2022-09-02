@@ -64,10 +64,27 @@ couple notes to keep in mind when turning in your problem sets.
 
 There are two ways to start a repository:
 
-- Create the repository on GitHub using your browser and then use `git clone`.
-- Use `git init` on your machine and then link it to a remote server, e.g. GitHub..
+1. Creating the repository on GitHub using your browser and then use `git clone`.
+2. Using `git init` on your machine and then link it to a remote server, e.g. GitHub.
 
-We're going to cover creating one online using Berkeley's GitHub Enterprise instance:
+:::{.callout-warning collapse="true"}
+## Option 1 is usually the right choice
+
+Use option 2. only if you already have a local repo and later decide you want to
+create a remote copy on a service such as GitHub. For this course, this won't be
+necessary.
+
+But if you do need to use `git init`, then when you first create a local repo on
+your machine using `git init`, the default branch name is `master`. However, the
+default branch when you create one on GitHub is called `main`, so if you later
+decide to add a remote copy of your local repo to GitHub, you will need to
+update the name of your default branch. After creating the blank repo on GitHub
+(no `README.md` or `.gitignore`), run the commands that GitHub provides in your
+local repo to change the default branch from `master` to `main`.
+
+:::
+
+Today, **we're going to cover option 1.** by creating one online using Berkeley's GitHub Enterprise instance:
 
 - Open your browser and Sign in to your [github.berkeley.edu](https://github.berkeley.edu/) account.
 - Locate the `+` button (next to your avatar).
@@ -77,17 +94,6 @@ We're going to cover creating one online using Berkeley's GitHub Enterprise inst
 - Check "Add .gitignore" and type "R" to find one that is tailored to R projects. This stops items like `.Rhistory` files from being added to your repo.
 - Click the green button __Create repository__.
 
-:::{.callout-note}
-
-When you first create a local repo on your machine using `git init`, the default
-branch name is `master`. However, the default branch when you create one on
-GitHub is called `main`, so if you later decide to add a remote copy of your
-local repo to GitHub, you will need to update the name of your default branch.
-After creating the blank repo on GitHub (no `README.md` or `.gitignore`), run
-the commands that GitHub provides in your local repo to change the default
-branch from `master` to `main`.
-
-:::
 
 
 ### Adding a README file
