@@ -22,6 +22,8 @@ execute:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+[PDF](./intro_git_knitr.pdf){.btn .btn-primary}
+
 In this section we will learn and dicuss some tools that you will need to
 complete your first problem set, namely git and knitr (either Quarto, R
 Markdown, or Rtex). At the end there are also resources about code style and a
@@ -319,14 +321,13 @@ a. Back on the SCF, `cd` into your repo and run `git pull` to update that copy
 
 In the menu bar of RStudio, click on __File__, then __New File__,
 and choose __R Markdown__. Select the default option (Document),
-and click __Ok__. RStudio will open a new `.Rmd` file in the source pane.
+and click __OK__. RStudio will open a new `.Rmd` file in the source pane.
 And you should be able to see a file with some default content.
 
-Locate the button __Knit HTML__, the one with an icon of a ball of yarn and two 
+Locate the button __Knit__, the one with an icon of a ball of yarn and two 
 needles. Click the button (knit to HTML) so you can see how `Rmd` files are 
 rendered and displayed as HTML documents. Alternatively, you can use a keyboard 
-shortcut: in Mac `Command+Shift+K`, in Windows `Ctrl+Shift+K`
-
+shortcut: in Mac `Command+Shift+K`, in Windows and Linux `Ctrl+Shift+K`
 
 ### What is an `Rmd` file?
 
@@ -334,40 +335,38 @@ __Rmd__ files are a special type of file, referred to as a _dynamic document_.
 This is the fancy term we use to describe a document that allows us to combine 
 narrative (text) with R code in one single file.
 
-Rmd files are plain text files. This means that you can open an Rmd file 
-with any text editor (not just RStudio) and being able to see and edit its
-contents. 
+Rmd files are plain text files. This means that you can open an Rmd file with
+any text editor (not just RStudio) to see and edit its contents.
 
 The main idea behind dynamic documents is simple yet very powerful: instead of 
 working with two separate files, one that contains the R code, and 
 another one that contains the narrative, you use an `.Rmd` file to include 
 both the commands and the narrative.
 
-One of the main advantages of this paradigm, 
-is that you avoid having to copy results from your computations and paste them 
-into a report file. In fact, there are more complex ways to work with dynamic 
-documents and source files. But the core idea is the same: combine narrative 
-and code in a way that you let the computer do the manual, repetitive, 
-and time consuming job.
+One of the main advantages of this paradigm is that you avoid having to copy
+results from your computations and paste them into a report file. In fact, there
+are more complex ways to work with dynamic documents and source files. But the
+core idea is the same: combine narrative and code in a way that lets the
+computer do the manual, repetitive, and time consuming job.
 
-Rmd files is just one type of dynamic document that you will find in RStudio.
-In fact, RStudio provides other file formats that can be used 
-as dynamic documents: e.g. `.Rnw`, `.Rpres`, `.Rhtml`, etc.
+Rmd is just one type of dynamic document that you will find in RStudio. In fact,
+RStudio provides other file formats that can be used as dynamic documents: e.g.,
+`.Rnw` (R Sweave), `.Rhtml` (R HTML), and `.qmd` (Quarto).
 
 
 ### Anatomy of an `Rmd` file
 
-The structure of an `.Rmd` file can be divided in two parts: 1) a __YAML header__, 
-and 2) the __body__ of the document. In addition to this structure, you should 
-know that `.Rmd` files use three types of syntaxes: YAML, Markdown, and R.
+The structure of an `.Rmd` file can be divided in two parts: 1) a __YAML
+header__ (also called YAML metadata), and 2) the __body__ of the document. In
+addition to this structure, you should know that `.Rmd` files typically use
+three types of syntaxes: YAML, Markdown, and R.
 
-The _YAML header_ consists of the first few lines at the top of the file. 
-This header is established by a set of three dashes `---` as delimiters 
-(one starting set, and one ending set). This part of the file requires you 
-to use YAML syntax (Yet Another Markup Language.)
-Within the delimiter sets of dashes, you specify settings (or metadata) that 
-will apply to the entire document. Some of the common 
-options are things like:
+The _YAML header_ consists of the first few lines at the top of the file. This
+header is established by a set of three dashes `---` as delimiters (one starting
+set, and one ending set). This part of the file requires you to use YAML syntax
+(Yet Another Markup Language.) Within the delimiter sets of dashes, you specify
+settings (or metadata) that will apply to the entire document. Some of the
+common options are things like:
 
 - `title`
 - `author`
@@ -378,12 +377,7 @@ The _body_ of the document is everything below the YAML header. It consists
 of a mix of narrative and R code. All the text that is narrative is written 
 in a markup syntax called __Markdown__ (although you can also use LaTeX math 
 notation). In turn, all the text that is code 
-is written in R syntax inside _blocks of code_. 
-
-There are two types of blocks of code: 1) __code chunks__, and 
-2) __inline code__. Code chunks are lines of text separated from any lines of 
-narrative text. Inline code is code inserted within a line of narrative text .
-
+is written in R syntax inside _blocks of code_ (see below). 
 
 ### How does an Rmd file work?
 
@@ -429,7 +423,93 @@ In an Rmd file, a hash `#` that is inside a code chunk will be treated as
 an R comment. A hash outside a code chunk, will be treated as markdown syntax, 
 making its associated text a given type of heading.
 
-### Code chunks
+### Blocks of code: Code chunks vs. inline code
+
+There are two types of blocks of code: 
+
+1. __code chunks__
+2. __inline code__.
+
+#### Inline code
+
+Inline code is code inserted within a line of narrative text between backticks
+(`). For example, here's a small bit of raw Markdown:
+
+````{verbatim, lang = "markdown"}
+**Important**: Edit your `README.md`.
+````
+And here's what that looks like when rendered:
+
+**Important**: Edit your `README.md`.
+
+Oftentimes, inline code blocks are simply a way to improve the formatting of our
+document and aren't used for computation, but they can run R code using the following syntax:
+
+````{verbatim, lang = "markdown"}
+I like to eat `r pi`.
+````
+Result: I like to eat `r pi`.
+
+This is helpful when you're describing results and don't want to hard-code a
+number or the amount of repititions you ran. Instead, you can use variables from
+previous code chunks in the document.
+
+#### Code chunks
+
+These are the most important blocks of code because they typically include the R
+computations that will run when you knit the document.
+
+Code chunks are lines of text (typically in the syntax of a specific programming
+language such as R) separated from any lines of narrative (in Markdown syntax)
+by the special Markdown syntax ``` (three backticks). For example:
+
+````{verbatim, lang = "markdown"}
+```{r my-chunk, echo = FALSE}
+
+par(mfrow = c(2, 3))
+
+for (n in 10^seq(0, 5)) {
+    x <- rbinom(n, 100, 0.5)
+    hist(x)
+}
+
+par(mfrow = c(1, 1))
+
+```
+````
+
+The opening backticks are followed by curly braces, the language (`r` for R), an
+optional (but highly recommended) name for the chunk (`my-chunk` here), and then
+comma-separated chunk options (see below). 
+
+Note the final three backticks at the bottom of the chunk --
+these close the chunk and allow you to return to the narrative in Markdown. By
+adding the above example to an `.Rmd`, you would see the following output:
+
+```{r my-chunk, echo = FALSE}
+
+par(mfrow = c(2, 3))
+
+for (n in 10^seq(0, 5)) {
+    x <- rbinom(n, 100, 0.5)
+    hist(x)
+}
+
+par(mfrow = c(1, 1))
+
+```
+
+The details aren't super important, but for those that are curious here is what
+happens when we run **Knit**:
+
+- `knitr` evaluates the chunks that start with ````{r}` and inserts the results
+into a intermediary markdown file. 
+- It then calls Pandoc which converts the intermediary markdown to the next
+format (possibly the output), repeating until the output format specified in the
+YAML header is reached.
+- For example, for PDF output, the sequence is: `.Rmd` -> `.md` -> `.tex` -> `.pdf`
+
+#### Code chunk options
 
 There are dozens of options available to control the executation of the code, 
 the formatting and display of both the commands and the output, the display 
@@ -458,10 +538,6 @@ basic options you should become familiar with:
     + the default is a double hash `##`
     + `""` empty character (to have a cleaner display)
     
-Additionally, you can include inline code within your work. If you're describing 
-results, you don't want to hard-code a number or the amount of repititions you ran. 
-Instead, include variables or short functions as **r 2 + 2**, which is rendered as `r 2+2`.
-
 ### LaTeX
 
 Rmarkdown files render LaTeX through an external generator. This means that you can 
