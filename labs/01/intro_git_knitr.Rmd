@@ -37,7 +37,7 @@ couple notes to keep in mind when turning in your problem sets.
 
 ### Useful Links
 - A nice tutorial is available on the [Berkeley SCF github repo](https://github.com/berkeley-scf/tutorial-git-basics)
-- Save username and password:
+- Using Git without having to enter your password over and over:
   - Option 1: Use [Git Credential Manager](https://docs.github.com/en/get-started/getting-started-with-git/caching-your-github-credentials-in-git#git-credential-manager) and HTTPS clone method, e.g., 
   
       ```bash
@@ -51,6 +51,12 @@ couple notes to keep in mind when turning in your problem sets.
       ```
   
   - Either way, be sure to follow the instructions for your OS (Mac, Windows, or Linux) by selecting it at the top of the page.
+  
+- [git-scm.com](https://git-scm.com) has a number useful resources for learning Git, including:
+
+    - [Pro Git book](https://git-scm.com/book/en/v2)
+    
+    - [Command reference manual](https://git-scm.com/docs)
 
 ### Create a New GitHub Repository
 
@@ -109,7 +115,7 @@ recorded by Git. You can confirm this by checking the status of the repo:
 git status
 ```
 
-Notice that Git knows that `README.md` is untracked. So let's add the changes to
+Notice that Git knows that `README.md` is untracked, so let's add the changes to
 Git's database:
 
 ```bash
@@ -122,11 +128,59 @@ Check the status of the repo again:
 git status
 ```
 
-Now Git is tracking the file `README.md`. Next, the changes need to
-__committed__ to the repository.
+Now Git is tracking the file `README.md`. Next, the changes need to _committed_
+to the repository. You can use the `-m` option to write a message inline. It's
+a good idea to keep your commit messages succinct but informative.
 
 ```bash
 git commit -m "Add README"
+```
+
+In general, it is best to make frequent small commits rather than infrequent
+large commits. For example, you might want to make a single commit for each
+problem in a problem set, rather than a single commit for the full problem set.
+
+:::{.callout-warning}
+
+If you run `git commit` without `-m`, Git will launch a default text editor,
+usually `vi` or `vim`. If you this happens unintentionally, you can quit by
+typing `ESC` followed by `:` and then `q!` followed by `Enter`. 
+
+You can specify which editor Git should use using `git config`. Take a look at
+this
+[documentation](https://git-scm.com/book/en/v2/Appendix-C%3A-Git-Commands-Setup-and-Config)
+to learn how.
+
+:::
+
+### Examining changes while editing
+
+Once you create a commit, it becomes a part of your repo's history. You can see
+the history using `git log`:
+
+```bash
+# this usually opens in `less`
+# type `Q` to quit and return to the bash shell
+git log
+```
+
+Let's make a change to `README.md`, which is now tracked by Git.
+
+```bash
+echo "Nothing to see here." >> README.md
+```
+
+`git status` will show that `README.md` was modified, along with other
+useful information. But it won't actually show the _differences_ between your
+repo's history and the current un-committed state. To see this, there is another
+extremely useful command:
+
+```bash
+# this also typically opens in `less`
+git diff
+
+# you can also check a specific file or directory
+git diff README.md
 ```
 
 ### Pushing changes to a remote repo
@@ -149,7 +203,9 @@ git push origin main
 Go to your Github repository and refresh the browser. If everything went fine,
 you should be able to see the contents of your customized `README.md` file.
 
-If you or a collaborator make changes on your remote repo you must __pull__ the remote repo into your local repo before you attempt to __push__ the changes you made locally.  
+If you or a collaborator make changes on your remote repo you must __pull__ the
+remote repo into your local repo before you attempt to __push__ the changes you
+made locally.
 
 ```bash
 git pull
@@ -158,7 +214,7 @@ In summary, if you want to use git add files to a GitHub repo, the steps are:
 
 **Step 0:** _Pull_ the repo (This is necessary if your local repo is "out of date'', meaning there are changes on the remote repo that are not present in your local repo. This is not necessary if your local repo contains the most recently made changes.)
 
-**Step 1:** Make edits to/create new files in your local repo.
+**Step 1:** Make edits to/create new files in your local repo. Check on _status_ and _diff_erences frequently.
 
 **Step 2:** _Add_ the files you edited/created.
 
@@ -169,11 +225,39 @@ In summary, if you want to use git add files to a GitHub repo, the steps are:
 ### Practice exercises
 
 :::{.callout-tip collapse="true"}
+## Practice exercise 0: Configure git and clone the course website repo
+
+a. Use `git config` to configure your identity, like the following example:
+
+    ```bash
+    git config --global user.name "Oski Bear"
+    git config --global user.email oski@berkeley.edu
+    ```
+    
+    For more info on configuring Git, see [here](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup).
+
+
+a. If you haven't already, clone the GitHub repo for the course website:
+
+    ```bash
+    # HTTPS
+    git clone https://github.com/berkeley-stat243/stat243-fall-2022.git
+
+    # SSH
+    git clone git@github.com:berkeley-stat243/stat243-fall-2022.git
+    ```
+
+    You can find the source for this lab in `labs/01/intro_git_knitr.Rmd`
+    
+:::
+
+:::{.callout-tip collapse="true"}
 ## Practice exercise 1: Add a `.gitignore` to your PS submission repo.
 
 Now that you know how to clone a repo, add files, commit, and push to GitHub, try the following on your laptop:
 
 a. Clone your PS submission repo.
+
 a. Copy the R-tailored `.gitignore` file from the demo repo you created above to the root directory of your local copy of the repo.
 
 a. `cd` to your local repo and use `git status` to confirm that `.gitignore` is
@@ -220,9 +304,9 @@ a. Back on the SCF, `cd` into your repo and run `git pull` to update that copy
 ### Learning Objectives:
 
  - Differentiate between `.R` and `.Rmd` files
- - To understand dynamic documents
- - To gain familiarity with R Markdown `.Rmd` files
- - To gain familiarity with code chunks
+ - Understand dynamic documents
+ - Gain familiarity with R Markdown `.Rmd` files
+ - Gain familiarity with code chunks
 
 ### Useful Links
 - SCF tutorial on [dynamic documents](https://github.com/berkeley-scf/tutorial-dynamic-docs)
