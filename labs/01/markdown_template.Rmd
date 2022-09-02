@@ -3,6 +3,8 @@ title: "R Markdown Template"
 author: "Andrew Vaughn"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: rmarkdown::pdf_document
+execute:
+  freeze: auto
 ---
 
 ```{r setup, include=FALSE}
