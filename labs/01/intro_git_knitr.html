@@ -365,11 +365,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="create-a-new-github-repository" class="level3">
 <h3 class="anchored" data-anchor-id="create-a-new-github-repository">Create a New GitHub Repository</h3>
 <p>There are two ways to start a repository:</p>
-<ul>
-<li>Create the repository on GitHub using your browser and then use <code>git clone</code>.</li>
-<li>Use <code>git init</code> on your machine and then link it to a remote server, e.g.&nbsp;GitHub..</li>
-</ul>
-<p>We’re going to cover creating one online using Berkeley’s GitHub Enterprise instance:</p>
+<ol type="1">
+<li>Creating the repository on GitHub using your browser and then use <code>git clone</code>.</li>
+<li>Using <code>git init</code> on your machine and then link it to a remote server, e.g.&nbsp;GitHub.</li>
+</ol>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Option 1 is usually the right choice
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Use option 2. only if you already have a local repo and later decide you want to create a remote copy on a service such as GitHub. For this course, this won’t be necessary.</p>
+<p>But if you do need to use <code>git init</code>, then when you first create a local repo on your machine using <code>git init</code>, the default branch name is <code>master</code>. However, the default branch when you create one on GitHub is called <code>main</code>, so if you later decide to add a remote copy of your local repo to GitHub, you will need to update the name of your default branch. After creating the blank repo on GitHub (no <code>README.md</code> or <code>.gitignore</code>), run the commands that GitHub provides in your local repo to change the default branch from <code>master</code> to <code>main</code>.</p>
+</div>
+</div>
+</div>
+<p>Today, <strong>we’re going to cover option 1.</strong> by creating one online using Berkeley’s GitHub Enterprise instance:</p>
 <ul>
 <li>Open your browser and Sign in to your <a href="https://github.berkeley.edu/">github.berkeley.edu</a> account.</li>
 <li>Locate the <code>+</code> button (next to your avatar).</li>
@@ -379,19 +396,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Check “Add .gitignore” and type “R” to find one that is tailored to R projects. This stops items like <code>.Rhistory</code> files from being added to your repo.</li>
 <li>Click the green button <strong>Create repository</strong>.</li>
 </ul>
-<div class="callout-note callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>When you first create a local repo on your machine using <code>git init</code>, the default branch name is <code>master</code>. However, the default branch when you create one on GitHub is called <code>main</code>, so if you later decide to add a remote copy of your local repo to GitHub, you will need to update the name of your default branch. After creating the blank repo on GitHub (no <code>README.md</code> or <code>.gitignore</code>), run the commands that GitHub provides in your local repo to change the default branch from <code>master</code> to <code>main</code>.</p>
-</div>
-</div>
 </section>
 <section id="adding-a-readme-file" class="level3">
 <h3 class="anchored" data-anchor-id="adding-a-readme-file">Adding a README file</h3>
