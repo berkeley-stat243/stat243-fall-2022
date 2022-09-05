@@ -39,6 +39,8 @@ website:
       contents:
         - file: labs/01/intro_git_knitr.Rmd
           text: "Lab 1"
+        - file: labs/02/assertionsAndTesting.Rmd
+          text: "Lab 2"
     - id: software
       title: "Software"
       contents:
