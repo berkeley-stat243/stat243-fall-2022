@@ -43,6 +43,7 @@ Submit your solutions on Gradescope and (for problem sets but not assignments) v
 | [bash shell problems (first 10)](https://berkeley-scf.github.io/tutorial-using-bash/exercises) | Friday Sep. 2 | 10 am | I recomend you do at least some of the tutorial reading before class on Aug. 31 |
 | PS 1 [(HTML)](ps/ps1.html) [(PDF)](ps/ps1.pdf) | Wednesday Sep. 7 | 10 am | |
 | regex problems | Friday Sep. 9 | 10 am | |
+| [regular expression reading and problems](https://www.gradescope.com/courses/425343/assignments/2227720)| Friday Sep. 9 | 10 am | |
 
 ## Quiz schedule
 
