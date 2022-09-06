@@ -769,7 +769,7 @@ lm(formula = y ~ x)
 
 Coefficients:
 (Intercept)            x  
-      0.458        0.309  </code></pre>
+     0.4278      -0.0354  </code></pre>
 </div>
 </div>
 </section>
@@ -898,12 +898,12 @@ y = x * 7.1;</code></pre>
 <div class="sourceCode cell-code" id="cb110"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a>qs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> 2.5% 97.5% 
--1.97  1.99 </code></pre>
+-1.99  1.99 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a>qs[<span class="dv">1</span>] <span class="sc">+</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>2.5% 
-1.03 </code></pre>
+1.01 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb114"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="fu">object.size</span>(qs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -915,7 +915,7 @@ y = x * 7.1;</code></pre>
 <div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(qs) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
 <span id="cb116-2"><a href="#cb116-2" aria-hidden="true" tabindex="-1"></a>qs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -1.97  1.99</code></pre>
+<pre><code>[1] -1.99  1.99</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="fu">object.size</span>(qs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1062,12 +1062,12 @@ Levels: advanced basic minimal proficient</code></pre>
 <span id="cb152-2"><a href="#cb152-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">label =</span> <span class="fu">rep</span>(<span class="st">'a'</span>, n), <span class="at">val1 =</span> <span class="fu">rnorm</span>(n), <span class="at">val2 =</span> <span class="fu">rnorm</span>(n))</span>
 <span id="cb152-3"><a href="#cb152-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  label   val1   val2
-1     a  0.330 -0.286
-2     a -0.777  1.162
-3     a -0.106  0.256
-4     a  0.181  0.102
-5     a  0.332  0.715</code></pre>
+<pre><code>  label   val1    val2
+1     a -0.127 -0.9683
+2     a -0.413 -1.3765
+3     a -0.353 -0.0309
+4     a -2.106  0.8249
+5     a  0.198 -0.4522</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb154"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb154-1"><a href="#cb154-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Why does the following not work?</span></span>
 <span id="cb154-2"><a href="#cb154-2" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>( <span class="fu">apply</span>(df, <span class="dv">1</span>, <span class="cf">function</span>(x) x[<span class="dv">2</span>] <span class="sc">+</span> x[<span class="dv">3</span>]) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1077,7 +1077,7 @@ Levels: advanced basic minimal proficient</code></pre>
 <div class="sourceCode cell-code" id="cb156"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb156-1"><a href="#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Instead, this will work. Why?</span></span>
 <span id="cb156-2"><a href="#cb156-2" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(df[ , <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>], <span class="dv">1</span>, <span class="cf">function</span>(x) x[<span class="dv">1</span>] <span class="sc">+</span> x[<span class="dv">2</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.0445 0.3850 0.1497 0.2824 1.0476</code></pre>
+<pre><code>[1] -1.095 -1.790 -0.384 -1.281 -0.254</code></pre>
 </div>
 </div>
 </section>
