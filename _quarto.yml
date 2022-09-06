@@ -34,7 +34,7 @@ website:
           text: "Unit 3"
         - file: units/unit4-goodPractices.md
           text: "Unit 4"
-        - file: units/unit4-programming.md
+        - file: units/unit5-programming.Rmd
           text: "Unit 5"
     - id: labs
       title: "Labs"

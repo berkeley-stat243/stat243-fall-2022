@@ -27,7 +27,7 @@ execute:
 This unit covers a variety of programming concepts, illustrated in the
 context of R and with comments about and connections to other languages. It also serves as a way to teach some advanced features of
 R. In general the concepts are relevant in other languages, though other
-languages may implement things differently. One of my goals here for us
+languages may implement things differently. One of my goals for the unit is for us
 to think about why things are the way they are in R. I.e., what
 principles were used in creating the language and what choices were
 made? While other languages use different principles and made different 
@@ -41,12 +41,11 @@ References:
     and [R language
     manual](http://cran.r-project.org/doc/manuals/R-lang.html) (R-lang),
     both on CRAN.
--   Venables and Ripley, Modern Applied Statistics with S
 -   Murrell, Introduction to Data Technologies
 
 I'll likely refer to R syntax as *statements* or *expressions*, meaning
  any code that is a valid, complete R expression. But note that the term *expression* also means a specific type of object
-within the R language, as seen in the section on [Computing on the Language](#computing-on-the-language).
+within the R language, as seen late in this Unit when we discuss computing on the language.
 
 # 1. Text manipulation, string processing and regular expressions (regex)
 
@@ -110,7 +109,7 @@ grep("[\tz]", tmp)   ## search for a tab or a 'z'
 ```
 
 As a result, in R we often need two backslashes when working with
-regular expressions. In these examples, the first backslash says to
+regular expressions. In the next examples, the first backslash says to
 interpret the next backslash literally, with the second backslash being
 used to indicate that the caret (\^) should be interpreted literally and
 not as a special character in the regular expression syntax.
@@ -135,7 +134,7 @@ grep("^.{3}$", c("abc", "1234", "def"))
 ## Search for a period (as a regular character)
 grep("\\.", c("3.9", "27", "4.2"))
 
-## This fails (and the Rmd won't compile because 
+## This fails (and the Rmd won't compile) because 
 ## '\.' is not an escape sequence (i.e., a special character):
 ## grep("\.", c("3.9", "27")))
 ## Error: '\.' is an unrecognized escape in character string starting ""\."
@@ -201,8 +200,7 @@ in R: *getwd*, *setwd*, *source*, *pdf*, *save*, *save.image*, *load*.
     noting that we can save the result of a system call to an R object:
 
     ```{r}
-    system("ls -al") 
-    ## knitr/Sweave doesn't seem to show the output of system()
+    system("ls -al")   ## results apparently not shown when compiled...
     files <- system("ls", intern = TRUE)
     files[1:5]
     ```
@@ -534,7 +532,7 @@ More complex types in R (and in Python) often use references (*pointers*, aka *a
 You should be familiar with vectors as the basic data structure in R,
 with character, integer, numeric, etc. classes. Vectors are either
 *atomic vectors* or *lists*. Atomic vectors generally contain one of the
-four following types: *logical*, *integer*, *double/numeric*, and
+four following types: *logical*, *integer*, *double* (i.e., *numeric*), and
 *character*.
 
 Everything in R is an object and all objects have a class. For simple
@@ -612,9 +610,6 @@ A common use of attributes is that rows and columns may be named in
 matrices and data frames, and elements in vectors:
 
 ```{r}
-row.names(mtcars)[1:6]
-names(mtcars)
-attributes(mtcars)
 df <- data.frame(x = 1:2, y = 3:4)
 attributes(df)
 row.names(df) <- c("first", "second")
@@ -641,7 +636,9 @@ as.factor(c("a", "b", "c"))
 Some common conversions are converting numbers that are being
 interpreted as characters into actual numbers, converting between
 factors and characters, and converting between logical TRUE/FALSE
-vectors and numeric 1/0 vectors. In some cases R will automatically do
+vectors and numeric 1/0 vectors. 
+
+In some cases R will automatically do
 conversions behind the scenes in a smart way (or occasionally not so
 smart way). Consider these examples of implicit coercion:
 
