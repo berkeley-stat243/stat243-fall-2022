@@ -43,6 +43,14 @@ References:
     both on CRAN.
 -   Murrell, Introduction to Data Technologies
 
+(Optional) Videos
+
+There are various videos from 2020 in the bCourses Media Gallery that you
+can use for reference if you want to:
+
+1. Strings and regular expressions
+3. Type/class coercion 
+
 I'll likely refer to R syntax as *statements* or *expressions*, meaning
  any code that is a valid, complete R expression. But note that the term *expression* also means a specific type of object
 within the R language, as seen late in this Unit when we discuss computing on the language.
