@@ -24,15 +24,6 @@ execute:
 > **Note**
 > This Unit will be posted in phases as I get the material ready. Currently only Sections 1-4 are available.
 
-This unit covers a variety of programming concepts, illustrated in the
-context of R and with comments about and connections to other languages. It also serves as a way to teach some advanced features of
-R. In general the concepts are relevant in other languages, though other
-languages may implement things differently. One of my goals for the unit is for us
-to think about why things are the way they are in R. I.e., what
-principles were used in creating the language and what choices were
-made? While other languages use different principles and made different 
-choices, understanding what one language does in detail will be helpful when you
-are learning another language or choosing a language for a project.
 
 References:
 
@@ -46,10 +37,23 @@ References:
 (Optional) Videos
 
 There are various videos from 2020 in the bCourses Media Gallery that you
-can use for reference if you want to:
+can use for reference if you want to. Note that I've reorganized the material in this Unit relative to 2020, so the section numbers and ordering in the videos may differ from that in the current Unit, but you should be able to match things up fairly easily.
 
 1. Strings and regular expressions
-3. Type/class coercion 
+3. Type/class coercion
+
+
+# Overview
+
+This unit covers a variety of programming concepts, illustrated in the
+context of R and with comments about and connections to other languages. It also serves as a way to teach some advanced features of
+R. In general the concepts are relevant in other languages, though other
+languages may implement things differently. One of my goals for the unit is for us
+to think about why things are the way they are in R. I.e., what
+principles were used in creating the language and what choices were
+made? While other languages use different principles and made different 
+choices, understanding what one language does in detail will be helpful when you
+are learning another language or choosing a language for a project.
 
 I'll likely refer to R syntax as *statements* or *expressions*, meaning
  any code that is a valid, complete R expression. But note that the term *expression* also means a specific type of object
