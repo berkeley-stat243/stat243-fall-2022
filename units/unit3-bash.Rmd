@@ -285,8 +285,7 @@ who didn't write the code.
     *cpds.csv* in a programmatic way.
 2.  Have what is printed out to the screen look like "Belgium 6.2".
 3.  Now store the unique values of the countries in a variable, first
-    stripping out the quotation marks and removing the space in "New
-    Zealand", which causes problems because of the space in its name.
+    stripping out the quotation marks.
 4.  Figure out how to automate step 1 to do the calculation for all the
     countries and print to the screen.
 5.  How would you instead store the results in a new file?
