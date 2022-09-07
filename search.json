@@ -557,7 +557,7 @@
     "href": "units/unit3-bash.html#third-challenge",
     "title": "The bash shell and UNIX utilities",
     "section": "4.3 Third challenge",
-    "text": "4.3 Third challenge\n\nFor Belgium, determine the minimum unemployment value (field #6) in cpds.csv in a programmatic way.\nHave what is printed out to the screen look like “Belgium 6.2”.\nNow store the unique values of the countries in a variable, first stripping out the quotation marks and removing the space in “New Zealand”, which causes problems because of the space in its name.\nFigure out how to automate step 1 to do the calculation for all the countries and print to the screen.\nHow would you instead store the results in a new file?"
+    "text": "4.3 Third challenge\n\nFor Belgium, determine the minimum unemployment value (field #6) in cpds.csv in a programmatic way.\nHave what is printed out to the screen look like “Belgium 6.2”.\nNow store the unique values of the countries in a variable, first stripping out the quotation marks.\nFigure out how to automate step 1 to do the calculation for all the countries and print to the screen.\nHow would you instead store the results in a new file?"
   },
   {
     "objectID": "units/unit3-bash.html#fourth-challenge",
