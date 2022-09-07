@@ -573,19 +573,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1
    user  system elapsed 
-  0.523   0.003   0.527 
+  0.467   0.005   0.472 
 [1] "Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarrier,FlightNum,TailNum,ActualElapsedTime,CRSElapsedTime,AirTime,ArrDelay,DepDelay,Origin,Dest,Distance,TaxiIn,TaxiOut,Cancelled,CancellationCode,Diverted,CarrierDelay,WeatherDelay,NASDelay,SecurityDelay,LateAircraftDelay"
 [1] 2
    user  system elapsed 
-  0.497   0.004   0.501 
+  0.424   0.008   0.433 
 [1] "2008,1,29,2,1938,1935,2308,2257,XE,7676,N11176,150,142,104,11,3,SLC,OKC,866,5,41,0,,0,NA,NA,NA,NA,NA"
 [1] 3
    user  system elapsed 
-  0.501   0.000   0.500 
+  0.422   0.005   0.426 
 [1] "2008,1,20,7,1540,1525,1651,1637,OO,5703,N227SW,71,72,58,14,15,SBA,SJC,234,5,8,0,,0,NA,NA,NA,NA,NA"
 [1] 4
    user  system elapsed 
-  0.494   0.000   0.494 
+  0.433   0.009   0.441 
 [1] "2008,1,2,3,1313,1250,1443,1425,WN,440,N461WN,150,155,138,18,23,MCO,STL,880,3,9,0,,0,2,0,0,0,16"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">close</span>(con)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -651,7 +651,7 @@ Attaching package: 'readr'</code></pre>
 <span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">file.path</span>(dir, <span class="st">'airline.csv'</span>), <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  3.569   0.129   3.722 </code></pre>
+  3.246   0.107   3.356 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(dat2 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(dir, <span class="st">'airline.csv'</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -668,7 +668,7 @@ dbl (24): Year, Month, DayOfMonth, DayOfWeek, DepTime, CRSDepTime, ArrTime, ...
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  4.280   0.146   1.114 </code></pre>
+  3.895   0.124   1.252 </code></pre>
 </div>
 </div>
 </section>
@@ -782,16 +782,16 @@ Attaching package: 'rvest'</code></pre>
 <span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(pop)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 9
-  Rank  `Country / Dependency` Continent Population    `Percentage of th…` Date 
-  &lt;chr&gt; &lt;chr&gt;                  &lt;chr&gt;     &lt;chr&gt;         &lt;chr&gt;               &lt;chr&gt;
-1 –     World                  All       7,974,390,000 100%                30 A…
-2 1     China                  Asia      1,412,600,000 17.7%               31 D…
-3 2     India                  Asia      1,375,586,000 17.3%               1 Ma…
-4 3     United States          America   333,046,221   4.18%               30 A…
-5 4     Indonesia              Asia[b]   275,773,800   3.46%               1 Ju…
-6 5     Pakistan               Asia      235,825,000   2.96%               1 Ju…
-# … with 3 more variables:
-#   `Source (official or from the United Nations)` &lt;chr&gt;, Notes &lt;chr&gt;, `` &lt;lgl&gt;</code></pre>
+  Rank  `Country / Dependency` Conti…¹ Popul…² Perce…³ Date  Sourc…⁴ Notes ``   
+  &lt;chr&gt; &lt;chr&gt;                  &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;lgl&gt;
+1 –     World                  All     7,976,… 100%    6 Se… UN pro… ""    NA   
+2 1     China                  Asia    1,412,… 17.7%   31 D… Offici… "The… NA   
+3 2     India                  Asia    1,375,… 17.2%   1 Ma… Offici… "The… NA   
+4 3     United States          North … 333,06… 4.18%   6 Se… Nation… "The… NA   
+5 4     Indonesia              Asia[b] 275,77… 3.46%   1 Ju… Offici… ""    NA   
+6 5     Pakistan               Asia    235,82… 2.96%   1 Ju… UN pro… "The… NA   
+# … with abbreviated variable names ¹​Continent, ²​Population,
+#   ³​`Percentage of the world`, ⁴​`Source (official or from the United Nations)`</code></pre>
 </div>
 </div>
 <p>(Caution here – notice what format the columns are stored in…)</p>
@@ -903,33 +903,33 @@ Attaching package: 'rvest'</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>$name
 $name[[1]]
-[1] "Elysa"
+[1] "Piseth"
 
 
 $activity
 $activity[[1]]
-[1] "Agriculture"
+[1] "Home Energy"
 
 
 $sector
 $sector[[1]]
-[1] "Agriculture"
+[1] "Personal Use"
 
 
 $location
 $location$country_code
 $location$country_code[[1]]
-[1] "MG"
+[1] "KH"
 
 
 $location$country
 $location$country[[1]]
-[1] "Madagascar"
+[1] "Cambodia"
 
 
 $location$town
 $location$town[[1]]
-[1] "Faravohitra"
+[1] "Siem Reap"
 
 
 $location$geo
@@ -940,7 +940,7 @@ $location$geo$level[[1]]
 
 $location$geo$pairs
 $location$geo$pairs[[1]]
-[1] "-18.909749 47.530918"
+[1] "13.366667 103.85"
 
 
 $location$geo$type
@@ -952,7 +952,7 @@ $location$geo$type[[1]]
 
 $loan_amount
 $loan_amount[[1]]
-[1] "200"</code></pre>
+[1] "800"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="do">## alternatively, extract only the 'loans' info (and use pipes)</span></span>
 <span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>loansNode <span class="ot">&lt;-</span> doc <span class="sc">%&gt;%</span> <span class="fu">html_elements</span>(<span class="st">'loans'</span>)</span>
@@ -982,59 +982,58 @@ $loan_amount[[1]]
 <span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a><span class="fu">xml_find_all</span>(loansNode, <span class="st">'//location//country'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>{xml_nodeset (20)}
- [1] &lt;country&gt;Indonesia&lt;/country&gt;
- [2] &lt;country&gt;Madagascar&lt;/country&gt;
- [3] &lt;country&gt;Kenya&lt;/country&gt;
- [4] &lt;country&gt;Kenya&lt;/country&gt;
- [5] &lt;country&gt;Kosovo&lt;/country&gt;
- [6] &lt;country&gt;Kenya&lt;/country&gt;
- [7] &lt;country&gt;Kenya&lt;/country&gt;
- [8] &lt;country&gt;Nepal&lt;/country&gt;
- [9] &lt;country&gt;Vanuatu&lt;/country&gt;
-[10] &lt;country&gt;Moldova&lt;/country&gt;
-[11] &lt;country&gt;Solomon Islands&lt;/country&gt;
-[12] &lt;country&gt;Solomon Islands&lt;/country&gt;
-[13] &lt;country&gt;Indonesia&lt;/country&gt;
-[14] &lt;country&gt;Indonesia&lt;/country&gt;
-[15] &lt;country&gt;Indonesia&lt;/country&gt;
-[16] &lt;country&gt;Indonesia&lt;/country&gt;
-[17] &lt;country&gt;Indonesia&lt;/country&gt;
-[18] &lt;country&gt;Indonesia&lt;/country&gt;
-[19] &lt;country&gt;Jordan&lt;/country&gt;
-[20] &lt;country&gt;Jordan&lt;/country&gt;</code></pre>
+ [1] &lt;country&gt;Cambodia&lt;/country&gt;
+ [2] &lt;country&gt;Cambodia&lt;/country&gt;
+ [3] &lt;country&gt;Cambodia&lt;/country&gt;
+ [4] &lt;country&gt;Cambodia&lt;/country&gt;
+ [5] &lt;country&gt;Ecuador&lt;/country&gt;
+ [6] &lt;country&gt;Cambodia&lt;/country&gt;
+ [7] &lt;country&gt;Vietnam&lt;/country&gt;
+ [8] &lt;country&gt;Vietnam&lt;/country&gt;
+ [9] &lt;country&gt;Guatemala&lt;/country&gt;
+[10] &lt;country&gt;Timor-Leste&lt;/country&gt;
+[11] &lt;country&gt;El Salvador&lt;/country&gt;
+[12] &lt;country&gt;Colombia&lt;/country&gt;
+[13] &lt;country&gt;Colombia&lt;/country&gt;
+[14] &lt;country&gt;Kenya&lt;/country&gt;
+[15] &lt;country&gt;Kenya&lt;/country&gt;
+[16] &lt;country&gt;Kenya&lt;/country&gt;
+[17] &lt;country&gt;Kenya&lt;/country&gt;
+[18] &lt;country&gt;Colombia&lt;/country&gt;
+[19] &lt;country&gt;Colombia&lt;/country&gt;
+[20] &lt;country&gt;Honduras&lt;/country&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">xml_find_all</span>(loansNode, <span class="st">'//location//country'</span>) <span class="sc">%&gt;%</span> <span class="fu">xml_text</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "Indonesia"       "Madagascar"      "Kenya"           "Kenya"          
- [5] "Kosovo"          "Kenya"           "Kenya"           "Nepal"          
- [9] "Vanuatu"         "Moldova"         "Solomon Islands" "Solomon Islands"
-[13] "Indonesia"       "Indonesia"       "Indonesia"       "Indonesia"      
-[17] "Indonesia"       "Indonesia"       "Jordan"          "Jordan"         </code></pre>
+<pre><code> [1] "Cambodia"    "Cambodia"    "Cambodia"    "Cambodia"    "Ecuador"    
+ [6] "Cambodia"    "Vietnam"     "Vietnam"     "Guatemala"   "Timor-Leste"
+[11] "El Salvador" "Colombia"    "Colombia"    "Kenya"       "Kenya"      
+[16] "Kenya"       "Kenya"       "Colombia"    "Colombia"    "Honduras"   </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="do">## or extract the geographic coordinates</span></span>
 <span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a><span class="fu">xml_find_all</span>(loansNode, <span class="st">'//location//geo/pairs'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>{xml_nodeset (20)}
- [1] &lt;pairs&gt;-6.178056 106.63&lt;/pairs&gt;
- [2] &lt;pairs&gt;-18.909749 47.530918&lt;/pairs&gt;
- [3] &lt;pairs&gt;0.782681 34.720204&lt;/pairs&gt;
- [4] &lt;pairs&gt;0.416667 34.25&lt;/pairs&gt;
- [5] &lt;pairs&gt;42.583333 21&lt;/pairs&gt;
- [6] &lt;pairs&gt;0.05 37.65&lt;/pairs&gt;
- [7] &lt;pairs&gt;0.416667 34.25&lt;/pairs&gt;
- [8] &lt;pairs&gt;27.719635 85.329775&lt;/pairs&gt;
- [9] &lt;pairs&gt;-17.733251 168.327325&lt;/pairs&gt;
-[10] &lt;pairs&gt;45.9075 28.194444&lt;/pairs&gt;
-[11] &lt;pairs&gt;-9.445638 159.9729&lt;/pairs&gt;
-[12] &lt;pairs&gt;-9.445638 159.9729&lt;/pairs&gt;
-[13] &lt;pairs&gt;-6.178056 106.63&lt;/pairs&gt;
-[14] &lt;pairs&gt;-6.110366 106.163975&lt;/pairs&gt;
-[15] &lt;pairs&gt;-6.178056 106.63&lt;/pairs&gt;
-[16] &lt;pairs&gt;-6.178056 106.63&lt;/pairs&gt;
-[17] &lt;pairs&gt;-6.178056 106.63&lt;/pairs&gt;
-[18] &lt;pairs&gt;-6.110366 106.163975&lt;/pairs&gt;
-[19] &lt;pairs&gt;31 36&lt;/pairs&gt;
-[20] &lt;pairs&gt;32.560923 36.008697&lt;/pairs&gt;</code></pre>
+ [1] &lt;pairs&gt;13.09573 103.202206&lt;/pairs&gt;
+ [2] &lt;pairs&gt;13.366667 103.85&lt;/pairs&gt;
+ [3] &lt;pairs&gt;13.366667 103.85&lt;/pairs&gt;
+ [4] &lt;pairs&gt;13.366667 103.85&lt;/pairs&gt;
+ [5] &lt;pairs&gt;0.339176 -78.122234&lt;/pairs&gt;
+ [6] &lt;pairs&gt;12.5 104&lt;/pairs&gt;
+ [7] &lt;pairs&gt;21.40639 103.032155&lt;/pairs&gt;
+ [8] &lt;pairs&gt;21.40639 103.032155&lt;/pairs&gt;
+ [9] &lt;pairs&gt;14.421598 -91.404825&lt;/pairs&gt;
+[10] &lt;pairs&gt;-8.930576 125.396797&lt;/pairs&gt;
+[11] &lt;pairs&gt;13.833333 -88.916667&lt;/pairs&gt;
+[12] &lt;pairs&gt;4 -72&lt;/pairs&gt;
+[13] &lt;pairs&gt;5.472709 -74.667984&lt;/pairs&gt;
+[14] &lt;pairs&gt;0.516667 35.283333&lt;/pairs&gt;
+[15] &lt;pairs&gt;-0.785561 35.33914&lt;/pairs&gt;
+[16] &lt;pairs&gt;0.035164 36.364292&lt;/pairs&gt;
+[17] &lt;pairs&gt;-0.777114 34.945839&lt;/pairs&gt;
+[18] &lt;pairs&gt;11.004107 -74.806981&lt;/pairs&gt;
+[19] &lt;pairs&gt;10.391049 -75.479426&lt;/pairs&gt;
+[20] &lt;pairs&gt;15.047154 -85.125776&lt;/pairs&gt;</code></pre>
 </div>
 </div>
 </section>
@@ -1084,62 +1083,69 @@ $loan_amount[[1]]
 </div>
 <div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data<span class="sc">$</span>loans)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>       id    name languages      status funded_amount basket_amount image.id
-1 2436623 Salbiah        en fundraising             0             0  4934180
-2 2434672   Elysa    fr, en fundraising             0             0  4931384
-3 2436632  Lydiah        en fundraising             0             0  4934194
-4 2436644  Hellen        en fundraising             0             0  4934211
-5 2436645   Arbër        en fundraising             0             0  4934213
-6 2436614   Emily        en fundraising             0             0  4934168
-  image.template_id                       activity      sector
-1                 1 Primary/secondary school costs   Education
-2                 1                    Agriculture Agriculture
-3                 1                        Farming Agriculture
-4                 1                        Cereals        Food
-5                 1                    Agriculture Agriculture
-6                 1                        Cereals        Food
-                                     themes
-1 Youth, Underfunded Areas, Islamic Finance
-2                                      NULL
-3           Crop Insurance, Rural Exclusion
-4           Crop Insurance, Rural Exclusion
-5                                      NULL
-6           Crop Insurance, Rural Exclusion
-                                                                                                  use
-1                                                                 to pay for her child's school fees.
-2                                                 to buy the necessary inputs for potato cultivation.
-3                        to purchase quality farm inputs and supplies to improve her crop production.
-4            to purchase cereal varieties to sell and supplement her income and support her children.
-5                            to buy an irrigation system in order to improve the groundwater storage.
-6 to buy a variety of cereals such as maize, cow peas, lentils, and rice to sell in the local market.
+<pre><code>       id           name languages      status funded_amount basket_amount
+1 2426966            Hon        en fundraising            25            25
+2 2426991         Piseth        en fundraising             0             0
+3 2444685         Sareth        en fundraising             0             0
+4 2444689           Kheu        en fundraising             0             0
+5 2425164 Maria Consuelo    es, en fundraising             0             0
+6 2444680         Sophat        en fundraising             0             0
+  image.id image.template_id    activity       sector
+1  4946099                 1 Home Energy Personal Use
+2  4934240                 1 Home Energy Personal Use
+3  4947188                 1      Crafts         Arts
+4  4947194                 1      Crafts         Arts
+5  4914714                 1  Restaurant         Food
+6  4947060                 1     Farming  Agriculture
+                                  themes
+1 Social Enterprise, Clean Energy, Green
+2 Social Enterprise, Clean Energy, Green
+3                      Underfunded Areas
+4                      Underfunded Areas
+5                                   NULL
+6                                   NULL
+                                                                                            use
+1          to buy a biodigester that reduces kitchen smoke with biogas replacing the wood fuel.
+2          to buy a biodigester that reduces kitchen smoke with biogas replacing the wood fuel.
+3    to purchase more rattan and tropical fruit trees for making baskets to sell in the market.
+4    to purchase more rattan and tropical fruit trees for making baskets to sell in the market.
+5 to acquire cooking utensils and an industrial stove, as well as make renovations to her shop.
+6                             to buy rice seeds and fertilizer to support her farming business.
   location.country_code location.country location.town location.geo.level
-1                    ID        Indonesia     Tangerang               town
-2                    MG       Madagascar   Faravohitra               town
-3                    KE            Kenya      Kimilili               town
-4                    KE            Kenya         Busia               town
-5                    XK           Kosovo          &lt;NA&gt;            country
-6                    KE            Kenya          Meru               town
-    location.geo.pairs location.geo.type partner_id          posted_date
-1     -6.178056 106.63             point        406 2022-08-30T07:10:06Z
-2 -18.909749 47.530918             point        359 2022-08-30T07:10:05Z
-3   0.782681 34.720204             point        156 2022-08-30T07:10:05Z
-4       0.416667 34.25             point        156 2022-08-30T07:10:05Z
-5         42.583333 21             point        240 2022-08-30T07:10:05Z
-6           0.05 37.65             point        156 2022-08-30T07:10:04Z
+1                    KH         Cambodia    Battambang               town
+2                    KH         Cambodia     Siem Reap               town
+3                    KH         Cambodia     Siem Reap               town
+4                    KH         Cambodia     Siem Reap               town
+5                    EC          Ecuador        Ibarra               town
+6                    KH         Cambodia        Pursat               town
+   location.geo.pairs location.geo.type partner_id          posted_date
+1 13.09573 103.202206             point        636 2022-09-07T15:40:51Z
+2    13.366667 103.85             point        636 2022-09-07T15:40:51Z
+3    13.366667 103.85             point        499 2022-09-07T15:40:51Z
+4    13.366667 103.85             point        499 2022-09-07T15:40:51Z
+5 0.339176 -78.122234             point        457 2022-09-07T15:40:50Z
+6            12.5 104             point        499 2022-09-07T15:40:50Z
   planned_expiration_date loan_amount borrower_count lender_count
-1    2022-10-04T07:10:06Z         450              1            0
-2    2022-10-04T07:10:05Z         200              1            0
-3    2022-10-04T07:10:04Z         175              1            0
-4    2022-10-04T07:10:05Z         350              1            0
-5    2022-10-04T07:10:05Z        1200              1            0
-6    2022-10-04T07:10:04Z         150              1            0
-  bonus_credit_eligibility                                        tags
-1                    FALSE                           volunteer_like, 2
-2                    FALSE                                        NULL
-3                     TRUE                    #Woman-Owned Business, 6
-4                     TRUE volunteer_like, #Woman-Owned Business, 2, 6
-5                    FALSE                           volunteer_pick, 1
-6                     TRUE        #Woman-Owned Business, #Vegan, 6, 10</code></pre>
+1    2022-10-12T15:40:51Z         800              1            1
+2    2022-10-12T15:40:51Z         800              1            0
+3    2022-10-12T15:40:51Z         800              1            0
+4    2022-10-12T15:40:51Z         525              1            0
+5    2022-10-12T15:40:50Z        1600              1            0
+6    2022-10-12T15:40:50Z         500              1            0
+  bonus_credit_eligibility
+1                    FALSE
+2                    FALSE
+3                     TRUE
+4                     TRUE
+5                    FALSE
+6                     TRUE
+                                                                         tags
+1                                                            #Eco-friendly, 9
+2                                                                        NULL
+3                            #Woman-Owned Business, #Supporting Family, 6, 31
+4                            #Woman-Owned Business, #Supporting Family, 6, 31
+5 #Woman-Owned Business, #Biz Durable Asset, #Repair Renew Replace, 6, 35, 39
+6                          #Woman-Owned Business, #Vegan, #Elderly, 6, 10, 13</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb106"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>loans[<span class="dv">1</span>, <span class="st">'location.geo.pairs'</span>] <span class="co"># hmmm...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1147,8 +1153,8 @@ $loan_amount[[1]]
 </div>
 <div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>loans[<span class="dv">1</span>, <span class="st">'location'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  country_code   country      town geo.level        geo.pairs geo.type
-1           ID Indonesia Tangerang      town -6.178056 106.63    point</code></pre>
+<pre><code>  country_code  country       town geo.level           geo.pairs geo.type
+1           KH Cambodia Battambang      town 13.09573 103.202206    point</code></pre>
 </div>
 </div>
 <p>One disadvantage of JSON is that it is not set up to deal with missing values, infinity, etc.</p>
@@ -1470,7 +1476,7 @@ Attaching package: 'httr'</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb133"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb133-1"><a href="#cb133-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system</span>(<span class="st">'ls -l tmp.txt'</span>, <span class="at">intern =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "-rw-rw-r-- 1 james james 4 Aug 30 00:23 tmp.txt"</code></pre>
+<pre><code>[1] "-rw-r--r-- 1 paciorek scfstaff 4 Sep  7 08:51 tmp.txt"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb135"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb135-1"><a href="#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system</span>(<span class="st">'cat tmp.txt'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>

@@ -423,19 +423,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span><span class="fu"> mvlast()</span> <span class="kw">{</span></span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mv</span> <span class="st">"/accounts/vis/paciorek/Downloads/</span><span class="va">$(</span><span class="fu">ls</span> <span class="at">-rt</span> <span class="dt">\</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>       /accounts/vis/paciorek/Downloads <span class="kw">|</span> <span class="fu">tail</span> <span class="at">-n</span> <span class="va">$1)</span><span class="st">"</span> <span class="va">$2</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>       /accounts/vis/paciorek/Downloads <span class="kw">|</span> <span class="fu">tail</span> <span class="at">-n</span> 1<span class="va">)</span><span class="st">"</span> <span class="va">$1</span></span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>That code only works if the files don’t have spaces in their names. If there are spaces, we need double quotes around each file name, which is hard to do in the shell because double quotes are interpreted by the shell as giving the beginning and ending of strings, rather than being passed along for further processing.</p>
-<p>But we can do it using a loop, provided we get each filename on a separate line:</p>
+<p>Note the need for the quotes to deal with cases where a file has a space in its name.</p>
+<p>If we wanted to handle multiple files, we could do it with a loop:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span><span class="fu"> mvlast()</span> <span class="kw">{</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">((</span><span class="va">i</span><span class="op">=</span><span class="dv">1</span><span class="kw">;</span> <span class="va">i</span><span class="op">&lt;=</span><span class="va">${1}</span><span class="kw">;</span> <span class="va">i</span><span class="op">++</span><span class="kw">));</span> <span class="cf">do</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mv</span> <span class="st">"/accounts/vis/paciorek/Downloads/</span><span class="va">$(</span><span class="fu">ls</span> <span class="at">-rt</span> <span class="dt">\</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>           /accounts/vis/paciorek/Downloads <span class="kw">|</span> <span class="fu">tail</span> <span class="at">-n</span> 1<span class="va">)</span><span class="st">"</span> <span class="va">$2</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>           /accounts/vis/paciorek/Downloads <span class="kw">|</span> <span class="fu">tail</span> <span class="at">-n</span> 1<span class="va">)</span><span class="st">"</span> <span class="va">${2}</span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">done</span></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Side note: if we were just moving files from the current working directory and with files without spaces in their names, it should be possible to use <code>tail -n ${1}</code> without the loop.</p>
 <p><strong>Our fifth mission</strong>: automate the process of determining what R packages are used in all of the R code here and install those packages on a new machine.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> library unit[1-9]<span class="pp">*</span>.R</span>

@@ -286,7 +286,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#text-manipulation-string-processing-and-regular-expressions-regex" id="toc-text-manipulation-string-processing-and-regular-expressions-regex" class="nav-link active" data-scroll-target="#text-manipulation-string-processing-and-regular-expressions-regex">1. Text manipulation, string processing and regular expressions (regex)</a>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#text-manipulation-string-processing-and-regular-expressions-regex" id="toc-text-manipulation-string-processing-and-regular-expressions-regex" class="nav-link" data-scroll-target="#text-manipulation-string-processing-and-regular-expressions-regex">1. Text manipulation, string processing and regular expressions (regex)</a>
   <ul class="collapse">
   <li><a href="#string-processing-and-regular-expressions-in-r" id="toc-string-processing-and-regular-expressions-in-r" class="nav-link" data-scroll-target="#string-processing-and-regular-expressions-in-r">String processing and regular expressions in R</a></li>
   <li><a href="#regexstring-processing-challenges" id="toc-regexstring-processing-challenges" class="nav-link" data-scroll-target="#regexstring-processing-challenges">Regex/string processing challenges</a></li>
@@ -367,14 +368,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <blockquote class="blockquote">
 <p><strong>Note</strong> This Unit will be posted in phases as I get the material ready. Currently only Sections 1-4 are available.</p>
 </blockquote>
-<p>This unit covers a variety of programming concepts, illustrated in the context of R and with comments about and connections to other languages. It also serves as a way to teach some advanced features of R. In general the concepts are relevant in other languages, though other languages may implement things differently. One of my goals for the unit is for us to think about why things are the way they are in R. I.e., what principles were used in creating the language and what choices were made? While other languages use different principles and made different choices, understanding what one language does in detail will be helpful when you are learning another language or choosing a language for a project.</p>
 <p>References:</p>
 <ul>
 <li>Books on R listed on the syllabus: Adler, Chambers, Wickham</li>
 <li><a href="http://cran.r-project.org/doc/manuals/R-intro.html">R intro manual</a> and <a href="http://cran.r-project.org/doc/manuals/R-lang.html">R language manual</a> (R-lang), both on CRAN.</li>
 <li>Murrell, Introduction to Data Technologies</li>
 </ul>
+<p>(Optional) Videos</p>
+<p>There are various videos from 2020 in the bCourses Media Gallery that you can use for reference if you want to. Note that I’ve reorganized the material in this Unit relative to 2020, so the section numbers and ordering in the videos may differ from that in the current Unit, but you should be able to match things up fairly easily.</p>
+<ol type="1">
+<li>Strings and regular expressions</li>
+<li>Type/class coercion</li>
+</ol>
+<section id="overview" class="level1">
+<h1>Overview</h1>
+<p>This unit covers a variety of programming concepts, illustrated in the context of R and with comments about and connections to other languages. It also serves as a way to teach some advanced features of R. In general the concepts are relevant in other languages, though other languages may implement things differently. One of my goals for the unit is for us to think about why things are the way they are in R. I.e., what principles were used in creating the language and what choices were made? While other languages use different principles and made different choices, understanding what one language does in detail will be helpful when you are learning another language or choosing a language for a project.</p>
 <p>I’ll likely refer to R syntax as <em>statements</em> or <em>expressions</em>, meaning any code that is a valid, complete R expression. But note that the term <em>expression</em> also means a specific type of object within the R language, as seen late in this Unit when we discuss computing on the language.</p>
+</section>
 <section id="text-manipulation-string-processing-and-regular-expressions-regex" class="level1">
 <h1>1. Text manipulation, string processing and regular expressions (regex)</h1>
 <p>Text manipulations in R have a number of things in common with Python, Perl, and UNIX, as many of these evolved from UNIX. When I use the term <em>string</em> here, I’ll be referring to any sequence of characters that may include numbers, white space, and special characters, rather than to the character class of R objects. The string or strings will generally be stored as an R character vector.</p>
@@ -811,7 +821,7 @@ lm(formula = y ~ x)
 
 Coefficients:
 (Intercept)            x  
-     0.4997       0.0266  </code></pre>
+      0.865       -0.676  </code></pre>
 </div>
 </div>
 </section>
@@ -940,12 +950,12 @@ y = x * 7.1;</code></pre>
 <div class="sourceCode cell-code" id="cb110"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a>qs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> 2.5% 97.5% 
--1.89  1.87 </code></pre>
+-1.95  1.90 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a>qs[<span class="dv">1</span>] <span class="sc">+</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>2.5% 
-1.11 </code></pre>
+1.05 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb114"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="fu">object.size</span>(qs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -957,7 +967,7 @@ y = x * 7.1;</code></pre>
 <div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(qs) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
 <span id="cb116-2"><a href="#cb116-2" aria-hidden="true" tabindex="-1"></a>qs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -1.89  1.87</code></pre>
+<pre><code>[1] -1.95  1.90</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="fu">object.size</span>(qs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1073,12 +1083,12 @@ Levels: advanced basic minimal proficient</code></pre>
 <span id="cb146-2"><a href="#cb146-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">label =</span> <span class="fu">rep</span>(<span class="st">'a'</span>, n), <span class="at">val1 =</span> <span class="fu">rnorm</span>(n), <span class="at">val2 =</span> <span class="fu">rnorm</span>(n))</span>
 <span id="cb146-3"><a href="#cb146-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  label   val1   val2
-1     a  1.122  0.362
-2     a  0.577  0.960
-3     a -0.775 -1.482
-4     a -0.411  2.593
-5     a -1.448  0.304</code></pre>
+<pre><code>  label    val1   val2
+1     a  0.7968  0.487
+2     a  0.0695  0.313
+3     a  1.8820 -1.433
+4     a  0.6907  1.980
+5     a -1.1075 -0.937</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb148"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb148-1"><a href="#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Why does the following not work?</span></span>
 <span id="cb148-2"><a href="#cb148-2" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>( <span class="fu">apply</span>(df, <span class="dv">1</span>, <span class="cf">function</span>(x) x[<span class="dv">2</span>] <span class="sc">+</span> x[<span class="dv">3</span>]) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1088,7 +1098,7 @@ Levels: advanced basic minimal proficient</code></pre>
 <div class="sourceCode cell-code" id="cb150"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb150-1"><a href="#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Instead, this will work. Why?</span></span>
 <span id="cb150-2"><a href="#cb150-2" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(df[ , <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>], <span class="dv">1</span>, <span class="cf">function</span>(x) x[<span class="dv">1</span>] <span class="sc">+</span> x[<span class="dv">2</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1]  1.48  1.54 -2.26  2.18 -1.14</code></pre>
+<pre><code>[1]  1.284  0.382  0.449  2.670 -2.044</code></pre>
 </div>
 </div>
 </section>
