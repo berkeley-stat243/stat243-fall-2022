@@ -174,26 +174,24 @@ mv "/accounts/vis/paciorek/Downloads/$(ls -rt \
 
 function mvlast() {
     mv "/accounts/vis/paciorek/Downloads/$(ls -rt \
-       /accounts/vis/paciorek/Downloads | tail -n $1)" $2
+       /accounts/vis/paciorek/Downloads | tail -n 1)" $1
 }
 ```
 
-That code only works if the files don't have spaces in their names. If
-there are spaces, we need double quotes around each file name, which is
-hard to do in the shell because double quotes are interpreted by the
-shell as giving the beginning and ending of strings, rather than being
-passed along for further processing.
+Note the need for the quotes to deal with cases where a file has a space in its name.
 
-But we can do it using a loop, provided we get each filename on a separate line:
+If we wanted to handle multiple files, we could do it with a loop:
 
 ```{bash, eval=FALSE}
 function mvlast() {
     for ((i=1; i<=${1}; i++)); do
         mv "/accounts/vis/paciorek/Downloads/$(ls -rt \
-           /accounts/vis/paciorek/Downloads | tail -n 1)" $2
+           /accounts/vis/paciorek/Downloads | tail -n 1)" ${2}
     done
 }
 ```
+
+Side note: if we were just moving files from the current working directory and with files without spaces in their names, it should be possible to use `tail -n ${1}` without the loop.
 
 **Our fifth mission**: automate the process of determining what R
 packages are used in all of the R code here and install those packages
