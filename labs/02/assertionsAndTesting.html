@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.189">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Zoe Vernon, Andrew Vaughn, James Duncan">
+<meta name="dcterms.date" content="2022-09-09">
+
+<title>Statistics 243 Fall 2022 - Assertions and Testing</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../labs/01/intro_git_knitr.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Statistics 243 Fall 2022</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html">Home</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../syllabus.html">Syllabus</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../office_hours.html">Office hours</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../schedule.html">Schedule</a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-units" role="button" data-bs-toggle="dropdown" aria-expanded="false">Units</a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-units">    
+        <li>
+    <a class="dropdown-item" href="../../units/unit1-intro.html">
+ <span class="dropdown-text">Unit 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../units/unit2-dataTech.html">
+ <span class="dropdown-text">Unit 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../units/unit3-bash.html">
+ <span class="dropdown-text">Unit 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../units/unit4-goodPractices.html">
+ <span class="dropdown-text">Unit 4</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../units/unit5-programming.html">
+ <span class="dropdown-text">Unit 5</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-labs" role="button" data-bs-toggle="dropdown" aria-expanded="false">Labs</a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-labs">    
+        <li>
+    <a class="dropdown-item" href="../../labs/01/intro_git_knitr.html">
+ <span class="dropdown-text">Lab 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../labs/02/assertionsAndTesting.html">
+ <span class="dropdown-text">Lab 2</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-software" role="button" data-bs-toggle="dropdown" aria-expanded="false">Software</a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-software">    
+        <li>
+    <a class="dropdown-item" href="../../howtos/RandRStudioInstall.html">
+ <span class="dropdown-text">Installing R &amp; RStudio</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../howtos/accessingPython.html">
+ <span class="dropdown-text">Accessing Python</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../howtos/accessingUnixCommandLine.html">
+ <span class="dropdown-text">Accessing the Unix Command Line</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../howtos/gitInstall.html">
+ <span class="dropdown-text">Installing Git</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../howtos/ps-submission.html">
+ <span class="dropdown-text">Problem Set Submissions</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Windows</li>
+        <li>
+    <a class="dropdown-item" href="../../howtos/windowsAndLinux.html">
+ <span class="dropdown-text">Installing the Linux Subsystem on Windows</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../howtos/windowsInstall.html">
+ <span class="dropdown-text">Using R, RStudio, and LaTeX on Windows</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="https://edstem.org/us/courses/25090/discussion/">Discussion</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://statistics.berkeley.edu/computing/training/tutorials">Tutorials</a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Assertions and Testing</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../labs/01/intro_git_knitr.html" class="sidebar-item-text sidebar-link">Lab 1</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../labs/02/assertionsAndTesting.html" class="sidebar-item-text sidebar-link active">Lab 2</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#references-and-useful-links" id="toc-references-and-useful-links" class="nav-link active" data-scroll-target="#references-and-useful-links">References and useful links</a></li>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
+  <li><a href="#purpose-of-assertions-and-testing" id="toc-purpose-of-assertions-and-testing" class="nav-link" data-scroll-target="#purpose-of-assertions-and-testing">Purpose of Assertions and Testing</a></li>
+  <li><a href="#assertion-vs.-testing" id="toc-assertion-vs.-testing" class="nav-link" data-scroll-target="#assertion-vs.-testing">Assertion vs.&nbsp;Testing</a></li>
+  <li><a href="#assertions-and-assertthat" id="toc-assertions-and-assertthat" class="nav-link" data-scroll-target="#assertions-and-assertthat">Assertions and <code>assertthat</code></a>
+  <ul class="collapse">
+  <li><a href="#three-main-functions-assert_that-see_if-and-validate_that" id="toc-three-main-functions-assert_that-see_if-and-validate_that" class="nav-link" data-scroll-target="#three-main-functions-assert_that-see_if-and-validate_that">Three main functions: <code>assert_that</code>, <code>see_if</code>, and <code>validate_that</code></a></li>
+  <li><a href="#writing-your-own-assertions" id="toc-writing-your-own-assertions" class="nav-link" data-scroll-target="#writing-your-own-assertions">Writing Your Own Assertions</a></li>
+  <li><a href="#some-additional-useful-assertions" id="toc-some-additional-useful-assertions" class="nav-link" data-scroll-target="#some-additional-useful-assertions">Some Additional Useful Assertions</a></li>
+  </ul></li>
+  <li><a href="#testing" id="toc-testing" class="nav-link" data-scroll-target="#testing">Testing</a></li>
+  <li><a href="#testthat" id="toc-testthat" class="nav-link" data-scroll-target="#testthat"><code>testthat</code></a>
+  <ul class="collapse">
+  <li><a href="#list-of-common-expectations" id="toc-list-of-common-expectations" class="nav-link" data-scroll-target="#list-of-common-expectations">List of Common Expectations</a></li>
+  </ul></li>
+  <li><a href="#testthat-example" id="toc-testthat-example" class="nav-link" data-scroll-target="#testthat-example"><code>testthat</code> example</a>
+  <ul class="collapse">
+  <li><a href="#informal-testing" id="toc-informal-testing" class="nav-link" data-scroll-target="#informal-testing">Informal testing</a></li>
+  <li><a href="#using-testthat" id="toc-using-testthat" class="nav-link" data-scroll-target="#using-testthat">Using <code>testthat</code></a></li>
+  <li><a href="#edge-cases-testing-function-robustness" id="toc-edge-cases-testing-function-robustness" class="nav-link" data-scroll-target="#edge-cases-testing-function-robustness">Edge cases: Testing function robustness</a></li>
+  <li><a href="#combining-multiple-expectations-into-a-test-with-test_that" id="toc-combining-multiple-expectations-into-a-test-with-test_that" class="nav-link" data-scroll-target="#combining-multiple-expectations-into-a-test-with-test_that">Combining multiple expectations into a test with <code>test_that()</code></a></li>
+  <li><a href="#running-tests" id="toc-running-tests" class="nav-link" data-scroll-target="#running-tests">Running tests</a></li>
+  </ul></li>
+  <li><a href="#practice-problems" id="toc-practice-problems" class="nav-link" data-scroll-target="#practice-problems">Practice problems</a>
+  <ul class="collapse">
+  <li><a href="#acknowledgements" id="toc-acknowledgements" class="nav-link" data-scroll-target="#acknowledgements">Acknowledgements</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">Assertions and Testing</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Zoe Vernon, Andrew Vaughn, James Duncan </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 9, 2022</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<p><a href="./assertionsAndTesting.pdf" class="btn btn-primary">PDF</a></p>
+<section id="references-and-useful-links" class="level2">
+<h2 class="anchored" data-anchor-id="references-and-useful-links">References and useful links</h2>
+<ul>
+<li><a href="http://r-pkgs.had.co.nz/tests.html">Testing section</a> of the R packages tutorial by Hadley Wickham</li>
+<li><a href="https://github.com/hadley/assertthat">GitHub</a> for assertthat package by Hadley Wickham</li>
+<li><a href="https://swcarpentry.github.io/python-novice-inflammation/10-defensive/index.html">Assertions and testing tutorial</a> in Python</li>
+</ul>
+</section>
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
+<ul>
+<li>Understand the benefits of assertions and testing as well as the differences between the two.</li>
+<li>Introduction to the R package <code>assertthat</code>.</li>
+<li>Introduction to the R package <code>testthat</code>.</li>
+<li>Practice writing assertions and tests on your own.</li>
+</ul>
+</section>
+<section id="purpose-of-assertions-and-testing" class="level2">
+<h2 class="anchored" data-anchor-id="purpose-of-assertions-and-testing">Purpose of Assertions and Testing</h2>
+<p>We all want our code to be correct the first time we write it. The unfortunate reality is that we all make mistakes when coding, either because of “silly mistakes” (indexing errors, incorrect syntax, using a wrong variable name, etc.) or because of a fundamental misunderstanding of the problem we are trying to solve. While print statements and writing test cases can help reduce coding errors, it is desirable to have a formal, structured way to test our code to ensure that it is functioning how we want it to. It is here that the <code>assertthat</code> and <code>testthat</code> packages in R prove useful.</p>
+</section>
+<section id="assertion-vs.-testing" class="level2">
+<h2 class="anchored" data-anchor-id="assertion-vs.-testing">Assertion vs.&nbsp;Testing</h2>
+<p>Assertions check the internal state of a function. For example, consider a function <code>add(x, y)</code> which returns <code>x + y</code>. The function assumes <code>x</code> is numeric, and an assertion within the body of the function would confirm that this is in the case and return an error if not.</p>
+<p>On the other hand, tests (sometimes referred to as “unit tests”) check that a function produces the expected output for various inputs. For example, ensuring that <code>add(1, 2)</code> returns the number 3. Tests may include checks that assertions are working properly, for example by confirming that an error is thrown when the user calls <code>add("potato", 2)</code>.</p>
+<p>Tests and assertions are similar in that,</p>
+<ul>
+<li>Both are part of ensuring programs run correctly and aspects of defensive programming.</li>
+<li>Both should check small pieces of the code while providing useful error messages, so they tell you exactly where the issue arises.</li>
+</ul>
+<p>Here’s a summary table comparing the two:</p>
+<table class="table">
+<colgroup>
+<col style="width: 60%">
+<col style="width: 39%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Assertions</th>
+<th>Tests</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Take the perspective of the developer.</td>
+<td>Take the perspective of the user.</td>
+</tr>
+<tr class="even">
+<td>Assert that the developer knows what they’re doing.</td>
+<td>Test what the user can do.</td>
+</tr>
+<tr class="odd">
+<td>Check internal function states.</td>
+<td>Check function results given a specific input.</td>
+</tr>
+<tr class="even">
+<td>Typically found within a function alongside source code.</td>
+<td>Typically kept in a directory separate from source code.</td>
+</tr>
+<tr class="odd">
+<td>Can run every time the code is called.</td>
+<td>Run periodically during development at specific moments (e.g., before creating a git commit).</td>
+</tr>
+<tr class="even">
+<td>Amount of computation should be limited to avoid slowing down source code.</td>
+<td>For large packages with many functions, can take many minutes or even hours to run.</td>
+</tr>
+<tr class="odd">
+<td>Should depend only on local states (e.g., the function’s arguments and internal variables).</td>
+<td>Can depend on global state (e.g., global options).</td>
+</tr>
+<tr class="even">
+<td>Double as inline documentation of source code.</td>
+<td>Can be helpful for the code design process (i.e., test-driven development).</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="assertions-and-assertthat" class="level2">
+<h2 class="anchored" data-anchor-id="assertions-and-assertthat">Assertions and <code>assertthat</code></h2>
+<p>An assertion is a statement in a function or program that must be <code>TRUE</code> for it to continue and throws an error if <code>FALSE</code>. There are three types of assertions:</p>
+<ol type="1">
+<li><em>Pre-conditions</em>: statements that must be true at the beginning of the function for it to work. Mostly, this involves checking that inputs to the function are in the expected form.</li>
+<li><em>Invariants</em>: statements that must be true at intermediate points in the function. For example, checking that the output from a computation is positive before using the <code>sqrt()</code> function.</li>
+<li><em>Post-conditions</em>: statements that must be true at the end of a function. For example, if you write a function that must always return a vector of length <code>n</code> with all positive numbers you would ensure that is the case after all the computation has been performed.</li>
+</ol>
+<p><code>assertthat</code> is a R package that provides functionality for adding assertions to functions, while producing useful error messages. Calls to <code>assert_that</code> are similar to <code>stopifnot</code> function from base R. Consider the examples below:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">is.character</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error: is.character(x) is not TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assert_that</span>(<span class="fu">is.character</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error: x is not a character vector</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assert_that</span>(<span class="fu">length</span>(x) <span class="sc">==</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error: length(x) not equal to 5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assert_that</span>(<span class="fu">is.numeric</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<p>In addition to giving useful error messages to the user about their inputs, adding assertions to your function allows you to document exactly what you as the developer expect to happen at intermediate points. This is particularly useful if you come back to the function after a while and need to recall exactly what it does.</p>
+<p><code>assertthat</code> can be installed either from CRAN or GitHub (CRAN is the stable version, GitHub usually has the current dev version):</p>
+<ul>
+<li><p>Installation from CRAN:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">'assertthat'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+<li><p>Installation from GitHub (requires the <a href="https://remotes.r-lib.org/"><code>remotes</code></a> package):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"hadley/assertthat"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+</ul>
+<section id="three-main-functions-assert_that-see_if-and-validate_that" class="level3">
+<h3 class="anchored" data-anchor-id="three-main-functions-assert_that-see_if-and-validate_that">Three main functions: <code>assert_that</code>, <code>see_if</code>, and <code>validate_that</code></h3>
+<p>These are the three primary functions from the package:</p>
+<ul>
+<li><code>assert_that()</code> signals (i.e., throws) an error. This is primarily what you will use in your functions.</li>
+<li><code>see_if()</code> returns a logical value, with the error message as an attribute, but no error is thrown.</li>
+<li><code>validate_that()</code> returns <code>TRUE</code> on success and otherwise returns the error as a string.</li>
+</ul>
+<p>Here is an example of the differences. When the assertion is <code>TRUE</code> they all return <code>TRUE</code> and continue with the execution of the function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># these functions will help us see the differences in assertthat's functions</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>returnStringAssert <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">assert_that</span>(<span class="fu">is.string</span>(x))</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(x)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>returnStringSeeIf <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">see_if</span>(<span class="fu">is.string</span>(x))</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(x)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>returnStringValidate <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">validate_that</span>(<span class="fu">is.string</span>(x))</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(x)</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="fu">returnStringAssert</span>(<span class="st">"a"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "a"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">returnStringSeeIf</span>(<span class="st">"a"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "a"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">returnStringValidate</span>(<span class="st">"a"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "a"</code></pre>
+</div>
+</div>
+<p>When the assertion is <code>FALSE</code> the functions have different behaviors. <code>assert_that()</code> will throw an error, halting furthering execution of the function immediately. <code>see_if()</code> and <code>validate_that()</code> will not stop the execution, allowing the function to continue with bad state.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">returnStringAssert</span>(<span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error: x is not a string (a length one character vector).</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">returnStringSeeIf</span>(<span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "a" "b"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">returnStringValidate</span>(<span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "a" "b"</code></pre>
+</div>
+</div>
+<p>However, all three will give the error message</p>
+<p><code>assert_that</code> signals an error:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assert_that</span>(<span class="fu">is.string</span>(<span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error: c("a", "b") is not a string (a length one character vector).</code></pre>
+</div>
+</div>
+<p><code>see_if</code> returns <code>FALSE</code> with the error message as an attribute:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>see_if_result <span class="ot">&lt;-</span> <span class="fu">see_if</span>(<span class="fu">is.string</span>(<span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>)))</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>see_if_result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE
+attr(,"msg")
+[1] "c(\"a\", \"b\") is not a string (a length one character vector)."</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(see_if_result, <span class="st">"msg"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "c(\"a\", \"b\") is not a string (a length one character vector)."</code></pre>
+</div>
+</div>
+<p><code>validate_that</code> returns the error message as a string:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">validate_that</span>(<span class="fu">is.string</span>(<span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "c(\"a\", \"b\") is not a string (a length one character vector)."</code></pre>
+</div>
+</div>
+<p>While in general <code>assert_that()</code> is likely to be your go-to, you might prefer to use <code>see_if()</code> or <code>validate_that()</code> in cases where you first want to inspect the error message and perhaps check other aspects of your function’s state before eventually signaling an error (e.g., using <code>stop()</code> with a custom message) so that function execution does not continue with the bad state.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>err_msg <span class="ot">&lt;-</span> <span class="fu">attr</span>(see_if_result, <span class="st">"msg"</span>)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stop</span>(<span class="st">"see_if() returned FALSE because "</span>, err_msg, <span class="at">call. =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error: see_if() returned FALSE because c("a", "b") is not a string (a length one character vector).</code></pre>
+</div>
+</div>
+</section>
+<section id="writing-your-own-assertions" class="level3">
+<h3 class="anchored" data-anchor-id="writing-your-own-assertions">Writing Your Own Assertions</h3>
+<p>While you could use <code>see_if()</code> or <code>validate_that()</code> to create custom error messages as in the previous example, <code>assertthat</code> already provides a couple of ways to do so.</p>
+<p>The first is by adding a new assertion that checks whether the number is odd and add a custom message directly to the assertion:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>is_odd <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># your custom assertion checking functions can have their own assertions!</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># you can check multiple conditions by separating them with a ,</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">assert_that</span>(<span class="fu">is.numeric</span>(x), <span class="fu">length</span>(x) <span class="sc">==</span> <span class="dv">1</span>)</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># here is the main assertion</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">assert_that</span>(x <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">1</span>, <span class="at">msg =</span> <span class="fu">paste</span>(<span class="st">"x ="</span>, x, <span class="st">"is even"</span>))</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="fu">assert_that</span>(<span class="fu">is_odd</span>(<span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error: x = 2 is even</code></pre>
+</div>
+</div>
+<p>The second is to using the <code>on_failure()</code> function, which allows you to use more complex logic to create your assertion failure messages. Below is an example of how this works:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>is_odd2 <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">assert_that</span>(<span class="fu">is.numeric</span>(x), <span class="fu">length</span>(x) <span class="sc">==</span> <span class="dv">1</span>)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">1</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(is_odd2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$srcref
+function(x) {
+  assert_that(is.numeric(x), length(x) == 1)
+  x %% 2 == 1
+}</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assert_that</span>(<span class="fu">is_odd2</span>(<span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error: is_odd2(x = 2) is not TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">on_failure</span>(is_odd2) <span class="ot">&lt;-</span> <span class="cf">function</span>(call, env) {</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste</span>(<span class="st">"x ="</span>, <span class="fu">deparse</span>(call<span class="sc">$</span>x), <span class="st">" is even"</span>)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(is_odd2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$srcref
+function(x) {
+  assert_that(is.numeric(x), length(x) == 1)
+  x %% 2 == 1
+}
+
+$fail
+function(call, env) {
+  paste("x =", deparse(call$x), " is even")
+}</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assert_that</span>(<span class="fu">is_odd2</span>(<span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error: x = 2  is even</code></pre>
+</div>
+</div>
+<p>The assertions from our original <code>is_odd()</code> function flow through the function we assigned to the <code>fail</code> attribute of <code>is_odd()</code> by using <code>on_failure()</code>, so we still get the appropriate error messages when we pass a non-numeric or vector value to <code>is_odd()</code>.</p>
+</section>
+<section id="some-additional-useful-assertions" class="level3">
+<h3 class="anchored" data-anchor-id="some-additional-useful-assertions">Some Additional Useful Assertions</h3>
+<p><code>assertthat</code> provides a few additional assertions above and beyond what base R provides that can be quite useful:</p>
+<ul>
+<li><code>is.flag(x)</code>: is <code>x</code> <code>TRUE</code> or <code>FALSE</code>? (a boolean flag)</li>
+<li><code>is.string(x)</code>: is <code>x</code> a length 1 character vector?</li>
+<li><code>has_name(x, nm)</code>, <code>x %has_name% nm</code>: does <code>x</code> have component <code>nm</code>?</li>
+<li><code>has_attr(x, attr)</code>, <code>x %has_attr% attr</code>: does <code>x</code> have attribute <code>attr</code>?</li>
+<li><code>is.count(x)</code>: is <code>x</code> a single positive integer?</li>
+<li><code>are_equal(x, y)</code>: are <code>x</code> and <code>y</code> equal?</li>
+<li><code>not_empty(x)</code>: are all dimensions of <code>x</code> greater than 0?</li>
+<li><code>noNA(x)</code>: is <code>x</code> free from missing values?</li>
+<li><code>is.dir(path)</code>: is path a directory?</li>
+<li><code>is.writeable(path)</code>/<code>is.readable(path)</code>: is <code>path</code> writeable/readable?</li>
+<li><code>has_extension(path, extension)</code>: does <code>file</code> have given <code>extension</code>?</li>
+</ul>
+</section>
+</section>
+<section id="testing" class="level2">
+<h2 class="anchored" data-anchor-id="testing">Testing</h2>
+<p>Assertions allow us to check aspects of function state as the function is being executed, while unit tests help ensure that the output from a function is what we expect given some set of inputs.</p>
+<p>A common approach to testing is to use the R console to informally check whether your code works on a few examples. Units tests formalize this approach by providing a framework for testing that allows you to re-run tests as you update your functions. You are likely already using the first approach, so there is no reason to waste your code and energy by not saving it for later use.</p>
+<p>Hadley Wickam describes four main areas that proper testings will help improve your code:</p>
+<ol type="1">
+<li><p><strong>Fewer bugs</strong>: When setting up unit tests you have a formal place that describes your expectations for function behavior. This serves as a form of internal documentation and helps ensure that your code does what you intend.</p></li>
+<li><p><strong>Better code structure</strong>: Tests should only check accuracy of small portions of code, allowing you to easily find sources of error. This forces you to write more modular code.</p></li>
+<li><p><strong>Easier restarts</strong>: Tests help you remember where you left off and what the next step in your code should be. It is good practice to write tests first, and then write the function that achieves the desired result. This practice is called “test-driven development”.</p></li>
+<li><p><strong>Robust code</strong>: By having tests in place for all portions of your code you can make changes while knowing that you can easily check if those changes produce an error and where to go to fix it.</p></li>
+</ol>
+</section>
+<section id="testthat" class="level2">
+<h2 class="anchored" data-anchor-id="testthat"><code>testthat</code></h2>
+<p>The <code>testthat</code> package provides a framework for writing and performing tests in R. There are two pieces of the <code>testthat</code> package, forming a hierarchical structure for testing.</p>
+<ol type="1">
+<li><p>Tests: tests are the top of the hiercharchy. Usually for a single function that is being tested there will be multiple tests. For example, we may have one test that inspects results for normal inputs and another test for inputs with missing values. Use the <code>test_that()</code> function.</p></li>
+<li><p>Expectations: each test is made up of a series of expectations that describe the expected output of a function (e.g.&nbsp;length, type, value). Use the <code>expect_that()</code> function.</p></li>
+</ol>
+<section id="list-of-common-expectations" class="level3">
+<h3 class="anchored" data-anchor-id="list-of-common-expectations">List of Common Expectations</h3>
+<table class="table">
+<colgroup>
+<col style="width: 39%">
+<col style="width: 60%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>expect_true(x)</code></td>
+<td>expects that <code>x</code> is <code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td><code>expect_false(x)</code></td>
+<td>expects that <code>x</code> is <code>FALSE</code></td>
+</tr>
+<tr class="odd">
+<td><code>expect_null(x)</code></td>
+<td>expects that <code>x</code> is <code>NULL</code></td>
+</tr>
+<tr class="even">
+<td><code>expect_type(x)</code></td>
+<td>expects that <code>x</code> is of type <code>y</code></td>
+</tr>
+<tr class="odd">
+<td><code>expect_is(x, y)</code></td>
+<td>expects that <code>x</code> is of class <code>y</code></td>
+</tr>
+<tr class="even">
+<td><code>expect_length(x, y)</code></td>
+<td>expects that <code>x</code> is of length <code>y</code></td>
+</tr>
+<tr class="odd">
+<td><code>expect_equal(x, y)</code></td>
+<td>expects that <code>x</code> is equal to <code>y</code></td>
+</tr>
+<tr class="even">
+<td><code>expect_equivalent(x, y)</code></td>
+<td>expects that <code>x</code> is equivalent to <code>y</code></td>
+</tr>
+<tr class="odd">
+<td><code>expect_identical(x, y)</code></td>
+<td>expects that <code>x</code> is identical to <code>y</code></td>
+</tr>
+<tr class="even">
+<td><code>expect_lt(x, y)</code></td>
+<td>expects that <code>x</code> is less than <code>y</code></td>
+</tr>
+<tr class="odd">
+<td><code>expect_gt(x, y)</code></td>
+<td>expects that <code>x</code> is greater than <code>y</code></td>
+</tr>
+<tr class="even">
+<td><code>expect_lte(x, y)</code></td>
+<td>expects that <code>x</code> is less than or equal to <code>y</code></td>
+</tr>
+<tr class="odd">
+<td><code>expect_gte(x, y)</code></td>
+<td>expects that <code>x</code> is greater than or equal <code>y</code></td>
+</tr>
+<tr class="even">
+<td><code>expect_named(x)</code></td>
+<td>expects that <code>x</code> has names <code>y</code></td>
+</tr>
+<tr class="odd">
+<td><code>expect_matches(x, y)</code></td>
+<td>expects that <code>x</code> matches <code>y</code> (regex)</td>
+</tr>
+<tr class="even">
+<td><code>expect_message(x, y)</code></td>
+<td>expects that <code>x</code> gives message <code>y</code></td>
+</tr>
+<tr class="odd">
+<td><code>expect_warning(x, y)</code></td>
+<td>expects that <code>x</code> gives warning <code>y</code></td>
+</tr>
+<tr class="even">
+<td><code>expect_error(x, y)</code></td>
+<td>expects that <code>x</code> throws error <code>y</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="testthat-example" class="level2">
+<h2 class="anchored" data-anchor-id="testthat-example"><code>testthat</code> example</h2>
+<p>To understand how <code>testthat</code> works, we will consider the <code>standardize()</code> function, which takes a vector <code>x</code>, subtracts the mean of the vector, and then divides by the standard deviation. Notice the assertions in the function to check pre-conditions!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>standardize <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">na.rm =</span> <span class="cn">FALSE</span>) {</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># assertions on input</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">assert_that</span>(<span class="fu">is.vector</span>(x))</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">assert_that</span>(<span class="fu">is.flag</span>(na.rm))</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># do computation</span></span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>  z <span class="ot">&lt;-</span> (x <span class="sc">-</span> <span class="fu">mean</span>(x, <span class="at">na.rm =</span> na.rm)) <span class="sc">/</span> <span class="fu">sd</span>(x, <span class="at">na.rm =</span> na.rm)</span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(z)</span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="informal-testing" class="level3">
+<h3 class="anchored" data-anchor-id="informal-testing">Informal testing</h3>
+<p>When writing a function, the informal process of testing usually looks something like this, executed line-by-line in the R console:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">standardize</span>(a)</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>z</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -1.3719887 -0.6859943  0.3429972  0.6859943  1.0289915</code></pre>
+</div>
+</div>
+<p>Then you might look at the mean and standard deviation of <code>z</code> to see if <code>standardize()</code> appears to be working as expected:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># zero mean</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(z)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># unit std-dev</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(z)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+</div>
+<p>Next, you might keep testing the function with more extreme cases:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="cn">NA</span>)</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">standardize</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NA NA NA NA NA</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">standardize</span>(y, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -1.1618950 -0.3872983  0.3872983  1.1618950         NA</code></pre>
+</div>
+</div>
+<p>And so on for different types of inputs:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>alog <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="fu">standardize</span>(alog)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  0.8660254 -0.8660254 -0.8660254  0.8660254</code></pre>
+</div>
+</div>
+<p>This approach is fine and encouraged for interactive development, but don’t waste all this energy! Hold on to your testing code for a rainy day.</p>
+</section>
+<section id="using-testthat" class="level3">
+<h3 class="anchored" data-anchor-id="using-testthat">Using <code>testthat</code></h3>
+<p>Instead of just writing a list of more or less informal tests in the R console, we are going to use the functions provide by <code>testthat</code>.</p>
+<p>To learn about the testing functions, we’ll consider the following test inputs:</p>
+<ul>
+<li><code>x &lt;- c(1, 2, 3)</code></li>
+<li><code>y &lt;- c(1, 2, NA)</code></li>
+<li><code>w &lt;- c(TRUE, FALSE, TRUE)</code></li>
+<li><code>q &lt;- letters[1:3]</code></li>
+</ul>
+<section id="the-happy-path-testing-with-normal-input" class="level4">
+<h4 class="anchored" data-anchor-id="the-happy-path-testing-with-normal-input">The “happy path”: Testing with “normal” input</h4>
+<p>The core of <code>testthat</code> consists of <em>expectations</em>; to write expectations you use functions from the <code>testthat</code> package starting with <code>expect_</code> such as <code>expect_equal()</code>, <code>expect_integer()</code> or <code>expect_error()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> (x <span class="sc">-</span> <span class="fu">mean</span>(x)) <span class="sc">/</span> <span class="fu">sd</span>(x)</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="fu">expect_equal</span>(<span class="fu">standardize</span>(x), z)</span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a><span class="fu">expect_length</span>(<span class="fu">standardize</span>(x), <span class="fu">length</span>(x))</span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a><span class="fu">expect_type</span>(<span class="fu">standardize</span>(x), <span class="st">'double'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Notice that when an expectation runs successfully, nothing appears to happen. But that’s good news. If an expectation fails, you’ll typically get an error, here are some failed tests:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># different expected output</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">expect_equal</span>(<span class="fu">standardize</span>(x), x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error: standardize(x) not equal to `x`.
+3/3 mismatches (average diff: 2)
+[1] -1 - 1 == -2
+[2]  0 - 2 == -2
+[3]  1 - 3 == -2</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># different expected length</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">expect_length</span>(<span class="fu">standardize</span>(x), <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error: standardize(x) has length 3, not length 2.</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="co"># different expected type</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="fu">expect_type</span>(<span class="fu">standardize</span>(x), <span class="st">'character'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error: standardize(x) has type 'double', not 'character'.</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="edge-cases-testing-function-robustness" class="level3">
+<h3 class="anchored" data-anchor-id="edge-cases-testing-function-robustness">Edge cases: Testing function robustness</h3>
+<p>It’s important to be creative when testing and get into the mindset of the user of your code. You might be the only user, but your perspective when developing code vs.&nbsp;when you use it later on are not one in the same. Think about the range of inputs the user might give your functions and how your function should behave in cases that don’t fall directly on the happy path.</p>
+<section id="testing-inputs-with-na" class="level4">
+<h4 class="anchored" data-anchor-id="testing-inputs-with-na">Testing inputs with <code>NA</code></h4>
+<p>Let’s include a vector with missing values, which we want to handle.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="cn">NA</span>)</span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>z1 <span class="ot">&lt;-</span> (y <span class="sc">-</span> <span class="fu">mean</span>(y, <span class="at">na.rm =</span> <span class="cn">FALSE</span>)) <span class="sc">/</span> <span class="fu">sd</span>(y, <span class="at">na.rm =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>z2 <span class="ot">&lt;-</span> (y <span class="sc">-</span> <span class="fu">mean</span>(y, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">/</span> <span class="fu">sd</span>(y, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a><span class="fu">expect_equal</span>(<span class="fu">standardize</span>(y), z1)</span>
+<span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a><span class="fu">expect_length</span>(<span class="fu">standardize</span>(y), <span class="fu">length</span>(y))</span>
+<span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a><span class="fu">expect_equal</span>(<span class="fu">standardize</span>(y, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), z2)</span>
+<span id="cb63-8"><a href="#cb63-8" aria-hidden="true" tabindex="-1"></a><span class="fu">expect_length</span>(<span class="fu">standardize</span>(y, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="fu">length</span>(y))</span>
+<span id="cb63-9"><a href="#cb63-9" aria-hidden="true" tabindex="-1"></a><span class="fu">expect_type</span>(<span class="fu">standardize</span>(y), <span class="st">'double'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="testing-with-logical-input" class="level4">
+<h4 class="anchored" data-anchor-id="testing-with-logical-input">Testing with logical input</h4>
+<p>Let’s now test <code>standardize()</code> with a logical vector:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> (w <span class="sc">-</span> <span class="fu">mean</span>(w)) <span class="sc">/</span> <span class="fu">sd</span>(w)</span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a><span class="fu">expect_equal</span>(<span class="fu">standardize</span>(w), z)</span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a><span class="fu">expect_length</span>(<span class="fu">standardize</span>(w), <span class="fu">length</span>(w))</span>
+<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a><span class="fu">expect_type</span>(<span class="fu">standardize</span>(w), <span class="st">'double'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="combining-multiple-expectations-into-a-test-with-test_that" class="level3">
+<h3 class="anchored" data-anchor-id="combining-multiple-expectations-into-a-test-with-test_that">Combining multiple expectations into a test with <code>test_that()</code></h3>
+<p>Now that you’ve seen how the expectation functions work, the next thing to talk about is the function <code>test_that()</code> which you’ll use to group a set of expectations.</p>
+<p>Looking at the previous test examples with the normal input vector, all the expectations can be wrapped inside a call to <code>test_that()</code>. The first argument of <code>test_that()</code> is a string indicating what is being tested, followed by an R expression with the expectations.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">test_that</span>(<span class="st">"standardize works with normal input"</span>, {</span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>  z <span class="ot">&lt;-</span> (x <span class="sc">-</span> <span class="fu">mean</span>(x)) <span class="sc">/</span> <span class="fu">sd</span>(x)</span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect_equal</span>(<span class="fu">standardize</span>(x), z)</span>
+<span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect_length</span>(<span class="fu">standardize</span>(x), <span class="fu">length</span>(x))</span>
+<span id="cb65-7"><a href="#cb65-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect_type</span>(<span class="fu">standardize</span>(x), <span class="st">'double'</span>)</span>
+<span id="cb65-8"><a href="#cb65-8" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Test passed 🎊</code></pre>
+</div>
+</div>
+<p>Likewise, all the expectations with the vector containing missing values can be wrapped inside another call to <code>test_that()</code> like this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">test_that</span>(<span class="st">"standardize works with missing values"</span>, {</span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="cn">NA</span>)</span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>  z1 <span class="ot">&lt;-</span> (y <span class="sc">-</span> <span class="fu">mean</span>(y, <span class="at">na.rm =</span> <span class="cn">FALSE</span>)) <span class="sc">/</span> <span class="fu">sd</span>(y, <span class="at">na.rm =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>  z2 <span class="ot">&lt;-</span> (y <span class="sc">-</span> <span class="fu">mean</span>(y, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">/</span> <span class="fu">sd</span>(y, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect_equal</span>(<span class="fu">standardize</span>(y), z1)</span>
+<span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect_length</span>(<span class="fu">standardize</span>(y), <span class="fu">length</span>(y))</span>
+<span id="cb67-8"><a href="#cb67-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect_equal</span>(<span class="fu">standardize</span>(y, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), z2)</span>
+<span id="cb67-9"><a href="#cb67-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect_length</span>(<span class="fu">standardize</span>(y, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="fu">length</span>(y))</span>
+<span id="cb67-10"><a href="#cb67-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect_type</span>(<span class="fu">standardize</span>(y), <span class="st">'double'</span>)</span>
+<span id="cb67-11"><a href="#cb67-11" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Test passed 🌈</code></pre>
+</div>
+</div>
+<p>And last, but not least, the expectations with the logical vector can be grouped in a <code>test_that()</code> call:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">test_that</span>(<span class="st">"standardize handles logical vector"</span>, {</span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>  w <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>  z <span class="ot">&lt;-</span> (w <span class="sc">-</span> <span class="fu">mean</span>(w)) <span class="sc">/</span> <span class="fu">sd</span>(w)</span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect_equal</span>(<span class="fu">standardize</span>(w), z)</span>
+<span id="cb69-6"><a href="#cb69-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect_length</span>(<span class="fu">standardize</span>(w), <span class="fu">length</span>(w))</span>
+<span id="cb69-7"><a href="#cb69-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect_type</span>(<span class="fu">standardize</span>(w), <span class="st">'double'</span>)</span>
+<span id="cb69-8"><a href="#cb69-8" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Test passed 😸</code></pre>
+</div>
+</div>
+</section>
+<section id="running-tests" class="level3">
+<h3 class="anchored" data-anchor-id="running-tests">Running tests</h3>
+<p>The formal way to implement the tests is to include them in a separate <code>R</code> script file, e.g.&nbsp;<code>tests-function-name.R</code>. Then you</p>
+<p>If your working directory is the <code>sections/03/</code> directory, then you could run the tests in <code>tests-standardize.R</code> from the R console using the function <code>test_file()</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co"># (assuming that your working directory is "sections/03/")</span></span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="co"># run from R console</span></span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a><span class="fu">test_file</span>(<span class="st">"tests/tests-standardize.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+══ Testing tests-standardize.R ═════════════════════════════════════════════════
+
+[ FAIL 0 | WARN 0 | SKIP 0 | PASS 0 ]
+[ FAIL 0 | WARN 0 | SKIP 0 | PASS 1 ]
+[ FAIL 0 | WARN 0 | SKIP 0 | PASS 2 ]
+[ FAIL 0 | WARN 0 | SKIP 0 | PASS 3 ]
+[ FAIL 0 | WARN 0 | SKIP 0 | PASS 4 ]
+[ FAIL 0 | WARN 0 | SKIP 0 | PASS 5 ]
+[ FAIL 0 | WARN 0 | SKIP 0 | PASS 6 ]
+[ FAIL 0 | WARN 0 | SKIP 0 | PASS 7 ]
+[ FAIL 0 | WARN 0 | SKIP 0 | PASS 8 ]
+[ FAIL 0 | WARN 0 | SKIP 0 | PASS 9 ]
+[ FAIL 0 | WARN 0 | SKIP 0 | PASS 10 ]
+[ FAIL 0 | WARN 0 | SKIP 0 | PASS 11 ] Done!</code></pre>
+</div>
+</div>
+<p>We see that all 11 of the tests were passed, so it seems like our function is working as expected.</p>
+<p>To see what the output of <code>test_file()</code> looks like when tests fail I included a version of <code>standarize</code> which adds a 1 to the end of function called <code>standarizeWrong</code> in the <code>functions.R</code> file. In this case we expect the tests to fail and that is what we see:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co"># (assuming that your working directory is "sections/03/")</span></span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a><span class="co"># run from R console</span></span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a><span class="fu">test_file</span>(<span class="st">"tests/tests-standardize-wrong.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+══ Testing tests-standardize-wrong.R ═══════════════════════════════════════════
+
+[ FAIL 0 | WARN 0 | SKIP 0 | PASS 0 ]
+[ FAIL 1 | WARN 0 | SKIP 0 | PASS 0 ]
+[ FAIL 1 | WARN 0 | SKIP 0 | PASS 1 ]
+[ FAIL 1 | WARN 0 | SKIP 0 | PASS 2 ]
+[ FAIL 1 | WARN 0 | SKIP 0 | PASS 3 ]
+[ FAIL 1 | WARN 0 | SKIP 0 | PASS 4 ]
+[ FAIL 2 | WARN 0 | SKIP 0 | PASS 4 ]
+[ FAIL 2 | WARN 0 | SKIP 0 | PASS 5 ]
+[ FAIL 2 | WARN 0 | SKIP 0 | PASS 6 ]
+[ FAIL 3 | WARN 0 | SKIP 0 | PASS 6 ]
+[ FAIL 3 | WARN 0 | SKIP 0 | PASS 7 ]
+[ FAIL 3 | WARN 0 | SKIP 0 | PASS 8 ]
+
+── Failure (tests-standardize-wrong.R:9:3): standardize works with normal input ──
+standardizeWrong(x) not equal to `z`.
+3/3 mismatches (average diff: 1)
+[1] 0 - -1 == 1
+[2] 1 -  0 == 1
+[3] 2 -  1 == 1
+
+── Failure (tests-standardize-wrong.R:22:3): standardize works with missing values ──
+standardizeWrong(y, na.rm = TRUE) not equal to `z2`.
+2/3 mismatches (average diff: 1)
+[1] 0.293 - -0.707 == 1
+[2] 1.707 -  0.707 == 1
+
+── Failure (tests-standardize-wrong.R:32:3): standardize handles logical vector ──
+standardizeWrong(w) not equal to `z`.
+3/3 mismatches (average diff: 1)
+[1]  1.577 -  0.577 == 1
+[2] -0.155 - -1.155 == 1
+[3]  1.577 -  0.577 == 1
+
+
+[ FAIL 3 | WARN 0 | SKIP 0 | PASS 8 ]</code></pre>
+</div>
+</div>
+<p>Here we see that 3 tests failed, namely that our output is not equal to the value that we expect it to be. This allows us to go back to the function and assess what may be going wrong.</p>
+</section>
+</section>
+<section id="practice-problems" class="level1">
+<h1>Practice problems</h1>
+<p>Although it is not required to code in this manner, we are going to practice working in a test-driven format. It is a coding practice where you first write the tests, then write a function that will pass those tests, and update the function and tests as needed. Coding in this way is called <a href="https://en.wikipedia.org/wiki/Test-driven_development">test-driven development</a>.</p>
+<p>Suppose we want to write a function <code>calculator(x, y, operation)</code> that takes in two numbers <code>x</code> and <code>y</code> as well as a string <code>operation</code> indicating whether to perform addition, subtraction, multiplication, or division. This function should return a numeric value.</p>
+<ol type="1">
+<li><p>Write a test that will check whether <code>calculator</code> (which you have not written yet) returns an error when <code>x</code> and <code>y</code> are not numeric and when <code>operation</code> is not in the expected set of operations (i.e.&nbsp;addition, subtraction, multiplication, and division). Save these tests in a file called <code>tests-calculator.R</code>. Hint: use the expectation <code>expect_error()</code>. You may want to write custom error messages in your assertions.</p></li>
+<li><p>Start writing your <code>calculator</code> function to pass the tests written in 1). Use the <code>assertthat</code> package to produce errors if <code>x</code> or <code>y</code> are not numeric or when <code>operation</code> is not in the expected set of operations. You can choose what you expect the user to call each operation in the function. Save this function as <code>calculator.R</code></p></li>
+<li><p>Use the <code>test_files("tests-calculator.R")</code> to see if your function is operating as you hope. Note this assumes you are in the directory that holds <code>tests-calculator.R</code>.</p></li>
+<li><p>Write a test that checks whether the addition piece of your calculator produces the correct results with the following input:</p>
+<ol type="1">
+<li><code>x = 1</code> and <code>y = 9</code></li>
+<li><code>x = 100</code>, <code>y = -5</code> Also, check that the value returned is a scalar. Save these tests in a file called <code>tests-calculator.R</code>. If you think of any other tests feel free to add them.</li>
+</ol></li>
+<li><p>Add the addition functionality to <code>calculator()</code> and call <code>test_files("tests-calculator.R")</code> again.</p></li>
+<li><p>Continue iterating through this process for substraction, multiplication, and division. Make sure your function elegantly handles division when the demoninator is 0.</p></li>
+<li><p>If you have time, add new functionality to your calulator (e.g.&nbsp;square root).</p></li>
+</ol>
+<section id="acknowledgements" class="level2">
+<h2 class="anchored" data-anchor-id="acknowledgements">Acknowledgements</h2>
+<p>This lab was originally authored by Zoe Vernon and updated incrementally by Andrew Vaughn and James Duncan.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../labs/01/intro_git_knitr.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lab 1</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
