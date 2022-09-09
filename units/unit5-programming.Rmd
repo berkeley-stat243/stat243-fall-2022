@@ -282,7 +282,7 @@ in various ways by setting options.
     primary reason you would want to interrupt is when R runs out of
     memory.
 
--   *sessionInfo()* gives information on the current R session and can
+-   *sessionInfo* gives information on the current R session and can
     be very helpful for recording the state of your session (including package versions) to allow for reproducibility.
 
     ```{r}
@@ -347,7 +347,7 @@ wrapper around Fortran, the numerical programming language most commonly used at
 Calling out to external code is particularly important in languages like R and Python that are often much slower
 than compiled code and less important in a fast language like Julia (which uses Just-In-Time compilation -- more on that later).
 
-In R, one can call directly out to C or C++ code using *.Call()* or one can use the [*Rcpp* package](https://adv-r.hadley.nz/rcpp.html). *Rcpp* is specifically designed to be able to write C++ code that feels somewhat like writing R code and where it is very easy to pass data between R and C++. 
+In R, one can call directly out to C or C++ code using *.Call* or one can use the [Rcpp package](https://adv-r.hadley.nz/rcpp.html). *Rcpp* is specifically designed to be able to write C++ code that feels somewhat like writing R code and where it is very easy to pass data between R and C++. 
 
 In Python, one can [directly call out to C or C++ code](https://docs.python.org/3/extending/extending.html) or one can use *Cython* to interact with C. With Cython, one can:
   - Have Cython automatically translate Python code to C, if you provide type definitions for your variables.
@@ -363,11 +363,11 @@ be *installed* (once) on your computer and *loaded* (every time you start a new 
 A big part of R's popularity is indeed the extensive collection of add-on
 packages on [CRAN](https://cran.r-project.org) (and GitHub and elsewhere) that provide
 much of R's functionality. To make use of a package it needs to be
-installed on your system (using *install.packages()* once only) and
-loaded into R (using *library()* every time you start R).
+installed on your system (using *install.packages* once only) and
+loaded into R (using *library* every time you start R).
 
 Some packages are *installed* by default with R and of these, some are
-*loaded* by default, while others require a call to *library()*. 
+*loaded* by default, while others require a call to *library*. 
 
 If you want to sound like an R expert, make sure to call them *packages*
 and not *libraries*. A *library* is the location in the directory
@@ -375,7 +375,7 @@ structure where the packages are installed/stored.
 
 ## Loading packages
 
-You can use *library()* to either (1) make a package available (loading
+You can use *library* to either (1) make a package available (loading
 it), (2) get an overview of the package, or (3) (if called without
 arguments) to see all the installed packages.
 
@@ -388,7 +388,7 @@ Packages often
 depend on other packages. In general, if one package depends on another,
 R will load the dependency, but if the dependency is installed locally
 (see below), R may not find it automatically and you may have to use
-*library()* to load the dependency first. In general, package dependencies
+*library* to load the dependency first. In general, package dependencies
 are handled very cleanly in R without you having having to worry much about it;
 this is less the case in Python.
 
@@ -426,7 +426,7 @@ install.packages('dplyr', lib = '~/Rlibs') # ~/Rlibs needs to exist!
 ```
 
 You can also download the zipped source file from CRAN and install from
-the file; see the help page for *install.packages()*. This is called
+the file; see the help page for *install.packages*. This is called
 "installing from source". On Windows and Mac, you'll need to do
 something like this:
 
@@ -497,6 +497,35 @@ mod <- lm(y ~ x)
 mod
 ```
 
+### Namespace resolution
+
+Standard practice in R has generally been to load a package and then use any of the items in the package namespace directly, e.g.,
+
+```{r}
+library(stringr)
+str_detect("hello there", "hello")
+```
+
+However, particularly if you're using the package in only a limited way, it can be a nice idea to not load the entire package and instead use the namespace resolution operator in a style that might remind you of Python and some other languages:
+
+```{r}
+stringr::str_detect("hello there", "hello")
+```
+
+```{python}
+import numpy as np
+x = np.ndarray([0,3,5])
+```
+
+Of course in Python you could also load the entire package (i.e., import the entire namespace), though it's not standard practice:
+
+```{python}
+from numpy import *
+## OR: from numpy import ndarray
+x = ndarray([0,3,5])
+```
+
+Loading entire packages often causes 'name collisions' where there are multiple functions (or variables, more genreally) that have the same name. This can be confusing. We'll see how R determines what function to use later in the Unit.
 
 # 4. Types and data structures
 
@@ -637,7 +666,7 @@ attributes(vec)
 This also goes by the term *coercion* and *casting*. 
 Casting often needs to be done explicitly in compiled languages and somewhat less so in interpreted languages like R.
 
-We convert between classes using variants on *as()*: e.g.,
+We convert between classes using variants on *as*: e.g.,
 
 ```{r}
 as.character(c(1,2,3))
@@ -711,8 +740,8 @@ context: first one splits the dataset by one or more variables, then one
 does something to each subset, and then one combines the results. The
 *dplyr* package implements this framework (as does the *pandas* package
 for Python). One can also do similar operations using various flavors of
-the *apply()* family of functions such as *by()*, *tapply()*, and
-*aggregate()*, but the dplyr-based tools are often nicer to use.
+the *lapply* family of functions such as *by*, *tapply*, and
+*aggregate*, but the dplyr-based tools are often nicer to use.
 
 split-apply-combine is also closely related to the famous Map-Reduce framework
 underlying big data tools such as Hadoop and Spark. 
@@ -745,10 +774,10 @@ but the long formatwhile the long format is often what is needed for analyses su
 mixed models. ANOVA, or for plotting, such as with *ggplot2*.
 
 There are a variety of functions for converting between wide and long
-formats. I recommend *pivot_longer()* and *pivot_wider()* in the *tidyr* package. There are also older *tidyr* functions
-called *gather()* and *spread()*. There are also the *melt()* and
-*cast()* in the *reshape2* package. These are easier to use than the
-functions in base R such as *reshape()* or *stack()* and *unstack()*
+formats. I recommend *pivot_longer* and *pivot_wider* in the *tidyr* package. There are also older *tidyr* functions
+called *gather* and *spread*. There are also the *melt* and
+*cast* in the *reshape2* package. These are easier to use than the
+functions in base R such as *reshape* or *stack* and *unstack*
 functions*.*
 
 ### Piping
@@ -810,7 +839,7 @@ that involve tidyverse manipulations, see
 [this tidyverse programming guide](https://dplyr.tidyverse.org/articles/programming.html).
 
 Note that the tidyverse is not the only place where non-standard
-evaluation is used. Consider this *lm()* call:
+evaluation is used. Consider this *lm* call:
 
 ```{r, eval=FALSE}
 lm(y ~ x, weights = w, data = mydf)
@@ -818,3 +847,441 @@ lm(y ~ x, weights = w, data = mydf)
 
 > **Challenge**
 > Where is the non-standard evaluation there?
+
+# 5. Programming paradigms: object-oriented and functional programming
+
+Object-oriented and functional programming are two important approaches to programming.
+
+Functional programming focuses on writing functions that take inputs and produce outputs. Ideally those functions don't change the state (i.e., the values) of any variables and can be treated as black boxes. Functions can be treated like other variables, such as passing functions as arguments (as one does with *lapply* in R, for example).
+
+Object-oriented programming revolves around objects that belong to classes. The class of an object defines the fields (the data objects) holding information and (often) methods that can be applied to those fields. When one calls a method, it may modify the value of the fields. A statistical analogy is that an object of a class is like the realization (the object) of a random variable (the class).
+
+One can think of functional programming as being focused on actions (or *verbs* to make an analogy with human language). One carries out a computation as a sequence of function calls. One can think of OOP as being focused on the objects (or *nouns*). One carries out a computation as a sequence of operations with the objects, using the class methods.
+
+Many languages are multi-paradigm, containing aspects of both approaches and allowing programmers to use either approach. Both R and Python are like this, though some might consider R to be more functional and Python to be more object-oriented. That said, in R everything is an object and has a class, while there are plenty of function-based operations in Python.
+
+```python
+import numpy as np
+x = np.array([1.2, 3.5, 4.2])
+x.shape  # field (or attribute) of the numpy array class
+x.sum()  # method of the class
+len(x)   # function
+```
+
+Different people have different preferences, but which is better depends on what you are trying to do. If your computation is a data analysis pipeline that involves a series of transformations of some data, a functional approach might make more sense, since the focus is on a series of actions rather than the state of objects. If your computation involves various operations on fixed objects whose state needs to change, OOP might make more sense. For example, if you were writing code to keep track of student information, it would probably make sense to have each student as an object of a Student class with methods such as 'register' and 'assign_grade'. 
+
+
+# 6. Object-oriented programming (OOP)
+
+## Principles
+
+Some of the standard concepts in object-oriented programming include *encapsulation*, *inheritance*, *polymorphism*, and *abstraction*.
+
+*Encapsulation* involves preventing direct access to internal data in an object from outside the object. Instead the class is designed so that access (reading or writing) happens through the interface set up by the programmer (e.g., 'getter' and 'setter' methods). We'll see this in our R6 class example below.
+
+*Inheritance* allows one class to be based on another class, adding more specialized features. For example (as in our S3 example), a *glm* class inheriting from an *lm* class. 
+
+*Polymorphism* allows for different behavior of an object or function depending on the context. A polymorphic function behaves differently depending on the input types. A polymorphic object is one that can belong to different classes (e.g., based on inheritance), and a given method name can be used with any of the classes. An example would be having a base or super class called 'algorithm' and various specific machine learning algorithms inheriting from that class. All of the classes might have a 'predict' method.
+
+*Abstraction* involves hiding the details of how something is done (e.g., via the method of a class), giving the user an interface to provide inputs and get outputs. By making the actual computation a black box, the programmer can modify the internals without changing how a user uses the system. 
+
+Classes generally have *constructors* that initialize objects of the class and *destructors* that remove objects.
+
+
+## Generic function OOP
+
+Much of the object-oriented programming in R uses *generic function OOP*, also known as *functional OOP*. 
+In this style, classes don't have methods. Instead there are *generic functions* (also known as *generic methods*) that change their behavior based on the type of the input(s). Another way to put it is that the nouns and the verbs are separate, unliked in standard OOP.
+
+Generic function OOP  is how the (very) old S3 system in R works. It's also a key part of the (fairly) new Julia language.
+
+### S3 classes in R
+
+S3 classes are widely-used, in particular for statistical models in the
+*stats* package. S3 classes are very informal in that there's not a
+formal definition for an S3 class. Instead, an S3 object is just a
+primitive R object such as a list or vector with additional attributes
+including a class name.
+
+#### Creating our own class
+
+We can create an object with a new class as follows:
+
+```{r}
+yog <- list(firstname = 'Yogi', surname = 'the Bear', age = 20)
+class(yog) <- 'bear' 
+```
+
+Actually, if we want to create a new class that we'll use again, we want
+to create a *constructor* function that initializes new bears:
+
+```{r}
+bear <- function(firstname = NA, surname = NA, age = NA){
+	# constructor for 'indiv' class
+	obj <- list(firstname = firstname, surname = surname,
+                    age = age)
+	class(obj) <- 'bear' 
+	return(obj)
+}
+smoke <- bear('Smokey','Bear')
+```
+
+For those of you used to more formal OOP, the following is probably
+disconcerting:
+
+```{r}
+class(smoke) <- "celebrity"
+```
+
+#### Generic methods
+
+The real power of the S3 system comes from defining *class-specific methods*. For example,
+
+```{r}
+x <- rnorm(10)
+summary(x)
+
+y <- rnorm(10)
+mod <- lm(y ~ x)
+summary(mod)
+```
+
+Here *summary* is a generic function (or generic method) that, based
+on the type of object given to it (the first argument), dispatches a
+class-specific function (method) that operates on the object. 
+
+The above is equivalent to directly calling the class-specific methods:
+
+```{r}
+identical(summary(x), summary.default(x))
+identical(summary(mod), summary.lm(mod))
+```
+
+
+This use of generic functions is convenient in that it allows us to work with a variety of kinds of objects using familiar functions. Consider
+the generic methods *plot*, *print*, *summary*, *\[*, and
+others. We can look at a function and easily see that it is a generic
+method. 
+
+```{r}
+summary
+```
+
+The `UseMethod` syntax is what causes the dispatching of the class-specific method
+associated with `object` and calls that method.
+In many cases there will be a default method (here,
+*summary.default*), so if no method is defined for the class, R uses
+the default. Sidenote: arguments to a generic method are passed along to
+the selected method by passing along the calling environment.
+
+We can also see what classes have methods for a given generic
+function.
+
+```{r}
+methods(summary)
+```
+
+
+We can define a new generic function:
+
+```{r}
+summarize <- function(object, ...) 
+	UseMethod("summarize") 
+```
+
+Let's try this out on our *bear*
+class. In reality, we'd write either *summary.bear* or *print.bear*
+(and of course the generics for *summary* and *print* already exist) but
+for illustration, I wanted to show how we would write both the generic
+and the specific method, so I'll write a *summarize* method instead of a *summary* method.
+
+```{r}
+summarize.bear <- function(object) 
+	return(with(object, cat("Bear of age ", age, 
+	" whose name is ", firstname, " ", surname, ".\n",
+    sep = "")))
+summarize(yog)
+```
+
+#### Why use generic functions?
+
+We could have written *summary* as a regular function with a bunch of if statements or if-else clauses (or *switch*) so that it can handle different kinds of input objects. 
+
+This has two disadvantages:
+
+  1. We need to write the code that does the checking (and all the code for the different cases all lives inside one potentially very long function, unless we create class-specific helper functions).
+  2. Much more importantly, *summary* will only work for existing classes. And users can't easily extend it for new classes that they create because they don't control the *summary* function. So a user could not add the additional conditions/classes in a big if-else statement. The generic function approach makes the system *extensible* -- we can build our own new functionality on what is already in R.
+
+#### The print method
+
+Like *summary*, *print* is a generic method, with various
+class-specific methods, such as *print.lm*.
+
+Note that the *print* function is what is called when you simply type
+the name of the object, so we can have object information printed out in
+a structured way. Recall that the output when we type the name of an
+*lm* object is NOT simply a regurgitation of the elements of the list -
+rather *print.lm* is called.
+
+Similarly, when we used `print(object.size(x))` we are invoking the
+*object_size*-specific print method which gets the value of the size and
+then formats it. So there's actually a fair amount going on behind the
+scenes.
+
+Surprisingly, the *summary* method generally doesn't actually print
+out information; rather it computes things not stored in the original
+object and returns it as a new class (e.g., class *summary.lm*), which
+is then automatically printed, per my comment above (e.g., using
+*print.summary.lm*), unless one assigns it to a new object. Note that
+*print.summary.lm* is hidden from user view (it's a private object in the *stats* namespace).
+
+```{r}
+out <- summary(mod)
+class(out)
+out
+print(out)
+## One can look at the code for the method (not shown):
+## getS3method(f = "print", class = "summary.lm")
+```
+
+#### Inheritance
+
+Let's look at the *lm* class, which builds on lists, and *glm* class,
+which builds on the *lm* class. Here *mod* is an object (an instance) of
+class *lm*. 
+
+```{r}
+library(methods)
+ybin <- sample(c(0, 1), 10, replace = TRUE)
+ycont <- rnorm(10)
+x <- rnorm(10)
+mod1 <- lm(ycont ~ x)
+mod2 <- glm(ybin ~ x, family = binomial)
+class(mod1)
+class(mod2)
+is.list(mod1)
+names(mod1)
+is(mod2, "lm")
+methods(class = "lm")
+```
+
+Often S3 classes inherit from lists (i.e., are special cases of lists),
+so you can obtain components of the object using the \$ operator.
+
+As noted with *lm* and *glm* objects, we can assign more than one class
+to an object. Here *summarize* still works, even though the primary
+class is *grizzly_bear*.
+
+```{r}
+class(yog) <- c('grizzly_bear', 'bear')
+summarize(yog) 
+```
+
+The classes should nest within one another with the more specific
+classes to the left, e.g., here a *grizzly_bear* would have some
+additional fields on top of those of a *bear*, perhaps
+*number_of_people_killed* (since grizzly bears are much more dangerous
+than some other kinds of bears), and perhaps additional or modified
+methods. *grizzly_bear* inherits from *bear*, and R uses methods for the
+first class before methods for the next class(es).
+
+The above is an example of polymorphism. `yog` is a polymorphic object 
+and the various methods are polymorphic in that *print* can be used
+with the *bear* class, the *grizzly_bear* class, and other classes beyond that.
+
+
+> **Challenge**
+> How would you get R to quit immediately, without asking for any more information, when you simply type `k` (no parentheses!) instead of `quit()`? (Hint: you can do this by understanding what happens when you type `k` and how to exploit the S3 system.)
+
+
+### Multiple dispatch OOP 
+
+S3 method dispatch involves only the first argument to the function. In contrast, [Julia emphasizes the importance of multiple dispatch](https://docs.julialang.org/en/v1/manual/methods) as particularly important for mathematical computation. With multiple dispatch, the specific method can be chosen based on more than one argument.
+
+The old (but still used in some contexts) [S4](http://adv-r.had.co.nz/S4.html) system in R and the (very) new [R7](https://rconsortium.github.io/OOP-WG) system both provide for multiple dispatch. 
+
+As a very simple example unrelated to any specific language, multiple dispatch would allow one to do the following with the addition operator:
+
+```
+3 + 7    # 10
+3 + 'a'  # '3a'
+'hi' +  ' there'  # 'hi there'
+```
+
+The idea of having the behavior of an operator or function adapt to the type of the input(s) is one aspect of *polymorphism*.
+
+Both S4 and R7 are designed to be more formal than the S3 system (recall how we could just 'create' an S3 class by giving a class name to an existing list). With S4 and R7, you need to define your classes. 
+
+## 'Standard' OOP
+
+What I'm calling 'standard' object-oriented programming is the style of OOP used in languages such as Python, C++, and Java. In R, one can use this style via the R6 system (or the older *referenceClass* system).
+
+In this style, objects belong to classes. A class is made up of fields (the data objects) that store information and methods that operate on the fields. Thus, unlike generic function OOP, the verbs are part of the nouns.
+
+We'll illustrate this style of OOP using an example with an R6 class.
+
+### R6 classes
+
+R6 classes are a somewhat new construct in R, with a class-based approach fairly similar to Python and C++. Importantly, they behave like pointers. We'll discuss pointers in detail later. Let's work through an example
+where we set up the fields of the class and class
+methods, including a constructor.
+
+#### Example
+
+Our example is to create a class for working with random time series. Each object of the class has specific parameter values that control the stochastic behavior of the time series. With a given object we can simulate one or more time series (realizations).
+
+Here's the initial definition of the class, with both public
+(user-facing) and private (internal use only) methods and fields.
+
+```{r, include=FALSE}
+# suppress package-loading messages by loading here
+library(fields)  
+```
+
+```{r}
+library(R6)
+
+tsSimClass <- R6Class("tsSimClass",
+    ## class for holding time series simulators
+    public = list(
+        initialize = function(times, mean = 0, corParam = 1) {
+            library(fields)
+            stopifnot(is.numeric(corParam), length(corParam) == 1)
+            stopifnot(is.numeric(times))
+            private$times <- times
+            private$n <- length(times)
+            private$mean <- mean
+            private$corParam <- corParam
+            private$currentU <- FALSE
+            private$calcMats()
+        },
+        
+        changeTimes = function(newTimes) {
+            private$times <- newTimes
+            private$calcMats()
+        },
+        
+        getTimes = function() {
+            return(private$times)
+        },
+
+        print = function() { # 'print' method
+            cat("R6 Object of class 'tsSimClass' with ",
+                private$n, " time points.\n", sep = '')
+            invisible(self)
+        },
+
+        simulate = function() {
+            if(!private$currentU)     
+                private$calcMats()
+            ## analogous to mu+sigma*z for generating N(mu, sigma^2)
+            return(private$mean + crossprod(private$U, rnorm(private$n)))
+        }
+    ),
+
+    ## private methods and functions not accessible externally
+    private = list(
+        calcMats = function() {
+            ## calculates correlation matrix and Cholesky factor
+            lagMat <- fields::rdist(private$times) # local variable
+            corMat <- exp(-lagMat^2 / private$corParam^2)
+            private$U <- chol(corMat) # square root matrix
+            cat("Done updating correlation matrix and Cholesky factor.\n")
+            private$currentU <- TRUE
+            invisible(self)
+        },
+        n = NULL, 
+        times = NULL,
+        mean = NULL,
+        corParam = NULL,
+        U = NULL,
+        currentU = FALSE
+    )
+)   
+
+```
+
+
+Now let's see how we would use the class.
+
+```{r}
+myts <- tsSimClass$new(1:100, 2, 1)
+myts
+set.seed(1)
+## here's a simulated time series
+y1 <- myts$simulate()
+plot(myts$getTimes(), y1, type = 'l', xlab = 'time',
+     ylab = 'process values')
+## simulate a second series
+y2 <- myts$simulate()
+lines(myts$getTimes(), y2, lty = 2)
+```
+
+We could set up a different object that has different parameter values.
+That new simulated time series is less wiggly because the `corParam` value
+ is larger than before.
+
+
+```{r}
+myts2 <- tsSimClass$new(1:100, 2, 4)
+set.seed(1)
+## here's a simulated time series with a different value of
+## the correlation parameter (corParam)
+y3 <- myts2$simulate()
+
+plot(myts$getTimes(), y1, type = 'l', xlab = 'time',
+     ylab = 'process values')
+lines(myts$getTimes(), y2, lty = 2)
+lines(myts2$getTimes(), y3, col = 'red')
+```
+
+#### Copies and references
+
+Next let's think about when copies are made. In the next example `mytsRef` is a copy of `myts`
+in the sense that both names point to the same underlying object.
+But no data were copied when the assignment to `mytsRef` was done. 
+
+```{r}
+mytsRef <- myts
+## 'mytsRef' and 'myts' are names for the same underlying object
+mytsFullCopy <- myts$clone()  
+
+## Now let's change the values of a field
+myts$changeTimes(seq(0,1000, length = 100))
+myts$getTimes()[1:5] 
+mytsRef$getTimes()[1:5] # the same as `myts`
+mytsFullCopy$getTimes()[1:5] # different from `myts`
+```
+
+In contrast `mytsFullCopy` is a reference to a different object, and
+all the data from `myts` had to be copied over to `mytsFullCopy`. This takes additional memory (and time), but is also safer, as it avoids the possibility that the user might modify `myts` and not realize that they were also affecting `mytsRef`.
+
+#### Encapsulation
+
+Why have private fields (i.e., encapsulation)? The use of private fields shields them from
+    modification by users. In this case, that prevent users from modifying the
+*times* field. Why is this important? In this example, the correlation matrix and
+    the Cholesky factor U are both functions of the vector of times. So
+    we don't want to allow a user to directly modify *times*. If they did, it would leave the fields of the object in inconsistent states. Instead we
+    force them to use *setTimes*, which correctly keeps all the fields
+    in the object internally consistent (by calling *calcMats*). It also allows us to improve efficiency
+by controlling when computationally expensive operations are carried out.
+
+```{r}
+try(myts$times <- 1:10)
+```
+
+#### Final comments
+
+  -   As we saw above, a copy of an object is just a pointer to the original object, unless we explicitly invoke the *clone* method.
+  -   Classes can inherit from other classes. E.g., if we had a *simClass* and we wanted the *tsSimClass* to inherit from it:
+
+      ```
+      R6Class(tsSimClass, inherit = simClass, ...) 
+      ```
+  -   If you need to refer to methods and fields you refer to the entire object as either *self* or *private*.
+
+
+More details on R6 classes can be found in the [Advanced R book](https://adv-r.hadley.nz/r6.html).
+
+
