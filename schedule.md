@@ -32,7 +32,7 @@ resources for R are listed at the end of module 11 of the bootcamp
 materials, so you could also use those resources. You should do this by the end of the week of September 6.
 - **Bash shell tutorial and exercises**: (by September 2), read through this [tutorial on using the bash shell](https://berkeley-scf.github.io/tutorial-using-bash). You can skip the pages on Regular Expressions and Managing Processes. Work through the first 10 problems in the [exercises](https://berkeley-scf.github.io/tutorial-using-bash/exercises) and submit your answers via Gradescope. This is not a formal problem set, so you don't need to worry about formatting nor about explaining/commenting your answers, nor do you need to put your answers in your GitHub class repository. In fact it's even fine with me if you hand-write the answers and scan them to an electronic document. I just want to make sure you've worked through the tutorial. I'll be doing demonstrations on using the bash shell in class starting on Wednesday August 31, so that will be helpful as you work through the tutorial.
 - **Lab 1**: (September 2) First section/lab on using Git, setting up your GitHub repository for problem sets, and using R Markdown/Quarto/knitr to generate dynamic documents. **Please come only to the section you are registered for given space limits in the room, unless you have talked with Chris and have his permission.** 
-- **Regular expression tutorial and exercises**: (by September 9), read the regular expression material in the [tutorial on using the bash shell](https://berkeley-scf.github.io/tutorial-using-bash/regex). Also read Section 2.1 of the [string processing tutorial](https://berkeley-scf.github.io/tutorial-string-processing) (you can focus on Section 2.1.2 on stringr if you wish). Then answer the regular expressions (regex) [practice problems and submit your answers via TBD](TBD). This is not one of the graded problem sets but rather an 'assignment' that will simply be noted as being completed or not.
+- **Regular expression tutorial and exercises**: (by September 9), read the regular expression material in the [tutorial on using the bash shell](https://berkeley-scf.github.io/tutorial-using-bash/regex). Also read Section 1 of the 'basic text manipulation' page of the [string processing tutorial](https://berkeley-scf.github.io/tutorial-string-processing/basic-text-manipulation) (you can focus on Section 1.2 on stringr if you wish). Then answer the regular expressions (regex) [practice problems and submit your answers on Gradescope](https://www.gradescope.com/courses/425343/assignments/2227720). This is not one of the graded problem sets but rather an 'assignment' that will simply be noted as being completed or not.
 
 ## Assignments and problem sets
 
@@ -42,7 +42,8 @@ Submit your solutions on Gradescope and (for problem sets but not assignments) v
 |----|----|----|----|
 | [bash shell problems (first 10)](https://berkeley-scf.github.io/tutorial-using-bash/exercises) | Friday Sep. 2 | 10 am | I recomend you do at least some of the tutorial reading before class on Aug. 31 |
 | PS 1 [(HTML)](ps/ps1.html) [(PDF)](ps/ps1.pdf) | Wednesday Sep. 7 | 10 am | |
-| regex problems | Friday Sep. 9 | 10 am | |
+| [regular expression reading and problems](https://www.gradescope.com/courses/425343/assignments/2227720)| Friday Sep. 9 | 10 am | |
+| PS 2 [(HTML)](ps/ps2.html) [(PDF)](ps/ps2.pdf) | Friday Sep. 16 | 10 am | |
 
 ## Quiz schedule
 
