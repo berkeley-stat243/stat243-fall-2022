@@ -310,6 +310,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul class="collapse">
   <li><a href="#source-vs.-binary-packages" id="toc-source-vs.-binary-packages" class="nav-link" data-scroll-target="#source-vs.-binary-packages">Source vs.&nbsp;binary packages</a></li>
   </ul></li>
+  <li><a href="#managing-packages-using-package-managers" id="toc-managing-packages-using-package-managers" class="nav-link" data-scroll-target="#managing-packages-using-package-managers">Managing packages using package managers</a></li>
   <li><a href="#package-namespaces" id="toc-package-namespaces" class="nav-link" data-scroll-target="#package-namespaces">Package namespaces</a>
   <ul class="collapse">
   <li><a href="#why-have-namespaces" id="toc-why-have-namespaces" class="nav-link" data-scroll-target="#why-have-namespaces">Why have namespaces?</a></li>
@@ -385,7 +386,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <p><a href="./unit5-programming.pdf" class="btn btn-primary">PDF</a></p>
 <blockquote class="blockquote">
-<p><strong>Note</strong> This Unit will be posted in phases as I get the material ready. Currently only Sections 1-4 are available.</p>
+<p><strong>Note</strong> This Unit will be posted in phases as I get the material ready. 2022-09-09: Currently only Sections 1-6 are available.</p>
 </blockquote>
 <p>References:</p>
 <ul>
@@ -398,6 +399,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol type="1">
 <li>Strings and regular expressions</li>
 <li>Type/class coercion</li>
+<li>Object-oriented programming - S3 classes</li>
+<li>Object-oriented programming - R6 classes</li>
 </ol>
 <section id="overview" class="level1">
 <h1>Overview</h1>
@@ -547,7 +550,8 @@ again</code></pre>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>files <span class="ot">&lt;-</span> <span class="fu">system</span>(<span class="st">"ls"</span>, <span class="at">intern =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>files[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "badCode.R"    "cache"        "calc_mean.py" "convert.sh"   "convert.sh~" </code></pre>
+<pre><code>[1] "0-bash-shell.sh" "badCode.R"       "cache"           "calc_mean.py"   
+[5] "convert.sh"     </code></pre>
 </div>
 </div></li>
 <li><p>There are also a bunch of functions that will do specific queries of the filesystem, including</p>
@@ -741,9 +745,8 @@ First arg is:  NA ; second is:  22.5 ; third is:  NA .</code></pre>
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)              <span class="co"># load the package</span></span>
 <span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="at">help =</span> dplyr)       <span class="co"># get some help info about the package</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Packages often depend on other packages. In general, if one package depends on another, R will load the dependency, but if the dependency is installed locally (see below), R may not find it automatically and you may have to use <em>library</em> to load the dependency first. In general, package dependencies are handled very cleanly in R without you having having to worry much about it; this is less the case in Python.</p>
 <p>Packages in R (and in Python, Julia, etc.) may be installed in various places on the filesystem, and it sometimes it is helpful (e.g., if you end up with multiple versions of a package installed on your system) to be able to figure out where on the filesystem the package is being loaded from. If you run <code>library()</code>, you’ll notice that some of the packages are in a system directory and some are in your home directory.</p>
-<p><code>.libPaths()</code> shows where R looks for packages on your system and <code>searchpaths()</code> shows where individual packages currently loaded in your session have been loaded from. The help information for <em>.libPaths</em> gives some information about how R decides what locations to look in for packages.</p>
+<p><code>.libPaths()</code> shows where R looks for packages on your system and <code>searchpaths()</code> shows where individual packages currently loaded in your session have been loaded from. The help information for <em>.libPaths</em> gives some information about how R decides what locations to look in for packages (and how you can modify that).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.libPaths</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -771,6 +774,7 @@ First arg is:  NA ; second is:  22.5 ; third is:  NA .</code></pre>
 <section id="installing-packages" class="level2">
 <h2 class="anchored" data-anchor-id="installing-packages">Installing packages</h2>
 <p>If a package is on CRAN but not on your system, you can install it easily (usually). You don’t need root permission on a machine to install a package (though sometimes you run into hassles if you are installing it just as a user, so if you have administrative privileges it may help to use them). Of course in RStudio, you can install via the GUI.</p>
+<p>Packages often depend on other packages. In general, if one package depends on another, R will install the dependency automatically, but sometimes you’ll need to install a dependency yourself. In general, package dependencies are handled very cleanly in R without you having having to worry much about it; this is less the case in Python.</p>
 <p>Note that R will generally install the package in a reasonable place by default but you can control where it is installed using the <em>lib</em> argument.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">'dplyr'</span>, <span class="at">lib =</span> <span class="st">'~/Rlibs'</span>) <span class="co"># ~/Rlibs needs to exist!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -785,6 +789,11 @@ First arg is:  NA ; second is:  22.5 ; third is:  NA .</code></pre>
 <h3 class="anchored" data-anchor-id="source-vs.-binary-packages">Source vs.&nbsp;binary packages</h3>
 <p>The difference between a <em>source</em> package and a <em>binary</em> package is that the source package has the raw R (and C and Fortran, in some cases) code as text files while the binary package has all the code in a binary/non-text format, including that any C and Fortran code will have already been compiled. To install a source package with C or Fortran code in it, you’ll need to have developer/command-line tools (e.g., <em>XCode</em> on Mac or <em>Rtools.exe</em> on Windows) installed on your system so that you have a compiler.</p>
 </section>
+</section>
+<section id="managing-packages-using-package-managers" class="level2">
+<h2 class="anchored" data-anchor-id="managing-packages-using-package-managers">Managing packages using package managers</h2>
+<p>For reproducibility, it’s important to know the versions of the packages you use (and the version of R). Package managers make it easy to do this. Some useful packages that do package management in R are <em>checkpoint</em>, <em>renv</em>, and <em>packrat</em>. The basic commonality is that they try to make it easy to ‘freeze’ the versions of hte packages you are using, record that information, and restore the versions (potentially on some other machine and by some user other than yourself). The package manager may tell you where the packages are installed, but you can always verify things with <code>.libPaths()</code>.</p>
+<p>In Python, you can set up and manage isolated environments in which you can control the package versions using virtualenvs or Conda environments.</p>
 </section>
 <section id="package-namespaces" class="level2">
 <h2 class="anchored" data-anchor-id="package-namespaces">Package namespaces</h2>
@@ -840,7 +849,7 @@ lm(formula = y ~ x)
 
 Coefficients:
 (Intercept)            x  
-      0.519       -0.105  </code></pre>
+      0.683       -0.605  </code></pre>
 </div>
 </div>
 </section>
@@ -904,7 +913,11 @@ Coefficients:
 <pre><code>double y;
 double x = 3.1;
 y = x * 7.1;</code></pre>
-<p>Dynamic typing can be quite helpful from the perspective of quick implementation and avoiding tedious type definitions and problems from minor inconsistencies between types (e.g., multiplying an integer by a real-valued number). But static typing has some critical advantages from the perspective of software development, including: - protecting against errors from mismatched values and unexpected user inputs, and - generally much faster execution because the type of a variable does not need to be checked when the code is run.</p>
+<p>Dynamic typing can be quite helpful from the perspective of quick implementation and avoiding tedious type definitions and problems from minor inconsistencies between types (e.g., multiplying an integer by a real-valued number). But static typing has some critical advantages from the perspective of software development, including:</p>
+<ul>
+<li>protecting against errors from mismatched values and unexpected user inputs, and</li>
+<li>generally much faster execution because the type of a variable does not need to be checked when the code is run.</li>
+</ul>
 <p>More complex types in R (and in Python) often use references (<em>pointers</em>, aka <em>addresses</em>) to the actual locations of the data. We’ll see this in detail later in the Unit.</p>
 </section>
 <section id="types-and-classes-in-r" class="level3">
@@ -998,12 +1011,12 @@ y = x * 7.1;</code></pre>
 <div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>qs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> 2.5% 97.5% 
--1.92  1.95 </code></pre>
+-1.86  1.97 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a>qs[<span class="dv">1</span>] <span class="sc">+</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>2.5% 
-1.08 </code></pre>
+1.14 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="fu">object.size</span>(qs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1015,7 +1028,7 @@ y = x * 7.1;</code></pre>
 <div class="sourceCode cell-code" id="cb122"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(qs) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
 <span id="cb122-2"><a href="#cb122-2" aria-hidden="true" tabindex="-1"></a>qs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -1.92  1.95</code></pre>
+<pre><code>[1] -1.86  1.97</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb124"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="fu">object.size</span>(qs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1131,12 +1144,12 @@ Levels: advanced basic minimal proficient</code></pre>
 <span id="cb152-2"><a href="#cb152-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">label =</span> <span class="fu">rep</span>(<span class="st">'a'</span>, n), <span class="at">val1 =</span> <span class="fu">rnorm</span>(n), <span class="at">val2 =</span> <span class="fu">rnorm</span>(n))</span>
 <span id="cb152-3"><a href="#cb152-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  label   val1   val2
-1     a  1.568 -0.563
-2     a -1.000 -0.297
-3     a -0.581  0.545
-4     a -0.299  0.656
-5     a -0.527  0.600</code></pre>
+<pre><code>  label    val1   val2
+1     a  0.4562  0.277
+2     a  0.3278 -0.283
+3     a  0.0252 -0.649
+4     a -1.3206  1.853
+5     a  0.7681 -1.023</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb154"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb154-1"><a href="#cb154-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Why does the following not work?</span></span>
 <span id="cb154-2"><a href="#cb154-2" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>( <span class="fu">apply</span>(df, <span class="dv">1</span>, <span class="cf">function</span>(x) x[<span class="dv">2</span>] <span class="sc">+</span> x[<span class="dv">3</span>]) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1146,7 +1159,7 @@ Levels: advanced basic minimal proficient</code></pre>
 <div class="sourceCode cell-code" id="cb156"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb156-1"><a href="#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Instead, this will work. Why?</span></span>
 <span id="cb156-2"><a href="#cb156-2" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(df[ , <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>], <span class="dv">1</span>, <span class="cf">function</span>(x) x[<span class="dv">1</span>] <span class="sc">+</span> x[<span class="dv">2</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1]  1.0048 -1.2969 -0.0360  0.3570  0.0724</code></pre>
+<pre><code>[1]  0.7327  0.0443 -0.6242  0.5322 -0.2550</code></pre>
 </div>
 </div>
 </section>
@@ -1331,7 +1344,7 @@ Attaching package: 'dplyr'</code></pre>
 <span id="cb177-2"><a href="#cb177-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
- -1.735  -0.502  -0.309  -0.388  -0.046   0.316 </code></pre>
+ -1.474  -0.227   0.535   0.233   0.835   1.703 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb179"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb179-1"><a href="#cb179-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>)</span>
 <span id="cb179-2"><a href="#cb179-2" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x)</span>
@@ -1342,17 +1355,17 @@ Call:
 lm(formula = y ~ x)
 
 Residuals:
-   Min     1Q Median     3Q    Max 
--2.134 -0.381  0.179  0.538  1.687 
+    Min      1Q  Median      3Q     Max 
+-1.5153 -0.7006  0.0121  0.9148  0.9704 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept)  -0.0532     0.4243   -0.13     0.90
-x             0.4774     0.6058    0.79     0.45
+(Intercept)    0.413      0.330    1.25     0.25
+x             -0.237      0.341   -0.69     0.51
 
-Residual standard error: 1.12 on 8 degrees of freedom
-Multiple R-squared:  0.072, Adjusted R-squared:  -0.044 
-F-statistic: 0.621 on 1 and 8 DF,  p-value: 0.453</code></pre>
+Residual standard error: 1.01 on 8 degrees of freedom
+Multiple R-squared:  0.0568,    Adjusted R-squared:  -0.0611 
+F-statistic: 0.481 on 1 and 8 DF,  p-value: 0.507</code></pre>
 </div>
 </div>
 <p>Here <em>summary</em> is a generic function (or generic method) that, based on the type of object given to it (the first argument), dispatches a class-specific function (method) that operates on the object.</p>
@@ -1373,7 +1386,7 @@ F-statistic: 0.621 on 1 and 8 DF,  p-value: 0.453</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>function (object, ...) 
 UseMethod("summary")
-&lt;bytecode: 0x5600c181c038&gt;
+&lt;bytecode: 0x5637e7bde450&gt;
 &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
@@ -1454,17 +1467,17 @@ Call:
 lm(formula = y ~ x)
 
 Residuals:
-   Min     1Q Median     3Q    Max 
--2.134 -0.381  0.179  0.538  1.687 
+    Min      1Q  Median      3Q     Max 
+-1.5153 -0.7006  0.0121  0.9148  0.9704 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept)  -0.0532     0.4243   -0.13     0.90
-x             0.4774     0.6058    0.79     0.45
+(Intercept)    0.413      0.330    1.25     0.25
+x             -0.237      0.341   -0.69     0.51
 
-Residual standard error: 1.12 on 8 degrees of freedom
-Multiple R-squared:  0.072, Adjusted R-squared:  -0.044 
-F-statistic: 0.621 on 1 and 8 DF,  p-value: 0.453</code></pre>
+Residual standard error: 1.01 on 8 degrees of freedom
+Multiple R-squared:  0.0568,    Adjusted R-squared:  -0.0611 
+F-statistic: 0.481 on 1 and 8 DF,  p-value: 0.507</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb196"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb196-1"><a href="#cb196-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(out)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1473,17 +1486,17 @@ Call:
 lm(formula = y ~ x)
 
 Residuals:
-   Min     1Q Median     3Q    Max 
--2.134 -0.381  0.179  0.538  1.687 
+    Min      1Q  Median      3Q     Max 
+-1.5153 -0.7006  0.0121  0.9148  0.9704 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept)  -0.0532     0.4243   -0.13     0.90
-x             0.4774     0.6058    0.79     0.45
+(Intercept)    0.413      0.330    1.25     0.25
+x             -0.237      0.341   -0.69     0.51
 
-Residual standard error: 1.12 on 8 degrees of freedom
-Multiple R-squared:  0.072, Adjusted R-squared:  -0.044 
-F-statistic: 0.621 on 1 and 8 DF,  p-value: 0.453</code></pre>
+Residual standard error: 1.01 on 8 degrees of freedom
+Multiple R-squared:  0.0568,    Adjusted R-squared:  -0.0611 
+F-statistic: 0.481 on 1 and 8 DF,  p-value: 0.507</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb198"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb198-1"><a href="#cb198-1" aria-hidden="true" tabindex="-1"></a><span class="do">## One can look at the code for the method (not shown):</span></span>
 <span id="cb198-2"><a href="#cb198-2" aria-hidden="true" tabindex="-1"></a><span class="do">## getS3method(f = "print", class = "summary.lm")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
