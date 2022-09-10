@@ -22,7 +22,8 @@ execute:
 
 
 > **Note**
-> This Unit will be posted in phases as I get the material ready. Currently only Sections 1-4 are available.
+> This Unit will be posted in phases as I get the material ready.
+> 2022-09-09: Currently only Sections 1-6 are available.
 
 
 References:
@@ -41,6 +42,8 @@ can use for reference if you want to. Note that I've reorganized the material in
 
 1. Strings and regular expressions
 3. Type/class coercion
+4. Object-oriented programming - S3 classes
+5. Object-oriented programming - R6 classes
 
 
 # Overview
@@ -373,6 +376,7 @@ If you want to sound like an R expert, make sure to call them *packages*
 and not *libraries*. A *library* is the location in the directory
 structure where the packages are installed/stored.
 
+
 ## Loading packages
 
 You can use *library* to either (1) make a package available (loading
@@ -383,14 +387,6 @@ arguments) to see all the installed packages.
 library(dplyr)              # load the package
 library(help = dplyr)       # get some help info about the package
 ```
-
-Packages often
-depend on other packages. In general, if one package depends on another,
-R will load the dependency, but if the dependency is installed locally
-(see below), R may not find it automatically and you may have to use
-*library* to load the dependency first. In general, package dependencies
-are handled very cleanly in R without you having having to worry much about it;
-this is less the case in Python.
 
 Packages in R (and in Python, Julia, etc.) may be installed in various places
 on the filesystem, and it sometimes it is helpful (e.g., if you end up with multiple
@@ -403,7 +399,7 @@ system directory and some are in your home directory.
 looks for packages on your system and `searchpaths()` shows where
 individual packages currently loaded in your session have been loaded from. The help information 
 for *.libPaths* gives some information about how R decides what locations
-to look in for packages.
+to look in for packages (and how you can modify that).
 
 ```{r}
 .libPaths()
@@ -417,6 +413,13 @@ easily (usually). You don't need root permission on a machine to install
 a package (though sometimes you run into hassles if you are installing
 it just as a user, so if you have administrative privileges it may help
 to use them). Of course in RStudio, you can install via the GUI. 
+
+Packages often depend on other packages. In general, if one package depends on another,
+R will install the dependency automatically, but sometimes you'll need to 
+install a dependency yourself.  In general, package dependencies
+are handled very cleanly in R without you having having to worry much about it;
+this is less the case in Python.
+
 
 Note that R will generally install the package in a reasonable place by default
 but you can control where it is installed using the *lib* argument.
@@ -451,6 +454,14 @@ compiled. To install a source package with C or Fortran code in it,
 you'll need to have developer/command-line tools (e.g., *XCode* on Mac
 or *Rtools.exe* on Windows) installed on your system so that you have a
 compiler.
+
+## Managing packages using package managers
+
+For reproducibility, it's important to know the versions of the packages you use (and the version of R).
+Package managers make it easy to do this. Some useful packages that do package management in R are *checkpoint*, *renv*, and *packrat*. The basic commonality is that they try to make it easy to 'freeze' the versions of hte packages you are using, record that information, and restore the versions (potentially on some other machine and by some user other than yourself). The package manager may tell you where the packages are installed, but you can always verify things with `.libPaths()`.
+
+In Python, you can set up and manage isolated environments in which you can control the package versions using virtualenvs or Conda environments.
+
 
 ## Package namespaces
 
@@ -563,6 +574,7 @@ y = x * 7.1;
 
 Dynamic typing can be quite helpful from the perspective of quick implementation and avoiding tedious type definitions and problems from minor inconsistencies between types (e.g., multiplying an integer by a real-valued number).
 But static typing has some critical advantages from the perspective of software development, including:
+
   - protecting against errors from mismatched values and unexpected user inputs, and
   - generally much faster execution because the type of a variable does not need to be checked when the code is run.
 
