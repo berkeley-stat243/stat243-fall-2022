@@ -519,16 +519,17 @@ is almost never what you want!
 
 `expect_error()` will pass if _any_ error is signaled, including ones that we
 aren't expecting! Therefore, it's good practice to use the `regexp` argument in
-`expect_error()` to match. In this case, we'll also use `fixed = TRUE` to
-exactly match the error message, rather than use an actual regular expression.
+`expect_error()` to match the error message you expect to see. In this case,
+we'll also use `fixed = TRUE` to exactly match the error message, rather than
+use a more general regular expression.
 
 ```{r}
 expected_msg <- "non-numeric argument to binary operator"
 expect_error(standardize(q), regexp = expected_msg, fixed = TRUE)
 ```
 
-Together with the `class` and `...` (see `?testthat::expect_error`), it's
-possible to make sophisticated
+Together with the `class` and `...` arguments (see `?testthat::expect_error`), it's
+possible to create very sophisticated logic for matching specific errors.
 
 ## Combining multiple expectations into a test with `test_that()`
 
