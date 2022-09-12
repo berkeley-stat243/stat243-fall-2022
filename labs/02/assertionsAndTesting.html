@@ -915,7 +915,7 @@ Always use the regexp argument when using <code>expect_error()</code>
 <p>Using <code>expect_error()</code> without the <code>regexp</code> argument, as in the above example, is almost never what you want!</p>
 </div>
 </div>
-<p><code>expect_error()</code> will pass if <em>any</em> error is signaled, including ones that we aren’t expecting! Therefore, it’s good practice to use the <code>regexp</code> argument in <code>expect_error()</code> to match. In this case, we’ll also use <code>fixed = TRUE</code> to exactly match the error message, rather than use an actual regular expression.</p>
+<p><code>expect_error()</code> will pass if <em>any</em> error is signaled, including ones that we aren’t expecting! Therefore, it’s good practice to use the <code>regexp</code> argument in <code>expect_error()</code> to match the error message you expect to see. In this case, we’ll also use <code>fixed = TRUE</code> to exactly match the error message, rather than use a more general regular expression.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>expected_msg <span class="ot">&lt;-</span> <span class="st">"non-numeric argument to binary operator"</span></span>
 <span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a><span class="fu">expect_error</span>(<span class="fu">standardize</span>(q), <span class="at">regexp =</span> expected_msg, <span class="at">fixed =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -924,7 +924,7 @@ Always use the regexp argument when using <code>expect_error()</code>
 returning NA</code></pre>
 </div>
 </div>
-<p>Together with the <code>class</code> and <code>...</code> (see <code>?testthat::expect_error</code>), it’s possible to make sophisticated</p>
+<p>Together with the <code>class</code> and <code>...</code> arguments (see <code>?testthat::expect_error</code>), it’s possible to create very sophisticated logic for matching specific errors.</p>
 </section>
 </section>
 <section id="combining-multiple-expectations-into-a-test-with-test_that" class="level2">
@@ -941,7 +941,7 @@ returning NA</code></pre>
 <span id="cb72-7"><a href="#cb72-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect_type</span>(<span class="fu">standardize</span>(x), <span class="st">'double'</span>)</span>
 <span id="cb72-8"><a href="#cb72-8" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Test passed 🥳</code></pre>
+<pre><code>Test passed 😀</code></pre>
 </div>
 </div>
 <p>Likewise, all the expectations with the vector containing missing values can be wrapped inside another call to <code>test_that()</code> like this:</p>
@@ -958,7 +958,7 @@ returning NA</code></pre>
 <span id="cb74-10"><a href="#cb74-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect_type</span>(<span class="fu">standardize</span>(y), <span class="st">'double'</span>)</span>
 <span id="cb74-11"><a href="#cb74-11" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Test passed 😀</code></pre>
+<pre><code>Test passed 🥇</code></pre>
 </div>
 </div>
 <p>And last, but not least, the expectations with the logical vector can be grouped in a <code>test_that()</code> call:</p>
