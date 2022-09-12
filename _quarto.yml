@@ -16,7 +16,7 @@ website:
         text: Schedule
       - sidebar:units
       - sidebar:labs
-      - sidebar:software
+      - sidebar:howtos
       - href: https://edstem.org/us/courses/25090/discussion/
         text: "Discussion"
       - href: https://statistics.berkeley.edu/computing/training/tutorials
@@ -43,8 +43,8 @@ website:
           text: "Lab 1"
         - file: labs/02/assertionsAndTesting.Rmd
           text: "Lab 2"
-    - id: software
-      title: "Software"
+    - id: howtos
+      title: "How tos"
       contents:
         - file: howtos/RandRStudioInstall.md
           text: Installing R & RStudio
