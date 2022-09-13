@@ -483,7 +483,7 @@ ls("package:stats", pattern = "^lm")
 
 ### Why have namespaces?
 
-We'll talk more about namespaces when we talk about scope and
+We'll talk more about namespaces when we talk about variable scope and
 environments. But as some motivation for why this is useful, consider the following.
 
 The *lm* function calls the *lm.fit* function to calculate the least squares solution in regression.
@@ -703,6 +703,19 @@ myVec <- 1:10
 myVec[indices]
 ```
 
+Here's an example we can work through that will help illustrate how type
+conversions occur behind the scenes in R.
+
+```{r}
+n <- 5
+df <- data.frame(label = rep('a', n), val1 = rnorm(n), val2 = rnorm(n))
+df
+## Why does the following not work?
+try( apply(df, 1, function(x) x[2] + x[3]) )
+## Instead, this will work. Why?
+apply(df[ , 2:3], 1, function(x) x[1] + x[2])
+```
+
 Be careful of using factors as indices:
 
 ```{r}
@@ -717,18 +730,6 @@ score[as.character(students[3])]
 
 What has gone wrong and how does it relate to type coercion?
 
-Here's an example we can work through that will help illustrate how type
-conversions occur behind the scenes in R.
-
-```{r}
-n <- 5
-df <- data.frame(label = rep('a', n), val1 = rnorm(n), val2 = rnorm(n))
-df
-## Why does the following not work?
-try( apply(df, 1, function(x) x[2] + x[3]) )
-## Instead, this will work. Why?
-apply(df[ , 2:3], 1, function(x) x[1] + x[2])
-```
 
 
 ## Data frames and related concepts
@@ -891,7 +892,7 @@ Some of the standard concepts in object-oriented programming include *encapsulat
 
 *Encapsulation* involves preventing direct access to internal data in an object from outside the object. Instead the class is designed so that access (reading or writing) happens through the interface set up by the programmer (e.g., 'getter' and 'setter' methods). We'll see this in our R6 class example below.
 
-*Inheritance* allows one class to be based on another class, adding more specialized features. For example (as in our S3 example), a *glm* class inheriting from an *lm* class. 
+*Inheritance* allows one class to be based on another class, adding more specialized features. An example in R's S3 system is that the *glm* class inherits from the *lm* class. 
 
 *Polymorphism* allows for different behavior of an object or function depending on the context. A polymorphic function behaves differently depending on the input types. A polymorphic object is one that can belong to different classes (e.g., based on inheritance), and a given method name can be used with any of the classes. An example would be having a base or super class called 'algorithm' and various specific machine learning algorithms inheriting from that class. All of the classes might have a 'predict' method.
 
@@ -904,6 +905,8 @@ Classes generally have *constructors* that initialize objects of the class and *
 
 Much of the object-oriented programming in R uses *generic function OOP*, also known as *functional OOP*. 
 In this style, classes don't have methods. Instead there are *generic functions* (also known as *generic methods*) that change their behavior based on the type of the input(s). Another way to put it is that the nouns and the verbs are separate, unliked in standard OOP.
+
+The use of generic functions is similar in spirit to function or method *overloading* in C++ and Java.
 
 Generic function OOP  is how the (very) old S3 system in R works. It's also a key part of the (fairly) new Julia language.
 
@@ -944,6 +947,9 @@ disconcerting:
 ```{r}
 class(smoke) <- "celebrity"
 ```
+
+Generally S3 classes inherit from lists (i.e., are special cases of lists),
+so you can obtain components of the object using the \$ operator.
 
 #### Generic methods
 
@@ -993,19 +999,31 @@ function.
 methods(summary)
 ```
 
+Or from a different angle we can see what specific methods are available for a given class.
 
-We can define a new generic function:
+```{r}
+methods(class = 'lm')
+```
+
+Let's try this functionality  out on our *bear* class.
+
+```{r}
+summary.bear <- function(object) 
+	return(with(object, cat("Bear of age ", age, 
+	" whose name is ", firstname, " ", surname, ".\n",
+    sep = "")))
+summary(yog)
+```
+
+We can also define a new generic function.
+
+Let's do this for the *bear* class as an illustration, though this won't
+provide any functionality beyond what we did with *summary*
 
 ```{r}
 summarize <- function(object, ...) 
 	UseMethod("summarize") 
 ```
-
-Let's try this out on our *bear*
-class. In reality, we'd write either *summary.bear* or *print.bear*
-(and of course the generics for *summary* and *print* already exist) but
-for illustration, I wanted to show how we would write both the generic
-and the specific method, so I'll write a *summarize* method instead of a *summary* method.
 
 ```{r}
 summarize.bear <- function(object) 
@@ -1022,23 +1040,30 @@ We could have written *summary* as a regular function with a bunch of if stateme
 This has two disadvantages:
 
   1. We need to write the code that does the checking (and all the code for the different cases all lives inside one potentially very long function, unless we create class-specific helper functions).
-  2. Much more importantly, *summary* will only work for existing classes. And users can't easily extend it for new classes that they create because they don't control the *summary* function. So a user could not add the additional conditions/classes in a big if-else statement. The generic function approach makes the system *extensible* -- we can build our own new functionality on what is already in R.
+  2. Much more importantly, *summary* will only work for existing classes. And users can't easily extend it for new classes that they create because they don't control the *summary* function. So a user could not add the additional conditions/classes in a big if-else statement. The generic function approach makes the system *extensible* -- we can build our own new functionality on what is already in R. For example, we could have written *summary.bear*.
 
 #### The print method
 
 Like *summary*, *print* is a generic method, with various
-class-specific methods, such as *print.lm*.
+class-specific methods, such as *print.lm*. We could write our own
+*print.bear* specific method. 
 
 Note that the *print* function is what is called when you simply type
 the name of the object, so we can have object information printed out in
-a structured way. Recall that the output when we type the name of an
+a structured way. Thus, the output when we type the name of an
 *lm* object is NOT simply a regurgitation of the elements of the list -
 rather *print.lm* is called.
 
-Similarly, when we used `print(object.size(x))` we are invoking the
-*object_size*-specific print method which gets the value of the size and
-then formats it. So there's actually a fair amount going on behind the
-scenes.
+```{r}
+mod
+print(mod)
+stats:::print.lm(mod)  ## print.lm is private to the stats namespace
+# print.default(mod)   ## lots of output, so don't print in document...
+```
+
+```{r}
+stats:::print.lm
+```
 
 Surprisingly, the *summary* method generally doesn't actually print
 out information; rather it computes things not stored in the original
@@ -1074,11 +1099,16 @@ class(mod2)
 is.list(mod1)
 names(mod1)
 is(mod2, "lm")
-methods(class = "lm")
 ```
 
-Often S3 classes inherit from lists (i.e., are special cases of lists),
-so you can obtain components of the object using the \$ operator.
+Here's an example of why this is useful. We don't have to define methods for
+the *glm* class if the given method for the *lm* class would work fine:
+
+```{r}
+model.matrix(mod1)
+model.matrix(mod2)
+methods(model.matrix)
+```
 
 As noted with *lm* and *glm* objects, we can assign more than one class
 to an object. Here *summarize* still works, even though the primary
@@ -1297,3 +1327,551 @@ try(myts$times <- 1:10)
 More details on R6 classes can be found in the [Advanced R book](https://adv-r.hadley.nz/r6.html).
 
 
+# 7. Functional programming
+
+## Overview of functional programming
+
+Functional programming is an approach to programming that emphasizes the use of modular, self-contained functions.
+Such functions should operate only on arguments provided to
+them (avoiding global variables), and **produce no side effects**, although in some cases there are good
+reasons for making an exception. Another aspect of functional programming is 
+that functions are considered 'first-class' citizens in that they can be passed as arguments to another function,
+returned as the result of a function, and assigned to variables. In other words, a function can be treated as any other variable.
+
+In many cases (including R and Python), anonymous functions (also called 'lambda functions') can be created on-the-fly for use in various circumstances. 
+
+## Functional programming in R
+
+R is a language that has strong functional programming aspects to it, including:
+
+  - All operations are carried out by functions.
+  - Functions are first class citizens.
+  - Functions (generally) do not have side effects.
+
+Functions that are not implemented internally in R  are also referred to officially as *closures* (this is their
+*type*) - this terminology sometimes comes up in error messages.
+
+```{r}
+typeof(mean)
+typeof(lm)
+typeof(length)
+```
+
+
+### No side effects
+
+Most functions available in R (and ideally functions that you write as well) operate by taking in arguments and producing output that is then (presumably) used subsequently. The functions generally don't have any effect on the state of your R environment/session other than the output they produce.
+
+An important reason for this (plus for not using global variables) is that it means that it is easy for people using the language to understand what code does. Every function can be treated a black box -- you don't need to understand what happens in the function or worry that the function might do something unexpected (such as changing the value of one of your variables). The result of running code is simply the result of a composition of functions, as in mathematical function composition.
+
+One aspect of this is that R uses a *pass-by-value* approach to function arguments (as opposed to a *pass-by-reference* approach). We'll talk about function arguments and when copies are made  in much more detail later, but briefly, when you pass an object in as an argument and then modify it in the function, you are modifying a local copy of the variable that exists in the context (the *frame*) of the function and is deleted when the function call finishes:
+
+```{r}
+x <- 1:3
+myfun <- function(x) {
+      x[2] <- 7
+      print(x)
+      return(x)
+}
+
+new_x <- myfun(x)
+x   # unmodified
+```
+
+In contrast, let's see what happens in Python
+
+```{python}
+x = [1,2,3]
+def myfun(x):
+  x[1] = 7
+  print(x)
+  return(x)
+
+new_x = myfun(x)
+x   # modified!
+```
+
+There are some (necessary) exceptions to the idea of no side effects in R. 
+An important exception is *par()*. If you change graphics parameters by
+calling *par()* in a user-defined function, they are changed permanently
+outside of the function. One trick is as follows:
+
+```{r}
+f <- function(){
+  oldpar <- par()
+  par(cex = 2)
+          
+  # body of code
+
+  par() <- oldpar
+}
+```
+Note that changing graphics parameters within a specific plotting
+function - e.g., `plot(x, y, pch = '+')`, doesn't change things except
+for that particular plot.
+
+> *Challenge*
+> What are some other functions that are called for the purpose of the side effects they produce? (For example, which functions change the state of your R session in some way?
+
+### Functions are first-class objects
+
+Everything in R is an object, including functions. We can assign
+functions to variables in the same way we assign numeric and other
+values.
+
+```{r}
+x <- 3
+class(x); typeof(x)
+
+try(x(2))    # x is not a function (yet)
+x <- function(z) z^2  # now it is a function
+x(2)
+class(x); typeof(x)
+```
+
+We can call a function based on the text name of the function.
+
+```{r}
+myFun <- 'mean'; x <- rnorm(10)
+eval(as.name(myFun))(x)
+```
+
+We can also pass a function into another function as the actual function
+object. This is an important aspect of R being a functional programming language.
+
+```{r}
+x <- rnorm(10)
+sapply(x, abs)
+
+f <- function(fxn, x) {
+    fxn(x)
+}
+f(mean, x)
+```
+
+We can also pass in a function based on a a character vector of length
+one with the name of the function. Here *match.fun()* is a handy
+function that extracts a function when the function is passed in as an
+argument of a function. It looks in the calling environment for the
+function and can handle when the function is passed in as a function
+object or as a character vector of length 1 giving the function name.
+
+
+
+```{r}
+f <- function(fxn, x){
+  match.fun(fxn)(x) 
+}
+f("mean", x)
+f(mean, x)
+```
+
+
+Function objects contain three components: an argument list, a body (a
+parsed R statement), and an environment.
+
+```{r}
+f1 <- function(x) y <- x^2
+f2 <- function(x) {
+    y <- x^2
+    z <- x^3
+    return(list(y, z))
+}
+class(f1)
+body(f2)
+typeof(body(f1)); class(body(f1))
+typeof(body(f2)); class(body(f2))
+```
+
+We'll see more about objects relating to the R language and parsed code
+in the final section of this Unit. For now, just realize that the parsed
+code itself is treated as an object(s) with certain types and certain
+classes.
+
+
+The *do.call* function is another example of a function that takes a function as an argument.
+It will apply a function to the elements of a
+list. For example, we can `rbind()` together (if compatible) the
+elements of a list of vectors instead of having to loop over the
+elements or manually type them in:
+
+```{r}
+myList <- list(a = 1:3, b = 11:13, c = 21:23)
+args(rbind)
+rbind(myList$a, myList$b, myList$c)
+rbind(myList)
+do.call(rbind, myList)
+```
+
+Why couldn't we just use *rbind* directly? Basically we're using
+`do.call()` to use functions that take `...` as input (i.e., functions
+accepting an arbitrary number of arguments) and to use the list as the
+input instead (i.e., to use the list elements).
+
+More generally *do.call* is a way to pass arguments to a function when 
+the arguments you want to pass are part of a list.
+
+```{r}
+do.call(mean, list(1:10, na.rm = TRUE))
+```
+
+
+### All operations are functions
+
+All operations in R are actually function calls, even things that don't look like function calls,
+including various operators (such as addition,
+subtraction, etc.), printing to the screen, etc.
+
+#### Operators
+
+Operators, such as `+` and `[` are just functions, but their arguments
+can occur both before and after the function call:
+
+```{r}
+a <- 7; b <- 3
+# let's think about the following as a mathematical function
+#  -- what's the function call?
+a + b 
+`+`(a, b)
+```
+
+In general, you can use back-ticks to refer to the operators as
+operators instead of characters. In some cases single or double quotes
+also work. We can look at the code of an operator as follows using
+back-ticks to escape out of the standard R parsing, e.g., ``%*%``.
+
+Finally, since an operator is just a function, you can use it as an
+argument in various places:
+
+```{r}
+x <- 1:3; y <- c(100,200,300)
+outer(x, y, `+`)
+
+myList <- list(list(state = 'new york', value = 1:5),
+               list(state = 'california', value = 6:10),
+               list(state = 'delaware', value = 11:15))
+
+result <- lapply(myList, `[[`, 2)
+result
+## note that the index "2" is the additional argument to the [[ function
+myMat <- sapply(myList, `[[`, 2)
+myMat
+cbind(myList[[1]][[2]], myList[[2]][[2]])  ## equivalent but doesn't scale
+```
+
+You can define your own *binary* operator (an operator taking two
+arguments) using a string inside *%* symbols. Here's how we could do
+Python-style string addition:
+
+```{r}
+`%+%` <- function(a, b) paste0(a, b, collapse = '')
+"Hi " %+% "there"
+```
+
+Since operators are just functions, there are cases in which there are
+optional arguments that we might not expect. Here's how to pass a
+sometimes useful argument to the bracket operator (in this case avoiding
+conversion from a matrix to a vector, which can mess up subsequent
+code).
+
+```{r}
+mat <- matrix(1:4, 2, 2)
+mat[ , 1] 
+mat[ , 1, drop = FALSE] # what's the difference?
+```
+
+We can also use operators with our S3 classes. Picking up our example
+from our discussion of S3 OOP, the following example will be a bit silly
+(it would make more sense with a class that is a mathematical object)
+but indicates the power of having methods.
+
+```{r}
+yog <- list(firstname = 'Yogi', surname = 'the Bear', age = 20)
+class(yog) <- 'bear' 
+
+methods(`+`)
+`+.bear` <- function(object, incr) {
+	object$age <- object$age + incr
+	return(object)
+}
+older_yog <- yog + 15
+
+older_yog
+```
+
+#### Other operations that are functions
+
+Even beyond operators, all code in R can be viewed as a function call, including
+if statements and for and while loops.
+
+What do you think is the functional version of the following code? What
+are the arguments?
+
+```{r, eval=FALSE}
+if(x > 27){
+	print(x)	
+} else{
+	print("too small") 
+}
+```
+
+#### Replacement functions
+
+Assignments that involve functions or operators on the left-hand side
+(LHS) are called *replacement expressions* or *replacement functions.*
+These can be quite handy. Here are a few examples:
+
+```{r}
+diag(mat) <- c(3, 2)
+is.na(vec) <- 3
+names(df) <- c('var1', 'var2')
+```
+
+Replacement expressions are actually function calls. The R interpreter
+calls the replacement function (which often creates a new object that
+includes the replacement) and then assigns the result to the name of the
+original object.
+
+```{r}
+mat <- matrix(rnorm(4), 2, 2)
+diag(mat) <- c(3, 2)
+mat
+mat <- `diag<-`(mat, c(10, 21))
+mat
+base::`diag<-`
+```
+
+The old version of *mat* still exists until R's memory management cleans
+it up, but it's no longer referred to by the symbol *mat*.
+This can cause memory use to increase temporarily (but generally very briefly).
+So it's something to keep in mind if you're doing replacements on large objects.
+
+You can define your own replacement functions like this, with the
+requirements that the last argument be named '*value*' and that the
+function return the entire object:
+
+```{r}
+yog <- list(firstName = 'Yogi', lastName = 'Bear')
+`firstName<-` <- function(obj, value){
+  obj$firstName <- value
+  return(obj)
+}
+firstName(yog) <- 'Yogisandra'
+```
+
+We can use replacement functions with S3 classes we define. Again,
+picking up our example from our discussion of S3 OOP, this is again a
+bit silly but we could do the following. We need to define the generic
+replacement function and then the class-specific one.
+
+```{r}
+`age<-` <- function(x, ...) UseMethod("age<-")
+
+`age<-.bear` <- function(object, value){ 
+	object$age <- value
+	return(object)
+}
+age(older_yog) <- 60
+
+older_yog
+```
+
+
+## Function evaluation, frames, and the call stack
+
+### Overview
+
+When we run code, we end up calling functions inside of other function calls.
+This leads to a nested series of function calls. The series of calls is the *call stack*.
+The stack operates like a stack of cafeteria trays - when a
+function is called, it is added to the stack (pushed) and when it
+finishes, it is removed (popped).
+
+Understanding the series of calls is important when reading error messages and debugging.
+In Python, when an error occurs, the call stack is shown, which has the advantage of
+giving the complete history of what led to the error and the disadvantage of producing
+often very verbose output that can be hard to understand. In R, only the function in which
+the error occurs is shown, but you can see the full call stack by invoking `traceback()` (see the [debugging tutorial](https://github.com/berkeley-scf/tutorial-R-debugging)).
+
+What happens when an R function is evaluated? 
+
+  - The user-provided function arguments are evaluated in the calling environment and the results are
+matched to the argument names in the function definition. 
+  - A new environment with its own frame is created, with the frame on the call stack. Assignment to the argument names is done in the environment, including any default arguments. 
+  - The body of the function is evaluated in the environment. Any look-up of variables not found in the
+environment is done using R's lexical scoping rules to look in the
+series of enclosing environments. 
+  - When the function finishes, the return
+value is passed back to the calling frame and the function frame is
+taken off the stack. The environment is removed, unless the environment
+serves as the enclosing environment of another environment.
+
+I'm not expecting you to fully understand that previous paragraph and
+all the terms in it yet. We'll see all the details as we proceed through this Unit.
+
+### Frames and the call stack
+
+R keeps track of the call stack. Each function call is associated with
+a *frame* that contains the local variables for that function call.
+
+There are a bunch of functions that let us query what frames are on the
+stack and access objects in particular frames of interest. This gives us
+the ability to work with objects in the frame from which a function was
+called.
+
+Some terminology: for our purposes we'll use the terms *frame* and
+*environment* somewhat interchangeably for the moment. A *frame* or
+*environment* is a collection of named objects. (Note that when we talk
+about variable scope later in this Unit, we'll have to be more careful with
+our terminology.) So in the context of a function call, the frame is the
+set of local variables available in the function, including arguments
+passed to the function.
+
+R provides some functions that allow you to query the call stack and its frames.
+*sys.nframe* returns the number of the current frame/environment and
+*sys.parent* the number of the parent, while *parent.frame* gives
+the name of the frame/environment of the parent (i.e., the calling)
+frame. *sys.frame* gives the name of the frame/environment for a given
+frame number (for non-negative numbers). For negative numbers, it goes
+back that many frames in the call stack and returns the name of the
+frame/environment. I need to manually insert the output here because the R Markdown processing
+up the frame counting somehow.
+
+
+```{r, eval=FALSE}
+sys.nframe()
+f <- function() {
+	cat('in f: Frame number is ', sys.nframe(),
+            '; parent frame number is ', sys.parent(), '.\n', sep = '')
+	cat('in f: Frame (i.e., environment) is: ')
+	print(sys.frame(sys.nframe()))
+	cat('in f: Parent is ')
+	print(parent.frame())
+	cat('in f: Two frames up is ')
+	print(sys.frame(-2))
+}
+f()
+```
+
+```
+in f: Frame number is 1; parent frame number is 0.
+in f: Frame (i.e., environment) is: <environment: 0x55a4d71beb88>
+in f: Parent is <environment: R_GlobalEnv>
+in f: Two frames up is Error in sys.frame(-2) : not that many frames on the stack
+```
+
+```{r, eval=FALSE}
+ff <- function() {
+	cat('in ff: Frame (i.e., environment) is: ')
+	print(sys.frame(sys.nframe()))
+	cat('in ff: Parent is ')
+	print(parent.frame())	
+	f()
+}
+ff() 
+```
+
+```
+in ff: Frame (i.e., environment) is: <environment: 0x55a4d7391700>
+in ff: Parent is <environment: R_GlobalEnv>
+in f: Frame number is 2; parent frame number is 1.
+in f: Frame (i.e., environment) is: <environment: 0x55a4d7393b38>
+in f: Parent is <environment: 0x55a4d7391700>
+in f: Two frames up is <environment: R_GlobalEnv>
+```
+
+Next we'll use a recursive function to illustrate what information we can gather
+about the call stack using *sys.status*. *sys.status* gives extensive information about the call
+stack and the frames involved (*sys.status* uses *sys.calls*,
+*sys.parents* and *sys.frames*).
+
+
+```{r, eval=FALSE}
+g <- function(y) {
+    if(y > 0) g(y-1) else gg()
+}
+
+## Ultimately, gg() is called, and it prints out info about the call stack
+gg <- function() {
+    ## this gives us the information from sys.calls(),
+    ##   sys.parents() and sys.frames() as one object
+    ## Rather than running print(sys.status()),
+    ## which would involve adding print() to the call stack,
+    ## we'll run sys.status and then print the result out.
+    tmp <- sys.status()
+    print(tmp)
+}
+
+g(3)
+```
+
+```
+$sys.calls
+$sys.calls[[1]]
+g(3)
+
+$sys.calls[[2]]
+if(y > 0) g(y-1) else gg()
+
+$sys.calls[[3]]
+if(y > 0) g(y-1) else gg()
+
+$sys.calls[[4]]
+if(y > 0) g(y-1) else gg()
+
+$sys.calls[[5]]
+if(y > 0) g(y-1) else gg()
+
+$sys.calls[[6]]
+tmp <- sys.status()
+
+
+$sys.parents
+[1] 0 1 2 3 4 5
+
+$sys.frames
+$sys.frames[[1]]
+<environment: 0x55a4d63479e8>
+
+$sys.frames[[2]]
+<environment: 0x55a4d6347ba8>
+
+$sys.frames[[3]]
+<environment: 0x55a4d5736638>
+
+$sys.frames[[4]]
+<environment: 0x55a4d5732028>
+
+$sys.frames[[5]]
+<environment: 0x55a4d5732098>
+
+$sys.frames[[6]]
+<environment: 0x55a4d5732488>
+```
+
+> *Challenge*
+> Why did I not do `print(sys.status())` directly?
+
+If you're interested in parsing a somewhat complicated example of frames
+in action, Adler provides a user-defined timing function that evaluates
+statements in the calling frame.
+
+## Function inputs and outputs
+
+Under construction.
+
+## Variable scope and lookup
+
+Under construction.
+
+# 8. Memory and copies
+
+Under construction.
+
+# 9. Efficiency
+
+Under construction.
+
+# 10. Computing on the language (optional)
+
+Under construction.
