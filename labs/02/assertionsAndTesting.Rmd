@@ -26,6 +26,8 @@ library(testthat)
 
 [PDF](./assertionsAndTesting.pdf){.btn .btn-primary}
 
+# Overview
+
 ## References and useful links
 
 * [Testing section](http://r-pkgs.had.co.nz/tests.html) of the R packages tutorial by Hadley Wickham
@@ -39,7 +41,15 @@ library(testthat)
   - Practice writing assertions and tests on your own.
 
 ## Purpose of Assertions and Testing
-We all want our code   to be correct the first time we write it. The unfortunate reality is that we all make mistakes when coding, either because of "silly mistakes" (indexing errors,   incorrect syntax,  using a wrong variable name, etc.) or because of a fundamental misunderstanding of the problem we are trying to solve. While print statements and writing test cases can help reduce coding errors, it is desirable to have a formal, structured way to test our code to ensure that it is functioning how we want it to. It is here that the `assertthat` and `testthat` packages in R prove useful.
+
+We all want our code to be correct the first time we write it. The unfortunate
+reality is that we all make mistakes when coding, either because of "silly
+mistakes" (indexing errors, incorrect syntax, using a wrong variable name, etc.)
+or because of a fundamental misunderstanding of the problem we are trying to
+solve. While print statements and writing test cases can help reduce coding
+errors, it is desirable to have a formal, structured way to test our code to
+ensure that it is functioning how we want it to. It is here that the
+`assertthat` and `testthat` packages in R prove useful.
 
 
 ## Assertion vs. Testing
@@ -73,7 +83,7 @@ Here's a summary table comparing the two:
 | Should depend only on local states (e.g., the function's arguments and internal variables). | Can depend on global state (e.g., global options). |
 | Double as inline documentation of source code. | Can be helpful for the code design process (i.e., test-driven development). |
 
-## Assertions and `assertthat`
+# Assertions and `assertthat`
 
 An assertion is a statement in a function or program that must be `TRUE` for it to
 continue and throws an error if `FALSE`. There are three types of assertions:
@@ -112,7 +122,7 @@ version, GitHub usually has the current dev version):
   remotes::install_github("hadley/assertthat")
   ```
 
-### Three main functions: `assert_that`, `see_if`, and `validate_that`
+## Three main functions: `assert_that`, `see_if`, and `validate_that`
 
 These are the three primary functions from the package:
 
@@ -190,7 +200,7 @@ err_msg <- attr(see_if_result, "msg")
 stop("see_if() returned FALSE because ", err_msg, call. = FALSE)
 ```
 
-### Writing Your Own Assertions
+## Writing Your Own Assertions
 
 While you could use `see_if()` or `validate_that()` to create custom error
 messages as in the previous example, `assertthat` already provides a couple of
@@ -239,7 +249,7 @@ still get the appropriate error messages when we pass a non-numeric or vector
 value to `is_odd()`.
 
 
-### Some Additional Useful Assertions
+## Some Additional Useful Assertions
 
 `assertthat` provides a few additional assertions above and beyond what base R
 provides that can be quite useful:
@@ -256,7 +266,7 @@ provides that can be quite useful:
   - `is.writeable(path)`/`is.readable(path)`: is `path` writeable/readable?
   - `has_extension(path, extension)`: does `file` have given `extension`?
 
-## Testing
+# Testing and `testthat`
 
 Assertions allow us to check aspects of function state as the function is being
 executed, while unit tests help ensure that the output from a function is what
@@ -289,9 +299,6 @@ your code:
    can make changes while knowing that you can easily check if those changes
    produce an error and where to go to fix it.
 
-
-## `testthat`
-
 The `testthat` package provides a framework for writing and performing tests in
 R. There are two pieces of the `testthat` package, forming a hierarchical
 structure for testing.
@@ -305,7 +312,7 @@ structure for testing.
    the expected output of a function (e.g. length, type, value). Use the
    `expect_that()` function.
 
-### List of Common Expectations
+## List of Common `testthat` Expectations
 
 | Function                  | Description                             |
 |---------------------------|-----------------------------------------|
@@ -329,7 +336,7 @@ structure for testing.
 | `expect_error(x, y)`      | expects that `x` throws error `y`       |
 
 
-## `testthat` example
+## Motivating Example
 
 To understand how `testthat` works, we will consider the `standardize()`
 function, which takes a vector `x`, subtracts the mean of the vector, and then
@@ -347,7 +354,6 @@ standardize <- function(x, na.rm = FALSE) {
   return(z)
 }
 ```
-
 
 ### Informal testing
 
@@ -389,7 +395,7 @@ standardize(alog)
 This approach is fine and encouraged for interactive development, but don't
 waste all this energy! Hold on to your testing code for a rainy day.
 
-### Using `testthat`
+## Using `testthat` expectations
 
 Instead of just writing a list of more or less informal tests in the R console,
 we are going to use the functions provide by `testthat`.
@@ -401,7 +407,7 @@ To learn about the testing functions, we'll consider the following test inputs:
 - `w <- c(TRUE, FALSE, TRUE)`
 - `q <- letters[1:3]`
 
-#### The "happy path": Testing with "normal" input
+### The "happy path": Testing with "normal" input
 
 The core of `testthat` consists of _expectations_; to write expectations you
 use functions from the `testthat` package starting with `expect_` such as
@@ -472,7 +478,60 @@ expect_length(standardize(w), length(w))
 expect_type(standardize(w), 'double')
 ```
 
-### Combining multiple expectations into a test with `test_that()`
+You may be able to think of other edge cases that would be helpful to test for
+this function. While it is not practical to attempt to write a test for every
+possible input, you should think carefully about how your users may reasonably
+interact with your code and what sorts of inputs may lead to unexpected bugs or
+shortcomings even when the inputs are reasonable.
+
+### Testing for expected errors
+
+While we might assume that `standardize()` will already rightly throw an error
+when given the character vector `q`, it's still a good idea to test for the
+failures that we expect. This is especially important for catching bad bugs
+where an error should be thrown but isn't, allowing function execution to
+continue with incorrect state. Even if we try to guard against bad state with
+assertions, testing can still help catch any incorrect logic in those
+assertions.
+
+Here's the current error we get when calling `standardize()` with character
+vector input. (Notice the warning signaled by using `mean()` on a character
+vector.)
+
+```{r, error = TRUE, warning = TRUE}
+q <- letters[1:3]
+standardize(q)
+```
+
+We can confirm that an error is signaled using `expect_error()`:
+
+```{r}
+expect_error(standardize(q))
+```
+
+:::{.callout-important}
+## Always use the regexp argument when using `expect_error()`
+
+Using `expect_error()` without the `regexp` argument, as in the above example,
+is almost never what you want!
+
+:::
+
+`expect_error()` will pass if _any_ error is signaled, including ones that we
+aren't expecting! Therefore, it's good practice to use the `regexp` argument in
+`expect_error()` to match the error message you expect to see. In this case,
+we'll also use `fixed = TRUE` to exactly match the error message, rather than
+use a more general regular expression.
+
+```{r}
+expected_msg <- "non-numeric argument to binary operator"
+expect_error(standardize(q), regexp = expected_msg, fixed = TRUE)
+```
+
+Together with the `class` and `...` arguments (see `?testthat::expect_error`), it's
+possible to create very sophisticated logic for matching specific errors.
+
+## Combining multiple expectations into a test with `test_that()`
 
 Now that you've seen how the expectation functions work, the next thing to
 talk about is the function `test_that()` which you'll use to group a set
@@ -494,7 +553,8 @@ test_that("standardize works with normal input", {
 })
 ```
 
-Likewise, all the expectations with the vector containing missing values can be wrapped inside another call to `test_that()` like this:
+Likewise, all the expectations with the vector containing missing values can be
+wrapped inside another call to `test_that()` like this:
 
 ```{r}
 test_that("standardize works with missing values", {
@@ -524,8 +584,7 @@ test_that("standardize handles logical vector", {
 })
 ```
 
-
-### Running tests
+## Running tests
 
 The formal way to implement the tests is to include them in a separate `R`
 script file, e.g. `tests-function-name.R`.  Then you
@@ -572,7 +631,7 @@ Also, check that the value returned is a scalar.  Save these tests in a file cal
 
 7.  If you have time, add new functionality to your calulator (e.g. square root).
 
-## Acknowledgements
+# Acknowledgements
 
 This lab was originally authored by Zoe Vernon and updated incrementally by
 Andrew Vaughn and James Duncan.
