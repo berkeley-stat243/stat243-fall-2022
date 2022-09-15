@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.189">
+<meta name="generator" content="quarto-1.1.245">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -358,14 +358,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#no-side-effects" id="toc-no-side-effects" class="nav-link" data-scroll-target="#no-side-effects">No side effects</a></li>
   <li><a href="#functions-are-first-class-objects" id="toc-functions-are-first-class-objects" class="nav-link" data-scroll-target="#functions-are-first-class-objects">Functions are first-class objects</a></li>
   <li><a href="#all-operations-are-functions" id="toc-all-operations-are-functions" class="nav-link" data-scroll-target="#all-operations-are-functions">All operations are functions</a></li>
+  <li><a href="#map-operations" id="toc-map-operations" class="nav-link" data-scroll-target="#map-operations">Map operations</a></li>
   </ul></li>
   <li><a href="#function-evaluation-frames-and-the-call-stack" id="toc-function-evaluation-frames-and-the-call-stack" class="nav-link" data-scroll-target="#function-evaluation-frames-and-the-call-stack">Function evaluation, frames, and the call stack</a>
   <ul class="collapse">
   <li><a href="#overview-1" id="toc-overview-1" class="nav-link" data-scroll-target="#overview-1">Overview</a></li>
   <li><a href="#frames-and-the-call-stack" id="toc-frames-and-the-call-stack" class="nav-link" data-scroll-target="#frames-and-the-call-stack">Frames and the call stack</a></li>
   </ul></li>
-  <li><a href="#function-inputs-and-outputs" id="toc-function-inputs-and-outputs" class="nav-link" data-scroll-target="#function-inputs-and-outputs">Function inputs and outputs</a></li>
-  <li><a href="#variable-scope-and-lookup" id="toc-variable-scope-and-lookup" class="nav-link" data-scroll-target="#variable-scope-and-lookup">Variable scope and lookup</a></li>
+  <li><a href="#function-inputs-and-outputs" id="toc-function-inputs-and-outputs" class="nav-link" data-scroll-target="#function-inputs-and-outputs">Function inputs and outputs</a>
+  <ul class="collapse">
+  <li><a href="#arguments" id="toc-arguments" class="nav-link" data-scroll-target="#arguments">Arguments</a></li>
+  <li><a href="#function-outputs" id="toc-function-outputs" class="nav-link" data-scroll-target="#function-outputs">Function outputs</a></li>
+  </ul></li>
+  <li><a href="#pass-by-value-vs.-pass-by-reference" id="toc-pass-by-value-vs.-pass-by-reference" class="nav-link" data-scroll-target="#pass-by-value-vs.-pass-by-reference">Pass by value vs.&nbsp;pass by reference</a>
+  <ul class="collapse">
+  <li><a href="#pointers" id="toc-pointers" class="nav-link" data-scroll-target="#pointers">Pointers</a></li>
+  <li><a href="#pointers-in-r" id="toc-pointers-in-r" class="nav-link" data-scroll-target="#pointers-in-r">Pointers in R?</a></li>
+  <li><a href="#alternatives-to-pass-by-value-in-r" id="toc-alternatives-to-pass-by-value-in-r" class="nav-link" data-scroll-target="#alternatives-to-pass-by-value-in-r">Alternatives to pass by value in R</a></li>
+  <li><a href="#promises-and-lazy-evaluation" id="toc-promises-and-lazy-evaluation" class="nav-link" data-scroll-target="#promises-and-lazy-evaluation">Promises and lazy evaluation</a></li>
+  </ul></li>
+  <li><a href="#variable-scope-and-lookup" id="toc-variable-scope-and-lookup" class="nav-link" data-scroll-target="#variable-scope-and-lookup">Variable scope and lookup</a>
+  <ul class="collapse">
+  <li><a href="#lexical-scoping" id="toc-lexical-scoping" class="nav-link" data-scroll-target="#lexical-scoping">Lexical scoping</a></li>
+  <li><a href="#closures" id="toc-closures" class="nav-link" data-scroll-target="#closures">Closures</a></li>
+  <li><a href="#environments-and-the-search-path" id="toc-environments-and-the-search-path" class="nav-link" data-scroll-target="#environments-and-the-search-path">Environments and the search path</a></li>
+  </ul></li>
   </ul></li>
   <li><a href="#memory-and-copies" id="toc-memory-and-copies" class="nav-link" data-scroll-target="#memory-and-copies">8. Memory and copies</a></li>
   <li><a href="#efficiency" id="toc-efficiency" class="nav-link" data-scroll-target="#efficiency">9. Efficiency</a></li>
@@ -406,7 +423,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <p><a href="./unit5-programming.pdf" class="btn btn-primary">PDF</a></p>
 <blockquote class="blockquote">
-<p><strong>Note</strong> This Unit will be posted in phases as I get the material ready. 2022-09-09: Currently only Sections 1-6 are available.</p>
+<p><strong>Note</strong> This Unit will be posted in phases as I get the material ready. 2022-09-15: Currently only Sections 1-7 are available.</p>
 </blockquote>
 <p>References:</p>
 <ul>
@@ -869,7 +886,7 @@ lm(formula = y ~ x)
 
 Coefficients:
 (Intercept)            x  
-     0.4219       0.0358  </code></pre>
+      0.294        0.287  </code></pre>
 </div>
 </div>
 </section>
@@ -1031,7 +1048,7 @@ y = x * 7.1;</code></pre>
 <div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>qs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> 2.5% 97.5% 
--1.94  1.95 </code></pre>
+-1.94  2.02 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a>qs[<span class="dv">1</span>] <span class="sc">+</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1048,7 +1065,7 @@ y = x * 7.1;</code></pre>
 <div class="sourceCode cell-code" id="cb122"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(qs) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
 <span id="cb122-2"><a href="#cb122-2" aria-hidden="true" tabindex="-1"></a>qs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -1.94  1.95</code></pre>
+<pre><code>[1] -1.94  2.02</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb124"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="fu">object.size</span>(qs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1137,12 +1154,12 @@ Levels: a b c</code></pre>
 <span id="cb144-2"><a href="#cb144-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">label =</span> <span class="fu">rep</span>(<span class="st">'a'</span>, n), <span class="at">val1 =</span> <span class="fu">rnorm</span>(n), <span class="at">val2 =</span> <span class="fu">rnorm</span>(n))</span>
 <span id="cb144-3"><a href="#cb144-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  label    val1   val2
-1     a  1.2177  0.997
-2     a  1.4586 -1.275
-3     a -1.0638  1.367
-4     a -0.0613 -0.451
-5     a  0.3363  0.153</code></pre>
+<pre><code>  label  val1    val2
+1     a -1.01  0.0958
+2     a -0.19 -0.5867
+3     a  2.07 -0.9203
+4     a -1.32 -0.8972
+5     a -1.20 -1.1613</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb146"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb146-1"><a href="#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Why does the following not work?</span></span>
 <span id="cb146-2"><a href="#cb146-2" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>( <span class="fu">apply</span>(df, <span class="dv">1</span>, <span class="cf">function</span>(x) x[<span class="dv">2</span>] <span class="sc">+</span> x[<span class="dv">3</span>]) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1152,7 +1169,7 @@ Levels: a b c</code></pre>
 <div class="sourceCode cell-code" id="cb148"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb148-1"><a href="#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Instead, this will work. Why?</span></span>
 <span id="cb148-2"><a href="#cb148-2" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(df[ , <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>], <span class="dv">1</span>, <span class="cf">function</span>(x) x[<span class="dv">1</span>] <span class="sc">+</span> x[<span class="dv">2</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1]  2.215  0.183  0.303 -0.512  0.489</code></pre>
+<pre><code>[1] -0.915 -0.777  1.149 -2.219 -2.357</code></pre>
 </div>
 </div>
 <p>Be careful of using factors as indices:</p>
@@ -1366,7 +1383,7 @@ Attaching package: 'dplyr'</code></pre>
 <span id="cb177-2"><a href="#cb177-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
- -1.734  -0.793  -0.580  -0.395  -0.105   1.050 </code></pre>
+ -2.473  -1.132   0.133   0.002   0.943   2.068 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb179"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb179-1"><a href="#cb179-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>)</span>
 <span id="cb179-2"><a href="#cb179-2" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x)</span>
@@ -1377,17 +1394,17 @@ Call:
 lm(formula = y ~ x)
 
 Residuals:
-    Min      1Q  Median      3Q     Max 
--1.7070 -0.7648  0.0166  0.7211  1.6692 
+   Min     1Q Median     3Q    Max 
+-1.875 -0.635 -0.294  0.459  2.586 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept)  0.00199    0.41127    0.00      1.0
-x            0.66804    0.48282    1.38      0.2
+(Intercept)   0.3169     0.4330    0.73     0.49
+x             0.0671     0.3126    0.21     0.84
 
-Residual standard error: 1.15 on 8 degrees of freedom
-Multiple R-squared:  0.193, Adjusted R-squared:  0.0922 
-F-statistic: 1.91 on 1 and 8 DF,  p-value: 0.204</code></pre>
+Residual standard error: 1.37 on 8 degrees of freedom
+Multiple R-squared:  0.00573,   Adjusted R-squared:  -0.119 
+F-statistic: 0.0461 on 1 and 8 DF,  p-value: 0.835</code></pre>
 </div>
 </div>
 <p>Here <em>summary</em> is a generic function (or generic method) that, based on the type of object given to it (the first argument), dispatches a class-specific function (method) that operates on the object.</p>
@@ -1408,7 +1425,7 @@ F-statistic: 1.91 on 1 and 8 DF,  p-value: 0.204</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>function (object, ...) 
 UseMethod("summary")
-&lt;bytecode: 0x55b6cce07060&gt;
+&lt;bytecode: 0x55efae9a4380&gt;
 &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
@@ -1509,7 +1526,7 @@ lm(formula = y ~ x)
 
 Coefficients:
 (Intercept)            x  
-    0.00199      0.66804  </code></pre>
+     0.3169       0.0671  </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb198"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb198-1"><a href="#cb198-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1519,7 +1536,7 @@ lm(formula = y ~ x)
 
 Coefficients:
 (Intercept)            x  
-    0.00199      0.66804  </code></pre>
+     0.3169       0.0671  </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb200"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb200-1"><a href="#cb200-1" aria-hidden="true" tabindex="-1"></a>stats<span class="sc">:::</span><span class="fu">print.lm</span>(mod)  <span class="do">## print.lm is private to the stats namespace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1529,7 +1546,7 @@ lm(formula = y ~ x)
 
 Coefficients:
 (Intercept)            x  
-    0.00199      0.66804  </code></pre>
+     0.3169       0.0671  </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb202"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb202-1"><a href="#cb202-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print.default(mod)   ## lots of output, so don't print in document...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1549,7 +1566,7 @@ Coefficients:
     cat("\n")
     invisible(x)
 }
-&lt;bytecode: 0x55b6ca550af8&gt;
+&lt;bytecode: 0x55efa7958d70&gt;
 &lt;environment: namespace:stats&gt;</code></pre>
 </div>
 </div>
@@ -1567,17 +1584,17 @@ Call:
 lm(formula = y ~ x)
 
 Residuals:
-    Min      1Q  Median      3Q     Max 
--1.7070 -0.7648  0.0166  0.7211  1.6692 
+   Min     1Q Median     3Q    Max 
+-1.875 -0.635 -0.294  0.459  2.586 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept)  0.00199    0.41127    0.00      1.0
-x            0.66804    0.48282    1.38      0.2
+(Intercept)   0.3169     0.4330    0.73     0.49
+x             0.0671     0.3126    0.21     0.84
 
-Residual standard error: 1.15 on 8 degrees of freedom
-Multiple R-squared:  0.193, Adjusted R-squared:  0.0922 
-F-statistic: 1.91 on 1 and 8 DF,  p-value: 0.204</code></pre>
+Residual standard error: 1.37 on 8 degrees of freedom
+Multiple R-squared:  0.00573,   Adjusted R-squared:  -0.119 
+F-statistic: 0.0461 on 1 and 8 DF,  p-value: 0.835</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb209"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb209-1"><a href="#cb209-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(out)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1586,17 +1603,17 @@ Call:
 lm(formula = y ~ x)
 
 Residuals:
-    Min      1Q  Median      3Q     Max 
--1.7070 -0.7648  0.0166  0.7211  1.6692 
+   Min     1Q Median     3Q    Max 
+-1.875 -0.635 -0.294  0.459  2.586 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept)  0.00199    0.41127    0.00      1.0
-x            0.66804    0.48282    1.38      0.2
+(Intercept)   0.3169     0.4330    0.73     0.49
+x             0.0671     0.3126    0.21     0.84
 
-Residual standard error: 1.15 on 8 degrees of freedom
-Multiple R-squared:  0.193, Adjusted R-squared:  0.0922 
-F-statistic: 1.91 on 1 and 8 DF,  p-value: 0.204</code></pre>
+Residual standard error: 1.37 on 8 degrees of freedom
+Multiple R-squared:  0.00573,   Adjusted R-squared:  -0.119 
+F-statistic: 0.0461 on 1 and 8 DF,  p-value: 0.835</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb211"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb211-1"><a href="#cb211-1" aria-hidden="true" tabindex="-1"></a><span class="do">## One can look at the code for the method (not shown):</span></span>
 <span id="cb211-2"><a href="#cb211-2" aria-hidden="true" tabindex="-1"></a><span class="do">## getS3method(f = "print", class = "summary.lm")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1640,32 +1657,32 @@ F-statistic: 1.91 on 1 and 8 DF,  p-value: 0.204</code></pre>
 <div class="sourceCode cell-code" id="cb222"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb222-1"><a href="#cb222-1" aria-hidden="true" tabindex="-1"></a><span class="fu">model.matrix</span>(mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   (Intercept)      x
-1            1 -0.946
-2            1 -1.073
-3            1  0.208
-4            1 -1.500
-5            1  0.219
-6            1  0.209
-7            1 -0.440
-8            1 -0.668
-9            1 -0.654
-10           1  0.936
+1            1  0.528
+2            1 -0.127
+3            1 -1.118
+4            1 -0.629
+5            1  0.730
+6            1  0.033
+7            1  1.677
+8            1 -1.610
+9            1  1.190
+10           1  0.559
 attr(,"assign")
 [1] 0 1</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb224"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb224-1"><a href="#cb224-1" aria-hidden="true" tabindex="-1"></a><span class="fu">model.matrix</span>(mod2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   (Intercept)      x
-1            1 -0.946
-2            1 -1.073
-3            1  0.208
-4            1 -1.500
-5            1  0.219
-6            1  0.209
-7            1 -0.440
-8            1 -0.668
-9            1 -0.654
-10           1  0.936
+1            1  0.528
+2            1 -0.127
+3            1 -1.118
+4            1 -0.629
+5            1  0.730
+6            1  0.033
+7            1  1.677
+8            1 -1.610
+9            1  1.190
+10           1  0.559
 attr(,"assign")
 [1] 0 1</code></pre>
 </div>
@@ -1882,6 +1899,7 @@ see '?methods' for accessing help and source code</code></pre>
 <li>All operations are carried out by functions.</li>
 <li>Functions are first class citizens.</li>
 <li>Functions (generally) do not have side effects.</li>
+<li><em>Map</em> operations (e.g., <em>lapply</em>) are central to programming in R.</li>
 </ul>
 <p>Functions that are not implemented internally in R are also referred to officially as <em>closures</em> (this is their <em>type</em>) - this terminology sometimes comes up in error messages.</p>
 <div class="cell">
@@ -1950,7 +1968,7 @@ see '?methods' for accessing help and source code</code></pre>
 </div>
 <p>Note that changing graphics parameters within a specific plotting function - e.g., <code>plot(x, y, pch = '+')</code>, doesn’t change things except for that particular plot.</p>
 <blockquote class="blockquote">
-<p><em>Challenge</em> What are some other functions that are called for the purpose of the side effects they produce? (For example, which functions change the state of your R session in some way?</p>
+<p><strong>Challenge</strong> What are some other functions that are called for the purpose of the side effects they produce? (For example, which functions change the state of your R session in some way?</p>
 </blockquote>
 </section>
 <section id="functions-are-first-class-objects" class="level3">
@@ -2111,23 +2129,30 @@ c   21   22   23</code></pre>
 <pre><code>[1] 10</code></pre>
 </div>
 </div>
-<p>In general, you can use back-ticks to refer to the operators as operators instead of characters. In some cases single or double quotes also work. We can look at the code of an operator as follows using back-ticks to escape out of the standard R parsing, e.g., <code>%*%</code>.</p>
+<p>In general, you can use back-ticks to refer to the operators as operators instead of characters. In some cases single or double quotes also work. We can look at the code of an operator as follows using back-ticks to escape out of the standard R parsing, e.g.,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb310"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb310-1"><a href="#cb310-1" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">%*%</span><span class="st">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>function (x, y)  .Primitive("%*%")</code></pre>
+</div>
+</div>
 <p>Finally, since an operator is just a function, you can use it as an argument in various places:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb310"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb310-1"><a href="#cb310-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>; y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">100</span>,<span class="dv">200</span>,<span class="dv">300</span>)</span>
-<span id="cb310-2"><a href="#cb310-2" aria-hidden="true" tabindex="-1"></a><span class="fu">outer</span>(x, y, <span class="st">`</span><span class="at">+</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb312"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb312-1"><a href="#cb312-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>; y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">100</span>,<span class="dv">200</span>,<span class="dv">300</span>)</span>
+<span id="cb312-2"><a href="#cb312-2" aria-hidden="true" tabindex="-1"></a><span class="fu">outer</span>(x, y, <span class="st">`</span><span class="at">+</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1] [,2] [,3]
 [1,]  101  201  301
 [2,]  102  202  302
 [3,]  103  203  303</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb312"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb312-1"><a href="#cb312-1" aria-hidden="true" tabindex="-1"></a>myList <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">list</span>(<span class="at">state =</span> <span class="st">'new york'</span>, <span class="at">value =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>),</span>
-<span id="cb312-2"><a href="#cb312-2" aria-hidden="true" tabindex="-1"></a>               <span class="fu">list</span>(<span class="at">state =</span> <span class="st">'california'</span>, <span class="at">value =</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">10</span>),</span>
-<span id="cb312-3"><a href="#cb312-3" aria-hidden="true" tabindex="-1"></a>               <span class="fu">list</span>(<span class="at">state =</span> <span class="st">'delaware'</span>, <span class="at">value =</span> <span class="dv">11</span><span class="sc">:</span><span class="dv">15</span>))</span>
-<span id="cb312-4"><a href="#cb312-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb312-5"><a href="#cb312-5" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">lapply</span>(myList, <span class="st">`</span><span class="at">[[</span><span class="st">`</span>, <span class="dv">2</span>)</span>
-<span id="cb312-6"><a href="#cb312-6" aria-hidden="true" tabindex="-1"></a>result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb314"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb314-1"><a href="#cb314-1" aria-hidden="true" tabindex="-1"></a>myList <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">list</span>(<span class="at">state =</span> <span class="st">'new york'</span>, <span class="at">value =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>),</span>
+<span id="cb314-2"><a href="#cb314-2" aria-hidden="true" tabindex="-1"></a>               <span class="fu">list</span>(<span class="at">state =</span> <span class="st">'california'</span>, <span class="at">value =</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">10</span>),</span>
+<span id="cb314-3"><a href="#cb314-3" aria-hidden="true" tabindex="-1"></a>               <span class="fu">list</span>(<span class="at">state =</span> <span class="st">'delaware'</span>, <span class="at">value =</span> <span class="dv">11</span><span class="sc">:</span><span class="dv">15</span>))</span>
+<span id="cb314-4"><a href="#cb314-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb314-5"><a href="#cb314-5" aria-hidden="true" tabindex="-1"></a><span class="do">## note that the index "2" is the additional argument to the [[ function</span></span>
+<span id="cb314-6"><a href="#cb314-6" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">lapply</span>(myList, <span class="st">`</span><span class="at">[[</span><span class="st">`</span>, <span class="dv">2</span>)</span>
+<span id="cb314-7"><a href="#cb314-7" aria-hidden="true" tabindex="-1"></a>result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[1]]
 [1] 1 2 3 4 5
@@ -2138,9 +2163,8 @@ c   21   22   23</code></pre>
 [[3]]
 [1] 11 12 13 14 15</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb314"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb314-1"><a href="#cb314-1" aria-hidden="true" tabindex="-1"></a><span class="do">## note that the index "2" is the additional argument to the [[ function</span></span>
-<span id="cb314-2"><a href="#cb314-2" aria-hidden="true" tabindex="-1"></a>myMat <span class="ot">&lt;-</span> <span class="fu">sapply</span>(myList, <span class="st">`</span><span class="at">[[</span><span class="st">`</span>, <span class="dv">2</span>)</span>
-<span id="cb314-3"><a href="#cb314-3" aria-hidden="true" tabindex="-1"></a>myMat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb316"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb316-1"><a href="#cb316-1" aria-hidden="true" tabindex="-1"></a>myMat <span class="ot">&lt;-</span> <span class="fu">sapply</span>(myList, <span class="st">`</span><span class="at">[[</span><span class="st">`</span>, <span class="dv">2</span>)</span>
+<span id="cb316-2"><a href="#cb316-2" aria-hidden="true" tabindex="-1"></a>myMat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1] [,2] [,3]
 [1,]    1    6   11
@@ -2149,7 +2173,7 @@ c   21   22   23</code></pre>
 [4,]    4    9   14
 [5,]    5   10   15</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb316"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb316-1"><a href="#cb316-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(myList[[<span class="dv">1</span>]][[<span class="dv">2</span>]], myList[[<span class="dv">2</span>]][[<span class="dv">2</span>]])  <span class="do">## equivalent but doesn't scale</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb318"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb318-1"><a href="#cb318-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(myList[[<span class="dv">1</span>]][[<span class="dv">2</span>]], myList[[<span class="dv">2</span>]][[<span class="dv">2</span>]])  <span class="do">## equivalent but doesn't scale</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1] [,2]
 [1,]    1    6
@@ -2161,20 +2185,20 @@ c   21   22   23</code></pre>
 </div>
 <p>You can define your own <em>binary</em> operator (an operator taking two arguments) using a string inside <em>%</em> symbols. Here’s how we could do Python-style string addition:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb318"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb318-1"><a href="#cb318-1" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">%+%</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="cf">function</span>(a, b) <span class="fu">paste0</span>(a, b, <span class="at">collapse =</span> <span class="st">''</span>)</span>
-<span id="cb318-2"><a href="#cb318-2" aria-hidden="true" tabindex="-1"></a><span class="st">"Hi "</span> <span class="sc">%+%</span> <span class="st">"there"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb320"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb320-1"><a href="#cb320-1" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">%+%</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="cf">function</span>(a, b) <span class="fu">paste0</span>(a, b, <span class="at">collapse =</span> <span class="st">''</span>)</span>
+<span id="cb320-2"><a href="#cb320-2" aria-hidden="true" tabindex="-1"></a><span class="st">"Hi "</span> <span class="sc">%+%</span> <span class="st">"there"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Hi there"</code></pre>
 </div>
 </div>
 <p>Since operators are just functions, there are cases in which there are optional arguments that we might not expect. Here’s how to pass a sometimes useful argument to the bracket operator (in this case avoiding conversion from a matrix to a vector, which can mess up subsequent code).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb320"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb320-1"><a href="#cb320-1" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
-<span id="cb320-2"><a href="#cb320-2" aria-hidden="true" tabindex="-1"></a>mat[ , <span class="dv">1</span>] </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb322"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb322-1"><a href="#cb322-1" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb322-2"><a href="#cb322-2" aria-hidden="true" tabindex="-1"></a>mat[ , <span class="dv">1</span>] </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1 2</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb322"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb322-1"><a href="#cb322-1" aria-hidden="true" tabindex="-1"></a>mat[ , <span class="dv">1</span>, drop <span class="ot">=</span> <span class="cn">FALSE</span>] <span class="co"># what's the difference?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb324"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb324-1"><a href="#cb324-1" aria-hidden="true" tabindex="-1"></a>mat[ , <span class="dv">1</span>, drop <span class="ot">=</span> <span class="cn">FALSE</span>] <span class="co"># what's the difference?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1]
 [1,]    1
@@ -2183,10 +2207,10 @@ c   21   22   23</code></pre>
 </div>
 <p>We can also use operators with our S3 classes. Picking up our example from our discussion of S3 OOP, the following example will be a bit silly (it would make more sense with a class that is a mathematical object) but indicates the power of having methods.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb324"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb324-1"><a href="#cb324-1" aria-hidden="true" tabindex="-1"></a>yog <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">firstname =</span> <span class="st">'Yogi'</span>, <span class="at">surname =</span> <span class="st">'the Bear'</span>, <span class="at">age =</span> <span class="dv">20</span>)</span>
-<span id="cb324-2"><a href="#cb324-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(yog) <span class="ot">&lt;-</span> <span class="st">'bear'</span> </span>
-<span id="cb324-3"><a href="#cb324-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb324-4"><a href="#cb324-4" aria-hidden="true" tabindex="-1"></a><span class="fu">methods</span>(<span class="st">`</span><span class="at">+</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb326"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb326-1"><a href="#cb326-1" aria-hidden="true" tabindex="-1"></a>yog <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">firstname =</span> <span class="st">'Yogi'</span>, <span class="at">surname =</span> <span class="st">'the Bear'</span>, <span class="at">age =</span> <span class="dv">20</span>)</span>
+<span id="cb326-2"><a href="#cb326-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(yog) <span class="ot">&lt;-</span> <span class="st">'bear'</span> </span>
+<span id="cb326-3"><a href="#cb326-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb326-4"><a href="#cb326-4" aria-hidden="true" tabindex="-1"></a><span class="fu">methods</span>(<span class="st">`</span><span class="at">+</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] +,dgTMatrix,dgTMatrix-method +,Matrix,missing-method     
  [3] +,matrix,spam-method         +,spam,matrix-method        
@@ -2196,13 +2220,13 @@ c   21   22   23</code></pre>
 [11] +.vctrs_vctr*               
 see '?methods' for accessing help and source code</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb326"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb326-1"><a href="#cb326-1" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">+.bear</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="cf">function</span>(object, incr) {</span>
-<span id="cb326-2"><a href="#cb326-2" aria-hidden="true" tabindex="-1"></a>    object<span class="sc">$</span>age <span class="ot">&lt;-</span> object<span class="sc">$</span>age <span class="sc">+</span> incr</span>
-<span id="cb326-3"><a href="#cb326-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(object)</span>
-<span id="cb326-4"><a href="#cb326-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb326-5"><a href="#cb326-5" aria-hidden="true" tabindex="-1"></a>older_yog <span class="ot">&lt;-</span> yog <span class="sc">+</span> <span class="dv">15</span></span>
-<span id="cb326-6"><a href="#cb326-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb326-7"><a href="#cb326-7" aria-hidden="true" tabindex="-1"></a>older_yog</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb328"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb328-1"><a href="#cb328-1" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">+.bear</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="cf">function</span>(object, incr) {</span>
+<span id="cb328-2"><a href="#cb328-2" aria-hidden="true" tabindex="-1"></a>    object<span class="sc">$</span>age <span class="ot">&lt;-</span> object<span class="sc">$</span>age <span class="sc">+</span> incr</span>
+<span id="cb328-3"><a href="#cb328-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(object)</span>
+<span id="cb328-4"><a href="#cb328-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb328-5"><a href="#cb328-5" aria-hidden="true" tabindex="-1"></a>older_yog <span class="ot">&lt;-</span> yog <span class="sc">+</span> <span class="dv">15</span></span>
+<span id="cb328-6"><a href="#cb328-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb328-7"><a href="#cb328-7" aria-hidden="true" tabindex="-1"></a>older_yog</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$firstname
 [1] "Yogi"
@@ -2223,39 +2247,39 @@ attr(,"class")
 <p>Even beyond operators, all code in R can be viewed as a function call, including if statements and for and while loops.</p>
 <p>What do you think is the functional version of the following code? What are the arguments?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb328"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb328-1"><a href="#cb328-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(x <span class="sc">&gt;</span> <span class="dv">27</span>){</span>
-<span id="cb328-2"><a href="#cb328-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(x)    </span>
-<span id="cb328-3"><a href="#cb328-3" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span>{</span>
-<span id="cb328-4"><a href="#cb328-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"too small"</span>) </span>
-<span id="cb328-5"><a href="#cb328-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb330"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb330-1"><a href="#cb330-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(x <span class="sc">&gt;</span> <span class="dv">27</span>){</span>
+<span id="cb330-2"><a href="#cb330-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(x)    </span>
+<span id="cb330-3"><a href="#cb330-3" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span>{</span>
+<span id="cb330-4"><a href="#cb330-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"too small"</span>) </span>
+<span id="cb330-5"><a href="#cb330-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="replacement-functions" class="level4">
 <h4 class="anchored" data-anchor-id="replacement-functions">Replacement functions</h4>
 <p>Assignments that involve functions or operators on the left-hand side (LHS) are called <em>replacement expressions</em> or <em>replacement functions.</em> These can be quite handy. Here are a few examples:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb329"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb329-1"><a href="#cb329-1" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(mat) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>)</span>
-<span id="cb329-2"><a href="#cb329-2" aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(vec) <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb329-3"><a href="#cb329-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'var1'</span>, <span class="st">'var2'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb331"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb331-1"><a href="#cb331-1" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(mat) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>)</span>
+<span id="cb331-2"><a href="#cb331-2" aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(vec) <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb331-3"><a href="#cb331-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'var1'</span>, <span class="st">'var2'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Replacement expressions are actually function calls. The R interpreter calls the replacement function (which often creates a new object that includes the replacement) and then assigns the result to the name of the original object.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb330"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb330-1"><a href="#cb330-1" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">4</span>), <span class="dv">2</span>, <span class="dv">2</span>)</span>
-<span id="cb330-2"><a href="#cb330-2" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(mat) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>)</span>
-<span id="cb330-3"><a href="#cb330-3" aria-hidden="true" tabindex="-1"></a>mat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb332"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb332-1"><a href="#cb332-1" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">4</span>), <span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb332-2"><a href="#cb332-2" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(mat) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>)</span>
+<span id="cb332-3"><a href="#cb332-3" aria-hidden="true" tabindex="-1"></a>mat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1]   [,2]
 [1,] 3.00 -0.215
 [2,] 1.34  2.000</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb332"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb332-1"><a href="#cb332-1" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="st">`</span><span class="at">diag&lt;-</span><span class="st">`</span>(mat, <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">21</span>))</span>
-<span id="cb332-2"><a href="#cb332-2" aria-hidden="true" tabindex="-1"></a>mat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb334"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb334-1"><a href="#cb334-1" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="st">`</span><span class="at">diag&lt;-</span><span class="st">`</span>(mat, <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">21</span>))</span>
+<span id="cb334-2"><a href="#cb334-2" aria-hidden="true" tabindex="-1"></a>mat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      [,1]   [,2]
 [1,] 10.00 -0.215
 [2,]  1.34 21.000</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb334"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb334-1"><a href="#cb334-1" aria-hidden="true" tabindex="-1"></a>base<span class="sc">::</span><span class="st">`</span><span class="at">diag&lt;-</span><span class="st">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb336"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb336-1"><a href="#cb336-1" aria-hidden="true" tabindex="-1"></a>base<span class="sc">::</span><span class="st">`</span><span class="at">diag&lt;-</span><span class="st">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>function (x, value) 
 {
@@ -2272,31 +2296,33 @@ attr(,"class")
     }
     x
 }
-&lt;bytecode: 0x55b6cd23aa00&gt;
+&lt;bytecode: 0x55efaf3ff208&gt;
 &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
 <p>The old version of <em>mat</em> still exists until R’s memory management cleans it up, but it’s no longer referred to by the symbol <em>mat</em>. This can cause memory use to increase temporarily (but generally very briefly). So it’s something to keep in mind if you’re doing replacements on large objects.</p>
-<p>You can define your own replacement functions like this, with the requirements that the last argument be named ‘<em>value</em>’ and that the function return the entire object:</p>
+<p>You can define your own replacement functions like this, with the requirements that the last argument be named <code>value</code> and that the function return the entire object:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb336"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb336-1"><a href="#cb336-1" aria-hidden="true" tabindex="-1"></a>yog <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">firstName =</span> <span class="st">'Yogi'</span>, <span class="at">lastName =</span> <span class="st">'Bear'</span>)</span>
-<span id="cb336-2"><a href="#cb336-2" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">firstName&lt;-</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="cf">function</span>(obj, value){</span>
-<span id="cb336-3"><a href="#cb336-3" aria-hidden="true" tabindex="-1"></a>  obj<span class="sc">$</span>firstName <span class="ot">&lt;-</span> value</span>
-<span id="cb336-4"><a href="#cb336-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(obj)</span>
-<span id="cb336-5"><a href="#cb336-5" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb336-6"><a href="#cb336-6" aria-hidden="true" tabindex="-1"></a><span class="fu">firstName</span>(yog) <span class="ot">&lt;-</span> <span class="st">'Yogisandra'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb338"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb338-1"><a href="#cb338-1" aria-hidden="true" tabindex="-1"></a>yog <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">firstName =</span> <span class="st">'Yogi'</span>, <span class="at">lastName =</span> <span class="st">'Bear'</span>)</span>
+<span id="cb338-2"><a href="#cb338-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb338-3"><a href="#cb338-3" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">firstName&lt;-</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="cf">function</span>(obj, value){</span>
+<span id="cb338-4"><a href="#cb338-4" aria-hidden="true" tabindex="-1"></a>  obj<span class="sc">$</span>firstName <span class="ot">&lt;-</span> value</span>
+<span id="cb338-5"><a href="#cb338-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(obj)</span>
+<span id="cb338-6"><a href="#cb338-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb338-7"><a href="#cb338-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb338-8"><a href="#cb338-8" aria-hidden="true" tabindex="-1"></a><span class="fu">firstName</span>(yog) <span class="ot">&lt;-</span> <span class="st">'Yogisandra'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We can use replacement functions with S3 classes we define. Again, picking up our example from our discussion of S3 OOP, this is again a bit silly but we could do the following. We need to define the generic replacement function and then the class-specific one.</p>
+<p>We can use replacement functions with functional OOP. We need to define the generic replacement function and then the class-specific one.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb337"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb337-1"><a href="#cb337-1" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">age&lt;-</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="cf">function</span>(x, ...) <span class="fu">UseMethod</span>(<span class="st">"age&lt;-"</span>)</span>
-<span id="cb337-2"><a href="#cb337-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb337-3"><a href="#cb337-3" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">age&lt;-.bear</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="cf">function</span>(object, value){ </span>
-<span id="cb337-4"><a href="#cb337-4" aria-hidden="true" tabindex="-1"></a>    object<span class="sc">$</span>age <span class="ot">&lt;-</span> value</span>
-<span id="cb337-5"><a href="#cb337-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(object)</span>
-<span id="cb337-6"><a href="#cb337-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb337-7"><a href="#cb337-7" aria-hidden="true" tabindex="-1"></a><span class="fu">age</span>(older_yog) <span class="ot">&lt;-</span> <span class="dv">60</span></span>
-<span id="cb337-8"><a href="#cb337-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb337-9"><a href="#cb337-9" aria-hidden="true" tabindex="-1"></a>older_yog</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb339"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb339-1"><a href="#cb339-1" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">age&lt;-</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="cf">function</span>(x, ...) <span class="fu">UseMethod</span>(<span class="st">"age&lt;-"</span>)</span>
+<span id="cb339-2"><a href="#cb339-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb339-3"><a href="#cb339-3" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">age&lt;-.bear</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="cf">function</span>(object, value){ </span>
+<span id="cb339-4"><a href="#cb339-4" aria-hidden="true" tabindex="-1"></a>    object<span class="sc">$</span>age <span class="ot">&lt;-</span> value</span>
+<span id="cb339-5"><a href="#cb339-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(object)</span>
+<span id="cb339-6"><a href="#cb339-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb339-7"><a href="#cb339-7" aria-hidden="true" tabindex="-1"></a><span class="fu">age</span>(older_yog) <span class="ot">&lt;-</span> <span class="dv">60</span></span>
+<span id="cb339-8"><a href="#cb339-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb339-9"><a href="#cb339-9" aria-hidden="true" tabindex="-1"></a>older_yog</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$firstname
 [1] "Yogi"
@@ -2312,6 +2338,26 @@ attr(,"class")
 </div>
 </div>
 </section>
+</section>
+<section id="map-operations" class="level3">
+<h3 class="anchored" data-anchor-id="map-operations">Map operations</h3>
+<p>A <em>map</em> operation takes a function and runs the function on each element of some collection of items, analogous to a mathematical map. This kind of operation is very commonly used in programming, particularly functional programming, and often makes for clean, concise, and readable code.</p>
+<p>Base R provides a variety of map-type functions: <em>lapply</em> and <em>sapply</em> and their variants, as well as <em>apply</em>. In addition, the <em>purrr</em> package for functional programming provides <code>purrr::map</code>. In R, often the map-type function is run on the elements of a list, but they can also generally be run on elements of a vector and in other ways. In other languages, map-type functions are run on a variety of data structures. These are examples of higher-order functions – functions that take a function as an argument.</p>
+<p>Let’s compare using <em>lapply</em> to using a for loop to run a stratified analysis for a generic example (this code won’t run because the variables don’t exist):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb341"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb341-1"><a href="#cb341-1" aria-hidden="true" tabindex="-1"></a><span class="co"># stratification </span></span>
+<span id="cb341-2"><a href="#cb341-2" aria-hidden="true" tabindex="-1"></a>subsets <span class="ot">&lt;-</span> <span class="fu">split</span>(df, grouping_variable)</span>
+<span id="cb341-3"><a href="#cb341-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb341-4"><a href="#cb341-4" aria-hidden="true" tabindex="-1"></a><span class="co"># lapply: one line, easy to understand</span></span>
+<span id="cb341-5"><a href="#cb341-5" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">lapply</span>(subsets, analysis_function)</span>
+<span id="cb341-6"><a href="#cb341-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb341-7"><a href="#cb341-7" aria-hidden="true" tabindex="-1"></a><span class="co"># for loop: needs storage set up and multiple lines</span></span>
+<span id="cb341-8"><a href="#cb341-8" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb341-9"><a href="#cb341-9" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(results) <span class="ot">&lt;-</span> <span class="fu">length</span>(subsets)</span>
+<span id="cb341-10"><a href="#cb341-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="fu">seq_along</span>(subsets)) </span>
+<span id="cb341-11"><a href="#cb341-11" aria-hidden="true" tabindex="-1"></a>  results[[i]] <span class="ot">&lt;-</span> <span class="fu">analysis_function</span>(subsets[[i]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Map operations are also at the heart of the famous map-reduce paradigm, used in Hadoop and Spark for big data processing.</p>
 </section>
 </section>
 <section id="function-evaluation-frames-and-the-call-stack" class="level2">
@@ -2336,32 +2382,32 @@ attr(,"class")
 <p>Some terminology: for our purposes we’ll use the terms <em>frame</em> and <em>environment</em> somewhat interchangeably for the moment. A <em>frame</em> or <em>environment</em> is a collection of named objects. (Note that when we talk about variable scope later in this Unit, we’ll have to be more careful with our terminology.) So in the context of a function call, the frame is the set of local variables available in the function, including arguments passed to the function.</p>
 <p>R provides some functions that allow you to query the call stack and its frames. <em>sys.nframe</em> returns the number of the current frame/environment and <em>sys.parent</em> the number of the parent, while <em>parent.frame</em> gives the name of the frame/environment of the parent (i.e., the calling) frame. <em>sys.frame</em> gives the name of the frame/environment for a given frame number (for non-negative numbers). For negative numbers, it goes back that many frames in the call stack and returns the name of the frame/environment. I need to manually insert the output here because the R Markdown processing up the frame counting somehow.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb339"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb339-1"><a href="#cb339-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sys.nframe</span>()</span>
-<span id="cb339-2"><a href="#cb339-2" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
-<span id="cb339-3"><a href="#cb339-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">'in f: Frame number is '</span>, <span class="fu">sys.nframe</span>(),</span>
-<span id="cb339-4"><a href="#cb339-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">'; parent frame number is '</span>, <span class="fu">sys.parent</span>(), <span class="st">'.</span><span class="sc">\n</span><span class="st">'</span>, <span class="at">sep =</span> <span class="st">''</span>)</span>
-<span id="cb339-5"><a href="#cb339-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">'in f: Frame (i.e., environment) is: '</span>)</span>
-<span id="cb339-6"><a href="#cb339-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">sys.frame</span>(<span class="fu">sys.nframe</span>()))</span>
-<span id="cb339-7"><a href="#cb339-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">'in f: Parent is '</span>)</span>
-<span id="cb339-8"><a href="#cb339-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">parent.frame</span>())</span>
-<span id="cb339-9"><a href="#cb339-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">'in f: Two frames up is '</span>)</span>
-<span id="cb339-10"><a href="#cb339-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">sys.frame</span>(<span class="sc">-</span><span class="dv">2</span>))</span>
-<span id="cb339-11"><a href="#cb339-11" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb339-12"><a href="#cb339-12" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb342"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb342-1"><a href="#cb342-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sys.nframe</span>()</span>
+<span id="cb342-2"><a href="#cb342-2" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb342-3"><a href="#cb342-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">'in f: Frame number is '</span>, <span class="fu">sys.nframe</span>(),</span>
+<span id="cb342-4"><a href="#cb342-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">'; parent frame number is '</span>, <span class="fu">sys.parent</span>(), <span class="st">'.</span><span class="sc">\n</span><span class="st">'</span>, <span class="at">sep =</span> <span class="st">''</span>)</span>
+<span id="cb342-5"><a href="#cb342-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">'in f: Frame (i.e., environment) is: '</span>)</span>
+<span id="cb342-6"><a href="#cb342-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">sys.frame</span>(<span class="fu">sys.nframe</span>()))</span>
+<span id="cb342-7"><a href="#cb342-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">'in f: Parent is '</span>)</span>
+<span id="cb342-8"><a href="#cb342-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">parent.frame</span>())</span>
+<span id="cb342-9"><a href="#cb342-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">'in f: Two frames up is '</span>)</span>
+<span id="cb342-10"><a href="#cb342-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">sys.frame</span>(<span class="sc">-</span><span class="dv">2</span>))</span>
+<span id="cb342-11"><a href="#cb342-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb342-12"><a href="#cb342-12" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <pre><code>in f: Frame number is 1; parent frame number is 0.
 in f: Frame (i.e., environment) is: &lt;environment: 0x55a4d71beb88&gt;
 in f: Parent is &lt;environment: R_GlobalEnv&gt;
 in f: Two frames up is Error in sys.frame(-2) : not that many frames on the stack</code></pre>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb341"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb341-1"><a href="#cb341-1" aria-hidden="true" tabindex="-1"></a>ff <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
-<span id="cb341-2"><a href="#cb341-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">'in ff: Frame (i.e., environment) is: '</span>)</span>
-<span id="cb341-3"><a href="#cb341-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">sys.frame</span>(<span class="fu">sys.nframe</span>()))</span>
-<span id="cb341-4"><a href="#cb341-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">'in ff: Parent is '</span>)</span>
-<span id="cb341-5"><a href="#cb341-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">parent.frame</span>())   </span>
-<span id="cb341-6"><a href="#cb341-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">f</span>()</span>
-<span id="cb341-7"><a href="#cb341-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb341-8"><a href="#cb341-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ff</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb344"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb344-1"><a href="#cb344-1" aria-hidden="true" tabindex="-1"></a>ff <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb344-2"><a href="#cb344-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">'in ff: Frame (i.e., environment) is: '</span>)</span>
+<span id="cb344-3"><a href="#cb344-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">sys.frame</span>(<span class="fu">sys.nframe</span>()))</span>
+<span id="cb344-4"><a href="#cb344-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">'in ff: Parent is '</span>)</span>
+<span id="cb344-5"><a href="#cb344-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">parent.frame</span>())   </span>
+<span id="cb344-6"><a href="#cb344-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">f</span>()</span>
+<span id="cb344-7"><a href="#cb344-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb344-8"><a href="#cb344-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ff</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <pre><code>in ff: Frame (i.e., environment) is: &lt;environment: 0x55a4d7391700&gt;
 in ff: Parent is &lt;environment: R_GlobalEnv&gt;
@@ -2371,22 +2417,22 @@ in f: Parent is &lt;environment: 0x55a4d7391700&gt;
 in f: Two frames up is &lt;environment: R_GlobalEnv&gt;</code></pre>
 <p>Next we’ll use a recursive function to illustrate what information we can gather about the call stack using <em>sys.status</em>. <em>sys.status</em> gives extensive information about the call stack and the frames involved (<em>sys.status</em> uses <em>sys.calls</em>, <em>sys.parents</em> and <em>sys.frames</em>).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb343"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb343-1"><a href="#cb343-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="cf">function</span>(y) {</span>
-<span id="cb343-2"><a href="#cb343-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(y <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="fu">g</span>(y<span class="dv">-1</span>) <span class="cf">else</span> <span class="fu">gg</span>()</span>
-<span id="cb343-3"><a href="#cb343-3" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb343-4"><a href="#cb343-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb343-5"><a href="#cb343-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Ultimately, gg() is called, and it prints out info about the call stack</span></span>
-<span id="cb343-6"><a href="#cb343-6" aria-hidden="true" tabindex="-1"></a>gg <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
-<span id="cb343-7"><a href="#cb343-7" aria-hidden="true" tabindex="-1"></a>    <span class="do">## this gives us the information from sys.calls(),</span></span>
-<span id="cb343-8"><a href="#cb343-8" aria-hidden="true" tabindex="-1"></a>    <span class="do">##   sys.parents() and sys.frames() as one object</span></span>
-<span id="cb343-9"><a href="#cb343-9" aria-hidden="true" tabindex="-1"></a>    <span class="do">## Rather than running print(sys.status()),</span></span>
-<span id="cb343-10"><a href="#cb343-10" aria-hidden="true" tabindex="-1"></a>    <span class="do">## which would involve adding print() to the call stack,</span></span>
-<span id="cb343-11"><a href="#cb343-11" aria-hidden="true" tabindex="-1"></a>    <span class="do">## we'll run sys.status and then print the result out.</span></span>
-<span id="cb343-12"><a href="#cb343-12" aria-hidden="true" tabindex="-1"></a>    tmp <span class="ot">&lt;-</span> <span class="fu">sys.status</span>()</span>
-<span id="cb343-13"><a href="#cb343-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(tmp)</span>
-<span id="cb343-14"><a href="#cb343-14" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb343-15"><a href="#cb343-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb343-16"><a href="#cb343-16" aria-hidden="true" tabindex="-1"></a><span class="fu">g</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb346"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb346-1"><a href="#cb346-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="cf">function</span>(y) {</span>
+<span id="cb346-2"><a href="#cb346-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(y <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="fu">g</span>(y<span class="dv">-1</span>) <span class="cf">else</span> <span class="fu">gg</span>()</span>
+<span id="cb346-3"><a href="#cb346-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb346-4"><a href="#cb346-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb346-5"><a href="#cb346-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Ultimately, gg() is called, and it prints out info about the call stack</span></span>
+<span id="cb346-6"><a href="#cb346-6" aria-hidden="true" tabindex="-1"></a>gg <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb346-7"><a href="#cb346-7" aria-hidden="true" tabindex="-1"></a>    <span class="do">## this gives us the information from sys.calls(),</span></span>
+<span id="cb346-8"><a href="#cb346-8" aria-hidden="true" tabindex="-1"></a>    <span class="do">##   sys.parents() and sys.frames() as one object</span></span>
+<span id="cb346-9"><a href="#cb346-9" aria-hidden="true" tabindex="-1"></a>    <span class="do">## Rather than running print(sys.status()),</span></span>
+<span id="cb346-10"><a href="#cb346-10" aria-hidden="true" tabindex="-1"></a>    <span class="do">## which would involve adding print() to the call stack,</span></span>
+<span id="cb346-11"><a href="#cb346-11" aria-hidden="true" tabindex="-1"></a>    <span class="do">## we'll run sys.status and then print the result out.</span></span>
+<span id="cb346-12"><a href="#cb346-12" aria-hidden="true" tabindex="-1"></a>    tmp <span class="ot">&lt;-</span> <span class="fu">sys.status</span>()</span>
+<span id="cb346-13"><a href="#cb346-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(tmp)</span>
+<span id="cb346-14"><a href="#cb346-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb346-15"><a href="#cb346-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb346-16"><a href="#cb346-16" aria-hidden="true" tabindex="-1"></a><span class="fu">g</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <pre><code>$sys.calls
 $sys.calls[[1]]
@@ -2430,18 +2476,657 @@ $sys.frames[[5]]
 $sys.frames[[6]]
 &lt;environment: 0x55a4d5732488&gt;</code></pre>
 <blockquote class="blockquote">
-<p><em>Challenge</em> Why did I not do <code>print(sys.status())</code> directly?</p>
+<p><strong>Challenge</strong> Why did I not do <code>print(sys.status())</code> directly?</p>
 </blockquote>
 <p>If you’re interested in parsing a somewhat complicated example of frames in action, Adler provides a user-defined timing function that evaluates statements in the calling frame.</p>
 </section>
 </section>
 <section id="function-inputs-and-outputs" class="level2">
 <h2 class="anchored" data-anchor-id="function-inputs-and-outputs">Function inputs and outputs</h2>
-<p>Under construction.</p>
+<section id="arguments" class="level3">
+<h3 class="anchored" data-anchor-id="arguments">Arguments</h3>
+<p>Arguments can be specified by position (based on the order of the inputs) or by name, using <code>name = value</code>. R first tries to match arguments by name and then by position. In general the more important arguments are specified first. You can see the arguments and defaults for a function using <em>args</em>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb348"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb348-1"><a href="#cb348-1" aria-hidden="true" tabindex="-1"></a><span class="fu">args</span>(lm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>function (formula, data, subset, weights, na.action, method = "qr", 
+    model = TRUE, x = FALSE, y = FALSE, qr = TRUE, singular.ok = TRUE, 
+    contrasts = NULL, offset, ...) 
+NULL</code></pre>
+</div>
+</div>
+<p>You can’t generally tell directly which arguments are required; in general you’d need to look at the documentation. For example, <code>lm()</code> requires <code>formula</code> but not <code>data</code>, <code>subset</code>, etc., even though none of them have default arguments.</p>
+<p>R will error out if it is expecting an argument, rather than looking for that argument elsewhere.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb350"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb350-1"><a href="#cb350-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sum)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>function (..., na.rm = FALSE)  .Primitive("sum")</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb352"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb352-1"><a href="#cb352-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb354"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb354-1"><a href="#cb354-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(quantile)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>function (x, ...) 
+UseMethod("quantile")
+&lt;bytecode: 0x55efa90721c8&gt;
+&lt;environment: namespace:stats&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb356"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb356-1"><a href="#cb356-1" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>(<span class="fu">quantile</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Error in is.factor(x) : argument "x" is missing, with no default</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb358"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb358-1"><a href="#cb358-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb358-2"><a href="#cb358-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb358-3"><a href="#cb358-3" aria-hidden="true" tabindex="-1"></a>myfun <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb358-4"><a href="#cb358-4" aria-hidden="true" tabindex="-1"></a>    z <span class="ot">&lt;-</span> y<span class="sc">+</span><span class="dv">3</span></span>
+<span id="cb358-5"><a href="#cb358-5" aria-hidden="true" tabindex="-1"></a>    w <span class="ot">&lt;-</span> x<span class="sc">+</span><span class="dv">3</span></span>
+<span id="cb358-6"><a href="#cb358-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb358-7"><a href="#cb358-7" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>(<span class="fu">myfun</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Error in myfun() : argument "x" is missing, with no default</code></pre>
+</div>
+</div>
+<p>You can check if an argument is missing with <code>missing()</code>. Arguments can also have default values, which may be <code>NULL</code>. If you are writing a function and designate the default as <code>argname = NULL</code>, you can check whether the user provided anything using <code>is.null(argname)</code>. The default values can also relate to other arguments. As an example, consider <em>dgamma</em>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb360"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb360-1"><a href="#cb360-1" aria-hidden="true" tabindex="-1"></a><span class="fu">args</span>(dgamma)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>function (x, shape, rate = 1, scale = 1/rate, log = FALSE) 
+NULL</code></pre>
+</div>
+</div>
+<p>Functions may have unspecified arguments, which are designated using <code>...</code>. Unspecified arguments occurring at the beginning of the argument list are generally a collection of like objects that will be manipulated (consider <em>paste</em>, <em>c</em>, and <em>rbind</em>), while unspecified arguments occurring at the end are often optional arguments (consider <em>plot</em>). These optional arguments are sometimes passed along to a function within the function. For example, here’s my own wrapper for plotting, where any additional arguments specified by the user (such as <code>xlab</code> and <code>ylab</code>) will get passed along to plot:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb362"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb362-1"><a href="#cb362-1" aria-hidden="true" tabindex="-1"></a>pplot <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">cex =</span> <span class="fl">0.4</span>, ...) {</span>
+<span id="cb362-2"><a href="#cb362-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(x, y, <span class="at">pch =</span> pch, <span class="at">cex =</span> cex, ...)</span>
+<span id="cb362-3"><a href="#cb362-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb362-4"><a href="#cb362-4" aria-hidden="true" tabindex="-1"></a><span class="fu">pplot</span>(<span class="fu">rnorm</span>(<span class="dv">10</span>), <span class="fu">rnorm</span>(<span class="dv">10</span>), <span class="at">xlab =</span> <span class="st">'x'</span>, <span class="at">ylab =</span> <span class="st">'y'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If you want to manipulate what the user passed in as the <code>...</code> args, rather than just passing them along, you can extract them:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb363"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb363-1"><a href="#cb363-1" aria-hidden="true" tabindex="-1"></a>myFun <span class="ot">&lt;-</span> <span class="cf">function</span>(...){</span>
+<span id="cb363-2"><a href="#cb363-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(..<span class="dv">2</span>) </span>
+<span id="cb363-3"><a href="#cb363-3" aria-hidden="true" tabindex="-1"></a>  args <span class="ot">&lt;-</span> <span class="fu">list</span>(...)</span>
+<span id="cb363-4"><a href="#cb363-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(args[[<span class="dv">2</span>]])</span>
+<span id="cb363-5"><a href="#cb363-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb363-6"><a href="#cb363-6" aria-hidden="true" tabindex="-1"></a><span class="fu">myFun</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3
+[1] 3</code></pre>
+</div>
+</div>
+<p>As we’ve seen, functions can be passed in as arguments (e.g., see the variants of <em>apply</em> and <em>lapply</em>). Note that one does not need to pass in a named function - you can create the function on the spot - this is called an <em>anonymous function</em> (also called a <em>lambda function</em> in some languages such as Python):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb365"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb365-1"><a href="#cb365-1" aria-hidden="true" tabindex="-1"></a>mylist <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">rnorm</span>(<span class="dv">2</span>), <span class="fu">rnorm</span>(<span class="dv">3</span>), <span class="fu">rnorm</span>(<span class="dv">5</span>))</span>
+<span id="cb365-2"><a href="#cb365-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(mylist, length)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2 3 5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb367"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb367-1"><a href="#cb367-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(mylist, <span class="cf">function</span>(x) x[x <span class="sc">&lt;</span> <span class="dv">0</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] -0.1
+
+[[2]]
+[1] -0.0736 -0.0376 -0.6817
+
+[[3]]
+[1] -0.324 -0.589 -1.518</code></pre>
+</div>
+</div>
+<p>We can see the arguments using <code>args()</code> and extract the arguments using <code>formals()</code>. <code>formals()</code> can be helpful if you need to manipulate the arguments.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb369"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb369-1"><a href="#cb369-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">y =</span> <span class="dv">2</span>, <span class="at">z =</span> <span class="dv">3</span> <span class="sc">/</span> y) { </span>
+<span id="cb369-2"><a href="#cb369-2" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">+</span> y <span class="sc">+</span> z </span>
+<span id="cb369-3"><a href="#cb369-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb369-4"><a href="#cb369-4" aria-hidden="true" tabindex="-1"></a><span class="fu">args</span>(f)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>function (x, y = 2, z = 3/y) 
+NULL</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb371"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb371-1"><a href="#cb371-1" aria-hidden="true" tabindex="-1"></a><span class="fu">formals</span>(f)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$x
+
+
+$y
+[1] 2
+
+$z
+3/y</code></pre>
+</div>
+</div>
+<p><em>match.call()</em> will show the user-suppled arguments explicitly matched to named arguments.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb373"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb373-1"><a href="#cb373-1" aria-hidden="true" tabindex="-1"></a><span class="fu">match.call</span>(<span class="at">definition =</span> mean, </span>
+<span id="cb373-2"><a href="#cb373-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">call =</span> <span class="fu">quote</span>(<span class="fu">mean</span>(y, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>mean(x = y, na.rm = TRUE)</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Challenge</strong> In the above code, what do you think <code>quote()</code>does? Why is it needed?</p>
+</blockquote>
+<section id="where-are-arguments-evaluated" class="level4">
+<h4 class="anchored" data-anchor-id="where-are-arguments-evaluated">Where are arguments evaluated?</h4>
+<p>User-supplied arguments are evaluated in the calling frame (why?), while default arguments are evaluated in the frame of the function (why?):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb375"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb375-1"><a href="#cb375-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb375-2"><a href="#cb375-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb375-3"><a href="#cb375-3" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">y =</span> x<span class="sc">*</span><span class="dv">3</span>) {x<span class="sc">+</span>y}</span>
+<span id="cb375-4"><a href="#cb375-4" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(z<span class="sc">*</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 60</code></pre>
+</div>
+</div>
+<p>Here, when <code>f()</code> is called and the code is evaluated, <code>z</code> is evaluated in the calling frame and <code>z*5</code> is assigned to <code>x</code> in the frame of the function, while <code>x*3</code> is evaluated in the frame of the function (using the local <code>x</code> that was just created) and assigned to <code>y</code>.</p>
+</section>
+</section>
+<section id="function-outputs" class="level3">
+<h3 class="anchored" data-anchor-id="function-outputs">Function outputs</h3>
+<p><code>return(x)</code> will specify <code>x</code> as the output of the function. By default, if <code>return()</code> is not specified, the output is the result of the last evaluated statement. <code>return()</code> can occur anywhere in the function, and allows the function to exit as soon as it is done.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb377"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb377-1"><a href="#cb377-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x) { </span>
+<span id="cb377-2"><a href="#cb377-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(x <span class="sc">&lt;</span> <span class="dv">0</span>) {</span>
+<span id="cb377-3"><a href="#cb377-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">return</span>(<span class="sc">-</span>x<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb377-4"><a href="#cb377-4" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> res <span class="ot">&lt;-</span> x<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb377-5"><a href="#cb377-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb377-6"><a href="#cb377-6" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="sc">-</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -9</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb379"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb379-1"><a href="#cb379-1" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="dv">3</span>)</span>
+<span id="cb379-2"><a href="#cb379-2" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">f</span>(<span class="dv">3</span>)</span>
+<span id="cb379-3"><a href="#cb379-3" aria-hidden="true" tabindex="-1"></a>a</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 9</code></pre>
+</div>
+</div>
+<p><code>invisible(x)</code> will return <code>x</code> and the result can be assigned in the calling environment but it will not be printed if not assigned:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb381"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb381-1"><a href="#cb381-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x){ </span>
+<span id="cb381-2"><a href="#cb381-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">invisible</span>(x<span class="sc">^</span><span class="dv">2</span>) </span>
+<span id="cb381-3"><a href="#cb381-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb381-4"><a href="#cb381-4" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="dv">3</span>)</span>
+<span id="cb381-5"><a href="#cb381-5" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">f</span>(<span class="dv">3</span>)</span>
+<span id="cb381-6"><a href="#cb381-6" aria-hidden="true" tabindex="-1"></a>a</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 9</code></pre>
+</div>
+</div>
+<p>A function can only return a single object (unlike Matlab, e.g.), but of course we can tack things together as a list and return that, as occurs with many functions, such as <em>lm</em>. (Of course <code>lm()</code> actually returns an object of the S3 <code>lm</code> class, which inherits from the list class.)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb383"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb383-1"><a href="#cb383-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg <span class="sc">~</span> cyl, <span class="at">data =</span> mtcars)</span>
+<span id="cb383-2"><a href="#cb383-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "lm"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb385"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb385-1"><a href="#cb385-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.list</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="pass-by-value-vs.-pass-by-reference" class="level2">
+<h2 class="anchored" data-anchor-id="pass-by-value-vs.-pass-by-reference">Pass by value vs.&nbsp;pass by reference</h2>
+<p>When talking about programming languages, one often distinguishes <em>pass-by-value</em> and <em>pass-by-reference</em>.</p>
+<p><em>Pass-by-value</em> means that when a function is called with one or more arguments, a copy is made of each argument and the function operates on those copies.</p>
+<p><em>Pass-by-reference</em> means that the arguments are not copied, but rather that information is passed allowing the function to find and modify the original value of the objects passed into the function.</p>
+<p>In pass-by-value, changes to an argument made within a function do not affect the value of the argument in the calling environment. In pass-by-reference changes inside a function do affect the object outside of the function. R is (roughly) pass-by-value. R’s designers chose not to allow pass-by-reference because they didn’t like the idea that a function could have the side effect of changing an object. However, passing by reference can sometimes be very helpful, and we’ll see ways of passing by reference later (and also note our discussion of R6 classes).</p>
+<p>Pass-by-value is elegant and modular in that functions do not have side effects - the effect of the function occurs only through the return value of the function. However, it can be inefficient in terms of the amount of computation and of memory used. In contrast, pass-by-reference is more efficient, but also more dangerous and less modular. It’s more difficult to reason about code that uses pass-by-reference because effects of calling a function can be hidden inside the function. Thus pass-by-value is directly related to functional programming.</p>
+<p>Arrays in Python are pass-by-reference (but tuples are not, as they are immutable).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb387"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb387-1"><a href="#cb387-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> myfun(x):</span>
+<span id="cb387-2"><a href="#cb387-2" aria-hidden="true" tabindex="-1"></a>    x[<span class="dv">1</span>] <span class="op">=</span> <span class="dv">99</span></span>
+<span id="cb387-3"><a href="#cb387-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb387-4"><a href="#cb387-4" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>]</span>
+<span id="cb387-5"><a href="#cb387-5" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> myfun(y)</span>
+<span id="cb387-6"><a href="#cb387-6" aria-hidden="true" tabindex="-1"></a>y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[0, 99, 2]</code></pre>
+</div>
+</div>
+<section id="pointers" class="level3">
+<h3 class="anchored" data-anchor-id="pointers">Pointers</h3>
+<p>By way of contrast to a pass-by-value system, I want to briefly discuss the idea of a pointer, common in compiled languages such as C.</p>
+<pre><code>int x = 3;
+int* ptr;
+ptr = &amp;x;
+*ptr * 7; // returns 21</code></pre>
+<ul>
+<li>The <code>int*</code> declares <code>ptr</code> to be a pointer to (the address of) the integer <code>x</code>.</li>
+<li>The <code>&amp;x</code> gets the address where <code>x</code> is stored.</li>
+<li><code>*ptr</code> dereferences <code>ptr</code>, returning the value in that address (which is 3 since <code>ptr</code> is the address of <code>x</code>.</li>
+</ul>
+<p>Vectors in C are really pointers to a block of memory:</p>
+<pre><code>int x[10];</code></pre>
+<p>In this case <code>x</code> will be the address of the first element of the vector. We can access the first element as <code>x[0]</code> or <code>*x</code>.</p>
+<p>Why have we gone into this? In C, you can pass a pointer as an argument to a function. The result is that only the scalar address is copied and not the entire object, and inside the function, one can modify the original object, with the new value persisting on exit from the function. For example in the following example one passes in the address of an object and that object is then modified in place, affecting its value when the function call finishes.</p>
+<pre><code>int myCal(int* ptr){
+    *ptr = *ptr + *ptr;
+}
+
+myCal(&amp;x)  # x itself will be modified</code></pre>
+<blockquote class="blockquote">
+<p><strong>Note</strong> When calling C or C++ from R, one (implicitly) passes pointers to the vectors into C.</p>
+</blockquote>
+</section>
+<section id="pointers-in-r" class="level3">
+<h3 class="anchored" data-anchor-id="pointers-in-r">Pointers in R?</h3>
+<p>Are there pointers in R? From a user perspective, one might say ‘no’, because an R programmer can’t use pointers explicitly. But pointer-like behavior is occurring behind the scenes in lots of ways:</p>
+<ul>
+<li>Lists in R are essentially vectors of pointers to the elements of the list.</li>
+<li>Character vectors in R are essentially pointers to the individual character strings.</li>
+<li>Environments behave like pointers and are passed by reference rather than by copy.</li>
+<li>R6 objects behave like pointers and are passed by reference, as seen earlier.</li>
+</ul>
+<p>We’ll see more on these ideas later in the Unit.</p>
+</section>
+<section id="alternatives-to-pass-by-value-in-r" class="level3">
+<h3 class="anchored" data-anchor-id="alternatives-to-pass-by-value-in-r">Alternatives to pass by value in R</h3>
+<p>There are occasions we do not want to pass by value. In addition to avoiding copies and the computation and memory use that that causes, another reason is when we want a function to modify a complicated object without having to return it and re-assign it in the parent environment. There are several work-arounds:</p>
+<ol type="1">
+<li>We can use R6 (or Reference Class) objects.</li>
+<li>We can use a <em>closure</em>, as discussed later.</li>
+<li>We can access the object in the enclosing environment as a ‘global variable’, as we’ll see when discussing scoping. More generally we can access the object using <code>get()</code>, specifying the environment from which we want to obtain the variable. To specify the location of an object when using <code>get()</code>, we can generally specify (1) a position in the search path, (2) an explicit environment, or (3) a location in the call stack by using <code>sys.frame()</code>. However we cannot change the value of the object in the parent environment without some additional tools:
+<ol type="a">
+<li>We can use the <code>&lt;&lt;-</code> operator to assign into an object in the enclosing environment (provided an object of that name exists in the enclosing environment). We’ll discuss enclosing environments when we talk about scoping.</li>
+<li>We can also use <code>assign()</code>, specifying the environment in which we want the assignment to occur. While these techniques are possible and ok for exploratory coding, they’re generally bad practice for more formal code development.</li>
+</ol></li>
+<li>We can use replacement functions, which hide the reassignment in the parent environment from the user. Note that a second copy is generally created in this case, but the original copy is quickly removed.</li>
+</ol>
+</section>
+<section id="promises-and-lazy-evaluation" class="level3">
+<h3 class="anchored" data-anchor-id="promises-and-lazy-evaluation">Promises and lazy evaluation</h3>
+<p>In actuality, R is not quite pass-by-value; rather it is <em>call-by-value</em>. Copying of arguments is delayed in two ways. The first is the idea of promises and lazy evaluation, described here. The second is the idea of <em>copy-on-change</em>, described in more detail later. Basically, with copy-on-change, copies of arguments are only made if the argument is changed within the function. Until then the object in the function just refers back to the original object.</p>
+<p>Let’s see what a <em>promise</em> object is. In function calls, when R matches user input arguments to formal argument names, it does not (usually) evaluate the arguments until they are needed, which is called <em>lazy evaluation</em>. Instead the formal arguments are of a special type called a <em>promise</em>. Let’s see lazy evaluation in action.</p>
+<p>What’s strange about this?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb392"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb392-1"><a href="#cb392-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">print</span>(<span class="st">"hi"</span>)</span>
+<span id="cb392-2"><a href="#cb392-2" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(<span class="fu">mean</span>(<span class="fu">rnorm</span>(<span class="dv">1000000</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   user  system elapsed 
+  0.058   0.000   0.059 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb394"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb394-1"><a href="#cb394-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(<span class="fu">f</span>(<span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "hi"</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   user  system elapsed 
+      0       0       0 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb397"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb397-1"><a href="#cb397-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(<span class="fu">f</span>(<span class="fu">mean</span>(<span class="fu">rnorm</span>(<span class="dv">1000000</span>)))) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "hi"</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   user  system elapsed 
+  0.001   0.000   0.001 </code></pre>
+</div>
+</div>
+<p>Here’s an even stranger situation. Do you think the following code will run?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb400"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb400-1"><a href="#cb400-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(a, <span class="at">b =</span> d) {</span>
+<span id="cb400-2"><a href="#cb400-2" aria-hidden="true" tabindex="-1"></a>    d <span class="ot">&lt;-</span> a<span class="sc">*</span><span class="dv">3</span>; </span>
+<span id="cb400-3"><a href="#cb400-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(a<span class="sc">*</span>b)</span>
+<span id="cb400-4"><a href="#cb400-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb400-5"><a href="#cb400-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb400-6"><a href="#cb400-6" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="dv">5</span>)</span>
+<span id="cb400-7"><a href="#cb400-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb400-8"><a href="#cb400-8" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb400-9"><a href="#cb400-9" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Lazy evaluation is not just an R thing. It also occurs in Tensorflow (particularly version 1), the Python Dask package, and in Spark. The basic idea is to delay executation until it’s really needed, with the goal that if one does so, the system may be able to better optimize a series of multiple steps as a joint operation relative to executing them one by one.</p>
+</section>
 </section>
 <section id="variable-scope-and-lookup" class="level2">
 <h2 class="anchored" data-anchor-id="variable-scope-and-lookup">Variable scope and lookup</h2>
-<p>Under construction.</p>
+<section id="lexical-scoping" class="level3">
+<h3 class="anchored" data-anchor-id="lexical-scoping">Lexical scoping</h3>
+<p>In this section, we seek to understand what happens in the following circumstance. Namely, where does R get the value for the object <code>x</code>?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb401"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb401-1"><a href="#cb401-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(y) {</span>
+<span id="cb401-2"><a href="#cb401-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(x <span class="sc">+</span> y)</span>
+<span id="cb401-3"><a href="#cb401-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb401-4"><a href="#cb401-4" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 103</code></pre>
+</div>
+</div>
+<p>To consider variable scope, we need to define the terms <em>environment</em> and <em>frame</em>. Environments and frames are closely related.</p>
+<ul>
+<li>A <em>frame</em> is a collection of named objects.</li>
+<li>An <em>environment</em> is a frame, with a pointer to the ‘enclosing environment’, i.e., the next environment to look for something in. (Be careful as this is different than the parent frame of a function, discussed when we were talking about the call stack.)</li>
+</ul>
+<p>Variables in the enclosing environment (also called the parent environment) are available within a function. This is the analog of <em>global variables</em> in other languages. <strong>The enclosing environment is the environment in which a function is defined, not the environment from which a function is called.</strong></p>
+<p>This approach is called <em>lexical scoping</em>. Python and many other languages also use lexical scoping.</p>
+<p>Why is the enclosing environment defined in this way? Recall our example where I tried to break the usage of the <em>lm</em> function by redefining <em>lm.fit</em>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb403"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb403-1"><a href="#cb403-1" aria-hidden="true" tabindex="-1"></a>lm.fit <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">print</span>(<span class="st">'hi'</span>)</span>
+<span id="cb403-2"><a href="#cb403-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>)</span>
+<span id="cb403-3"><a href="#cb403-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>)</span>
+<span id="cb403-4"><a href="#cb403-4" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(y<span class="sc">~</span>x)  <span class="co"># this still works!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>When R looks for <code>lm.fit</code> when it is called within <code>lm</code>, it looks in the enclosing environment of <code>lm</code>. That is where <code>lm</code> is defined, which is the stats package namespace. It finds <code>lm.fit</code> there. All is well! In contrast, if the scoping rules looked for <code>lm.fit</code> where <code>lm</code> was called from, then the user-defined <code>lm.fit</code> would be found and <code>lm()</code> would not work until that <code>lm.fit</code> was removed. That would be a very fragile system!</p>
+<p>Let’s dig deeper to understand where R looks for non-local variables, illustrating lexical scoping:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb404"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb404-1"><a href="#cb404-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb404-2"><a href="#cb404-2" aria-hidden="true" tabindex="-1"></a>f2 <span class="ot">&lt;-</span> <span class="cf">function</span>() <span class="fu">print</span>(x)</span>
+<span id="cb404-3"><a href="#cb404-3" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb404-4"><a href="#cb404-4" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="dv">7</span></span>
+<span id="cb404-5"><a href="#cb404-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">f2</span>()</span>
+<span id="cb404-6"><a href="#cb404-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb404-7"><a href="#cb404-7" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>() <span class="co"># what will happen?</span></span>
+<span id="cb404-8"><a href="#cb404-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb404-9"><a href="#cb404-9" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb404-10"><a href="#cb404-10" aria-hidden="true" tabindex="-1"></a>f2 <span class="ot">&lt;-</span> <span class="cf">function</span>() <span class="fu">print</span>(x)</span>
+<span id="cb404-11"><a href="#cb404-11" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb404-12"><a href="#cb404-12" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="dv">7</span></span>
+<span id="cb404-13"><a href="#cb404-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">f2</span>()</span>
+<span id="cb404-14"><a href="#cb404-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb404-15"><a href="#cb404-15" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb404-16"><a href="#cb404-16" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>() <span class="co"># what will happen?</span></span>
+<span id="cb404-17"><a href="#cb404-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb404-18"><a href="#cb404-18" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb404-19"><a href="#cb404-19" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb404-20"><a href="#cb404-20" aria-hidden="true" tabindex="-1"></a>    f2 <span class="ot">&lt;-</span> <span class="cf">function</span>() { <span class="fu">print</span>(x) }</span>
+<span id="cb404-21"><a href="#cb404-21" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="dv">7</span></span>
+<span id="cb404-22"><a href="#cb404-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">f2</span>()</span>
+<span id="cb404-23"><a href="#cb404-23" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb404-24"><a href="#cb404-24" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>() <span class="co"># what will happen?</span></span>
+<span id="cb404-25"><a href="#cb404-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb404-26"><a href="#cb404-26" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb404-27"><a href="#cb404-27" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>() { </span>
+<span id="cb404-28"><a href="#cb404-28" aria-hidden="true" tabindex="-1"></a>    f2 <span class="ot">&lt;-</span> <span class="cf">function</span>() { <span class="fu">print</span>(x) }</span>
+<span id="cb404-29"><a href="#cb404-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">f2</span>()</span>
+<span id="cb404-30"><a href="#cb404-30" aria-hidden="true" tabindex="-1"></a>} </span>
+<span id="cb404-31"><a href="#cb404-31" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>() <span class="co"># what will happen?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here’s a tricky example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb405"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb405-1"><a href="#cb405-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb405-2"><a href="#cb405-2" aria-hidden="true" tabindex="-1"></a>fun_constructor <span class="ot">&lt;-</span> <span class="cf">function</span>(){</span>
+<span id="cb405-3"><a href="#cb405-3" aria-hidden="true" tabindex="-1"></a>    y <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb405-4"><a href="#cb405-4" aria-hidden="true" tabindex="-1"></a>    g <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb405-5"><a href="#cb405-5" aria-hidden="true" tabindex="-1"></a>            <span class="fu">return</span>(x <span class="sc">+</span> y)</span>
+<span id="cb405-6"><a href="#cb405-6" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb405-7"><a href="#cb405-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(g)</span>
+<span id="cb405-8"><a href="#cb405-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb405-9"><a href="#cb405-9" aria-hidden="true" tabindex="-1"></a><span class="do">## fun_constructor() creates functions</span></span>
+<span id="cb405-10"><a href="#cb405-10" aria-hidden="true" tabindex="-1"></a>myfun <span class="ot">&lt;-</span> <span class="fu">fun_constructor</span>()</span>
+<span id="cb405-11"><a href="#cb405-11" aria-hidden="true" tabindex="-1"></a><span class="fu">myfun</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 13</code></pre>
+</div>
+</div>
+<p>Let’s work through this:</p>
+<ol type="1">
+<li>What is the enclosing environment of the function <em>g()</em>?</li>
+<li>What does <em>g()</em> use for <em>y</em>?</li>
+<li>When <em>fun_constructor()</em> finishes, does its environment disappear? What would happen if it did?</li>
+<li>What is the enclosing environment of <em>myfun()</em>?</li>
+</ol>
+<p>The following code helps explain things, but it’s a bit confusing because <code>environment()</code> gives back different results depending on whether it is given a function as its argument. If given a function, it returns the enclosing environment for that function. If given no argument, it returns the current execution environment.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb407"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb407-1"><a href="#cb407-1" aria-hidden="true" tabindex="-1"></a><span class="fu">environment</span>(myfun)  <span class="co"># enclosing environment of h()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;environment: 0x55efb4088bf0&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb409"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb409-1"><a href="#cb409-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>(<span class="fu">environment</span>(myfun)) <span class="co"># objects in that environment</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "g" "y"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb411"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb411-1"><a href="#cb411-1" aria-hidden="true" tabindex="-1"></a>fun_constructor <span class="ot">&lt;-</span> <span class="cf">function</span>(){</span>
+<span id="cb411-2"><a href="#cb411-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">environment</span>()) <span class="co"># execution environment of fun_constructor()</span></span>
+<span id="cb411-3"><a href="#cb411-3" aria-hidden="true" tabindex="-1"></a>    y <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb411-4"><a href="#cb411-4" aria-hidden="true" tabindex="-1"></a>    g <span class="ot">&lt;-</span> <span class="cf">function</span>(x) x <span class="sc">+</span> y</span>
+<span id="cb411-5"><a href="#cb411-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(g)</span>
+<span id="cb411-6"><a href="#cb411-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb411-7"><a href="#cb411-7" aria-hidden="true" tabindex="-1"></a>myfun <span class="ot">&lt;-</span> <span class="fu">fun_constructor</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;environment: 0x55efb3bc2ed0&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb413"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb413-1"><a href="#cb413-1" aria-hidden="true" tabindex="-1"></a><span class="fu">environment</span>(myfun)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;environment: 0x55efb3bc2ed0&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb415"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb415-1"><a href="#cb415-1" aria-hidden="true" tabindex="-1"></a><span class="fu">myfun</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 13</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb417"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb417-1"><a href="#cb417-1" aria-hidden="true" tabindex="-1"></a><span class="fu">environment</span>(myfun)<span class="sc">$</span>y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb419"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb419-1"><a href="#cb419-1" aria-hidden="true" tabindex="-1"></a><span class="do">## advanced: explain this:</span></span>
+<span id="cb419-2"><a href="#cb419-2" aria-hidden="true" tabindex="-1"></a><span class="fu">environment</span>(myfun)<span class="sc">$</span>g</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>function(x) x + y
+&lt;environment: 0x55efb3bc2ed0&gt;</code></pre>
+</div>
+</div>
+<p>Be careful when using variables from the enclosing environment as the value of that variable in the enclosing environment may well not be what you expect it to be. In general it’s bad practice to use variables that are taken from environments outside that of a function, but in some cases it can be useful. Here are some examples of using variables outside of the frame of a function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb421"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb421-1"><a href="#cb421-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb421-2"><a href="#cb421-2" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>() {x <span class="ot">&lt;-</span> x<span class="sc">^</span><span class="dv">2</span>; <span class="fu">print</span>(x)}</span>
+<span id="cb421-3"><a href="#cb421-3" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>()</span>
+<span id="cb421-4"><a href="#cb421-4" aria-hidden="true" tabindex="-1"></a>x <span class="co"># what do you expect?</span></span>
+<span id="cb421-5"><a href="#cb421-5" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>() { <span class="fu">assign</span>(<span class="st">'x'</span>, x<span class="sc">^</span><span class="dv">2</span>, <span class="at">env =</span> .GlobalEnv) } </span>
+<span id="cb421-6"><a href="#cb421-6" aria-hidden="true" tabindex="-1"></a><span class="do">## careful: could be dangerous as a variable is changed as a side effect</span></span>
+<span id="cb421-7"><a href="#cb421-7" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>()</span>
+<span id="cb421-8"><a href="#cb421-8" aria-hidden="true" tabindex="-1"></a>x</span>
+<span id="cb421-9"><a href="#cb421-9" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x) { x <span class="ot">&lt;&lt;-</span> x<span class="sc">^</span><span class="dv">2</span> }</span>
+<span id="cb421-10"><a href="#cb421-10" aria-hidden="true" tabindex="-1"></a><span class="do">## careful: could be dangerous as a variable is changed as a side effect</span></span>
+<span id="cb421-11"><a href="#cb421-11" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="dv">5</span>)</span>
+<span id="cb421-12"><a href="#cb421-12" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="comprehension-problem" class="level4">
+<h4 class="anchored" data-anchor-id="comprehension-problem">Comprehension problem</h4>
+<p>Here’s a case where something I tried failed and I had to think more carefully about scoping to understand why.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb422"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb422-1"><a href="#cb422-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>) </span>
+<span id="cb422-2"><a href="#cb422-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">1</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.626</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb424"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb424-1"><a href="#cb424-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(.Random.seed, <span class="at">file =</span> <span class="st">'tmp.Rda'</span>) </span>
+<span id="cb424-2"><a href="#cb424-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.184</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb426"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb426-1"><a href="#cb426-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="cf">function</span>() { </span>
+<span id="cb426-2"><a href="#cb426-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">load</span>(<span class="st">'tmp.Rda'</span>) </span>
+<span id="cb426-3"><a href="#cb426-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">rnorm</span>(<span class="dv">1</span>)) </span>
+<span id="cb426-4"><a href="#cb426-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb426-5"><a href="#cb426-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tmp</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.836</code></pre>
+</div>
+</div>
+<p>Question: what was I hoping that code to do, and why didn’t it work?</p>
+</section>
+<section id="detecting-non-local-variables" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="detecting-non-local-variables">Detecting non-local variables</h4>
+<p>We can use <code>codetools::findGlobals()</code> to detect non-local variables when we are programming.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb428"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb428-1"><a href="#cb428-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb428-2"><a href="#cb428-2" aria-hidden="true" tabindex="-1"></a>    y <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb428-3"><a href="#cb428-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(x <span class="sc">+</span> y)</span>
+<span id="cb428-4"><a href="#cb428-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb428-5"><a href="#cb428-5" aria-hidden="true" tabindex="-1"></a>codetools<span class="sc">::</span><span class="fu">findGlobals</span>(f)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "{"     "+"     "&lt;-"    "print" "x"    </code></pre>
+</div>
+</div>
+<p>Is that result what you would expect? What does it say about my statement that using non-local variables is a bad idea?</p>
+</section>
+</section>
+<section id="closures" class="level3">
+<h3 class="anchored" data-anchor-id="closures">Closures</h3>
+<p>One way to avoid passing data by value is to associate data with a function, using a <em>closure</em>. This is a functional programming way to achieve something like an OOP class. This <a href="https://en.wikipedia.org/wiki/Closure_(computer_programming)">Wikipedia entry</a> nicely summarizes the idea, which is a general functional programming idea and not specific to R.</p>
+<p>Using a closure involves creating one (or more functions) within a function call and returning the function(s) as the output. When one executes the original function, the new function(s) is created and returned and one can then call that new function(s). The new function then can access objects in the enclosing environment (the environment of the original function) and can use <code>&lt;&lt;-</code> to assign into the enclosing environment, to which the function (or the multiple functions) have access. The nice thing about this compared to using a global variable is that the data in the closure is bound up with the function(s) and is protected from being changed by the user of the closure. Chambers provides an example of this in Sec. 5.4.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb430"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb430-1"><a href="#cb430-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>)</span>
+<span id="cb430-2"><a href="#cb430-2" aria-hidden="true" tabindex="-1"></a>scaler_constructor <span class="ot">&lt;-</span> <span class="cf">function</span>(input){</span>
+<span id="cb430-3"><a href="#cb430-3" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">&lt;-</span> input</span>
+<span id="cb430-4"><a href="#cb430-4" aria-hidden="true" tabindex="-1"></a>    g <span class="ot">&lt;-</span> <span class="cf">function</span>(param) <span class="fu">return</span>(param <span class="sc">*</span> data) </span>
+<span id="cb430-5"><a href="#cb430-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(g)</span>
+<span id="cb430-6"><a href="#cb430-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb430-7"><a href="#cb430-7" aria-hidden="true" tabindex="-1"></a>scaler <span class="ot">&lt;-</span> <span class="fu">scaler_constructor</span>(x)</span>
+<span id="cb430-8"><a href="#cb430-8" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(x) <span class="co"># to demonstrate we no longer need x</span></span>
+<span id="cb430-9"><a href="#cb430-9" aria-hidden="true" tabindex="-1"></a><span class="fu">scaler</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  4.786  0.989 -2.461  1.462  2.215  1.727 -0.916  4.535  1.170 -1.864</code></pre>
+</div>
+</div>
+<p>So calling <code>scaler(3)</code> multiplies 3 by the value of <code>data</code> stored in the closure (the enclosing environment) of the function <code>scaler</code>.</p>
+<p>It turns out that it can be hard to see the memory used involved in the closure.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb432"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb432-1"><a href="#cb432-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fl">1e7</span>)</span>
+<span id="cb432-2"><a href="#cb432-2" aria-hidden="true" tabindex="-1"></a>scaler <span class="ot">&lt;-</span> <span class="fu">scaler_constructor</span>(x)</span>
+<span id="cb432-3"><a href="#cb432-3" aria-hidden="true" tabindex="-1"></a><span class="fu">object.size</span>(scaler) <span class="co"># hmmm</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>3800 bytes</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb434"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb434-1"><a href="#cb434-1" aria-hidden="true" tabindex="-1"></a><span class="fu">object.size</span>(<span class="fu">environment</span>(scaler)<span class="sc">$</span>data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>80000048 bytes</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb436"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb436-1"><a href="#cb436-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pryr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'pryr'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked _by_ '.GlobalEnv':
+
+    f</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb439"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb439-1"><a href="#cb439-1" aria-hidden="true" tabindex="-1"></a><span class="fu">object_size</span>(scaler) <span class="co"># that's better!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>80,012,560 B</code></pre>
+</div>
+</div>
+<p>Here’s a fun example. You might do this with an <em>apply</em> variant, in particular <em>replicate</em>, but this is slick:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb441"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb441-1"><a href="#cb441-1" aria-hidden="true" tabindex="-1"></a>make_container <span class="ot">&lt;-</span> <span class="cf">function</span>(n) {</span>
+<span id="cb441-2"><a href="#cb441-2" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="fu">numeric</span>(n)</span>
+<span id="cb441-3"><a href="#cb441-3" aria-hidden="true" tabindex="-1"></a>    i <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb441-4"><a href="#cb441-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb441-5"><a href="#cb441-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">function</span>(<span class="at">value =</span> <span class="cn">NULL</span>) {</span>
+<span id="cb441-6"><a href="#cb441-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (<span class="fu">is.null</span>(value)) {</span>
+<span id="cb441-7"><a href="#cb441-7" aria-hidden="true" tabindex="-1"></a>            <span class="fu">return</span>(x)</span>
+<span id="cb441-8"><a href="#cb441-8" aria-hidden="true" tabindex="-1"></a>        } <span class="cf">else</span> {</span>
+<span id="cb441-9"><a href="#cb441-9" aria-hidden="true" tabindex="-1"></a>            x[i] <span class="ot">&lt;&lt;-</span> value</span>
+<span id="cb441-10"><a href="#cb441-10" aria-hidden="true" tabindex="-1"></a>            i <span class="ot">&lt;&lt;-</span> i <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb441-11"><a href="#cb441-11" aria-hidden="true" tabindex="-1"></a>        }    </span>
+<span id="cb441-12"><a href="#cb441-12" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb441-13"><a href="#cb441-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb441-14"><a href="#cb441-14" aria-hidden="true" tabindex="-1"></a>nboot <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb441-15"><a href="#cb441-15" aria-hidden="true" tabindex="-1"></a>bootmeans <span class="ot">&lt;-</span> <span class="fu">make_container</span>(nboot)</span>
+<span id="cb441-16"><a href="#cb441-16" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> faithful[ , <span class="dv">1</span>] <span class="co"># Old Faithful geyser eruption lengths</span></span>
+<span id="cb441-17"><a href="#cb441-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nboot)</span>
+<span id="cb441-18"><a href="#cb441-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">bootmeans</span>(<span class="fu">mean</span>(<span class="fu">sample</span>(data, <span class="fu">length</span>(data),</span>
+<span id="cb441-19"><a href="#cb441-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">replace=</span><span class="cn">TRUE</span>)))</span>
+<span id="cb441-20"><a href="#cb441-20" aria-hidden="true" tabindex="-1"></a><span class="fu">bootmeans</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1] 3.59 3.41 3.47 3.46 3.43 3.48 3.51 3.48 3.50 3.46 3.41 3.62 3.46 3.46 3.49
+ [16] 3.50 3.56 3.50 3.58 3.60 3.46 3.45 3.50 3.41 3.46 3.59 3.35 3.50 3.51 3.37
+ [31] 3.46 3.38 3.58 3.52 3.45 3.58 3.50 3.47 3.54 3.57 3.53 3.58 3.40 3.50 3.50
+ [46] 3.56 3.41 3.45 3.50 3.53 3.49 3.57 3.46 3.50 3.43 3.48 3.54 3.45 3.53 3.53
+ [61] 3.46 3.36 3.41 3.58 3.58 3.47 3.51 3.50 3.56 3.48 3.39 3.48 3.62 3.54 3.51
+ [76] 3.52 3.47 3.49 3.43 3.45 3.40 3.52 3.43 3.49 3.51 3.56 3.55 3.46 3.30 3.56
+ [91] 3.47 3.49 3.41 3.40 3.46 3.43 3.43 3.44 3.45 3.42</code></pre>
+</div>
+</div>
+<p>The closure stores the bootstrapped values and</p>
+</section>
+<section id="environments-and-the-search-path" class="level3">
+<h3 class="anchored" data-anchor-id="environments-and-the-search-path">Environments and the search path</h3>
+<p>So far we’ve seen lexical scoping in action primarily in terms of finding variables in a single enclosing environment. But what if the variable is not found in either the frame/environment of the function or the enclosing environment? When R goes looking for an object (in the form of a symbol), it starts in the current environment (e.g., the frame/environment of a function) and then runs up through the enclosing environments, until it reaches the global environment, which is where R starts when you open R.</p>
+<p>Then, if R can’t find the object when reaching the global environment, it runs through the search path, which you can see with <code>search()</code>. The search path is a set of additional environments, mainly the namespaces of packages loaded in the R session.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb443"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb443-1"><a href="#cb443-1" aria-hidden="true" tabindex="-1"></a><span class="fu">search</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] ".GlobalEnv"          "package:pryr"        "package:R6"         
+ [4] "package:fields"      "package:viridis"     "package:viridisLite"
+ [7] "package:spam"        "package:dplyr"       "package:stringr"    
+[10] "tools:quarto"        "package:stats"       "package:graphics"   
+[13] "package:grDevices"   "package:utils"       "package:datasets"   
+[16] "package:SCF"         "package:methods"     "Autoloads"          
+[19] "package:base"       </code></pre>
+</div>
+</div>
+<p>We can see the full set of environments in which R looks using code such as the following. This illustrates that in looking for a local variable used in <em>lm</em> the search process would go through the stats namespace, the base R namespace, the global environment and then the various packages loaded in the current R session.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb445"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb445-1"><a href="#cb445-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">environment</span>(lm)</span>
+<span id="cb445-2"><a href="#cb445-2" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (<span class="fu">environmentName</span>(x) <span class="sc">!=</span> <span class="fu">environmentName</span>(<span class="fu">emptyenv</span>())) {</span>
+<span id="cb445-3"><a href="#cb445-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">environmentName</span>(x))</span>
+<span id="cb445-4"><a href="#cb445-4" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="fu">parent.env</span>(x) <span class="co"># enclosing env't, NOT parent frame!</span></span>
+<span id="cb445-5"><a href="#cb445-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "stats"
+[1] "imports:stats"
+[1] "base"
+[1] "R_GlobalEnv"
+[1] "package:pryr"
+[1] "package:R6"
+[1] "package:fields"
+[1] "package:viridis"
+[1] "package:viridisLite"
+[1] "package:spam"
+[1] "package:dplyr"
+[1] "package:stringr"
+[1] "tools:quarto"
+[1] "package:stats"
+[1] "package:graphics"
+[1] "package:grDevices"
+[1] "package:utils"
+[1] "package:datasets"
+[1] "package:SCF"
+[1] "package:methods"
+[1] "Autoloads"
+[1] "base"</code></pre>
+</div>
+</div>
+<p>That code uses <code>environmentName()</code>, which prints out a nice-looking version of the environment name.</p>
+<p>Here’s an alternative way using <em>pryr</em>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb447"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb447-1"><a href="#cb447-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pryr)</span>
+<span id="cb447-2"><a href="#cb447-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">environment</span>(lm)</span>
+<span id="cb447-3"><a href="#cb447-3" aria-hidden="true" tabindex="-1"></a><span class="fu">parenvs</span>(x, <span class="at">all =</span> <span class="cn">TRUE</span>)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   label                              name                 
+1  &lt;environment: namespace:stats&gt;     ""                   
+2  &lt;environment: 0x55efa783af68&gt;      "imports:stats"      
+3  &lt;environment: namespace:base&gt;      ""                   
+4  &lt;environment: R_GlobalEnv&gt;         ""                   
+5  &lt;environment: package:pryr&gt;        "package:pryr"       
+6  &lt;environment: package:R6&gt;          "package:R6"         
+7  &lt;environment: package:fields&gt;      "package:fields"     
+8  &lt;environment: package:viridis&gt;     "package:viridis"    
+9  &lt;environment: package:viridisLite&gt; "package:viridisLite"
+10 &lt;environment: package:spam&gt;        "package:spam"       
+11 &lt;environment: package:dplyr&gt;       "package:dplyr"      
+12 &lt;environment: package:stringr&gt;     "package:stringr"    
+13 &lt;environment: 0x55efa756e6a0&gt;      "tools:quarto"       
+14 &lt;environment: package:stats&gt;       "package:stats"      
+15 &lt;environment: package:graphics&gt;    "package:graphics"   
+16 &lt;environment: package:grDevices&gt;   "package:grDevices"  
+17 &lt;environment: package:utils&gt;       "package:utils"      
+18 &lt;environment: package:datasets&gt;    "package:datasets"   
+19 &lt;environment: package:SCF&gt;         "package:SCF"        
+20 &lt;environment: package:methods&gt;     "package:methods"    
+21 &lt;environment: 0x55efa759d510&gt;      "Autoloads"          
+22 &lt;environment: base&gt;                ""                   
+23 &lt;environment: R_EmptyEnv&gt;          ""                   </code></pre>
+</div>
+</div>
+<p>Note that eventually the global environment and the environments of the packages are nested within the base environment (of the base package) and the empty environment.</p>
+</section>
 </section>
 </section>
 <section id="memory-and-copies" class="level1">
