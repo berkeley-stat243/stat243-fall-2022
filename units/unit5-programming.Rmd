@@ -1009,9 +1009,11 @@ Let's try this functionality  out on our *bear* class.
 
 ```{r}
 summary.bear <- function(object) 
-	return(with(object, cat("Bear of age ", age, 
+    with(object, cat("Bear of age ", age, 
 	" whose name is ", firstname, " ", surname, ".\n",
-    sep = "")))
+        sep = ""))
+    invisible(NULL)
+
 summary(yog)
 ```
 
@@ -1027,9 +1029,11 @@ summarize <- function(object, ...)
 
 ```{r}
 summarize.bear <- function(object) 
-	return(with(object, cat("Bear of age ", age, 
+    with(object, cat("Bear of age ", age, 
 	" whose name is ", firstname, " ", surname, ".\n",
-    sep = "")))
+        sep = ""))
+    invisible(NULL)
+
 summarize(yog)
 ```
 
