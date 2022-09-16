@@ -371,11 +371,11 @@
     "text": "Problem 4\nAlso note that you should not add spaces directly after the opening \\(\\$\\) of a mathematical expression or directly before the closing \\(\\$\\) of a mathematical expression. For example, \\(\\$1+2 \\$\\) will display correctly but both \\(\\$\\,\\, 1+2\\$\\) and \\(\\$1+2\\,\\,\\$\\) will display as text instead of math."
   },
   {
-    "objectID": "schedule.html#assignments-and-problem-sets",
-    "href": "schedule.html#assignments-and-problem-sets",
+    "objectID": "schedule.html",
+    "href": "schedule.html",
     "title": "Statistics 243 Fall 2022",
-    "section": "Assignments and problem sets",
-    "text": "Assignments and problem sets\nSubmit your solutions on Gradescope and (for problem sets but not assignments) via your Git repository.\n\n\n\nAssignment or PS\nDate\nTime\nNotes\n\n\n\n\nbash shell problems (first 10)\nFriday Sep. 2\n10 am\nI recomend you do at least some of the tutorial reading before class on Aug. 31\n\n\nPS 1 (HTML) (PDF)\nWednesday Sep. 7\n10 am\n\n\n\nregular expression reading and problems\nFriday Sep. 9\n10 am\n\n\n\nPS 2 (HTML) (PDF)\nFriday Sep. 16\n10 am\n\n\n\nPS 3 (HTML) (PDF)\nWednesday Sep. 28\n10 am"
+    "section": "",
+    "text": "Submit your solutions on Gradescope and (for problem sets but not assignments) via your Git repository.\n\n\n\nAssignment or PS\nDate\nTime\nNotes\n\n\n\n\nbash shell problems (first 10)\nFriday Sep. 2\n10 am\nI recomend you do at least some of the tutorial reading before class on Aug. 31\n\n\nPS 1 (HTML) (PDF)\nWednesday Sep. 7\n10 am\n\n\n\nregular expression reading and problems\nFriday Sep. 9\n10 am\n\n\n\nPS 2 (HTML) (PDF)\nFriday Sep. 16\n10 am\n\n\n\nPS 3 (HTML) (PDF)\nWednesday Sep. 28\n10 am"
   },
   {
     "objectID": "schedule.html#quiz-schedule",
@@ -389,7 +389,14 @@
     "href": "schedule.html#project-schedule",
     "title": "Statistics 243 Fall 2022",
     "section": "Project schedule",
-    "text": "Project schedule\nDue date: TBD, but due either the reading week or the exam week.\n\n\n\nWeek\nDay\nDate\nTime\nActivity/Assignment\n\n\n\n\n1\nThursday\n2022-08-25\n4:00-5:30 pm\nOptional: Introduction to LaTeX session run by the library (see Details below)\n\n\n\nFriday\n2022-08-26\nnoon\nRequired (part of your class participation): class survey\n\n\n\n\n\nnoon\nRequired: office hour time survey\n\n\n\n\n\nnoon\nRequired: Go to github.berkeley.edu and login with your Calnet credentials (that’s all – it will allow me to create your repository)\n\n\n\n\n\nnoon\nOptional: survey for time for extra R help session\n\n\n\n\n\nlab (1:00-4:30 pm)\nOptional: Lab 0 help session for software installation/setup and UNIX command line basics (see Details below)\n\n\n2\nMonday\n2022-08-29\n10 am\nRequired: read first three sections of Unit 2 (sections before ‘Webscraping’)\n\n\n\n\n\nnone\nOptional: work through the UNIX basics tutorial and answer (for yourself) the questions at the end\n\n\n\nTuesday\n2022-08-30\n4-6pm\nOptional: R help session (see Details below)\n\n\n\nFriday\n2022-09-02\n10 am\nRequired: Bash shell tutorial and exercises (see Details below)\n\n\n\n\n\nlab\nRequired: Lab 1 on using course tools and problem set submission (see Details below)\n\n\n3\nWednesday\n2022-09-07\n4:00-5:30 pm\nOptional: Introduction to LaTeX session run by the library (see Details below)\n\n\n\nWednesday\n2022-09-07\n10 am\nPS1 due\n\n\n\nFriday\n2022-09-09\n10 am\nRegular expression tutorial and exercises (see Details below)\n\n\n\n\n\nlab\nRequired: Lab 2 on assertions and testing"
+    "text": "Project schedule\nDue date: TBD, but due either the reading week or the exam week."
+  },
+  {
+    "objectID": "schedule.html#first-few-week-activities-and-assignments",
+    "href": "schedule.html#first-few-week-activities-and-assignments",
+    "title": "Statistics 243 Fall 2022",
+    "section": "First few week activities and assignments",
+    "text": "First few week activities and assignments\n\n\n\nWeek\nDay\nDate\nTime\nActivity/Assignment\n\n\n\n\n1\nThursday\n2022-08-25\n4:00-5:30 pm\nOptional: Introduction to LaTeX session run by the library (see Details below)\n\n\n\nFriday\n2022-08-26\nnoon\nRequired (part of your class participation): class survey\n\n\n\n\n\nnoon\nRequired: office hour time survey\n\n\n\n\n\nnoon\nRequired: Go to github.berkeley.edu and login with your Calnet credentials (that’s all – it will allow me to create your repository)\n\n\n\n\n\nnoon\nOptional: survey for time for extra R help session\n\n\n\n\n\nlab (1:00-4:30 pm)\nOptional: Lab 0 help session for software installation/setup and UNIX command line basics (see Details below)\n\n\n2\nMonday\n2022-08-29\n10 am\nRequired: read first three sections of Unit 2 (sections before ‘Webscraping’)\n\n\n\n\n\nnone\nOptional: work through the UNIX basics tutorial and answer (for yourself) the questions at the end\n\n\n\nTuesday\n2022-08-30\n4-6pm\nOptional: R help session (see Details below)\n\n\n\nFriday\n2022-09-02\n10 am\nRequired: Bash shell tutorial and exercises (see Details below)\n\n\n\n\n\nlab\nRequired: Lab 1 on using course tools and problem set submission (see Details below)\n\n\n3\nWednesday\n2022-09-07\n4:00-5:30 pm\nOptional: Introduction to LaTeX session run by the library (see Details below)\n\n\n\nWednesday\n2022-09-07\n10 am\nPS1 due\n\n\n\nFriday\n2022-09-09\n10 am\nRegular expression tutorial and exercises (see Details below)\n\n\n\n\n\nlab\nRequired: Lab 2 on assertions and testing"
   },
   {
     "objectID": "schedule.html#notes-on-assignments-and-activities",
