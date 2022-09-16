@@ -886,7 +886,7 @@ lm(formula = y ~ x)
 
 Coefficients:
 (Intercept)            x  
-    0.60736     -0.00193  </code></pre>
+      0.705       -0.457  </code></pre>
 </div>
 </div>
 </section>
@@ -1048,12 +1048,12 @@ y = x * 7.1;</code></pre>
 <div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>qs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> 2.5% 97.5% 
--1.93  1.95 </code></pre>
+-2.05  1.92 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a>qs[<span class="dv">1</span>] <span class="sc">+</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>2.5% 
-1.07 </code></pre>
+<pre><code> 2.5% 
+0.948 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="fu">object.size</span>(qs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1065,7 +1065,7 @@ y = x * 7.1;</code></pre>
 <div class="sourceCode cell-code" id="cb122"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(qs) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
 <span id="cb122-2"><a href="#cb122-2" aria-hidden="true" tabindex="-1"></a>qs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -1.93  1.95</code></pre>
+<pre><code>[1] -2.05  1.92</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb124"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="fu">object.size</span>(qs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1155,11 +1155,11 @@ Levels: a b c</code></pre>
 <span id="cb144-3"><a href="#cb144-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  label   val1   val2
-1     a  1.024  1.377
-2     a -0.020  1.067
-3     a  0.479  1.042
-4     a  0.343  0.499
-5     a -0.631 -0.437</code></pre>
+1     a -0.151  1.246
+2     a  0.410  0.279
+3     a -2.790 -1.313
+4     a -0.520 -1.100
+5     a -1.242 -0.623</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb146"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb146-1"><a href="#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Why does the following not work?</span></span>
 <span id="cb146-2"><a href="#cb146-2" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>( <span class="fu">apply</span>(df, <span class="dv">1</span>, <span class="cf">function</span>(x) x[<span class="dv">2</span>] <span class="sc">+</span> x[<span class="dv">3</span>]) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1169,7 +1169,7 @@ Levels: a b c</code></pre>
 <div class="sourceCode cell-code" id="cb148"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb148-1"><a href="#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Instead, this will work. Why?</span></span>
 <span id="cb148-2"><a href="#cb148-2" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(df[ , <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>], <span class="dv">1</span>, <span class="cf">function</span>(x) x[<span class="dv">1</span>] <span class="sc">+</span> x[<span class="dv">2</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1]  2.401  1.047  1.522  0.842 -1.067</code></pre>
+<pre><code>[1]  1.095  0.688 -4.102 -1.621 -1.865</code></pre>
 </div>
 </div>
 <p>Be careful of using factors as indices:</p>
@@ -1383,7 +1383,7 @@ Attaching package: 'dplyr'</code></pre>
 <span id="cb177-2"><a href="#cb177-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
- -1.432  -0.491   0.301   0.121   0.697   1.281 </code></pre>
+ -1.408  -0.883  -0.223  -0.225   0.612   0.734 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb179"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb179-1"><a href="#cb179-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>)</span>
 <span id="cb179-2"><a href="#cb179-2" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x)</span>
@@ -1395,16 +1395,16 @@ lm(formula = y ~ x)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--1.5136 -0.2940 -0.0757  0.4136  1.4296 
+-0.9226 -0.4383 -0.0527  0.3970  1.2605 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept)   -0.372      0.276   -1.35     0.22
-x             -0.173      0.342   -0.51     0.63
+(Intercept)  -0.0206     0.2388   -0.09     0.93
+x             0.3316     0.2860    1.16     0.28
 
-Residual standard error: 0.863 on 8 degrees of freedom
-Multiple R-squared:  0.0311,    Adjusted R-squared:  -0.09 
-F-statistic: 0.257 on 1 and 8 DF,  p-value: 0.626</code></pre>
+Residual standard error: 0.727 on 8 degrees of freedom
+Multiple R-squared:  0.144, Adjusted R-squared:  0.0369 
+F-statistic: 1.35 on 1 and 8 DF,  p-value: 0.28</code></pre>
 </div>
 </div>
 <p>Here <em>summary</em> is a generic function (or generic method) that, based on the type of object given to it (the first argument), dispatches a class-specific function (method) that operates on the object.</p>
@@ -1425,7 +1425,7 @@ F-statistic: 0.257 on 1 and 8 DF,  p-value: 0.626</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>function (object, ...) 
 UseMethod("summary")
-&lt;bytecode: 0x55b4218d5808&gt;
+&lt;bytecode: 0x55ebff7f1f58&gt;
 &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
@@ -1479,10 +1479,12 @@ see '?methods' for accessing help and source code</code></pre>
 <p>Let’s try this functionality out on our <em>bear</em> class.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb191"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb191-1"><a href="#cb191-1" aria-hidden="true" tabindex="-1"></a>summary.bear <span class="ot">&lt;-</span> <span class="cf">function</span>(object) </span>
-<span id="cb191-2"><a href="#cb191-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">with</span>(object, <span class="fu">cat</span>(<span class="st">"Bear of age "</span>, age, </span>
+<span id="cb191-2"><a href="#cb191-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">with</span>(object, <span class="fu">cat</span>(<span class="st">"Bear of age "</span>, age, </span>
 <span id="cb191-3"><a href="#cb191-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">" whose name is "</span>, firstname, <span class="st">" "</span>, surname, <span class="st">".</span><span class="sc">\n</span><span class="st">"</span>,</span>
-<span id="cb191-4"><a href="#cb191-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">sep =</span> <span class="st">""</span>)))</span>
-<span id="cb191-5"><a href="#cb191-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(yog)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb191-4"><a href="#cb191-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">sep =</span> <span class="st">""</span>))</span>
+<span id="cb191-5"><a href="#cb191-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">invisible</span>(<span class="cn">NULL</span>)</span>
+<span id="cb191-6"><a href="#cb191-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb191-7"><a href="#cb191-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(yog)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Bear of age 20 whose name is Yogi the Bear.</code></pre>
 </div>
@@ -1495,10 +1497,12 @@ see '?methods' for accessing help and source code</code></pre>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb194"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb194-1"><a href="#cb194-1" aria-hidden="true" tabindex="-1"></a>summarize.bear <span class="ot">&lt;-</span> <span class="cf">function</span>(object) </span>
-<span id="cb194-2"><a href="#cb194-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">with</span>(object, <span class="fu">cat</span>(<span class="st">"Bear of age "</span>, age, </span>
+<span id="cb194-2"><a href="#cb194-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">with</span>(object, <span class="fu">cat</span>(<span class="st">"Bear of age "</span>, age, </span>
 <span id="cb194-3"><a href="#cb194-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">" whose name is "</span>, firstname, <span class="st">" "</span>, surname, <span class="st">".</span><span class="sc">\n</span><span class="st">"</span>,</span>
-<span id="cb194-4"><a href="#cb194-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">sep =</span> <span class="st">""</span>)))</span>
-<span id="cb194-5"><a href="#cb194-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize</span>(yog)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb194-4"><a href="#cb194-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">sep =</span> <span class="st">""</span>))</span>
+<span id="cb194-5"><a href="#cb194-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">invisible</span>(<span class="cn">NULL</span>)</span>
+<span id="cb194-6"><a href="#cb194-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb194-7"><a href="#cb194-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize</span>(yog)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Bear of age 20 whose name is Yogi the Bear.</code></pre>
 </div>
@@ -1526,7 +1530,7 @@ lm(formula = y ~ x)
 
 Coefficients:
 (Intercept)            x  
-     -0.372       -0.173  </code></pre>
+    -0.0206       0.3316  </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb198"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb198-1"><a href="#cb198-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1536,7 +1540,7 @@ lm(formula = y ~ x)
 
 Coefficients:
 (Intercept)            x  
-     -0.372       -0.173  </code></pre>
+    -0.0206       0.3316  </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb200"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb200-1"><a href="#cb200-1" aria-hidden="true" tabindex="-1"></a>stats<span class="sc">:::</span><span class="fu">print.lm</span>(mod)  <span class="do">## print.lm is private to the stats namespace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1546,7 +1550,7 @@ lm(formula = y ~ x)
 
 Coefficients:
 (Intercept)            x  
-     -0.372       -0.173  </code></pre>
+    -0.0206       0.3316  </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb202"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb202-1"><a href="#cb202-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print.default(mod)   ## lots of output, so don't print in document...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1566,7 +1570,7 @@ Coefficients:
     cat("\n")
     invisible(x)
 }
-&lt;bytecode: 0x55b41a88ad70&gt;
+&lt;bytecode: 0x55ebf8792858&gt;
 &lt;environment: namespace:stats&gt;</code></pre>
 </div>
 </div>
@@ -1585,16 +1589,16 @@ lm(formula = y ~ x)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--1.5136 -0.2940 -0.0757  0.4136  1.4296 
+-0.9226 -0.4383 -0.0527  0.3970  1.2605 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept)   -0.372      0.276   -1.35     0.22
-x             -0.173      0.342   -0.51     0.63
+(Intercept)  -0.0206     0.2388   -0.09     0.93
+x             0.3316     0.2860    1.16     0.28
 
-Residual standard error: 0.863 on 8 degrees of freedom
-Multiple R-squared:  0.0311,    Adjusted R-squared:  -0.09 
-F-statistic: 0.257 on 1 and 8 DF,  p-value: 0.626</code></pre>
+Residual standard error: 0.727 on 8 degrees of freedom
+Multiple R-squared:  0.144, Adjusted R-squared:  0.0369 
+F-statistic: 1.35 on 1 and 8 DF,  p-value: 0.28</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb209"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb209-1"><a href="#cb209-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(out)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1604,16 +1608,16 @@ lm(formula = y ~ x)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--1.5136 -0.2940 -0.0757  0.4136  1.4296 
+-0.9226 -0.4383 -0.0527  0.3970  1.2605 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept)   -0.372      0.276   -1.35     0.22
-x             -0.173      0.342   -0.51     0.63
+(Intercept)  -0.0206     0.2388   -0.09     0.93
+x             0.3316     0.2860    1.16     0.28
 
-Residual standard error: 0.863 on 8 degrees of freedom
-Multiple R-squared:  0.0311,    Adjusted R-squared:  -0.09 
-F-statistic: 0.257 on 1 and 8 DF,  p-value: 0.626</code></pre>
+Residual standard error: 0.727 on 8 degrees of freedom
+Multiple R-squared:  0.144, Adjusted R-squared:  0.0369 
+F-statistic: 1.35 on 1 and 8 DF,  p-value: 0.28</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb211"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb211-1"><a href="#cb211-1" aria-hidden="true" tabindex="-1"></a><span class="do">## One can look at the code for the method (not shown):</span></span>
 <span id="cb211-2"><a href="#cb211-2" aria-hidden="true" tabindex="-1"></a><span class="do">## getS3method(f = "print", class = "summary.lm")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1657,32 +1661,32 @@ F-statistic: 0.257 on 1 and 8 DF,  p-value: 0.626</code></pre>
 <div class="sourceCode cell-code" id="cb222"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb222-1"><a href="#cb222-1" aria-hidden="true" tabindex="-1"></a><span class="fu">model.matrix</span>(mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   (Intercept)      x
-1            1  2.677
-2            1 -0.729
-3            1  1.031
-4            1 -0.671
-5            1  0.251
-6            1 -2.256
-7            1  0.730
-8            1  1.334
-9            1 -0.282
-10           1  0.610
+1            1 -1.315
+2            1  0.855
+3            1 -1.328
+4            1  1.226
+5            1  1.471
+6            1  0.337
+7            1 -1.041
+8            1  0.889
+9            1 -0.541
+10           1  0.377
 attr(,"assign")
 [1] 0 1</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb224"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb224-1"><a href="#cb224-1" aria-hidden="true" tabindex="-1"></a><span class="fu">model.matrix</span>(mod2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   (Intercept)      x
-1            1  2.677
-2            1 -0.729
-3            1  1.031
-4            1 -0.671
-5            1  0.251
-6            1 -2.256
-7            1  0.730
-8            1  1.334
-9            1 -0.282
-10           1  0.610
+1            1 -1.315
+2            1  0.855
+3            1 -1.328
+4            1  1.226
+5            1  1.471
+6            1  0.337
+7            1 -1.041
+8            1  0.889
+9            1 -0.541
+10           1  0.377
 attr(,"assign")
 [1] 0 1</code></pre>
 </div>
@@ -2296,7 +2300,7 @@ attr(,"class")
     }
     x
 }
-&lt;bytecode: 0x55b422330738&gt;
+&lt;bytecode: 0x55ec002455f8&gt;
 &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
@@ -2510,7 +2514,7 @@ NULL</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>function (x, ...) 
 UseMethod("quantile")
-&lt;bytecode: 0x55b41bfa41c8&gt;
+&lt;bytecode: 0x55ebf9eb91c8&gt;
 &lt;environment: namespace:stats&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb356"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb356-1"><a href="#cb356-1" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>(<span class="fu">quantile</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2748,7 +2752,7 @@ myCal(&amp;x)  # x itself will be modified</code></pre>
 <span id="cb392-2"><a href="#cb392-2" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(<span class="fu">mean</span>(<span class="fu">rnorm</span>(<span class="dv">1000000</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.055   0.004   0.058 </code></pre>
+  0.058   0.000   0.059 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb394"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb394-1"><a href="#cb394-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(<span class="fu">f</span>(<span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -2756,7 +2760,7 @@ myCal(&amp;x)  # x itself will be modified</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.000   0.000   0.001 </code></pre>
+  0.001   0.000   0.001 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb397"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb397-1"><a href="#cb397-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(<span class="fu">f</span>(<span class="fu">mean</span>(<span class="fu">rnorm</span>(<span class="dv">1000000</span>)))) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -2873,7 +2877,7 @@ myCal(&amp;x)  # x itself will be modified</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb407"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb407-1"><a href="#cb407-1" aria-hidden="true" tabindex="-1"></a><span class="fu">environment</span>(myfun)  <span class="co"># enclosing environment of h()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;environment: 0x55b426fc09e8&gt;</code></pre>
+<pre><code>&lt;environment: 0x55ec04f00088&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb409"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb409-1"><a href="#cb409-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>(<span class="fu">environment</span>(myfun)) <span class="co"># objects in that environment</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -2887,11 +2891,11 @@ myCal(&amp;x)  # x itself will be modified</code></pre>
 <span id="cb411-6"><a href="#cb411-6" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb411-7"><a href="#cb411-7" aria-hidden="true" tabindex="-1"></a>myfun <span class="ot">&lt;-</span> <span class="fu">fun_constructor</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;environment: 0x55b426afacc8&gt;</code></pre>
+<pre><code>&lt;environment: 0x55ec049fb9b8&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb413"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb413-1"><a href="#cb413-1" aria-hidden="true" tabindex="-1"></a><span class="fu">environment</span>(myfun)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;environment: 0x55b426afacc8&gt;</code></pre>
+<pre><code>&lt;environment: 0x55ec049fb9b8&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb415"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb415-1"><a href="#cb415-1" aria-hidden="true" tabindex="-1"></a><span class="fu">myfun</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -2905,7 +2909,7 @@ myCal(&amp;x)  # x itself will be modified</code></pre>
 <span id="cb419-2"><a href="#cb419-2" aria-hidden="true" tabindex="-1"></a><span class="fu">environment</span>(myfun)<span class="sc">$</span>g</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>function(x) x + y
-&lt;environment: 0x55b426afacc8&gt;</code></pre>
+&lt;environment: 0x55ec049fb9b8&gt;</code></pre>
 </div>
 </div>
 <p>Be careful when using variables from the enclosing environment as the value of that variable in the enclosing environment may well not be what you expect it to be. In general it’s bad practice to use variables that are taken from environments outside that of a function, but in some cases it can be useful. Here are some examples of using variables outside of the frame of a function.</p>
@@ -3101,7 +3105,7 @@ Attaching package: 'pryr'</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>   label                              name                 
 1  &lt;environment: namespace:stats&gt;     ""                   
-2  &lt;environment: 0x55b41a76cf68&gt;      "imports:stats"      
+2  &lt;environment: 0x55ebf8681f68&gt;      "imports:stats"      
 3  &lt;environment: namespace:base&gt;      ""                   
 4  &lt;environment: R_GlobalEnv&gt;         ""                   
 5  &lt;environment: package:pryr&gt;        "package:pryr"       
@@ -3112,7 +3116,7 @@ Attaching package: 'pryr'</code></pre>
 10 &lt;environment: package:spam&gt;        "package:spam"       
 11 &lt;environment: package:dplyr&gt;       "package:dplyr"      
 12 &lt;environment: package:stringr&gt;     "package:stringr"    
-13 &lt;environment: 0x55b41a4a06a0&gt;      "tools:quarto"       
+13 &lt;environment: 0x55ebf83b56a0&gt;      "tools:quarto"       
 14 &lt;environment: package:stats&gt;       "package:stats"      
 15 &lt;environment: package:graphics&gt;    "package:graphics"   
 16 &lt;environment: package:grDevices&gt;   "package:grDevices"  
@@ -3120,7 +3124,7 @@ Attaching package: 'pryr'</code></pre>
 18 &lt;environment: package:datasets&gt;    "package:datasets"   
 19 &lt;environment: package:SCF&gt;         "package:SCF"        
 20 &lt;environment: package:methods&gt;     "package:methods"    
-21 &lt;environment: 0x55b41a4cf510&gt;      "Autoloads"          
+21 &lt;environment: 0x55ebf83e4510&gt;      "Autoloads"          
 22 &lt;environment: base&gt;                ""                   
 23 &lt;environment: R_EmptyEnv&gt;          ""                   </code></pre>
 </div>
