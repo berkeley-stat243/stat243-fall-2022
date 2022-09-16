@@ -1,5 +1,29 @@
 ## First few week activities and assignments
 
+## Assignments and problem sets
+
+Submit your solutions on Gradescope and (for problem sets but not assignments) via your Git repository. 
+
+| Assignment or PS | Date | Time | Notes |
+|----|----|----|----|
+| [bash shell problems (first 10)](https://berkeley-scf.github.io/tutorial-using-bash/exercises) | Friday Sep. 2 | 10 am | I recomend you do at least some of the tutorial reading before class on Aug. 31 |
+| PS 1 [(HTML)](ps/ps1.html) [(PDF)](ps/ps1.pdf) | Wednesday Sep. 7 | 10 am | |
+| [regular expression reading and problems](https://www.gradescope.com/courses/425343/assignments/2227720)| Friday Sep. 9 | 10 am | |
+| PS 2 [(HTML)](ps/ps2.html) [(PDF)](ps/ps2.pdf) | Friday Sep. 16 | 10 am | |
+| PS 3 [(HTML)](ps/ps3.html) [(PDF)](ps/ps3.pdf) | Wednesday Sep. 28 | 10 am | |
+
+## Quiz schedule
+
+Quizzes are in-person only. 
+
+- Quiz 1: Monday October 24 in class.
+  - Review session Friday October 21 in Lab.
+- Quiz 2: Monday November 21 in class.
+  - Review session Friday November 18 in Lab.
+
+## Project schedule
+
+Due date: TBD, but due either the reading week or the exam week.
 
 | Week | Day    | Date       | Time | Activity/Assignment                                                                                                                          |
 |------|--------|------------|------|----------------------------------------------------------------------------------------------------------------------------------------------|
@@ -34,26 +58,3 @@ materials, so you could also use those resources. You should do this by the end 
 - **Lab 1**: (September 2) First section/lab on using Git, setting up your GitHub repository for problem sets, and using R Markdown/Quarto/knitr to generate dynamic documents. **Please come only to the section you are registered for given space limits in the room, unless you have talked with Chris and have his permission.** 
 - **Regular expression tutorial and exercises**: (by September 9), read the regular expression material in the [tutorial on using the bash shell](https://berkeley-scf.github.io/tutorial-using-bash/regex). Also read Section 1 of the 'basic text manipulation' page of the [string processing tutorial](https://berkeley-scf.github.io/tutorial-string-processing/basic-text-manipulation) (you can focus on Section 1.2 on stringr if you wish). Then answer the regular expressions (regex) [practice problems and submit your answers on Gradescope](https://www.gradescope.com/courses/425343/assignments/2227720). This is not one of the graded problem sets but rather an 'assignment' that will simply be noted as being completed or not.
 
-## Assignments and problem sets
-
-Submit your solutions on Gradescope and (for problem sets but not assignments) via your Git repository. 
-
-| Assignment or PS | Date | Time | Notes |
-|----|----|----|----|
-| [bash shell problems (first 10)](https://berkeley-scf.github.io/tutorial-using-bash/exercises) | Friday Sep. 2 | 10 am | I recomend you do at least some of the tutorial reading before class on Aug. 31 |
-| PS 1 [(HTML)](ps/ps1.html) [(PDF)](ps/ps1.pdf) | Wednesday Sep. 7 | 10 am | |
-| [regular expression reading and problems](https://www.gradescope.com/courses/425343/assignments/2227720)| Friday Sep. 9 | 10 am | |
-| PS 2 [(HTML)](ps/ps2.html) [(PDF)](ps/ps2.pdf) | Friday Sep. 16 | 10 am | |
-
-## Quiz schedule
-
-Quizzes are in-person only. 
-
-- Quiz 1: Monday October 24 in class.
-  - Review session Friday October 21 in Lab.
-- Quiz 2: Monday November 21 in class.
-  - Review session Friday November 18 in Lab.
-
-## Project schedule
-
-Due date: TBD, but due either the reading week or the exam week.
