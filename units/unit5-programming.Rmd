@@ -1198,7 +1198,7 @@ tsSimClass <- R6Class("tsSimClass",
             private$calcMats()
         },
         
-        changeTimes = function(newTimes) {
+        setTimes = function(newTimes) {
             private$times <- newTimes
             private$calcMats()
         },
@@ -1289,7 +1289,7 @@ mytsRef <- myts
 mytsFullCopy <- myts$clone()  
 
 ## Now let's change the values of a field
-myts$changeTimes(seq(0,1000, length = 100))
+myts$setTimes(seq(0,1000, length = 100))
 myts$getTimes()[1:5] 
 mytsRef$getTimes()[1:5] # the same as `myts`
 mytsFullCopy$getTimes()[1:5] # different from `myts`
