@@ -43,6 +43,8 @@ website:
           text: "Lab 1"
         - file: labs/02/assertionsAndTesting.Rmd
           text: "Lab 2"
+        - file: labs/03/reproducibility.md
+          text: "Lab 3"
     - id: howtos
       title: "How tos"
       contents:
