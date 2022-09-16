@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Andrew Vaughn">
-<meta name="dcterms.date" content="2022-09-02">
+<meta name="author" content="James Duncan">
+<meta name="dcterms.date" content="2022-09-16">
 
-<title>Statistics 243 Fall 2022 - R Markdown Template</title>
+<title>Statistics 243 Fall 2022 - Reproducibility discussion</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,69 +22,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -95,6 +32,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
+<link href="../../labs/02/assertionsAndTesting.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -124,12 +62,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   }
 }</script>
 
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-sidebar floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -245,24 +182,54 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Reproducibility discussion</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../labs/01/intro_git_knitr.html" class="sidebar-item-text sidebar-link">Lab 1</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../labs/02/assertionsAndTesting.html" class="sidebar-item-text sidebar-link">Lab 2</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../labs/03/reproducibility.html" class="sidebar-item-text sidebar-link active">Lab 3</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#problem-1" id="toc-problem-1" class="nav-link active" data-scroll-target="#problem-1">Problem 1</a>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#agenda" id="toc-agenda" class="nav-link" data-scroll-target="#agenda">Agenda</a>
   <ul class="collapse">
-  <li><a href="#sub-problem-1.1" id="toc-sub-problem-1.1" class="nav-link" data-scroll-target="#sub-problem-1.1">Sub Problem 1.1</a></li>
-  <li><a href="#sub-problem-1.2" id="toc-sub-problem-1.2" class="nav-link" data-scroll-target="#sub-problem-1.2">Sub Problem 1.2</a></li>
+  <li><a href="#make-small-groups" id="toc-make-small-groups" class="nav-link" data-scroll-target="#make-small-groups">Make small groups</a></li>
+  <li><a href="#general-discussion-in-small-groups" id="toc-general-discussion-in-small-groups" class="nav-link" data-scroll-target="#general-discussion-in-small-groups">General discussion in small groups</a></li>
+  <li><a href="#group-consensus-of-strengths-weaknesses" id="toc-group-consensus-of-strengths-weaknesses" class="nav-link" data-scroll-target="#group-consensus-of-strengths-weaknesses">Group consensus of strengths &amp; weaknesses</a></li>
+  <li><a href="#class-discussion" id="toc-class-discussion" class="nav-link" data-scroll-target="#class-discussion">Class discussion</a></li>
   </ul></li>
-  <li><a href="#problem-2" id="toc-problem-2" class="nav-link" data-scroll-target="#problem-2">Problem 2</a></li>
-  <li><a href="#problem-3" id="toc-problem-3" class="nav-link" data-scroll-target="#problem-3">Problem 3</a></li>
-  <li><a href="#problem-4" id="toc-problem-4" class="nav-link" data-scroll-target="#problem-4">Problem 4</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">Further reading</a></li>
   </ul>
 </nav>
     </div>
@@ -271,7 +238,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">R Markdown Template</h1>
+<h1 class="title d-none d-lg-block">Reproducibility discussion</h1>
 </div>
 
 
@@ -281,14 +248,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Andrew Vaughn </p>
+             <p>James Duncan </p>
           </div>
   </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 2, 2022</p>
+      <p class="date">September 16, 2022</p>
     </div>
   </div>
     
@@ -297,73 +264,79 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="problem-1" class="level2">
-<h2 class="anchored" data-anchor-id="problem-1">Problem 1</h2>
-<section id="sub-problem-1.1" class="level3">
-<h3 class="anchored" data-anchor-id="sub-problem-1.1">Sub Problem 1.1</h3>
-<p>I am going to show some code in R that performs matrix multiplication of a <span class="math inline">\(2 \times 3\)</span> matrix <span class="math inline">\(A\)</span> and a <span class="math inline">\(3 \times 4\)</span> matrix <span class="math inline">\(B\)</span>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#We first set our random seed</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2021</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Let's create A as a matrix of standard normal random variates</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>A <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">6</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">3</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#We'll create B as a matrix of variates from a normal distribution</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#with mean 0 and a standard deviation of 2</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>B <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">12</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">2</span>), <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">4</span>)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">#Now, we will print A, B, and the matrix product AB</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>A</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>           [,1]      [,2]       [,3]
-[1,] -0.1224600 0.3486495  0.8980537
-[2,]  0.5524566 0.3596322 -1.9225695</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>B</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>           [,1]       [,2]      [,3]      [,4]
-[1,] 0.52348873  3.4599263 0.3639908 -3.682951
-[2,] 1.83113274 -2.1644097 3.0170836  3.246620
-[3,] 0.02754388 -0.5456504 3.2089402  0.262778</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>A<span class="sc">%*%</span>B</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>          [,1]      [,2]      [,3]      [,4]
-[1,] 0.5990530 -1.668346  3.889131  1.818936
-[2,] 0.8947842  2.182118 -4.883281 -1.372290</code></pre>
-</div>
-</div>
-<p>We can even put in some text here and refer to the matrices <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> from a subsequent code block. In other words, code in a certain block can refer to results from earlier code blocks.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(A[<span class="dv">1</span>,<span class="dv">1</span>] <span class="sc">+</span> B[<span class="dv">2</span>,<span class="dv">3</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.894624</code></pre>
-</div>
-</div>
+<section id="overview" class="level1">
+<h1>Overview</h1>
+<p>Today we’ll discuss reproducibility in small groups and as a class, using the paper “A Cohort Location Model of Household Sorting in US Metropolitan Regions” as a case study.</p>
+<p>Please open up the <a href="https://journals.sagepub.com/doi/full/10.1177/0042098016668783">paper</a> and corresponding <a href="https://github.com/andykrause/hhLocation">code</a>.</p>
 </section>
-<section id="sub-problem-1.2" class="level3">
-<h3 class="anchored" data-anchor-id="sub-problem-1.2">Sub Problem 1.2</h3>
-<p>Note that we can also use LaTeX’s display mode:</p>
-<p><span class="math display">\[e^{i\pi}+1=0\]</span></p>
+<section id="agenda" class="level1">
+<h1>Agenda</h1>
+<section id="make-small-groups" class="level2">
+<h2 class="anchored" data-anchor-id="make-small-groups">Make small groups</h2>
+<p><em>&lt; 5 minutes</em></p>
+<p>Form a group with the 3–4 people sitting nearest to you, turning your desks toward one another.</p>
+<p>A different person should take each of the following roles:</p>
+<ul>
+<li><p><strong>General discussion leader</strong>: Leads the first 15 minutes discussion. You’ll keep the discussion moving and try to encourage contributions from all members of your group.</p></li>
+<li><p><strong>Group consensus leader</strong>: You’ll keep track of the group discussion of strengths and weaknesses and break any ties in the final consensus.</p></li>
+<li><p><strong>Strengths representative</strong>: During the class discussion at the end, you’ll give one of the strengths from your group’s list, and say any differences in your group’s ranking vs.&nbsp;what we currently have on the board.</p></li>
+<li><p><strong>Weakness representative</strong>: During the class discussion at the end, you’ll give one of the weaknesses from your group’s list, and say any differences in your group’s ranking vs.&nbsp;what we currently have on the board.</p></li>
+</ul>
+<p>If you only have 3 people, then one person should serve as the representative for both the strengths and weaknesses.</p>
+</section>
+<section id="general-discussion-in-small-groups" class="level2">
+<h2 class="anchored" data-anchor-id="general-discussion-in-small-groups">General discussion in small groups</h2>
+<p><em>10–15 minutes</em></p>
+<p>Please discuss each of the following together:</p>
+<ul>
+<li><p>From the paper and documentation on GitHub provided by the authors, try to find where the authors carried out each of the following in their code (or if they did at all):</p>
+<ul>
+<li>data collection</li>
+<li>data cleaning / processing</li>
+<li>statistical calculations</li>
+<li>visualizations from the paper</li>
+</ul></li>
+<li><p>In terms of their coding, what elements of their project do you like. Consider:</p>
+<ul>
+<li>documentation</li>
+<li>comments</li>
+<li>organization</li>
+<li>naming</li>
+<li>workflow</li>
+<li>data provenance</li>
+<li>etc.</li>
+</ul></li>
+<li><p>What aspects of their code do you think could be improved?</p></li>
+<li><p>Without looking at the code itself, can you tell what the purpose of each file is?</p></li>
+<li><p>Without looking at the code in detail, can you quickly tell what each block of code does?</p></li>
+<li><p>Are there any exceptions to your answers above?</p></li>
+<li><p>In what way do the authors document their workflow? Is it effective?</p></li>
+<li><p>Take note of any judgment calls you noticed in their workflow. Are those judgment calls documented and/or justified in their code?</p></li>
+</ul>
+</section>
+<section id="group-consensus-of-strengths-weaknesses" class="level2">
+<h2 class="anchored" data-anchor-id="group-consensus-of-strengths-weaknesses">Group consensus of strengths &amp; weaknesses</h2>
+<p><em>10–15 minutes</em></p>
+<p>As a group, come to a consensus on the most important strengths and weaknesses of the reproducibility aspects of the paper, and rank each category separately from most important to least.</p>
+<p>These should be succinct enough to write on the board later, so please write them down and keep them short and specific. Try to come up with 4–5 for each.</p>
+</section>
+<section id="class-discussion" class="level2">
+<h2 class="anchored" data-anchor-id="class-discussion">Class discussion</h2>
+<p><em>10–15 minutes</em></p>
+<p>As a class, we’ll discuss the strengths and weaknesses and find the overall consensus. Please pick two representatives from your group, one for strengths and one for weaknesses.</p>
 </section>
 </section>
-<section id="problem-2" class="level2">
-<h2 class="anchored" data-anchor-id="problem-2">Problem 2</h2>
-<p>For calculations we do not actually want to run, we can set <span class="math inline">\(eval=F\)</span> at the beginning of the R block.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">10</span><span class="sc">^</span>(<span class="dv">10</span><span class="sc">^</span><span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="problem-3" class="level2">
-<h2 class="anchored" data-anchor-id="problem-3">Problem 3</h2>
-<p>Note as a formatting guide that as in standard LaTeX multiple consecutive spaces are treated as only one space and that single newlines are treated as spaces. Multiple newlines</p>
-<p>are treated as one newline.</p>
-</section>
-<section id="problem-4" class="level2">
-<h2 class="anchored" data-anchor-id="problem-4">Problem 4</h2>
-<p>Also note that you should not add spaces directly after the opening <span class="math inline">\(\$\)</span> of a mathematical expression or directly before the closing <span class="math inline">\(\$\)</span> of a mathematical expression. For example, <span class="math inline">\(\$1+2 \$\)</span> will display correctly but both <span class="math inline">\(\$\,\, 1+2\$\)</span> and <span class="math inline">\(\$1+2\,\,\$\)</span> will display as text instead of math.</p>
+<section id="further-reading" class="level1">
+<h1>Further reading</h1>
+<p>Reproducibility is a crucial component of statistical computing and good (data) science, as well as something that you can work to continuously improve in your own practice. I encourage you to take a look at the resources and tools below and to find ways to incorporate reproducibility best practices into your everyday workflow:</p>
+<ul>
+<li>UC Berkeley Library guide on <a href="https://guides.lib.berkeley.edu/reproducibility-guide">Reproducible Research Practices</a></li>
+<li>UC Santa Barbara’s <a href="https://carpentries-incubator.github.io/Reproducible-Publications-with-RStudio">Introduction to Reproducible Publications with RStudio</a> (currently in alpha) – materials from a Nov.&nbsp;2022 workshop on reproducible research.</li>
+<li><a href="https://www.tandfonline.com/doi/full/10.1080/00031305.2017.1375986">“Packaging Data Analytical Work Reproducibly Using R (and Friends)”</a> – example reproducible project structure, tailored to R projects.</li>
+<li><a href="https://github.com/rlbarter/reproducibility-workflow">“Reproducbility workflow”</a>, Rebecca Barter (Berkeley Statistics PhD alum and postdoc) – another example project structure you might find useful.</li>
+<li><a href="https://rstudio.github.io/renv/articles/renv.html"><code>renv</code></a> – an R package for managing project-local R dependencies (e.g., libraries and other R packages).</li>
+<li><a href="https://cran.r-project.org/web/views/ReproducibleResearch.html">CRAN Task View: Reproducible Research</a> – compilation of R packages related to</li>
+</ul>
 
 
 </section>
@@ -467,6 +440,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../labs/02/assertionsAndTesting.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lab 2</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
 </div> <!-- /content -->
 
 
