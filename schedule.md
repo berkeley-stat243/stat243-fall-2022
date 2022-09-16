@@ -1,5 +1,3 @@
-## First few week activities and assignments
-
 ## Assignments and problem sets
 
 Submit your solutions on Gradescope and (for problem sets but not assignments) via your Git repository. 
@@ -24,6 +22,8 @@ Quizzes are in-person only.
 ## Project schedule
 
 Due date: TBD, but due either the reading week or the exam week.
+
+## First few week activities and assignments
 
 | Week | Day    | Date       | Time | Activity/Assignment                                                                                                                          |
 |------|--------|------------|------|----------------------------------------------------------------------------------------------------------------------------------------------|
