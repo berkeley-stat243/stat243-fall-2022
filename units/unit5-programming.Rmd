@@ -44,7 +44,9 @@ can use for reference if you want to. Note that I've reorganized the material in
 3. Type/class coercion
 4. Object-oriented programming - S3 classes
 5. Object-oriented programming - R6 classes
-
+6. Nested function calls and the call stack
+7. Operators in R
+8. Unexpected functions and replacement functions
 
 # Overview
 

@@ -1,6 +1,6 @@
 ## @knitr download
 
-moderators <- c("HOLT", "SCHIEFFER", "SCHIEFFER", "LEHRER", "MODERATOR", "WALLACE")
+moderators <- c("MODERATOR", "SCHIEFFER", "SCHIEFFER", "LEHRER", "HOLT", "WALLACE")
 
 candidates <- list(c(Dem = "GORE", Rep = "BUSH"),
                    c(Dem = "KERRY", Rep = "BUSH"),
@@ -53,10 +53,10 @@ get_content <- function(html) {
     return(text)
 }
 
-debates_body <- sapply(debates_html, get_content)
+debates_bodies <- sapply(debates_html, get_content)
 
 ## sanity checks
-print(substring(debates_body[1], 1, 1000))
-print(substring(debates_body[6], 1, 1000))
-lengths <- sapply(debates_body, nchar, USE.NAMES = FALSE)
+print(substring(debates_bodies[1], 1, 1000))
+print(substring(debates_bodies[6], 1, 1000))
+lengths <- sapply(debates_bodies, nchar, USE.NAMES = FALSE)
 assert_that(min(lengths) > 70000 && max(lengths) < 120000)
