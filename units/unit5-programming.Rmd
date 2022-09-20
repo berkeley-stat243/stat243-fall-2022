@@ -2101,7 +2101,8 @@ difficult to reason about code that uses pass-by-reference because
 effects of calling a function can be hidden inside the function.
 Thus pass-by-value is directly related to functional programming.
 
-Arrays in Python are pass-by-reference (but tuples are not, as they are immutable).
+Arrays in Python are pass-by-reference (but note that tuples are immutable, 
+so one could not modify a tuple that is passed as an argument).
 
 ```{python}
 def myfun(x):
@@ -2234,9 +2235,7 @@ f <- function(a, b = d) {
 	return(a*b)
 }
 
-f(5)
-
-d <- 100
+b <- 100
 f(5)
 ```
 
