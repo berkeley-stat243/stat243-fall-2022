@@ -23,7 +23,7 @@ execute:
 
 > **Note**
 > This Unit will be posted in phases as I get the material ready.
-> 2022-09-15: Currently only Sections 1-7 are available.
+> 2022-09-21: Currently only Sections 1-8 are available.
 
 
 References:
@@ -2204,9 +2204,10 @@ are several work-arounds:
 ### Promises and lazy evaluation
 
 In actuality, R is not quite pass-by-value; rather it is
-*call-by-value*. Copying of arguments is delayed in two ways. The first
-is the idea of promises and lazy evaluation, described here. The second
-is the idea of *copy-on-change*, described in more detail later. Basically, with copy-on-change,
+*call-by-value*. Copying of arguments is delayed in two ways:
+
+  - The first is the idea of *promises*, described next. Promises are an example of a general programming concept called *lazy evaluation*.
+  - The second is the idea of *copy-on-modify*, described in more detail later. Basically, with copy-on-modify,
 copies of arguments are only made if the argument is changed within the
 function. Until then the object in the function just refers back to the
 original object.
@@ -2570,7 +2571,6 @@ and the empty environment.
 
 # 8. Memory and copies
 
-Under construction.
 
 # 9. Efficiency
 
