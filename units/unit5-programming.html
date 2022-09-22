@@ -125,6 +125,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   }
 }</script>
 
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -388,7 +389,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#environments-and-the-search-path" id="toc-environments-and-the-search-path" class="nav-link" data-scroll-target="#environments-and-the-search-path">Environments and the search path</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#memory-and-copies" id="toc-memory-and-copies" class="nav-link" data-scroll-target="#memory-and-copies">8. Memory and copies</a></li>
+  <li><a href="#memory-and-copies" id="toc-memory-and-copies" class="nav-link" data-scroll-target="#memory-and-copies">8. Memory and copies</a>
+  <ul class="collapse">
+  <li><a href="#overview-2" id="toc-overview-2" class="nav-link" data-scroll-target="#overview-2">Overview</a>
+  <ul class="collapse">
+  <li><a href="#allocating-and-freeing-memory" id="toc-allocating-and-freeing-memory" class="nav-link" data-scroll-target="#allocating-and-freeing-memory">Allocating and freeing memory</a></li>
+  <li><a href="#the-heap-and-the-stack" id="toc-the-heap-and-the-stack" class="nav-link" data-scroll-target="#the-heap-and-the-stack">The heap and the stack</a></li>
+  </ul></li>
+  <li><a href="#monitoring-memory-use" id="toc-monitoring-memory-use" class="nav-link" data-scroll-target="#monitoring-memory-use">Monitoring memory use</a>
+  <ul class="collapse">
+  <li><a href="#monitoring-overall-memory-use-on-a-unix-style-computer" id="toc-monitoring-overall-memory-use-on-a-unix-style-computer" class="nav-link" data-scroll-target="#monitoring-overall-memory-use-on-a-unix-style-computer">Monitoring overall memory use on a UNIX-style computer</a></li>
+  <li><a href="#monitoring-memory-use-in-r" id="toc-monitoring-memory-use-in-r" class="nav-link" data-scroll-target="#monitoring-memory-use-in-r">Monitoring memory use in R</a></li>
+  </ul></li>
+  <li><a href="#how-memory-is-used-in-r" id="toc-how-memory-is-used-in-r" class="nav-link" data-scroll-target="#how-memory-is-used-in-r">How memory is used in R</a>
+  <ul class="collapse">
+  <li><a href="#a-secret-weapon-inspect" id="toc-a-secret-weapon-inspect" class="nav-link" data-scroll-target="#a-secret-weapon-inspect">A secret weapon: <code>inspect</code></a></li>
+  <li><a href="#memory-use-in-specific-circumstances" id="toc-memory-use-in-specific-circumstances" class="nav-link" data-scroll-target="#memory-use-in-specific-circumstances">Memory use in specific circumstances</a></li>
+  <li><a href="#copy-on-modify" id="toc-copy-on-modify" class="nav-link" data-scroll-target="#copy-on-modify">Copy-on-modify</a></li>
+  </ul></li>
+  <li><a href="#strategies-for-saving-memory" id="toc-strategies-for-saving-memory" class="nav-link" data-scroll-target="#strategies-for-saving-memory">Strategies for saving memory</a></li>
+  <li><a href="#example-1" id="toc-example-1" class="nav-link" data-scroll-target="#example-1">Example</a></li>
+  </ul></li>
   <li><a href="#efficiency" id="toc-efficiency" class="nav-link" data-scroll-target="#efficiency">9. Efficiency</a></li>
   <li><a href="#computing-on-the-language-optional" id="toc-computing-on-the-language-optional" class="nav-link" data-scroll-target="#computing-on-the-language-optional">10. Computing on the language (optional)</a></li>
   </ul>
@@ -445,6 +466,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Nested function calls and the call stack</li>
 <li>Operators in R</li>
 <li>Unexpected functions and replacement functions</li>
+<li>Memory and copying</li>
 </ol>
 <section id="overview" class="level1">
 <h1>Overview</h1>
@@ -893,7 +915,7 @@ lm(formula = y ~ x)
 
 Coefficients:
 (Intercept)            x  
-     0.5566      -0.0397  </code></pre>
+      0.555       -0.208  </code></pre>
 </div>
 </div>
 </section>
@@ -1055,12 +1077,12 @@ y = x * 7.1;</code></pre>
 <div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>qs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> 2.5% 97.5% 
--1.99  2.00 </code></pre>
+-2.00  1.94 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a>qs[<span class="dv">1</span>] <span class="sc">+</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>2.5% 
-1.01 </code></pre>
+<pre><code> 2.5% 
+0.997 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="fu">object.size</span>(qs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1072,7 +1094,7 @@ y = x * 7.1;</code></pre>
 <div class="sourceCode cell-code" id="cb122"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(qs) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
 <span id="cb122-2"><a href="#cb122-2" aria-hidden="true" tabindex="-1"></a>qs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -1.99  2.00</code></pre>
+<pre><code>[1] -2.00  1.94</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb124"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="fu">object.size</span>(qs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1162,11 +1184,11 @@ Levels: a b c</code></pre>
 <span id="cb144-3"><a href="#cb144-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  label   val1   val2
-1     a -1.772 -0.375
-2     a -0.731  0.473
-3     a  0.103 -0.949
-4     a -1.117 -0.798
-5     a -0.550  1.231</code></pre>
+1     a -0.754 -0.411
+2     a  1.368 -0.343
+3     a -0.434  0.343
+4     a -0.741 -1.561
+5     a -0.180 -0.498</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb146"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb146-1"><a href="#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Why does the following not work?</span></span>
 <span id="cb146-2"><a href="#cb146-2" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>( <span class="fu">apply</span>(df, <span class="dv">1</span>, <span class="cf">function</span>(x) x[<span class="dv">2</span>] <span class="sc">+</span> x[<span class="dv">3</span>]) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1176,7 +1198,7 @@ Levels: a b c</code></pre>
 <div class="sourceCode cell-code" id="cb148"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb148-1"><a href="#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Instead, this will work. Why?</span></span>
 <span id="cb148-2"><a href="#cb148-2" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(df[ , <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>], <span class="dv">1</span>, <span class="cf">function</span>(x) x[<span class="dv">1</span>] <span class="sc">+</span> x[<span class="dv">2</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -2.147 -0.259 -0.846 -1.915  0.681</code></pre>
+<pre><code>[1] -1.1656  1.0253 -0.0909 -2.3021 -0.6787</code></pre>
 </div>
 </div>
 <p>Be careful of using factors as indices:</p>
@@ -1390,7 +1412,7 @@ Attaching package: 'dplyr'</code></pre>
 <span id="cb177-2"><a href="#cb177-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
- -1.491  -1.179  -0.161  -0.278   0.272   1.911 </code></pre>
+ -1.394  -1.052   0.103  -0.090   0.673   1.052 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb179"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb179-1"><a href="#cb179-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>)</span>
 <span id="cb179-2"><a href="#cb179-2" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x)</span>
@@ -1402,16 +1424,16 @@ lm(formula = y ~ x)
 
 Residuals:
    Min     1Q Median     3Q    Max 
--1.657 -1.110  0.125  0.721  2.091 
+-1.727 -0.520 -0.127  0.274  2.397 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept)    0.298      0.426    0.70     0.50
-x             -0.471      0.412   -1.14     0.29
+(Intercept)   -0.152      0.370   -0.41     0.69
+x             -0.384      0.399   -0.96     0.36
 
-Residual standard error: 1.3 on 8 degrees of freedom
-Multiple R-squared:  0.14,  Adjusted R-squared:  0.0329 
-F-statistic: 1.31 on 1 and 8 DF,  p-value: 0.286</code></pre>
+Residual standard error: 1.16 on 8 degrees of freedom
+Multiple R-squared:  0.104, Adjusted R-squared:  -0.00851 
+F-statistic: 0.924 on 1 and 8 DF,  p-value: 0.365</code></pre>
 </div>
 </div>
 <p>Here <em>summary</em> is a generic function (or generic method) that, based on the type of object given to it (the first argument), dispatches a class-specific function (method) that operates on the object.</p>
@@ -1432,7 +1454,7 @@ F-statistic: 1.31 on 1 and 8 DF,  p-value: 0.286</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>function (object, ...) 
 UseMethod("summary")
-&lt;bytecode: 0x55d1bcc6da38&gt;
+&lt;bytecode: 0x563f9dfd7810&gt;
 &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
@@ -1537,7 +1559,7 @@ lm(formula = y ~ x)
 
 Coefficients:
 (Intercept)            x  
-      0.298       -0.471  </code></pre>
+     -0.152       -0.384  </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb198"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb198-1"><a href="#cb198-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1547,7 +1569,7 @@ lm(formula = y ~ x)
 
 Coefficients:
 (Intercept)            x  
-      0.298       -0.471  </code></pre>
+     -0.152       -0.384  </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb200"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb200-1"><a href="#cb200-1" aria-hidden="true" tabindex="-1"></a>stats<span class="sc">:::</span><span class="fu">print.lm</span>(mod)  <span class="do">## print.lm is private to the stats namespace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1557,7 +1579,7 @@ lm(formula = y ~ x)
 
 Coefficients:
 (Intercept)            x  
-      0.298       -0.471  </code></pre>
+     -0.152       -0.384  </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb202"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb202-1"><a href="#cb202-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print.default(mod)   ## lots of output, so don't print in document...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1577,7 +1599,7 @@ Coefficients:
     cat("\n")
     invisible(x)
 }
-&lt;bytecode: 0x55d1b5bf24d8&gt;
+&lt;bytecode: 0x563f99ee4aa0&gt;
 &lt;environment: namespace:stats&gt;</code></pre>
 </div>
 </div>
@@ -1596,16 +1618,16 @@ lm(formula = y ~ x)
 
 Residuals:
    Min     1Q Median     3Q    Max 
--1.657 -1.110  0.125  0.721  2.091 
+-1.727 -0.520 -0.127  0.274  2.397 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept)    0.298      0.426    0.70     0.50
-x             -0.471      0.412   -1.14     0.29
+(Intercept)   -0.152      0.370   -0.41     0.69
+x             -0.384      0.399   -0.96     0.36
 
-Residual standard error: 1.3 on 8 degrees of freedom
-Multiple R-squared:  0.14,  Adjusted R-squared:  0.0329 
-F-statistic: 1.31 on 1 and 8 DF,  p-value: 0.286</code></pre>
+Residual standard error: 1.16 on 8 degrees of freedom
+Multiple R-squared:  0.104, Adjusted R-squared:  -0.00851 
+F-statistic: 0.924 on 1 and 8 DF,  p-value: 0.365</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb209"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb209-1"><a href="#cb209-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(out)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1615,16 +1637,16 @@ lm(formula = y ~ x)
 
 Residuals:
    Min     1Q Median     3Q    Max 
--1.657 -1.110  0.125  0.721  2.091 
+-1.727 -0.520 -0.127  0.274  2.397 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept)    0.298      0.426    0.70     0.50
-x             -0.471      0.412   -1.14     0.29
+(Intercept)   -0.152      0.370   -0.41     0.69
+x             -0.384      0.399   -0.96     0.36
 
-Residual standard error: 1.3 on 8 degrees of freedom
-Multiple R-squared:  0.14,  Adjusted R-squared:  0.0329 
-F-statistic: 1.31 on 1 and 8 DF,  p-value: 0.286</code></pre>
+Residual standard error: 1.16 on 8 degrees of freedom
+Multiple R-squared:  0.104, Adjusted R-squared:  -0.00851 
+F-statistic: 0.924 on 1 and 8 DF,  p-value: 0.365</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb211"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb211-1"><a href="#cb211-1" aria-hidden="true" tabindex="-1"></a><span class="do">## One can look at the code for the method (not shown):</span></span>
 <span id="cb211-2"><a href="#cb211-2" aria-hidden="true" tabindex="-1"></a><span class="do">## getS3method(f = "print", class = "summary.lm")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1668,32 +1690,32 @@ F-statistic: 1.31 on 1 and 8 DF,  p-value: 0.286</code></pre>
 <div class="sourceCode cell-code" id="cb222"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb222-1"><a href="#cb222-1" aria-hidden="true" tabindex="-1"></a><span class="fu">model.matrix</span>(mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   (Intercept)      x
-1            1  0.036
-2            1  0.547
-3            1  0.491
-4            1 -0.393
-5            1 -0.626
-6            1 -0.369
-7            1  2.610
-8            1 -1.385
-9            1  0.267
-10           1 -0.723
+1            1 -1.534
+2            1  1.413
+3            1  0.197
+4            1  0.411
+5            1 -0.557
+6            1 -0.267
+7            1 -0.302
+8            1  1.942
+9            1  0.627
+10           1  0.232
 attr(,"assign")
 [1] 0 1</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb224"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb224-1"><a href="#cb224-1" aria-hidden="true" tabindex="-1"></a><span class="fu">model.matrix</span>(mod2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   (Intercept)      x
-1            1  0.036
-2            1  0.547
-3            1  0.491
-4            1 -0.393
-5            1 -0.626
-6            1 -0.369
-7            1  2.610
-8            1 -1.385
-9            1  0.267
-10           1 -0.723
+1            1 -1.534
+2            1  1.413
+3            1  0.197
+4            1  0.411
+5            1 -0.557
+6            1 -0.267
+7            1 -0.302
+8            1  1.942
+9            1  0.627
+10           1  0.232
 attr(,"assign")
 [1] 0 1</code></pre>
 </div>
@@ -2307,7 +2329,7 @@ attr(,"class")
     }
     x
 }
-&lt;bytecode: 0x55d1bd6a6748&gt;
+&lt;bytecode: 0x563f9e90bac8&gt;
 &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
@@ -2521,7 +2543,7 @@ NULL</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>function (x, ...) 
 UseMethod("quantile")
-&lt;bytecode: 0x55d1b73111c8&gt;
+&lt;bytecode: 0x563f984be1c8&gt;
 &lt;environment: namespace:stats&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb356"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb356-1"><a href="#cb356-1" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>(<span class="fu">quantile</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2763,7 +2785,7 @@ myCal(&amp;x)  # x itself will be modified</code></pre>
 <span id="cb392-2"><a href="#cb392-2" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(<span class="fu">mean</span>(<span class="fu">rnorm</span>(<span class="dv">1000000</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.061   0.000   0.062 </code></pre>
+  0.058   0.000   0.059 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb394"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb394-1"><a href="#cb394-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(<span class="fu">f</span>(<span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -2771,7 +2793,7 @@ myCal(&amp;x)  # x itself will be modified</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.000   0.000   0.001 </code></pre>
+  0.001   0.000   0.000 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb397"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb397-1"><a href="#cb397-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(<span class="fu">f</span>(<span class="fu">mean</span>(<span class="fu">rnorm</span>(<span class="dv">1000000</span>)))) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -2779,7 +2801,7 @@ myCal(&amp;x)  # x itself will be modified</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.001   0.000   0.001 </code></pre>
+  0.001   0.000   0.002 </code></pre>
 </div>
 </div>
 <p>Here’s an even stranger situation. Do you think the following code will run?</p>
@@ -2886,7 +2908,7 @@ myCal(&amp;x)  # x itself will be modified</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb407"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb407-1"><a href="#cb407-1" aria-hidden="true" tabindex="-1"></a><span class="fu">environment</span>(myfun)  <span class="co"># enclosing environment of h()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;environment: 0x55d1c2349910&gt;</code></pre>
+<pre><code>&lt;environment: 0x563fa34d5720&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb409"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb409-1"><a href="#cb409-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>(<span class="fu">environment</span>(myfun)) <span class="co"># objects in that environment</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -2900,11 +2922,11 @@ myCal(&amp;x)  # x itself will be modified</code></pre>
 <span id="cb411-6"><a href="#cb411-6" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb411-7"><a href="#cb411-7" aria-hidden="true" tabindex="-1"></a>myfun <span class="ot">&lt;-</span> <span class="fu">fun_constructor</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;environment: 0x55d1c1e49070&gt;</code></pre>
+<pre><code>&lt;environment: 0x563fa25c1a40&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb413"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb413-1"><a href="#cb413-1" aria-hidden="true" tabindex="-1"></a><span class="fu">environment</span>(myfun)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;environment: 0x55d1c1e49070&gt;</code></pre>
+<pre><code>&lt;environment: 0x563fa25c1a40&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb415"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb415-1"><a href="#cb415-1" aria-hidden="true" tabindex="-1"></a><span class="fu">myfun</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -2918,7 +2940,7 @@ myCal(&amp;x)  # x itself will be modified</code></pre>
 <span id="cb419-2"><a href="#cb419-2" aria-hidden="true" tabindex="-1"></a><span class="fu">environment</span>(myfun)<span class="sc">$</span>g</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>function(x) x + y
-&lt;environment: 0x55d1c1e49070&gt;</code></pre>
+&lt;environment: 0x563fa25c1a40&gt;</code></pre>
 </div>
 </div>
 <p>Be careful when using variables from the enclosing environment as the value of that variable in the enclosing environment may well not be what you expect it to be. In general it’s bad practice to use variables that are taken from environments outside that of a function, but in some cases it can be useful. Here are some examples of using variables outside of the frame of a function.</p>
@@ -3114,7 +3136,7 @@ Attaching package: 'pryr'</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>   label                              name                 
 1  &lt;environment: namespace:stats&gt;     ""                   
-2  &lt;environment: 0x55d1b5ad9f68&gt;      "imports:stats"      
+2  &lt;environment: 0x563f96c86f68&gt;      "imports:stats"      
 3  &lt;environment: namespace:base&gt;      ""                   
 4  &lt;environment: R_GlobalEnv&gt;         ""                   
 5  &lt;environment: package:pryr&gt;        "package:pryr"       
@@ -3125,7 +3147,7 @@ Attaching package: 'pryr'</code></pre>
 10 &lt;environment: package:spam&gt;        "package:spam"       
 11 &lt;environment: package:dplyr&gt;       "package:dplyr"      
 12 &lt;environment: package:stringr&gt;     "package:stringr"    
-13 &lt;environment: 0x55d1b5818580&gt;      "tools:quarto"       
+13 &lt;environment: 0x563f969c5580&gt;      "tools:quarto"       
 14 &lt;environment: package:stats&gt;       "package:stats"      
 15 &lt;environment: package:graphics&gt;    "package:graphics"   
 16 &lt;environment: package:grDevices&gt;   "package:grDevices"  
@@ -3133,7 +3155,7 @@ Attaching package: 'pryr'</code></pre>
 18 &lt;environment: package:datasets&gt;    "package:datasets"   
 19 &lt;environment: package:SCF&gt;         "package:SCF"        
 20 &lt;environment: package:methods&gt;     "package:methods"    
-21 &lt;environment: 0x55d1b583c510&gt;      "Autoloads"          
+21 &lt;environment: 0x563f969e9510&gt;      "Autoloads"          
 22 &lt;environment: base&gt;                ""                   
 23 &lt;environment: R_EmptyEnv&gt;          ""                   </code></pre>
 </div>
@@ -3144,6 +3166,649 @@ Attaching package: 'pryr'</code></pre>
 </section>
 <section id="memory-and-copies" class="level1">
 <h1>8. Memory and copies</h1>
+<section id="overview-2" class="level2">
+<h2 class="anchored" data-anchor-id="overview-2">Overview</h2>
+<p>The main things to remember when thinking about memory use are: (1) numeric vectors take 8 bytes per element and (2) we need to keep track of when large objects are created, including local variables in the frames of functions.</p>
+<p>In some of our work here we’ll use functions from the <em>pryr</em> package, which provides functions to help understand what is going on under the hood in R.</p>
+<p><strong>In general, don’t try to run this code within RStudio, as some of how RStudio works affects when copies are made. In particular the environment pane causes there to be an additional reference to each object. Also, as noted in the document, some of the output in the PDF does not reflect what is happening when running code directly within R, because of effects from the process of rendering the document.</strong></p>
+<section id="allocating-and-freeing-memory" class="level3">
+<h3 class="anchored" data-anchor-id="allocating-and-freeing-memory">Allocating and freeing memory</h3>
+<p>Unlike compiled languages like C, in R we do not need to explicitly allocate storage for objects. (However, we will see that there are times that we do want to allocate storage in advance, rather than successively concatenating onto a larger object.)</p>
+<p>R automatically manages memory, releasing memory back to the operating system when it’s not needed via garbage collection. Very occasionally you may want to remove large objects as soon as they are not needed. <code>rm()</code> does not actually free up memory, it just disassociates the name from the memory used to store the object. In general R will quickly clean up such objects without a reference (i.e., a name), so there is generally no need to call <code>gc()</code> to force the garbage collection. In particular, calling <code>gc()</code> uses some computation so it’s generally not recommended.</p>
+<p>In a language like C in which the user allocates and frees up memory, memory leaks are a major cause of bugs. Basically if you are looping and you allocate memory at each iteration and forget to free it, the memory use builds up inexorably and eventually the machine runs out of memory. In R, with automatic garbage collection, this is generally not an issue, but occasionally memory leaks do occur.</p>
+</section>
+<section id="the-heap-and-the-stack" class="level3">
+<h3 class="anchored" data-anchor-id="the-heap-and-the-stack">The heap and the stack</h3>
+<p>The <em>heap</em> is the memory that is available for dynamically creating new objects while a program is executing, e.g., if you create a new object in R or call <em>new</em> in C++. When more memory is needed the program can request more from the operating system. When objects are removed in R, R will handle the garbage collection of releasing that memory.</p>
+<p>The <em>stack</em> is the memory used for local variables when a function is called.</p>
+<p>There’s a nice discussion of this on <a href="https://stackoverflow.com/questions/79923/what-and-where-are-the-stack-and-heap">this Stack Overflow thread</a>.</p>
+</section>
+</section>
+<section id="monitoring-memory-use" class="level2">
+<h2 class="anchored" data-anchor-id="monitoring-memory-use">Monitoring memory use</h2>
+<section id="monitoring-overall-memory-use-on-a-unix-style-computer" class="level3">
+<h3 class="anchored" data-anchor-id="monitoring-overall-memory-use-on-a-unix-style-computer">Monitoring overall memory use on a UNIX-style computer</h3>
+<p>To understand how much memory is available on your computer, one needs to have a clear understanding of disk caching. The operating system will generally cache files/data in memory when it reads from disk. Then if that information is still in memory the next time it is needed, it will be much faster to access it the second time around than if it had to read the information from disk. While the cached information is using memory, that same memory is immediately available to other processes, so the memory is available even though it is “in use”.</p>
+<p>We can see this via <code>free -h</code> (the <code>-h</code> is for ‘human-readable’, i.e. show in GB (G)) on Linux machine.</p>
+<pre><code>          total used free shared buff/cache available 
+    Mem:   251G 998M 221G   2.6G        29G      247G 
+    Swap:  7.6G 210M 7.4G</code></pre>
+<p>You’ll generally be interested in the <code>Mem</code> row. (See below for some comments on <code>Swap</code>.) The <code>shared</code> column is complicated and probably won’t be of use to you. The <code>buff/cache</code> column shows how much space is used for disk caching and related purposes but is actually available. Hence the <code>available</code> column is the sum of the <code>free</code> and <code>buff/cache</code> columns (more or less). In this case only about 1 GB is in use (indicated in the <code>used</code> column).</p>
+<p><code>top</code> (Linux or Mac) and <code>vmstat</code> (on Linux) both show overall memory use, but remember that the amount actually available to you is the amount free plus any buff/cache usage. Here is some example output from <code>vmstat</code>:</p>
+<pre><code>
+    procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu----- 
+    r b   swpd      free   buff    cache si so bi bo in cs us sy id wa st 
+    1 0 215140 231655120 677944 30660296  0  0  1  2  0  0 18  0 82  0  0</code></pre>
+<p>It shows 232 GB free and 31 GB used for cache and therefore available, for a total of 263 GB available.</p>
+<p>Here are some example lines from <code>top</code>:</p>
+<pre><code>    KiB Mem : 26413715+total, 23180236+free, 999704 used, 31335072 buff/cache 
+    KiB Swap:  7999484 total,  7784336 free, 215148 used. 25953483+avail Mem</code></pre>
+<p>We see that this machine has 264 GB RAM (the total column in the <code>Mem</code> row), with 259.5 GB available (232 GB free plus 31 GB buff/cache as seen in the <code>Mem</code> row). (I realize the numbers don’t quite add up for reasons I don’t fully understand, but we probably don’t need to worry about that degree of exactness.) Only 1 GB is in use.</p>
+<p><em>Swap</em> is essentially the reverse of disk caching. It is disk space that is used for memory when the machine runs out of physical memory. You never want your machine to be using swap for memory because your jobs will slow to a crawl. As seen above, the <code>swap</code> line in both <code>free</code> and <code>top</code> shows 8 GB swap space, with very little in use, as desired.</p>
+</section>
+<section id="monitoring-memory-use-in-r" class="level3">
+<h3 class="anchored" data-anchor-id="monitoring-memory-use-in-r">Monitoring memory use in R</h3>
+<p>There are a number of ways to see how much memory is being used. When R is actively executing statements, you can use <code>top</code> from the UNIX shell. In R, you can use <code>gc()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb452"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb452-1"><a href="#cb452-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           used (Mb) gc trigger (Mb) max used (Mb)
+Ncells  2347352  125    4157415  222  4157415  222
+Vcells 14223044  109   23059500  176 14770369  113</code></pre>
+</div>
+</div>
+<p><code>gc()</code> reports memory use and free memory as <code>Ncells</code> and <code>Vcells</code>. <code>Ncells</code> concerns the overhead of running R and <code>Vcells</code> relates to objects created by the user, so you’ll want to focus on <code>Vcells</code>. You can see the number of Mb currently used (the “<code>used</code>” column of the output) and the maximum used in the session (the “<code>max used</code>” column)“.</p>
+<p>We can see the size of an object with <code>object.size()</code> from base R or <code>object_size</code> from pryr:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb454"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb454-1"><a href="#cb454-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fl">1e8</span>) <span class="co"># should use about 800 Mb</span></span>
+<span id="cb454-2"><a href="#cb454-2" aria-hidden="true" tabindex="-1"></a><span class="fu">object.size</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>800000048 bytes</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb456"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb456-1"><a href="#cb456-1" aria-hidden="true" tabindex="-1"></a>pryr<span class="sc">::</span><span class="fu">object_size</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>800,000,048 B</code></pre>
+</div>
+</div>
+<p>A newer alternative to <code>gc()</code> is to use functions in the <code>pryr</code> package such as <code>mem_used()</code> and <code>mem_change()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb458"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb458-1"><a href="#cb458-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pryr)</span>
+<span id="cb458-2"><a href="#cb458-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mem_used</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1.05 GB</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb460"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb460-1"><a href="#cb460-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           used (Mb) gc trigger (Mb) max used (Mb)
+Ncells 2.35e+06  126   4.16e+06  222 4.16e+06  222
+Vcells 1.14e+08  872   1.67e+08 1275 1.14e+08  872</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb462"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb462-1"><a href="#cb462-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(x)</span>
+<span id="cb462-2"><a href="#cb462-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mem_used</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>245 MB</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb464"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb464-1"><a href="#cb464-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>() <span class="co"># note the "max used" column is unchanged</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           used (Mb) gc trigger (Mb) max used (Mb)
+Ncells  2348689  126   4.16e+06  222 4.16e+06  222
+Vcells 14226529  109   1.07e+08  816 1.14e+08  872</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb466"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb466-1"><a href="#cb466-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mem_change</span>(x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fl">1e8</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>800 MB</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb468"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb468-1"><a href="#cb468-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mem_change</span>(x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fl">1e7</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>-720 MB</code></pre>
+</div>
+</div>
+<p>You can reset the value given for <code>max used</code>, with <code>gc(reset = TRUE)</code>.</p>
+<p>In Windows only, <code>memory.size()</code> tells how much memory is being used.</p>
+<p>Here is a useful function, <code>ls.sizes()</code>, that wraps <code>object.size()</code> to report the largest <span class="math inline">\(n\)</span> objects in a given environment:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb470"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb470-1"><a href="#cb470-1" aria-hidden="true" tabindex="-1"></a>ls.sizes <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">howMany =</span> <span class="dv">10</span>, <span class="at">minSize =</span> <span class="dv">1</span>){</span>
+<span id="cb470-2"><a href="#cb470-2" aria-hidden="true" tabindex="-1"></a>    pf <span class="ot">&lt;-</span> <span class="fu">parent.frame</span>()</span>
+<span id="cb470-3"><a href="#cb470-3" aria-hidden="true" tabindex="-1"></a>    obj <span class="ot">&lt;-</span> <span class="fu">ls</span>(pf) <span class="co"># or ls(sys.frame(-1)) </span></span>
+<span id="cb470-4"><a href="#cb470-4" aria-hidden="true" tabindex="-1"></a>    objSizes <span class="ot">&lt;-</span> <span class="fu">sapply</span>(obj, <span class="cf">function</span>(x) {</span>
+<span id="cb470-5"><a href="#cb470-5" aria-hidden="true" tabindex="-1"></a>                               pryr<span class="sc">::</span><span class="fu">object_size</span>(<span class="fu">get</span>(x, pf))</span>
+<span id="cb470-6"><a href="#cb470-6" aria-hidden="true" tabindex="-1"></a>                           })</span>
+<span id="cb470-7"><a href="#cb470-7" aria-hidden="true" tabindex="-1"></a>    <span class="do">## or sys.frame(-4) to get out of FUN, lapply(), sapply() and sizes()</span></span>
+<span id="cb470-8"><a href="#cb470-8" aria-hidden="true" tabindex="-1"></a>    objNames <span class="ot">&lt;-</span> <span class="fu">names</span>(objSizes)</span>
+<span id="cb470-9"><a href="#cb470-9" aria-hidden="true" tabindex="-1"></a>    howmany <span class="ot">&lt;-</span> <span class="fu">min</span>(howMany, <span class="fu">length</span>(objSizes))</span>
+<span id="cb470-10"><a href="#cb470-10" aria-hidden="true" tabindex="-1"></a>    ord <span class="ot">&lt;-</span> <span class="fu">order</span>(objSizes, <span class="at">decreasing =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb470-11"><a href="#cb470-11" aria-hidden="true" tabindex="-1"></a>    objSizes <span class="ot">&lt;-</span> objSizes[ord][<span class="dv">1</span><span class="sc">:</span>howMany]</span>
+<span id="cb470-12"><a href="#cb470-12" aria-hidden="true" tabindex="-1"></a>    objSizes <span class="ot">&lt;-</span> objSizes[objSizes <span class="sc">&gt;</span> minSize]</span>
+<span id="cb470-13"><a href="#cb470-13" aria-hidden="true" tabindex="-1"></a>    objSizes <span class="ot">&lt;-</span> <span class="fu">matrix</span>(objSizes, <span class="at">ncol =</span> <span class="dv">1</span>)</span>
+<span id="cb470-14"><a href="#cb470-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rownames</span>(objSizes) <span class="ot">&lt;-</span> objNames[ord][<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(objSizes)]</span>
+<span id="cb470-15"><a href="#cb470-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(objSizes) <span class="ot">&lt;-</span> <span class="st">"bytes"</span></span>
+<span id="cb470-16"><a href="#cb470-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">'object'</span>)</span>
+<span id="cb470-17"><a href="#cb470-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">format</span>(objSizes, <span class="at">justify =</span> <span class="st">"right"</span>, <span class="at">width =</span> <span class="dv">11</span>),</span>
+<span id="cb470-18"><a href="#cb470-18" aria-hidden="true" tabindex="-1"></a>              <span class="at">quote =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb470-19"><a href="#cb470-19" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Unfortunately with R6 and ReferenceClasses, closures, environments, and other such “containers”, it can be hard to see how much memory the object is using, including all the components of the object. Here’s a trick where we serialize the object, as if to export it, and then see how long the binary representation is. In this case the object is a closure that contains a large vector.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb471"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb471-1"><a href="#cb471-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pryr)</span>
+<span id="cb471-2"><a href="#cb471-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fl">1e7</span>)</span>
+<span id="cb471-3"><a href="#cb471-3" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(input){</span>
+<span id="cb471-4"><a href="#cb471-4" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">&lt;-</span> input</span>
+<span id="cb471-5"><a href="#cb471-5" aria-hidden="true" tabindex="-1"></a>    g <span class="ot">&lt;-</span> <span class="cf">function</span>(param) <span class="fu">return</span>(param <span class="sc">*</span> data) </span>
+<span id="cb471-6"><a href="#cb471-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(g)</span>
+<span id="cb471-7"><a href="#cb471-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb471-8"><a href="#cb471-8" aria-hidden="true" tabindex="-1"></a>myFun <span class="ot">&lt;-</span> <span class="fu">f</span>(x)</span>
+<span id="cb471-9"><a href="#cb471-9" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(x)</span>
+<span id="cb471-10"><a href="#cb471-10" aria-hidden="true" tabindex="-1"></a><span class="fu">object.size</span>(myFun)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1608 bytes</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb473"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb473-1"><a href="#cb473-1" aria-hidden="true" tabindex="-1"></a><span class="fu">object_size</span>(myFun)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>80,013,376 B</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb475"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb475-1"><a href="#cb475-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">serialize</span>(myFun, <span class="cn">NULL</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 160007714</code></pre>
+</div>
+</div>
+<p>Note that our discussion of copy-on-modify should help us understand why the serialized object is 160 MB, but only 80 MB is used to store the 10,000,000 numbers.</p>
+<p>Here we examine the size of an environment:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb477"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb477-1"><a href="#cb477-1" aria-hidden="true" tabindex="-1"></a>e <span class="ot">&lt;-</span> <span class="fu">new.env</span>()</span>
+<span id="cb477-2"><a href="#cb477-2" aria-hidden="true" tabindex="-1"></a>e<span class="sc">$</span>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fl">1e7</span>)</span>
+<span id="cb477-3"><a href="#cb477-3" aria-hidden="true" tabindex="-1"></a><span class="fu">object.size</span>(e)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>56 bytes</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb479"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb479-1"><a href="#cb479-1" aria-hidden="true" tabindex="-1"></a><span class="fu">object_size</span>(e)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>80,000,496 B</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb481"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb481-1"><a href="#cb481-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">serialize</span>(e, <span class="cn">NULL</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 80000192</code></pre>
+</div>
+</div>
+<p>One frustration with memory management is that if your code bumps up against the memory limits of the machine, it can be very slow to respond even when you’re trying to cancel the statement with <code>Ctrl-C</code>. You can impose memory limits in Linux by starting R (from the UNIX prompt) in a fashion such as this</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb483"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb483-1"><a href="#cb483-1" aria-hidden="true" tabindex="-1"></a><span class="ex">R</span> <span class="at">--max-vsize</span><span class="op">=</span>1000M</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Then if you try to create an object that will push you over that limit or execute code that involves going over the limit, it will simply fail with the message “<em>Error: vector memory exhausted (limit reached?)</em>”. So this approach may be a nice way to avoid paging/swapping by setting the maximum in relation to the physical memory of the machine. It might also help in debugging memory leaks because the program would fail at the point that memory use was increasing. I haven’t played around with this much, so I offer this with a note of caution.</p>
+<p>Apparently there is a memory profiler in R, <em>Rprofmem</em>, but it needs to be enabled when R is compiled (i.e., installed on the machine), because it slows R down even when not used. So I’ve never gotten to the point of playing around with it.</p>
+</section>
+</section>
+<section id="how-memory-is-used-in-r" class="level2">
+<h2 class="anchored" data-anchor-id="how-memory-is-used-in-r">How memory is used in R</h2>
+<section id="a-secret-weapon-inspect" class="level3">
+<h3 class="anchored" data-anchor-id="a-secret-weapon-inspect">A secret weapon: <code>inspect</code></h3>
+<p>We can use an internal function called <code>inspect</code> to see where in memory an object is stored. It’s particularly useful for understanding storage and memory use for complicated data structures. We’ll also see that this can be a handy tool for seeing where copies are made and where they are not.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb484"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb484-1"><a href="#cb484-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">5</span>)</span>
+<span id="cb484-2"><a href="#cb484-2" aria-hidden="true" tabindex="-1"></a><span class="fu">.Internal</span>(<span class="fu">inspect</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>@563fa7b9f2f8 14 REALSXP g0c4 [REF(2)] (len=5, tl=0) -0.742042,0.577906,1.85653,0.449136,0.746484</code></pre>
+</div>
+</div>
+<p>The first output is the address in memory (in hexadecimal) of the vector. The <code>REALSXP</code> indicates that the vector is stored as a real-valued “S” object under the hood in C. <code>REF(2)</code> indicates that only two variables are referring to this particular memory location (more on this in much detail in a bit).</p>
+</section>
+<section id="memory-use-in-specific-circumstances" class="level3">
+<h3 class="anchored" data-anchor-id="memory-use-in-specific-circumstances">Memory use in specific circumstances</h3>
+<section id="how-lists-are-stored" class="level4">
+<h4 class="anchored" data-anchor-id="how-lists-are-stored">How lists are stored</h4>
+<p>Here we can use <code>inspect()</code> to see how the overall list is stored as well as the elements of the list and the attributes of the list.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb486"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb486-1"><a href="#cb486-1" aria-hidden="true" tabindex="-1"></a>nums <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">5</span>)</span>
+<span id="cb486-2"><a href="#cb486-2" aria-hidden="true" tabindex="-1"></a>obj <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">a =</span> nums, <span class="at">b =</span> nums, <span class="at">c =</span> <span class="fu">rnorm</span>(<span class="dv">5</span>), <span class="at">d =</span> <span class="fu">list</span>(<span class="at">some_string =</span> <span class="st">"adfs"</span>))</span>
+<span id="cb486-3"><a href="#cb486-3" aria-hidden="true" tabindex="-1"></a><span class="fu">.Internal</span>(<span class="fu">inspect</span>(obj<span class="sc">$</span>a))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>@563fa89e0058 14 REALSXP g0c4 [REF(4)] (len=5, tl=0) -1.47998,1.38282,0.22264,0.0640071,0.565649</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb488"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb488-1"><a href="#cb488-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.Internal</span>(<span class="fu">inspect</span>(obj<span class="sc">$</span>b))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>@563fa89e0058 14 REALSXP g0c4 [REF(5)] (len=5, tl=0) -1.47998,1.38282,0.22264,0.0640071,0.565649</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb490"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb490-1"><a href="#cb490-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.Internal</span>(<span class="fu">inspect</span>(obj<span class="sc">$</span>c))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>@563fa89e06e8 14 REALSXP g0c4 [REF(1)] (len=5, tl=0) -1.07213,-0.451605,-0.0594438,0.153536,-0.939612</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb492"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb492-1"><a href="#cb492-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.Internal</span>(<span class="fu">inspect</span>(obj))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>@563fa89cad88 19 VECSXP g0c3 [REF(2),ATT] (len=4, tl=0)
+  @563fa89e0058 14 REALSXP g0c4 [REF(6)] (len=5, tl=0) -1.47998,1.38282,0.22264,0.0640071,0.565649
+  @563fa89e0058 14 REALSXP g0c4 [REF(6)] (len=5, tl=0) -1.47998,1.38282,0.22264,0.0640071,0.565649
+  @563fa89e06e8 14 REALSXP g0c4 [REF(2)] (len=5, tl=0) -1.07213,-0.451605,-0.0594438,0.153536,-0.939612
+  @563fa7693628 19 VECSXP g0c1 [REF(1),ATT] (len=1, tl=0)
+    @563fa78cee78 16 STRSXP g0c1 [REF(3)] (len=1, tl=0)
+      @563fa78ceeb0 09 CHARSXP g0c1 [REF(2),gp=0x60] [ASCII] [cached] "adfs"
+  ATTRIB:
+    @563fa2a9c230 02 LISTSXP g0c0 [REF(1)] 
+      TAG: @563f96738800 01 SYMSXP g1c0 [MARK,REF(65535),LCK,gp=0x6000] "names" (has value)
+      @563fa7693660 16 STRSXP g0c1 [REF(1)] (len=1, tl=0)
+    @563fa59fa8f8 09 CHARSXP g0c2 [REF(4),gp=0x61] [ASCII] [cached] "some_string"
+ATTRIB:
+  @563fa2a9c2a0 02 LISTSXP g0c0 [REF(1)] 
+    TAG: @563f96738800 01 SYMSXP g1c0 [MARK,REF(65535),LCK,gp=0x6000] "names" (has value)
+    @563fa89cadd8 16 STRSXP g0c3 [REF(65535)] (len=4, tl=0)
+      @563f96a3a5d0 09 CHARSXP g1c1 [MARK,REF(807),gp=0x61] [ASCII] [cached] "a"
+      @563f96d59b80 09 CHARSXP g1c1 [MARK,REF(699),gp=0x61] [ASCII] [cached] "b"
+      @563f96739bc0 09 CHARSXP g1c1 [MARK,REF(1008),gp=0x61] [ASCII] [cached] "c"
+      @563f96bd86b0 09 CHARSXP g1c1 [MARK,REF(421),gp=0x61] [ASCII] [cached] "d"</code></pre>
+</div>
+</div>
+<p>What do we notice?</p>
+<ul>
+<li>The list itself is a vector of pointers to the component elements and a pointer to the attributes information.</li>
+<li>Each element has its own address.</li>
+<li>Attributes are themselves stored in particular locations.</li>
+<li>Two elements of a list can use the same memory (see <code>a</code> and <code>b</code> here, both located at <code>@55a3e79de068</code>).</li>
+</ul>
+<p>The <em>pryr</em> package provides <code>address()</code> or <code>inspect()</code> as an alternative to <code>.Internal(inspect())</code> though even <code>pryr::inspect()</code> doesn’t give us the richness of information about complicated objects that <code>.Internal(inspect())</code> does.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb494"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb494-1"><a href="#cb494-1" aria-hidden="true" tabindex="-1"></a><span class="fu">address</span>(obj)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "0x563fa89cad88"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb496"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb496-1"><a href="#cb496-1" aria-hidden="true" tabindex="-1"></a><span class="fu">inspect</span>(obj)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;VECSXP 0x563fa89cad88&gt;
+  &lt;REALSXP 0x563fa89e0058&gt;
+  [REALSXP 0x563fa89e0058]
+  &lt;REALSXP 0x563fa89e06e8&gt;
+  &lt;VECSXP 0x563fa7693628&gt;
+    &lt;STRSXP 0x563fa78cee78&gt;
+      &lt;CHARSXP 0x563fa78ceeb0&gt;
+  attributes: 
+    &lt;LISTSXP 0x563fa2a9c230&gt;
+    tag: 
+      &lt;SYMSXP 0x563f96738800&gt;
+    car: 
+      &lt;STRSXP 0x563fa7693660&gt;
+        &lt;CHARSXP 0x563fa59fa8f8&gt;
+    cdr: 
+      NULL
+attributes: 
+  &lt;LISTSXP 0x563fa2a9c2a0&gt;
+  tag: 
+    [SYMSXP 0x563f96738800]
+  car: 
+    &lt;STRSXP 0x563fa89cadd8&gt;
+      &lt;CHARSXP 0x563f96a3a5d0&gt;
+      &lt;CHARSXP 0x563f96d59b80&gt;
+      &lt;CHARSXP 0x563f96739bc0&gt;
+      &lt;CHARSXP 0x563f96bd86b0&gt;
+  cdr: 
+    NULL</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb498"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb498-1"><a href="#cb498-1" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>(<span class="fu">address</span>(obj<span class="sc">$</span>a)) <span class="co"># doesn't work</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Error : x must be the name of an object</code></pre>
+</div>
+</div>
+</section>
+<section id="how-character-strings-are-stored." class="level4">
+<h4 class="anchored" data-anchor-id="how-character-strings-are-stored.">How character strings are stored.</h4>
+<p>Similar tricks are used for storing character vectors. We’ll explore this in a problem on PS4 using <code>inspect()</code>.</p>
+</section>
+<section id="replacement-functions-1" class="level4">
+<h4 class="anchored" data-anchor-id="replacement-functions-1">Replacement functions</h4>
+<p>Replacement functions can hide the use of additional memory. How much memory is used here? (Try running in R (not RStudio) on your own computer and note the <code>max_used</code> column in the <code>gc()</code> result should increase after we modify the dimensionality of <code>x</code>, indicating a copy was made.)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb500"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb500-1"><a href="#cb500-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(x)</span>
+<span id="cb500-2"><a href="#cb500-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>(<span class="at">reset =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           used (Mb) gc trigger (Mb) max used (Mb)
+Ncells  2349335  126   4.16e+06  222  2349335  126
+Vcells 34228661  261   1.07e+08  816 34228661  261</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb502"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb502-1"><a href="#cb502-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fl">1e7</span>)</span>
+<span id="cb502-2"><a href="#cb502-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           used (Mb) gc trigger (Mb) max used (Mb)
+Ncells  2349260  126   4.16e+06  222  2361600  126
+Vcells 44228535  338   1.07e+08  816 44249652  338</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb504"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb504-1"><a href="#cb504-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(x) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1e4</span>, <span class="fl">1e3</span>)</span>
+<span id="cb504-2"><a href="#cb504-2" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(x) <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb504-3"><a href="#cb504-3" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           used (Mb) gc trigger (Mb) max used (Mb)
+Ncells  2349287  126   4.16e+06  222  2367186  126
+Vcells 44228575  338   1.07e+08  816 54261390  414</code></pre>
+</div>
+</div>
+<p>However, not all replacement functions actually involve creating a new object and replacing the original object. Here <code>[&lt;-</code> is a primitive function, so the modification of the vector can be done without a copy in the underlying execution in C.</p>
+<blockquote class="blockquote">
+<p><strong>Warning</strong>: For some reason when I compile this document a copy is made. Try it in R (not RStudio) on your own computer, and you should see that the address of <code>x</code> is unchanged and no additional memory has been used.</p>
+</blockquote>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb506"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb506-1"><a href="#cb506-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(x)</span>
+<span id="cb506-2"><a href="#cb506-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>(<span class="at">reset =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           used (Mb) gc trigger (Mb) max used (Mb)
+Ncells  2349257  126   4.16e+06  222  2349257  126
+Vcells 34228673  261   1.07e+08  816 34228673  261</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb508"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb508-1"><a href="#cb508-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fl">1e7</span>)</span>
+<span id="cb508-2"><a href="#cb508-2" aria-hidden="true" tabindex="-1"></a><span class="fu">address</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "0x7f2a30ee4010"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb510"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb510-1"><a href="#cb510-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           used (Mb) gc trigger (Mb) max used (Mb)
+Ncells  2349286  126   4.16e+06  222  2367727  126
+Vcells 44228717  338   1.07e+08  816 44260257  338</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb512"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb512-1"><a href="#cb512-1" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="dv">7</span></span>
+<span id="cb512-2"><a href="#cb512-2" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">[&lt;-</span><span class="st">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>.Primitive("[&lt;-")</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb514"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb514-1"><a href="#cb514-1" aria-hidden="true" tabindex="-1"></a><span class="do">## When run plainly in R, should be the same address as before,</span></span>
+<span id="cb514-2"><a href="#cb514-2" aria-hidden="true" tabindex="-1"></a><span class="do">## indicating no copy was made. Rendering the doc messes the</span></span>
+<span id="cb514-3"><a href="#cb514-3" aria-hidden="true" tabindex="-1"></a><span class="do">## result up!</span></span>
+<span id="cb514-4"><a href="#cb514-4" aria-hidden="true" tabindex="-1"></a><span class="fu">address</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "0x7f2a2c298010"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb516"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb516-1"><a href="#cb516-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           used (Mb) gc trigger (Mb) max used (Mb)
+Ncells  2349337  126   4.16e+06  222  2374346  127
+Vcells 44228807  338   1.07e+08  816 54270479  414</code></pre>
+</div>
+</div>
+<p>It makes some sense that modifying elements of a vector doesn’t cause a copy – if it did, working with large vectors would be very difficult.</p>
+</section>
+<section id="fast-representations-of-sequences" class="level4">
+<h4 class="anchored" data-anchor-id="fast-representations-of-sequences">Fast representations of sequences</h4>
+<p>As of R 3.5.0, <code>1:n</code> is not stored in memory as a vector of length <em>n</em>, but rather is represented by the first and last value in the sequence. However, some of the functions we use to determine object size don’t give us the right answer in this case.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb518"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb518-1"><a href="#cb518-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(microbenchmark)</span>
+<span id="cb518-2"><a href="#cb518-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb518-3"><a href="#cb518-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fl">1e6</span></span>
+<span id="cb518-4"><a href="#cb518-4" aria-hidden="true" tabindex="-1"></a><span class="fu">microbenchmark</span>(tmp <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Unit: nanoseconds
+       expr min  lq mean median  uq  max neval
+ tmp &lt;- 1:n 170 179  259    183 254 3929   100</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb520"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb520-1"><a href="#cb520-1" aria-hidden="true" tabindex="-1"></a><span class="fu">object.size</span>(tmp)  <span class="co"># incorrect</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>4000048 bytes</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb522"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb522-1"><a href="#cb522-1" aria-hidden="true" tabindex="-1"></a><span class="fu">object_size</span>(tmp)  <span class="co"># correct</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>680 B</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb524"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb524-1"><a href="#cb524-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mem_change</span>(mySeq <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>n)  <span class="co"># not sure why the result is negative!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>-11.1 kB</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb526"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb526-1"><a href="#cb526-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">serialize</span>(mySeq, <span class="cn">NULL</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 133</code></pre>
+</div>
+</div>
+<p>One implication is that in older versions of R, indexing large subsets can involve a lot of memory use.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb528"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb528-1"><a href="#cb528-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fl">1e7</span>)</span>
+<span id="cb528-2"><a href="#cb528-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> x[<span class="dv">1</span><span class="sc">:</span>(<span class="fu">length</span>(x) <span class="sc">-</span> <span class="dv">1</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In this case, in old versions of R, more memory was used than just for <code>x</code> and <code>y</code>, because the index sequence itself used a bunch of memory.</p>
+</section>
+</section>
+<section id="copy-on-modify" class="level3">
+<h3 class="anchored" data-anchor-id="copy-on-modify">Copy-on-modify</h3>
+<p>Next we’ll see that something like lazy evaluation occurs as well with some functionality called <em>delayed copying</em> or <em>copy-on-modify</em>. When we discussed R as being call-by-value, copy-on-modify was one of the reasons that copies of arguments are not always made. (But we didn’t talk about it at that time.)</p>
+<section id="copy-on-modify-in-function-calls" class="level4">
+<h4 class="anchored" data-anchor-id="copy-on-modify-in-function-calls">Copy-on-modify in function calls</h4>
+<p>Let’s see what goes on within a function in terms of memory use in different situations.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb529"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb529-1"><a href="#cb529-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(x)</span>
+<span id="cb529-2"><a href="#cb529-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>(<span class="at">reset =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           used (Mb) gc trigger (Mb) max used (Mb)
+Ncells  2386381  128   4.16e+06  222  2386381  128
+Vcells 34282400  262   1.07e+08  816 34282400  262</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb531"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb531-1"><a href="#cb531-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
+<span id="cb531-2"><a href="#cb531-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">gc</span>())</span>
+<span id="cb531-3"><a href="#cb531-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(x[<span class="dv">1</span>])</span>
+<span id="cb531-4"><a href="#cb531-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">gc</span>())</span>
+<span id="cb531-5"><a href="#cb531-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">address</span>(x)</span>
+<span id="cb531-6"><a href="#cb531-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(x)</span>
+<span id="cb531-7"><a href="#cb531-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb531-8"><a href="#cb531-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb531-9"><a href="#cb531-9" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fl">1e7</span>)</span>
+<span id="cb531-10"><a href="#cb531-10" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           used (Mb) gc trigger (Mb) max used (Mb)
+Ncells  2386361  128   4.16e+06  222  2404627  128
+Vcells 44282397  338   1.07e+08  816 44313612  338</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb533"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb533-1"><a href="#cb533-1" aria-hidden="true" tabindex="-1"></a><span class="fu">address</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "0x7f2a30860010"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb535"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb535-1"><a href="#cb535-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">f</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           used (Mb) gc trigger (Mb) max used (Mb)
+Ncells  2386391  128   4.16e+06  222  2404627  128
+Vcells 44282437  338   1.07e+08  816 44313612  338
+[1] 1.38
+           used (Mb) gc trigger (Mb) max used (Mb)
+Ncells  2386401  128   4.16e+06  222  2404627  128
+Vcells 44282460  338   1.07e+08  816 44313612  338</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb537"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb537-1"><a href="#cb537-1" aria-hidden="true" tabindex="-1"></a><span class="fu">address</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "0x7f2a30860010"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb539"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb539-1"><a href="#cb539-1" aria-hidden="true" tabindex="-1"></a><span class="fu">address</span>(out)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "0x7f2a30860010"</code></pre>
+</div>
+</div>
+<p>We see that <code>y</code>, the local variable <code>x</code> in the function frame, and <code>out</code> all use the same memory, so no copies are made here. The <code>gc()</code> output confirms that no additional memory was used.</p>
+</section>
+<section id="copy-on-modify-in-general" class="level4">
+<h4 class="anchored" data-anchor-id="copy-on-modify-in-general">Copy-on-modify in general</h4>
+<p>In fact, copy-on-modify occurs outside function calls as well. Copies of objects are not made until one of the objects is actually modified. Initially, the copy points to the same memory location as the original object.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb541"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb541-1"><a href="#cb541-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(y); <span class="fu">rm</span>(out)</span>
+<span id="cb541-2"><a href="#cb541-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>(<span class="at">reset =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           used (Mb) gc trigger (Mb) max used (Mb)
+Ncells  2386428  128   4.16e+06  222  2386428  128
+Vcells 34283542  262   1.07e+08  816 34283542  262</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb543"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb543-1"><a href="#cb543-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fl">1e7</span>)</span>
+<span id="cb543-2"><a href="#cb543-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           used (Mb) gc trigger (Mb) max used (Mb)
+Ncells  2386440  128   4.16e+06  222  2398693  128
+Vcells 44283561  338   1.07e+08  816 44304533  338</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb545"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb545-1"><a href="#cb545-1" aria-hidden="true" tabindex="-1"></a><span class="fu">address</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "0x7f2a30860010"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb547"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb547-1"><a href="#cb547-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> y</span>
+<span id="cb547-2"><a href="#cb547-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           used (Mb) gc trigger (Mb) max used (Mb)
+Ncells  2386466  128   4.16e+06  222  2404694  128
+Vcells 44283606  338   1.07e+08  816 44314795  338</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb549"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb549-1"><a href="#cb549-1" aria-hidden="true" tabindex="-1"></a><span class="fu">object_size</span>(x, y)  <span class="co"># from pryr</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>80,000,048 B</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb551"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb551-1"><a href="#cb551-1" aria-hidden="true" tabindex="-1"></a><span class="fu">address</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "0x7f2a30860010"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb553"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb553-1"><a href="#cb553-1" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb553-2"><a href="#cb553-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           used (Mb) gc trigger (Mb) max used (Mb)
+Ncells  2386499  128   4.16e+06  222  2412508  129
+Vcells 54283655  414   1.07e+08  816 54325827  414</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb555"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb555-1"><a href="#cb555-1" aria-hidden="true" tabindex="-1"></a><span class="fu">address</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "0x7f2a229ff010"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb557"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb557-1"><a href="#cb557-1" aria-hidden="true" tabindex="-1"></a><span class="fu">object_size</span>(x, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>160,000,096 B</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb559"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb559-1"><a href="#cb559-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(x)</span>
+<span id="cb559-2"><a href="#cb559-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> y</span>
+<span id="cb559-3"><a href="#cb559-3" aria-hidden="true" tabindex="-1"></a><span class="fu">address</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "0x7f2a30860010"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb561"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb561-1"><a href="#cb561-1" aria-hidden="true" tabindex="-1"></a><span class="fu">address</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "0x7f2a30860010"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb563"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb563-1"><a href="#cb563-1" aria-hidden="true" tabindex="-1"></a>y[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb563-2"><a href="#cb563-2" aria-hidden="true" tabindex="-1"></a><span class="fu">address</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "0x7f2a30860010"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb565"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb565-1"><a href="#cb565-1" aria-hidden="true" tabindex="-1"></a><span class="fu">address</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "0x7f2a1ddb3010"</code></pre>
+</div>
+</div>
+<p>Or we can see this using <code>mem_change()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb567"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb567-1"><a href="#cb567-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pryr)</span>
+<span id="cb567-2"><a href="#cb567-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(x)</span>
+<span id="cb567-3"><a href="#cb567-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(y)</span>
+<span id="cb567-4"><a href="#cb567-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mem_change</span>(x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fl">1e7</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>80 MB</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb569"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb569-1"><a href="#cb569-1" aria-hidden="true" tabindex="-1"></a><span class="fu">address</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "0x7f2a30860010"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb571"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb571-1"><a href="#cb571-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mem_change</span>(x[<span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>320 B</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb573"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb573-1"><a href="#cb573-1" aria-hidden="true" tabindex="-1"></a><span class="fu">address</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "0x7f2a30860010"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb575"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb575-1"><a href="#cb575-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mem_change</span>(y <span class="ot">&lt;-</span> x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>376 B</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb577"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb577-1"><a href="#cb577-1" aria-hidden="true" tabindex="-1"></a><span class="fu">address</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "0x7f2a30860010"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb579"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb579-1"><a href="#cb579-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mem_change</span>(x[<span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>80 MB</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb581"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb581-1"><a href="#cb581-1" aria-hidden="true" tabindex="-1"></a><span class="fu">address</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "0x7f2a229ff010"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb583"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb583-1"><a href="#cb583-1" aria-hidden="true" tabindex="-1"></a><span class="fu">address</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "0x7f2a30860010"</code></pre>
+</div>
+</div>
+<p><strong>Challenge</strong>: explain the results of the example above.</p>
+</section>
+<section id="how-does-copy-on-modify-work" class="level4">
+<h4 class="anchored" data-anchor-id="how-does-copy-on-modify-work">How does copy-on-modify work?</h4>
+<p>R keeps track of how many names refer to an object and only makes copies as needed when multiple names refer to an object. Note the value of REF and the address returned by <code>.Internal(inspect())</code>, or simply use <code>refs()</code> and <code>address()</code> from <code>pryr</code>.</p>
+<p>We’ll see this live in class. Unfortunately both rendering and RStudio can give us confusing results for <code>ref()</code>, so I’m adding the clean results from just running in R here in comments.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb585"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb585-1"><a href="#cb585-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">5</span>)</span>
+<span id="cb585-2"><a href="#cb585-2" aria-hidden="true" tabindex="-1"></a><span class="fu">address</span>(a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "0x563fa2730658"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb587"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb587-1"><a href="#cb587-1" aria-hidden="true" tabindex="-1"></a><span class="do">## refs(a)  ## 1</span></span>
+<span id="cb587-2"><a href="#cb587-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> a</span>
+<span id="cb587-3"><a href="#cb587-3" aria-hidden="true" tabindex="-1"></a><span class="fu">address</span>(b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "0x563fa2730658"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb589"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb589-1"><a href="#cb589-1" aria-hidden="true" tabindex="-1"></a><span class="do">## refs(a)  ## 2</span></span>
+<span id="cb589-2"><a href="#cb589-2" aria-hidden="true" tabindex="-1"></a><span class="do">## refs(b)  ## 2</span></span>
+<span id="cb589-3"><a href="#cb589-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(b)</span>
+<span id="cb589-4"><a href="#cb589-4" aria-hidden="true" tabindex="-1"></a><span class="do">## refs(a)  ## 1</span></span>
+<span id="cb589-5"><a href="#cb589-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb589-6"><a href="#cb589-6" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> a</span>
+<span id="cb589-7"><a href="#cb589-7" aria-hidden="true" tabindex="-1"></a>a[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb589-8"><a href="#cb589-8" aria-hidden="true" tabindex="-1"></a><span class="fu">address</span>(a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "0x563fa2c40218"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb591"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb591-1"><a href="#cb591-1" aria-hidden="true" tabindex="-1"></a><span class="fu">address</span>(b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "0x563fa2730658"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb593"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb593-1"><a href="#cb593-1" aria-hidden="true" tabindex="-1"></a><span class="do">## refs(a)  ## 1</span></span>
+<span id="cb593-2"><a href="#cb593-2" aria-hidden="true" tabindex="-1"></a><span class="do">## refs(b)  ## 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This notion of reference counting occurs in other contexts, such as shared pointers in C++ and garbage collection (deletion of unused objects) in Python and R.</p>
+<p>In older versions of R (before R 4.0) there were some shortcomings in how R managed this, and one could see different results than shown above.</p>
+</section>
+</section>
+</section>
+<section id="strategies-for-saving-memory" class="level2">
+<h2 class="anchored" data-anchor-id="strategies-for-saving-memory">Strategies for saving memory</h2>
+<p>A couple basic strategies for saving memory include:</p>
+<ul>
+<li>Avoiding unnecessary copies.</li>
+<li>Removing objects that are not being used, at which point the R garbage collector should free up the memory.</li>
+</ul>
+<p>If you’re really trying to optimize memory use, you may also consider:</p>
+<ul>
+<li>Using R6 classes and similar strategies to pass by reference.</li>
+<li>Substituting integer and logical vectors for numeric vectors when possible.</li>
+</ul>
+</section>
+<section id="example-1" class="level2">
+<h2 class="anchored" data-anchor-id="example-1">Example</h2>
+<p>Let’s work through a real example where we keep a running tally of current memory in use and maximum memory used in a function call. We’ll want to consider hidden uses of memory, when copies are made, and lazy evaluation. This code is courtesy of Yuval Benjamini. For our purposes here, let’s assume that <code>xvar</code> and <code>yvar</code> are very long vectors using a lot of memory. The use of <code>.C()</code> calls out to some user-written C code. (In a real example we’d also want to think about when copies are made in calling compiled code, but we don’t do that here.)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb594"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb594-1"><a href="#cb594-1" aria-hidden="true" tabindex="-1"></a>fastcount <span class="ot">&lt;-</span> <span class="cf">function</span>(xvar, yvar) {</span>
+<span id="cb594-2"><a href="#cb594-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(xvar[<span class="dv">1</span>])</span>
+<span id="cb594-3"><a href="#cb594-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(yvar[<span class="dv">1</span>])</span>
+<span id="cb594-4"><a href="#cb594-4" aria-hidden="true" tabindex="-1"></a>    naline <span class="ot">&lt;-</span> <span class="fu">is.na</span>(xvar)</span>
+<span id="cb594-5"><a href="#cb594-5" aria-hidden="true" tabindex="-1"></a>    naline[<span class="fu">is.na</span>(yvar)] <span class="ot">=</span> <span class="cn">TRUE</span></span>
+<span id="cb594-6"><a href="#cb594-6" aria-hidden="true" tabindex="-1"></a>    xvar[naline] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb594-7"><a href="#cb594-7" aria-hidden="true" tabindex="-1"></a>    yvar[naline] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb594-8"><a href="#cb594-8" aria-hidden="true" tabindex="-1"></a>    useline <span class="ot">&lt;-</span> <span class="sc">!</span>naline</span>
+<span id="cb594-9"><a href="#cb594-9" aria-hidden="true" tabindex="-1"></a>    <span class="do">## We'll ignore the rest of the code.</span></span>
+<span id="cb594-10"><a href="#cb594-10" aria-hidden="true" tabindex="-1"></a>    <span class="do">## Table must be initialized for -1's</span></span>
+<span id="cb594-11"><a href="#cb594-11" aria-hidden="true" tabindex="-1"></a>    tablex <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="fu">max</span>(xvar)<span class="sc">+</span><span class="dv">1</span>)</span>
+<span id="cb594-12"><a href="#cb594-12" aria-hidden="true" tabindex="-1"></a>    tabley <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="fu">max</span>(yvar)<span class="sc">+</span><span class="dv">1</span>)</span>
+<span id="cb594-13"><a href="#cb594-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stopifnot</span>(<span class="fu">length</span>(xvar) <span class="sc">==</span> <span class="fu">length</span>(yvar))</span>
+<span id="cb594-14"><a href="#cb594-14" aria-hidden="true" tabindex="-1"></a>    res <span class="ot">&lt;-</span> <span class="fu">.C</span>(<span class="st">"fastcount"</span>,<span class="at">PACKAGE=</span><span class="st">"GCcorrect"</span>,</span>
+<span id="cb594-15"><a href="#cb594-15" aria-hidden="true" tabindex="-1"></a>              <span class="at">tablex =</span> <span class="fu">as.integer</span>(tablex), <span class="at">tabley =</span> <span class="fu">as.integer</span>(tabley),</span>
+<span id="cb594-16"><a href="#cb594-16" aria-hidden="true" tabindex="-1"></a>              <span class="fu">as.integer</span>(xvar), <span class="fu">as.integer</span>(yvar), <span class="fu">as.integer</span>(useline),</span>
+<span id="cb594-17"><a href="#cb594-17" aria-hidden="true" tabindex="-1"></a>              <span class="fu">as.integer</span>(<span class="fu">length</span>(xvar)))</span>
+<span id="cb594-18"><a href="#cb594-18" aria-hidden="true" tabindex="-1"></a>    xuse <span class="ot">&lt;-</span> <span class="fu">which</span>(res<span class="sc">$</span>tablex<span class="sc">&gt;</span><span class="dv">0</span>)</span>
+<span id="cb594-19"><a href="#cb594-19" aria-hidden="true" tabindex="-1"></a>    xnames <span class="ot">&lt;-</span> xuse <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb594-20"><a href="#cb594-20" aria-hidden="true" tabindex="-1"></a>    resb <span class="ot">&lt;-</span> <span class="fu">rbind</span>(res<span class="sc">$</span>tablex[xuse], res<span class="sc">$</span>tabley[xuse]) </span>
+<span id="cb594-21"><a href="#cb594-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(resb) <span class="ot">&lt;-</span> xnames</span>
+<span id="cb594-22"><a href="#cb594-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(resb)</span>
+<span id="cb594-23"><a href="#cb594-23" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
 </section>
 <section id="efficiency" class="level1">
 <h1>9. Efficiency</h1>
