@@ -2974,20 +2974,38 @@ f <- function(x){
     print(gc())
     print(x[1])
     print(gc())
-    address(x)
+    .Internal(inspect(x))
+    ## print(address(x))  ## this gives the wrong answer; not sure why
     return(x)
 }
 
 y <- rnorm(1e7)
 gc()
-address(y)
+.Internal(inspect(y))
 out <- f(y)
-address(y)
-address(out)
+.Internal(inspect(y))
+.Internal(inspect(out))
 ```
 
 We see that `y`, the local variable `x` in the function frame, and `out` all use the same memory, so no
 copies are made here. The `gc()` output confirms that no additional memory was used.
+
+Only if `x` is changed do the addresses change and a copy in memory get made. (Note that we already saw this with the `diag<-` replacement function example.
+
+```{r}
+f <- function(x){
+    .Internal(inspect(x))
+    x[2] <- 7
+    .Internal(inspect(x))
+    return(x)
+}
+
+y <- rnorm(1e7)
+.Internal(inspect(y))
+out <- f(y)
+.Internal(inspect(y))
+.Internal(inspect(out))
+```
 
 #### Copy-on-modify in general
 
