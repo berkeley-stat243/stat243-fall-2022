@@ -40,14 +40,14 @@ References:
 There are various videos from 2020 in the bCourses Media Gallery that you
 can use for reference if you want to. Note that I've reorganized the material in this Unit relative to 2020, so the section numbers and ordering in the videos may differ from that in the current Unit, but you should be able to match things up fairly easily.
 
-1. Strings and regular expressions
-3. Type/class coercion
-4. Object-oriented programming - S3 classes
-5. Object-oriented programming - R6 classes
-6. Nested function calls and the call stack
-7. Operators in R
-8. Unexpected functions and replacement functions
-13. Memory and copying
+  - Video 1. Strings and regular expressions
+  - Video 3. Type/class coercion
+  - Video 4. Object-oriented programming - S3 classes
+  - Video 5. Object-oriented programming - R6 classes
+  - Video 6. Nested function calls and the call stack
+  - Video 7. Operators in R
+  - Video 8. Unexpected functions and replacement functions
+  - Video 13. Memory and copying
 
 # Overview
 
@@ -2838,7 +2838,7 @@ x <- rnorm(5)
 ```
 
 The first output is the address in memory (in hexadecimal) of the vector. The `REALSXP` indicates that the vector
-is stored as a real-valued "S" object under the hood in C. `REF(2)` indicates that only two variables are referring to this particular memory location (more on this in much detail in a bit).
+is stored as a real-valued "S" object under the hood in C. `REF(2)` indicates that two variables are referring to this particular memory location (more on this in much detail in a bit).
 
 
 ### Memory use in specific circumstances
@@ -2862,7 +2862,7 @@ What do we notice?
   - The list itself is a vector of pointers to the component elements and a pointer to the attributes information.
   - Each element has its own address.
   - Attributes are themselves stored in particular locations.
-  - Two elements of a list can use the same memory (see `a` and `b` here, both located at `@55a3e79de068`).
+  - Two elements of a list can use the same memory (see `a` and `b` here, whose contents are at the same memory address).
   
 
 The *pryr* package provides `address()` or `inspect()` as an alternative
@@ -2923,7 +2923,7 @@ address(x)
 gc()
 ```
 
-It makes some sense that modifying elements of a vector doesn't cause a copy -- if it did, working with large vectors would be very difficult. 
+It makes some sense that modifying elements of a vector doesn't cause a copy usually -- if it did, working with large vectors would be very difficult. 
 
 #### Fast representations of sequences
 
@@ -3046,8 +3046,8 @@ and the address returned by `.Internal(inspect())`, or simply use
 `refs()` and `address()` from `pryr`.
 
 We'll see this live in class. Unfortunately both rendering and RStudio
-can give us confusing results for `ref()`, so I'm adding the clean results from just
-running in R here in comments.
+can give us confusing results for `refs()`, so I'm adding the clean results from just
+running in R as comments here.
 
 ```{r}
 a <- rnorm(5)
