@@ -306,7 +306,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#online-forums-mailing-lists" id="toc-online-forums-mailing-lists" class="nav-link" data-scroll-target="#online-forums-mailing-lists">Online forums / mailing lists</a></li>
   <li><a href="#asking-questions-online" id="toc-asking-questions-online" class="nav-link" data-scroll-target="#asking-questions-online">Asking questions online</a></li>
   </ul></li>
-  <li><a href="#pair-debugging-exercise-logitboot" id="toc-pair-debugging-exercise-logitboot" class="nav-link" data-scroll-target="#pair-debugging-exercise-logitboot">Pair debugging exercise: <code>logitBoot()</code></a></li>
+  <li><a href="#pair-debugging-exercise" id="toc-pair-debugging-exercise" class="nav-link" data-scroll-target="#pair-debugging-exercise">Pair debugging exercise</a>
+  <ul class="collapse">
+  <li><a href="#buggy-logitboot-function" id="toc-buggy-logitboot-function" class="nav-link" data-scroll-target="#buggy-logitboot-function">Buggy <code>logitBoot()</code> function</a></li>
+  <li><a href="#debugging-steps" id="toc-debugging-steps" class="nav-link" data-scroll-target="#debugging-steps">Debugging steps</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -590,82 +594,130 @@ Note
 <p>The R mailing lists are a way to get free advice from the experts, who include some of the world’s most knowledgeable R experts - seriously - members of the R core development team contribute frequently. The cost is that you should do your homework and that sometimes the responses you get <strong>may be blunt</strong>, along the lines of “read the <a href="https://cran.r-project.org/manuals.html">manual</a>”. Chris considers it a pretty good tradeoff - where else do you get the foremost experts in a domain actually helping you?</p>
 </section>
 </section>
-<section id="pair-debugging-exercise-logitboot" class="level1">
-<h1>Pair debugging exercise: <code>logitBoot()</code></h1>
-<p>For the group work this week we will step through debugging the <code>logitBoot</code> function. This is a function that computes a bootstrapped estimate of the standard error of the coefficient on a logistic regression model. From R’s implementation of logistic regression, stored in the <code>mod</code> variable, we can see that the estimated standard error is around 3. However, by calling <code>logitBoot(my_data$y, my_data$x)</code>, which is supposed to get this same standard error, we return a value of over 100.</p>
+<section id="pair-debugging-exercise" class="level1">
+<h1>Pair debugging exercise</h1>
+<p>For the group work this week we will step through debugging the <code>logitBoot()</code> function. This is a function that computes a bootstrapped estimate of the standard error of the coefficient on a logistic regression model. From R’s implementation of logistic regression, stored in the <code>mod</code> variable below, we can see that the estimated standard error is around 3.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">'./data.csv'</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># fit model in R</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> my_data, <span class="at">family =</span> <span class="st">'binomial'</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># note that the standard error for the regression coefficient is ~3</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = y ~ x, family = "binomial", data = my_data)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-0.6045  -0.2976  -0.1867  -0.1332   2.4429  
+
+Coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)
+(Intercept)   -1.553      1.181  -1.315    0.188
+x             -4.052      3.231  -1.254    0.210
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 16.794  on 49  degrees of freedom
+Residual deviance: 14.823  on 48  degrees of freedom
+AIC: 18.823
+
+Number of Fisher Scoring iterations: 7</code></pre>
+</div>
+</div>
+<section id="buggy-logitboot-function" class="level2">
+<h2 class="anchored" data-anchor-id="buggy-logitboot-function">Buggy <code>logitBoot()</code> function</h2>
+<p>Take a quick look at the source code and output below:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">'./data.csv'</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>logitBoot <span class="ot">&lt;-</span> <span class="cf">function</span>(y, x, <span class="at">n_boot =</span> <span class="dv">2000</span>) {</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(<span class="dv">5</span>)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># do n_boot random permutations of x and y and return coefficient on x with</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># the myGLM function</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  boot_coefs <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">seq_len</span>(n_boot), myGLM, y, x)</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># compute standard deviation of those estimates and return</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>  boot_se <span class="ot">&lt;-</span> <span class="fu">sd</span>(boot_coefs)</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(boot_se)</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>myGLM <span class="ot">&lt;-</span> <span class="cf">function</span>(i, y, x) {</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(y)</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># randomly sample with replacement from the observations in the data</span></span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>  boot_sample <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">seq_len</span>(n), n, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># create vectors of the bootstrapped samples</span></span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>  x_boot <span class="ot">&lt;-</span> x[boot_sample]</span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>  y_boot <span class="ot">&lt;-</span> y[boot_sample]</span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>  <span class="co"># fit logistic regression on permutated data</span></span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>  mod_boot <span class="ot">&lt;-</span> <span class="fu">glm</span>(y_boot <span class="sc">~</span> x_boot, <span class="at">family =</span> <span class="st">'binomial'</span>)</span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># return the estimated coefficient</span></span>
+<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(mod_boot<span class="sc">$</span>coef[<span class="dv">2</span>])</span>
+<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-32"><a href="#cb21-32" aria-hidden="true" tabindex="-1"></a><span class="co"># estimate standard error with our bootstrap function</span></span>
+<span id="cb21-33"><a href="#cb21-33" aria-hidden="true" tabindex="-1"></a><span class="co"># note the overestimation of standard error 119 &gt; 3</span></span>
+<span id="cb21-34"><a href="#cb21-34" aria-hidden="true" tabindex="-1"></a><span class="fu">logitBoot</span>(my_data<span class="sc">$</span>y, my_data<span class="sc">$</span>x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: glm.fit: algorithm did not converge</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 119.099</code></pre>
+</div>
+</div>
+<p>When calling <code>logitBoot(my_data$y, my_data$x)</code>, which is supposed to give the same standard error of around 3, we return a value of over 100.</p>
+</section>
+<section id="debugging-steps" class="level2">
+<h2 class="anchored" data-anchor-id="debugging-steps">Debugging steps</h2>
 <p>The goal here is to figure out what is going wrong and, if time, fix the issue. Below are a list of steps you can take reach this goal. Note, that the functions are in the <code>logitBoot.R</code> script, so it will easiest to open that file and work from there.</p>
 <ul>
 <li>Load <code>data.csv</code> and look at the data to see what we are working with. There should be a column of <code>y</code> values (which are 0 or 1) and a column of <code>x</code> values (which are continuous).
 <ul>
 <li>The goal of logistic regression is to model which class <code>y</code> (0 or 1) an observation falls in based on <code>x</code>.</li>
 </ul></li>
-<li>Load the functions in the <code>logitBoot.R</code> script.</li>
-<li>Fit the logistic regression model in R using the <code>glm</code> function (code provided) and look at the <code>summary(mod)</code>
+<li>Load the functions in the <code>logitBoot.R</code> script
 <ul>
-<li>Notice the estimated standard error on the coefficient for <code>x</code> is around 3.</li>
-</ul></li>
+<li>If you’re using RStudio, be sure to set the working directory to the <code>labs/04/</code> directory. You can do this Using Session &gt; Set Working Directory &gt; To Source File Location from the top menu. Then you can use the <strong>Source</strong> button at the top of the RStudio source file editor to source in the whole file at one time.</li>
 <li>Try to run the <code>logitBoot(my_data$y, my_data$x)</code>. Notice the overestimate and the warning. We want to figure out what is going wrong.</li>
-<li>Call <code>debug(logitBoot)</code> and rerun <code>logitBoot(my_data$y, my_data$x)</code>. This will take you into the browser window for <code>logitBoot</code> (if you get a fatal error at this step, you may need to update RStudio)
+</ul></li>
+<li>Use <strong>one</strong> of the methods we discussed about to debug <code>logitBoot</code>:
 <ul>
-<li>Run through each line until you compute the vector <code>boot_coefs</code>. Use the <code>range</code> and <code>quantile</code> functions to examine <code>boot_coefs</code> and see what could be going wrong.</li>
+<li>add breakpoints</li>
+<li>use <code>debug()</code>/<code>debugonce()</code></li>
+<li>manually add a call to <code>browser()</code></li>
+<li>use <code>trace()</code> to temporarily add a call to <code>browser()</code></li>
+</ul></li>
+<li>Now rerun <code>logitBoot(my_data$y, my_data$x)</code>.
+<ul>
+<li>Run through each line until you compute the vector <code>boot_coefs</code>. Use the <code>range()</code>, <code>quantile()</code>, <code>mean()</code>, <code>median()</code>, etc. functions to examine statistics from <code>boot_coefs</code> and try to find any strange values.</li>
 <li>Find the index of sample that is causing the issue.</li>
 </ul></li>
-<li>Now that we have identified where the issue is occuring we still need to figure out why that paricular permutation is problematic. For that we will use <code>trace</code> to temporarily edit our functions.
+<li>Now that we have identified where the issue is occuring we still need to figure out why that particular permutation is problematic.
 <ul>
-<li>Call <code>trace(myGLM, edit = TRUE)</code> and edit the function to return a list of coeficient, <code>y_boot</code>, and <code>x_boot</code>.</li>
-<li>Call <code>trace(logitBoot, edit = TRUE)</code> and change <code>sapply</code> to <code>lapply</code></li>
+<li>Edit the function to return a list of coefficient, <code>y_boot</code>, and <code>x_boot</code>.</li>
+<li>Change <code>sapply</code> to <code>lapply</code>.</li>
 </ul></li>
-<li>Rerun <code>logitBoot(my_data$y, my_data$x)</code>, which will again open the browser window. Step through the code lines and look at <code>boot_coefs[[i]]</code> where <code>i</code> is the index found in step 5.
+<li>Rerun <code>logitBoot(my_data$y, my_data$x)</code>, which will start debugging where you set the debug point. Step through the code lines and look at <code>boot_coefs[[i]]</code> where <code>i</code> is the index found in step 5.
 <ul>
 <li>Look at the values of <code>x_boot</code> that correspond to <code>y_boot = 1</code>. Also, <code>sort</code> the <code>x_boot</code> output. Can you tell what is going wrong?</li>
 </ul></li>
-<li>Now that we know what is causing the warning we can call <code>untrace(logitBoot)</code> and <code>untrace(myGLM)</code> to remove the temporary edits.</li>
+<li>Now that we know what is causing the warning we can remove the changes that you made, so that <code>logitBoot()</code> outputs a vector again, instead of a list. Alternatively, for extra practice with nested list structures, you can modify <code>logitBoot()</code> further to work with the new <code>boot_coefs</code> data structure.</li>
 </ul>
-<p>After identifing the issue and we could edit the <code>myGLM</code> function to not compute the model when that particular issue arises. Alternatively, we could employ a more holistic approach with <code>tryCatch</code>. With this we can handle unforseen issues that may arise. (This is what is implemented in the <code>logitBoot_solution.R</code> script, which I will push after section.) Note, with the fixed code we now seem to underestimating the standard error. I am not sure why that is happening… because as far as I can tell the code is working correctly.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">'./data.csv'</span>)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>logitBoot <span class="ot">&lt;-</span> <span class="cf">function</span>(y, x, <span class="at">n_boot =</span> <span class="dv">2000</span>) {</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(<span class="dv">5</span>)</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># do n_boot random permutations of x and y and return coefficient on x with</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># the myGLM function</span></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  boot_coefs <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">seq_len</span>(n_boot), myGLM, y, x)</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># compute standard deviation of those estimates and return</span></span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  boot_se <span class="ot">&lt;-</span> <span class="fu">sd</span>(boot_coefs)</span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(boot_se)</span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>myGLM <span class="ot">&lt;-</span> <span class="cf">function</span>(i, y, x) {</span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(y)</span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># randomly sample with replacement from the observations in the data</span></span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>  boot_sample <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">seq_len</span>(n), n, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># create vectors of the bootstrapped samples</span></span>
-<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>  x_boot <span class="ot">&lt;-</span> x[boot_sample]</span>
-<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>  y_boot <span class="ot">&lt;-</span> y[boot_sample]</span>
-<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>  <span class="co"># fit logistic regression on permutated data</span></span>
-<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>  mod_boot <span class="ot">&lt;-</span> <span class="fu">glm</span>(y_boot <span class="sc">~</span> x_boot, <span class="at">family =</span> <span class="st">'binomial'</span>)</span>
-<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># return the estimated coefficient</span></span>
-<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(mod_boot<span class="sc">$</span>coef[<span class="dv">2</span>])</span>
-<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a><span class="co"># fit model in R</span></span>
-<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> my_data, <span class="at">family =</span> <span class="st">'binomial'</span>)</span>
-<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a><span class="co"># note that the standard error for the regression coefficient is ~3</span></span>
-<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span>
-<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a><span class="co"># estimate standard error with our bootstrap function</span></span>
-<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a><span class="co"># note the overestimation of standard error 119 &gt; 3</span></span>
-<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a><span class="fu">logitBoot</span>(my_data<span class="sc">$</span>y, my_data<span class="sc">$</span>x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<p>After identifying the issue, we could edit the <code>myGLM()</code> function to not compute the model when that particular issue arises. Or we could instead employ a more holistic approach with <code>tryCatch()</code>. With this we can handle unforseen issues that may arise. (This is what is implemented in the <code>logitBoot_solution.R</code> script, which I will push after section.) Note, with the fixed code we now seem to underestimating the standard error. I am not sure why that is happening… because as far as I can tell the code is working correctly.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
