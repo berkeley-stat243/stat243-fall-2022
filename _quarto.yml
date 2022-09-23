@@ -45,6 +45,8 @@ website:
           text: "Lab 2"
         - file: labs/03/reproducibility.md
           text: "Lab 3"
+        - file: labs/04/debugging.Rmd
+          text: "Lab 4"
     - id: howtos
       title: "How tos"
       contents:
