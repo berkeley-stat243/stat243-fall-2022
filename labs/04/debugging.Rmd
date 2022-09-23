@@ -244,46 +244,29 @@ homework and that sometimes the responses you get __may be blunt__, along the li
 of “read the [manual](https://cran.r-project.org/manuals.html)”. Chris considers it a
 pretty good tradeoff - where else do you get the foremost experts in a domain actually helping you?
 
-# Pair debugging exercise: `logitBoot()`
+# Pair debugging exercise
 
-For the group work this week we will step through debugging the `logitBoot`
+For the group work this week we will step through debugging the `logitBoot()`
 function. This is a function that computes a bootstrapped estimate of the
 standard error of the coefficient on a logistic regression model. From R's
-implementation of logistic regression, stored in the `mod` variable, we can see
-that the estimated standard error is around 3. However, by calling
-`logitBoot(my_data$y, my_data$x)`, which is supposed to get this same standard
-error, we return a value of over 100.
+implementation of logistic regression, stored in the `mod` variable below, we
+can see that the estimated standard error is around 3.
 
-The goal here is to figure out what is going wrong and, if time, fix the issue.
-Below are a list of steps you can take reach this goal. Note, that the functions
-are in the `logitBoot.R` script, so it will easiest to open that file and work
-from there.
+```{r}
+my_data <- read.csv('./data.csv')
 
-  - Load `data.csv` and look at the data to see what we are working with.   There should be a column of `y` values (which are 0 or 1) and a column of `x` values (which are continuous).
-    - The goal of logistic regression is to model which class `y` (0 or 1) an observation falls in based on `x`.
-  - Load the functions in the `logitBoot.R` script.
-  - Fit the logistic regression model in R using the `glm` function (code provided) and look at the `summary(mod)`
-    - Notice the estimated standard error on the coefficient for `x` is around 3.
-  - Try to run the `logitBoot(my_data$y, my_data$x)`.  Notice the overestimate and the warning.  We want to figure out what is going wrong.
-  - Call `debug(logitBoot)` and rerun `logitBoot(my_data$y, my_data$x)`.  This will take you into the browser window for `logitBoot` (if you get a fatal error at this step, you may need to update RStudio)
-    - Run through each line until you compute the vector `boot_coefs`.  Use the `range` and `quantile` functions to examine `boot_coefs` and see what could be going wrong.
-    - Find the index of sample that is causing the issue.
-  - Now that we have identified where the issue is occuring we still need to figure out why that paricular permutation is problematic.  For that we will use `trace` to temporarily edit our functions.
-    - Call `trace(myGLM, edit = TRUE)` and edit the function to return a list of coeficient, `y_boot`, and `x_boot`.
-    - Call `trace(logitBoot, edit = TRUE)` and change `sapply` to `lapply`
-  - Rerun `logitBoot(my_data$y, my_data$x)`, which will again open the browser window. Step through the code lines and look at `boot_coefs[[i]]` where `i` is the index found in step 5.
-    - Look at the values of `x_boot` that correspond to `y_boot = 1`.  Also, `sort` the `x_boot` output.  Can you tell what is going wrong?
-  - Now that we know what is causing the warning we can call `untrace(logitBoot)` and `untrace(myGLM)` to remove the temporary edits.
+# fit model in R
+mod <- glm(y ~ x, data = my_data, family = 'binomial')
 
-After identifing the issue and we could edit the `myGLM` function to not compute
-the model when that particular issue arises. Alternatively, we could employ a
-more holistic approach with `tryCatch`. With this we can handle unforseen issues
-that may arise. (This is what is implemented in the `logitBoot_solution.R`
-script, which I will push after section.) Note, with the fixed code we now seem
-to underestimating the standard error. I am not sure why that is happening...
-because as far as I can tell the code is working correctly.
+# note that the standard error for the regression coefficient is ~3
+summary(mod)
+```
 
-```{r, eval=FALSE}
+## Buggy `logitBoot()` function
+
+Take a quick look at the source code and output below:
+
+```{r, warning=TRUE}
 my_data <- read.csv('./data.csv')
 
 logitBoot <- function(y, x, n_boot = 2000) {
@@ -315,13 +298,62 @@ myGLM <- function(i, y, x) {
   return(mod_boot$coef[2])
 }
 
-# fit model in R
-mod <- glm(y ~ x, data = my_data, family = 'binomial')
-
-# note that the standard error for the regression coefficient is ~3
-summary(mod)
-
 # estimate standard error with our bootstrap function
 # note the overestimation of standard error 119 > 3
 logitBoot(my_data$y, my_data$x)
 ```
+
+When calling `logitBoot(my_data$y, my_data$x)`, which is supposed to give the
+same standard error of around 3, we return a value of over 100.
+
+## Debugging steps
+
+The goal here is to figure out what is going wrong and, if time, fix the issue.
+Below are a list of steps you can take reach this goal. Note, that the functions
+are in the `logitBoot.R` script, so it will easiest to open that file and work
+from there.
+
+  - Load `data.csv` and look at the data to see what we are working with. There
+    should be a column of `y` values (which are 0 or 1) and a column of `x`
+    values (which are continuous).
+    - The goal of logistic regression is to model which class `y` (0 or 1) an
+      observation falls in based on `x`.
+  - Load the functions in the `logitBoot.R` script
+    - If you're using RStudio, be sure to set the working directory to the
+    `labs/04/` directory. You can do this Using Session > Set Working Directory > To Source File Location 
+    from the top menu. Then you can use the **Source** button at the top of the RStudio source file editor 
+    to source in the whole file at one time.
+    - Try to run the `logitBoot(my_data$y, my_data$x)`. Notice the overestimate
+      and the warning. We want to figure out what is going wrong.
+  - Use **one** of the methods we discussed about to debug `logitBoot`:
+    - add breakpoints
+    - use `debug()`/`debugonce()`
+    - manually add a call to `browser()`
+    - use `trace()` to temporarily add a call to `browser()`
+  - Now rerun `logitBoot(my_data$y, my_data$x)`.
+    - Run through each line until you compute the vector `boot_coefs`. Use the
+      `range()`, `quantile()`, `mean()`, `median()`, etc. functions to examine
+      statistics from `boot_coefs` and try to find any strange values.
+    - Find the index of sample that is causing the issue.
+  - Now that we have identified where the issue is occuring we still need to
+    figure out why that particular permutation is problematic.
+    - Edit the function to return a list of coefficient, `y_boot`, and `x_boot`.
+    - Change `sapply` to `lapply`.
+  - Rerun `logitBoot(my_data$y, my_data$x)`, which will start debugging where
+    you set the debug point. Step through the code lines and look at
+    `boot_coefs[[i]]` where `i` is the index found in step 5.
+    - Look at the values of `x_boot` that correspond to `y_boot = 1`. Also,
+      `sort` the `x_boot` output. Can you tell what is going wrong?
+  - Now that we know what is causing the warning we can remove the changes that
+    you made, so that `logitBoot()` outputs a vector again, instead of a list.
+    Alternatively, for extra practice with nested list structures, you can
+    modify `logitBoot()` further to work with the new `boot_coefs` data
+    structure.
+
+After identifying the issue, we could edit the `myGLM()` function to not compute
+the model when that particular issue arises. Or we could instead employ a more
+holistic approach with `tryCatch()`. With this we can handle unforseen issues that
+may arise. (This is what is implemented in the `logitBoot_solution.R` script,
+which I will push after section.) Note, with the fixed code we now seem to
+underestimating the standard error. I am not sure why that is happening...
+because as far as I can tell the code is working correctly.
