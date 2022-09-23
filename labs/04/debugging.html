@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Zoe Vernon, Andrew Vaughn, James Duncan">
+<meta name="dcterms.date" content="2022-09-23">
+
+<title>Statistics 243 Fall 2022 - Debugging in R</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../labs/03/reproducibility.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Statistics 243 Fall 2022</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html">Home</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../syllabus.html">Syllabus</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../office_hours.html">Office hours</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../schedule.html">Schedule</a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-units" role="button" data-bs-toggle="dropdown" aria-expanded="false">Units</a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-units">    
+        <li>
+    <a class="dropdown-item" href="../../units/unit1-intro.html">
+ <span class="dropdown-text">Unit 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../units/unit2-dataTech.html">
+ <span class="dropdown-text">Unit 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../units/unit3-bash.html">
+ <span class="dropdown-text">Unit 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../units/unit4-goodPractices.html">
+ <span class="dropdown-text">Unit 4</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../units/unit5-programming.html">
+ <span class="dropdown-text">Unit 5</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-labs" role="button" data-bs-toggle="dropdown" aria-expanded="false">Labs</a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-labs">    
+        <li>
+    <a class="dropdown-item" href="../../labs/01/intro_git_knitr.html">
+ <span class="dropdown-text">Lab 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../labs/02/assertionsAndTesting.html">
+ <span class="dropdown-text">Lab 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../labs/03/reproducibility.html">
+ <span class="dropdown-text">Lab 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../labs/04/debugging.html">
+ <span class="dropdown-text">Lab 4</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-how-tos" role="button" data-bs-toggle="dropdown" aria-expanded="false">How tos</a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-how-tos">    
+        <li>
+    <a class="dropdown-item" href="../../howtos/RandRStudioInstall.html">
+ <span class="dropdown-text">Installing R &amp; RStudio</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../howtos/accessingPython.html">
+ <span class="dropdown-text">Accessing Python</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../howtos/accessingUnixCommandLine.html">
+ <span class="dropdown-text">Accessing the Unix Command Line</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../howtos/gitInstall.html">
+ <span class="dropdown-text">Installing Git</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../howtos/ps-submission.html">
+ <span class="dropdown-text">Problem Set Submissions</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Windows</li>
+        <li>
+    <a class="dropdown-item" href="../../howtos/windowsAndLinux.html">
+ <span class="dropdown-text">Installing the Linux Subsystem on Windows</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../howtos/windowsInstall.html">
+ <span class="dropdown-text">Using R, RStudio, and LaTeX on Windows</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="https://edstem.org/us/courses/25090/discussion/">Discussion</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://statistics.berkeley.edu/computing/training/tutorials">Tutorials</a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Debugging in R</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../labs/01/intro_git_knitr.html" class="sidebar-item-text sidebar-link">Lab 1</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../labs/02/assertionsAndTesting.html" class="sidebar-item-text sidebar-link">Lab 2</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../labs/03/reproducibility.html" class="sidebar-item-text sidebar-link">Lab 3</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../labs/04/debugging.html" class="sidebar-item-text sidebar-link active">Lab 4</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#useful-links" id="toc-useful-links" class="nav-link active" data-scroll-target="#useful-links">Useful links</a></li>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning objectives</a></li>
+  <li><a href="#rs-debugging-tools" id="toc-rs-debugging-tools" class="nav-link" data-scroll-target="#rs-debugging-tools"><code>R</code>’s debugging tools</a>
+  <ul class="collapse">
+  <li><a href="#tools" id="toc-tools" class="nav-link" data-scroll-target="#tools">Tools</a></li>
+  <li><a href="#example-of-debugging" id="toc-example-of-debugging" class="nav-link" data-scroll-target="#example-of-debugging">Example of debugging</a></li>
+  </ul></li>
+  <li><a href="#common-errors" id="toc-common-errors" class="nav-link" data-scroll-target="#common-errors">Common errors</a></li>
+  <li><a href="#getting-help-online" id="toc-getting-help-online" class="nav-link" data-scroll-target="#getting-help-online">Getting help online</a>
+  <ul class="collapse">
+  <li><a href="#online-forums-mailing-lists" id="toc-online-forums-mailing-lists" class="nav-link" data-scroll-target="#online-forums-mailing-lists">Online forums / mailing lists</a></li>
+  <li><a href="#asking-questions-online" id="toc-asking-questions-online" class="nav-link" data-scroll-target="#asking-questions-online">Asking questions online</a></li>
+  </ul></li>
+  <li><a href="#pair-debugging-exercise-logitboot" id="toc-pair-debugging-exercise-logitboot" class="nav-link" data-scroll-target="#pair-debugging-exercise-logitboot">Pair debugging exercise: <code>logitBoot()</code></a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">Debugging in R</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Zoe Vernon, Andrew Vaughn, James Duncan </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 23, 2022</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<p><a href="./debugging.pdf" class="btn btn-primary">PDF</a></p>
+<section id="useful-links" class="level1">
+<h1>Useful links</h1>
+<ul>
+<li>General advice for debugging
+<ul>
+<li><a href="https://www.codementor.io/mattgoldspink/how-to-debug-code-efficiently-and-effectively-du107u9jh">Efficient Debugging by Goldspink</a></li>
+<li><a href="https://blog.hartleybrody.com/debugging-code-beginner/">Debugging for Beginners by Brody</a></li>
+</ul></li>
+<li>R specific debugging
+<ul>
+<li><a href="https://adv-r.hadley.nz/debugging.html">Advanced R by Wickham</a></li>
+<li><a href="https://www.rstudio.com/resources/rstudioconf-2018/debugging-techniques-in-rstudio/">Debugging in Rstudio by Gadrow</a></li>
+</ul></li>
+<li>The material for this document is based on the SCF tutorial linked below.
+<ul>
+<li><a href="https://github.com/berkeley-scf/tutorial-R-debugging">Berkeley-SCF tutorial by Chris Paciorek</a></li>
+<li><a href="https://www.youtube.com/watch?v=-yy_3htRHdU&amp;feature=youtu.be&amp;ab_channel=berkeley-scf">Debugging demo by Chris</a></li>
+</ul></li>
+</ul>
+</section>
+<section id="learning-objectives" class="level1">
+<h1>Learning objectives</h1>
+<p>The goal for this section is to become familiar with the debugging tools available in R as well as provide additional information on online forums and common errors in R. Note that the debugging tools in R are difficult to illustrate in a Rmd document, so I recommend watching this <a href="https://www.youtube.com/watch?v=-yy_3htRHdU&amp;feature=youtu.be&amp;ab_channel=berkeley-scf">screencast</a> from the SCF tutorial. I will also do a live demo at the beginning of section if that you all would find that useful.</p>
+<p>Also, note that the material in this PDF is a summary of SCF tutorial on debugging, so if you want to see more detail please visit the <a href="https://github.com/berkeley-scf/tutorial-R-debugging">tutorial GitHub</a>. The tutorial also has some good tips for defensive programming that you may find useful for preventing and catching errors in your code.</p>
+</section>
+<section id="rs-debugging-tools" class="level1">
+<h1><code>R</code>’s debugging tools</h1>
+<p>Below is a list of the debugging tools available in R. I took screenshots illustrating how some of the tools work in RStudio in the example below.</p>
+<section id="tools" class="level2">
+<h2 class="anchored" data-anchor-id="tools">Tools</h2>
+<ul>
+<li>Use <code>traceback</code> to view the call stack, which can help pinpoint where an error is occurring.</li>
+<li>Use <code>recover</code> to navigate the stack of active function calls at the time of the error and browse within the desired call. If you set <code>options(error = recover)</code> then <code>recover</code> is invoked whenever an error occurs. You can revert the options to the default with <code>options(error = NULL)</code>.</li>
+<li><code>browser()</code>: pauses current execution, provides an interactive interpreter. You can now step through a function line-by-line to find errors.</li>
+<li><code>debug(someFunc)</code>: sets a <code>browser()</code> statement at the first line of <code>someFunc</code>
+<ul>
+<li><code>undebug(someFunc)</code> removes the <code>debug()</code> statement. Or close the <code>R</code> session</li>
+<li><code>debugonce(someFunc)</code> lets you debug only once, no need to run <code>undebug()</code></li>
+</ul></li>
+<li><code>trace()</code>: allows you to temporarily modify a function without saving the modifications
+<ul>
+<li>This is especially helpful for debugging functions in code where you don’t have the source handy (e.g., in the packages you’re using).</li>
+<li>Edits will be removed when session ends, or when you call <code>untrace()</code> on the function</li>
+</ul></li>
+</ul>
+</section>
+<section id="example-of-debugging" class="level2">
+<h2 class="anchored" data-anchor-id="example-of-debugging">Example of debugging</h2>
+<p>We will use the <code>jackKnife.R</code> code to understand the debugging tools.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>gamma_est <span class="ot">&lt;-</span> <span class="cf">function</span>(data) {</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># this fits a gamma distribution to a collection of numbers</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> <span class="fu">mean</span>(data)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  v <span class="ot">&lt;-</span> <span class="fu">var</span>(data)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  s <span class="ot">&lt;-</span> v<span class="sc">/</span>m</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  a <span class="ot">&lt;-</span> m<span class="sc">/</span>s</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">a=</span>a,<span class="at">s=</span>s))</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>calc_var <span class="ot">&lt;-</span> <span class="cf">function</span>(estimates){</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  var_of_ests <span class="ot">&lt;-</span> <span class="fu">apply</span>(estimates, <span class="dv">2</span>, var)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(((n<span class="dv">-1</span>)<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>n)<span class="sc">*</span>var_of_ests)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>gamma_jackknife <span class="ot">&lt;-</span> <span class="cf">function</span>(data) {</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="do">## jackknife the estimation</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(data)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  jack_estimates <span class="ot">&lt;-</span> <span class="fu">gamma_est</span>(data[<span class="sc">-</span><span class="dv">1</span>])</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (omitted_point <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>n) {</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    jack_estimates <span class="ot">&lt;-</span> <span class="fu">rbind</span>(jack_estimates, <span class="fu">gamma_est</span>(data[<span class="sc">-</span>omitted_point]))</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  jack_var <span class="ot">&lt;-</span> <span class="fu">calc_var</span>(jack_estimates)</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">sqrt</span>(jack_var))</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="co"># jackknife gamma dist. estimates of cat heart weights</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="fu">gamma_jackknife</span>(MASS<span class="sc">::</span>cats<span class="sc">$</span>Hwt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in FUN(newX[, i], ...): is.atomic(x) is not TRUE</code></pre>
+</div>
+</div>
+<p>Notice that there is an error returned by the function, but it is unclear what is producing the error. We can start by calling <code>traceback()</code> to see what may have gone wrong.</p>
+<p><img src="figures/traceback.png" class="img-fluid" style="width:95.0%"></p>
+<p><code>traceback()</code> shows us the set of calls leading up to the error. We see that the error is produced at 5, and thus came from the call at 4 <code>FUN(newX[, i], ...)</code> which occured after calling <code>calc_var()</code> function and attempting to excecute the <code>apply</code> statement.</p>
+<p>An alternative to <code>traceback()</code> is <code>recover()</code>. If we have set <code>options(error = recover)</code> and call <code>gamma_jackknife(MASS::cats$Hwt)</code> again we will see the call stack (in reverse order of <code>traceback</code>), but now we have the option to select a number in the stack that we would like to enter. I selected 2 and entered the <code>calc_var</code> function. Typing <code>ls()</code> showed me that the only object in the function environment is <code>estimates</code>, which is a matrix. However, I see the <code>is.atomic(x)</code> error when I try to compute the variance of a column. When we look at the column, we can now see that we output a list, instead of a vector and we know exactly where the error is occuring. To exit we type <code>Q</code> and hit enter.</p>
+<p><img src="figures/recover.png" class="img-fluid" style="width:95.0%"></p>
+<p>Now let’s say we want to browse in the <code>gamma_jackknife()</code> function to figure out why we are passing a list to <code>calc_var</code> we can utlize the <code>debug()</code> function, which will allow us to step through <code>gamma_jackknife</code> one line at a time. We first call <code>debug(gamma_jackknife)</code> and then when we attempt to run <code>gamma_jackknife(MASS::cats$Hwt)</code>, because an error is produce, we will enter the browser mode.</p>
+<p><img src="figures/jackknife.png" class="img-fluid" style="width:95.0%"></p>
+<p>We can use the graphical interface in RStudio or the command line, with the command <code>n</code> to step through lines of the code and see what it outputs. Here we see that <code>gamma_est</code> is returning a list and that is likely the source of our issues.</p>
+<p>For more details on these functions, as well as how to use <code>trace</code> to temporarialy add edits see the SCF tutorial and the screencast. Also, as I stated above if there is enough interest I can do a live demo at the beginning of section.</p>
+</section>
+</section>
+<section id="common-errors" class="level1">
+<h1>Common errors</h1>
+<ul>
+<li><p>Parenthesis mis-matches</p></li>
+<li><p><code>[[...]]</code> vs.&nbsp;<code>[...]</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># example list</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>myList <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">"A"</span><span class="ot">=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>               <span class="st">"B"</span><span class="ot">=</span><span class="dv">11</span><span class="sc">:</span><span class="dv">20</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a> <span class="co"># one set</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Type: "</span>, <span class="fu">typeof</span>(myList[<span class="dv">1</span>]), <span class="st">"</span><span class="sc">\n</span><span class="st">Length: "</span>, <span class="fu">length</span>(myList[<span class="dv">1</span>]), <span class="at">sep =</span> <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Type: list
+Length: 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a> <span class="co"># two sets</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Type: "</span>, <span class="fu">typeof</span>(myList[[<span class="dv">1</span>]]), <span class="st">"</span><span class="sc">\n</span><span class="st">Length: "</span>, <span class="fu">length</span>(myList[[<span class="dv">1</span>]]), <span class="at">sep =</span> <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Type: integer
+Length: 10</code></pre>
+</div>
+</div></li>
+<li><p><code>==</code> vs.&nbsp;<code>=</code></p></li>
+<li><p>Comparing real numbers exactly using <code>==</code> is dangerous because numbers on a computer are only represented to limited numerical precision.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># exact comparison</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">/</span><span class="dv">3</span> <span class="sc">==</span> <span class="dv">4</span><span class="sc">*</span>(<span class="dv">4</span><span class="sc">/</span><span class="dv">12</span> <span class="sc">-</span> <span class="dv">3</span><span class="sc">/</span><span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># approximate comparison</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#  default tolerance is sqrt(.Machine$double.eps)</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">all.equal</span>(<span class="at">target =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>, <span class="at">current =</span> <span class="dv">4</span><span class="sc">*</span>(<span class="dv">4</span><span class="sc">/</span><span class="dv">12</span> <span class="sc">-</span> <span class="dv">3</span><span class="sc">/</span><span class="dv">12</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div></li>
+<li><p>You expect a single value but execution of the code gives a vector</p></li>
+<li><p>You want to compare an entire vector but your code just compares the first value (e.g., in an if statement)</p>
+<ul>
+<li><p>use <code>identical()</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (x <span class="sc">==</span> y) {</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Equal"</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Not equal"</span>)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in if (x == y) {: the condition has length &gt; 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">identical</span>(x, y)) {</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Equal"</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Not equal"</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Not equal"</code></pre>
+</div>
+</div></li>
+</ul></li>
+<li><p>Silent type conversion when you don’t want it, or lack of coercion where you’re expecting it</p>
+<ul>
+<li>eg., <code>read.csv()</code> and the <code>stringsAsFactors</code> argument</li>
+</ul></li>
+<li><p>Using the wrong function or variable name</p></li>
+<li><p>Giving unnamed arguments to a function in the wrong order</p></li>
+<li><p>In an if-else statement, the <code>else</code> cannot be on its own line (unless all the code is enclosed in <code>{}</code>) because R will see the <code>if</code> part of the statement, which is a valid R statement, will execute that, and then will encounter the <code>else</code> and return an error.</p></li>
+<li><p>Forgetting to define a variable in the environment of a function and having R, via lexical scoping, get that variable as a global variable from one of the enclosing environments. At best the types are not compatible and you get an error; at worst, you use a garbage value and the bug is hard to trace. In some cases your code may work fine when you develop the code (if the variable exists in the enclosing environment), but then may not work when you restart R if the variable no longer exists or is different.</p>
+<ul>
+<li>Clear your environment before testing (<code>rm(list=ls());gc()</code>)</li>
+<li>Restart <code>R</code> session and test</li>
+</ul></li>
+<li><p>R (usually helpfully) drops matrix and array dimensions that are extraneous. This can sometimes confuse later code that expects an object of a certain dimension.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3x3 matrix</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>myMat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">data =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">3</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># lost dimensions</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(myMat[<span class="dv">1</span>, ])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>NULL</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># keep dimensions</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(myMat[<span class="dv">1</span>, , <span class="at">drop =</span> <span class="cn">FALSE</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 3</code></pre>
+</div>
+</div></li>
+</ul>
+</section>
+<section id="getting-help-online" class="level1">
+<h1>Getting help online</h1>
+<section id="online-forums-mailing-lists" class="level2">
+<h2 class="anchored" data-anchor-id="online-forums-mailing-lists">Online forums / mailing lists</h2>
+<p>There are online forums that have lots of useful postings. In general if you have an error, others have already posted about it.</p>
+<ul>
+<li>Simple web searches - <em>a la Google</em>
+<ul>
+<li>You may want to include “in R” or preface your question with “R yada yada yada”</li>
+</ul></li>
+<li><a href="http://stackoverflow.com">Stack overflow</a>: R stuff will be tagged with ‘R’
+<ul>
+<li><a href="http://stackoverflow.com/questions/tagged/r">http://stackoverflow.com/questions/tagged/r</a></li>
+</ul></li>
+<li>R help special interest groups (SIG) such as r-sig-hpc (high performance computing), r-sig-mac (R on Macs), etc.
+<ul>
+<li>To search a SIG you might include the name of the SIG in the search string</li>
+</ul></li>
+<li><a href="http://Rseek.org">Rseek.org</a> for web searches restricted to sites that have information on R</li>
+<li><a href="https://stat.ethz.ch/mailman/listinfo/r-help">R-help mailing list</a></li>
+</ul>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Of course these are also helpful for figuring out how to do things, not just for fixing bugs. For example, this <a href="http://www.r-bloggers.com/the-guerilla-guide-to-r/?utm_source=feedburner&amp;utm_medium=email&amp;utm_campaign=Feed%3A+RBloggers+%28R+bloggers%29">blogpost</a> has a guide to R based simply on Stack Overflow posts.</p>
+</div>
+</div>
+</section>
+<section id="asking-questions-online" class="level2">
+<h2 class="anchored" data-anchor-id="asking-questions-online">Asking questions online</h2>
+<p>If you’ve searched the archive and haven’t found an answer to your problem, you can often get help by posting to the R-help mailing list or one of the other lists mentioned above. A few guidelines (generally relevant when posting to mailing lists beyond just the R lists):</p>
+<ul>
+<li>Search the archives and look through relevant R books or manuals first.
+<ul>
+<li><a href="http://adv-r.had.co.nz/">Advanced R</a> by Hadley Wickham</li>
+</ul></li>
+<li>Boil your problem down to the essence of the problem, giving an example, including the output and error message
+<ul>
+<li>Former GSI’s first <a href="https://stackoverflow.com/questions/49822833/r-package-call-c-function-within-rcpp">SO</a> post
+<ul>
+<li>Notice the not-so-polite comments, see the remark below</li>
+</ul></li>
+<li>Former GSI’s second <a href="https://stackoverflow.com/questions/56298503/r-vignette-fails-on-internal-package-function">SO</a> question</li>
+</ul></li>
+<li>Say what version of R, what operating system and what operating system version you’re using.
+<ul>
+<li>Provide <code>sessionInfo()</code> and <code>Sys.info()</code>. These show the current state of your machine</li>
+</ul></li>
+<li>Read the <a href="https://www.r-project.org/posting-guide.html">R mailing list posting guide</a>.</li>
+</ul>
+<p>The R mailing lists are a way to get free advice from the experts, who include some of the world’s most knowledgeable R experts - seriously - members of the R core development team contribute frequently. The cost is that you should do your homework and that sometimes the responses you get <strong>may be blunt</strong>, along the lines of “read the <a href="https://cran.r-project.org/manuals.html">manual</a>”. Chris considers it a pretty good tradeoff - where else do you get the foremost experts in a domain actually helping you?</p>
+</section>
+</section>
+<section id="pair-debugging-exercise-logitboot" class="level1">
+<h1>Pair debugging exercise: <code>logitBoot()</code></h1>
+<p>For the group work this week we will step through debugging the <code>logitBoot</code> function. This is a function that computes a bootstrapped estimate of the standard error of the coefficient on a logistic regression model. From R’s implementation of logistic regression, stored in the <code>mod</code> variable, we can see that the estimated standard error is around 3. However, by calling <code>logitBoot(my_data$y, my_data$x)</code>, which is supposed to get this same standard error, we return a value of over 100.</p>
+<p>The goal here is to figure out what is going wrong and, if time, fix the issue. Below are a list of steps you can take reach this goal. Note, that the functions are in the <code>logitBoot.R</code> script, so it will easiest to open that file and work from there.</p>
+<ul>
+<li>Load <code>data.csv</code> and look at the data to see what we are working with. There should be a column of <code>y</code> values (which are 0 or 1) and a column of <code>x</code> values (which are continuous).
+<ul>
+<li>The goal of logistic regression is to model which class <code>y</code> (0 or 1) an observation falls in based on <code>x</code>.</li>
+</ul></li>
+<li>Load the functions in the <code>logitBoot.R</code> script.</li>
+<li>Fit the logistic regression model in R using the <code>glm</code> function (code provided) and look at the <code>summary(mod)</code>
+<ul>
+<li>Notice the estimated standard error on the coefficient for <code>x</code> is around 3.</li>
+</ul></li>
+<li>Try to run the <code>logitBoot(my_data$y, my_data$x)</code>. Notice the overestimate and the warning. We want to figure out what is going wrong.</li>
+<li>Call <code>debug(logitBoot)</code> and rerun <code>logitBoot(my_data$y, my_data$x)</code>. This will take you into the browser window for <code>logitBoot</code> (if you get a fatal error at this step, you may need to update RStudio)
+<ul>
+<li>Run through each line until you compute the vector <code>boot_coefs</code>. Use the <code>range</code> and <code>quantile</code> functions to examine <code>boot_coefs</code> and see what could be going wrong.</li>
+<li>Find the index of sample that is causing the issue.</li>
+</ul></li>
+<li>Now that we have identified where the issue is occuring we still need to figure out why that paricular permutation is problematic. For that we will use <code>trace</code> to temporarily edit our functions.
+<ul>
+<li>Call <code>trace(myGLM, edit = TRUE)</code> and edit the function to return a list of coeficient, <code>y_boot</code>, and <code>x_boot</code>.</li>
+<li>Call <code>trace(logitBoot, edit = TRUE)</code> and change <code>sapply</code> to <code>lapply</code></li>
+</ul></li>
+<li>Rerun <code>logitBoot(my_data$y, my_data$x)</code>, which will again open the browser window. Step through the code lines and look at <code>boot_coefs[[i]]</code> where <code>i</code> is the index found in step 5.
+<ul>
+<li>Look at the values of <code>x_boot</code> that correspond to <code>y_boot = 1</code>. Also, <code>sort</code> the <code>x_boot</code> output. Can you tell what is going wrong?</li>
+</ul></li>
+<li>Now that we know what is causing the warning we can call <code>untrace(logitBoot)</code> and <code>untrace(myGLM)</code> to remove the temporary edits.</li>
+</ul>
+<p>After identifing the issue and we could edit the <code>myGLM</code> function to not compute the model when that particular issue arises. Alternatively, we could employ a more holistic approach with <code>tryCatch</code>. With this we can handle unforseen issues that may arise. (This is what is implemented in the <code>logitBoot_solution.R</code> script, which I will push after section.) Note, with the fixed code we now seem to underestimating the standard error. I am not sure why that is happening… because as far as I can tell the code is working correctly.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">'./data.csv'</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>logitBoot <span class="ot">&lt;-</span> <span class="cf">function</span>(y, x, <span class="at">n_boot =</span> <span class="dv">2000</span>) {</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(<span class="dv">5</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># do n_boot random permutations of x and y and return coefficient on x with</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># the myGLM function</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  boot_coefs <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">seq_len</span>(n_boot), myGLM, y, x)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># compute standard deviation of those estimates and return</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  boot_se <span class="ot">&lt;-</span> <span class="fu">sd</span>(boot_coefs)</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(boot_se)</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>myGLM <span class="ot">&lt;-</span> <span class="cf">function</span>(i, y, x) {</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(y)</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># randomly sample with replacement from the observations in the data</span></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>  boot_sample <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">seq_len</span>(n), n, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># create vectors of the bootstrapped samples</span></span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>  x_boot <span class="ot">&lt;-</span> x[boot_sample]</span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>  y_boot <span class="ot">&lt;-</span> y[boot_sample]</span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>  <span class="co"># fit logistic regression on permutated data</span></span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>  mod_boot <span class="ot">&lt;-</span> <span class="fu">glm</span>(y_boot <span class="sc">~</span> x_boot, <span class="at">family =</span> <span class="st">'binomial'</span>)</span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># return the estimated coefficient</span></span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(mod_boot<span class="sc">$</span>coef[<span class="dv">2</span>])</span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a><span class="co"># fit model in R</span></span>
+<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> my_data, <span class="at">family =</span> <span class="st">'binomial'</span>)</span>
+<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a><span class="co"># note that the standard error for the regression coefficient is ~3</span></span>
+<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span>
+<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a><span class="co"># estimate standard error with our bootstrap function</span></span>
+<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a><span class="co"># note the overestimation of standard error 119 &gt; 3</span></span>
+<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a><span class="fu">logitBoot</span>(my_data<span class="sc">$</span>y, my_data<span class="sc">$</span>x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../labs/03/reproducibility.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lab 3</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
