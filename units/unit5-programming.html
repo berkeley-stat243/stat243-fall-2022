@@ -426,7 +426,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#hashing-including-name-lookup" id="toc-hashing-including-name-lookup" class="nav-link" data-scroll-target="#hashing-including-name-lookup">Hashing (including name lookup)</a></li>
   <li><a href="#efficiency-challenges" id="toc-efficiency-challenges" class="nav-link" data-scroll-target="#efficiency-challenges">Efficiency challenges</a></li>
   </ul></li>
-  <li><a href="#computing-on-the-language-optional" id="toc-computing-on-the-language-optional" class="nav-link" data-scroll-target="#computing-on-the-language-optional">10. Computing on the language (optional)</a></li>
+  <li><a href="#computing-on-the-language-optional" id="toc-computing-on-the-language-optional" class="nav-link" data-scroll-target="#computing-on-the-language-optional">10. Computing on the language (optional)</a>
+  <ul class="collapse">
+  <li><a href="#the-r-interpreter" id="toc-the-r-interpreter" class="nav-link" data-scroll-target="#the-r-interpreter">The R interpreter</a>
+  <ul class="collapse">
+  <li><a href="#parsing" id="toc-parsing" class="nav-link" data-scroll-target="#parsing">Parsing</a></li>
+  <li><a href="#primitive-and-.internal-and-.external" id="toc-primitive-and-.internal-and-.external" class="nav-link" data-scroll-target="#primitive-and-.internal-and-.external"><code>.Primitive()</code> and <code>.Internal()</code> (and <code>.External()</code>)</a></li>
+  </ul></li>
+  <li><a href="#parsing-code-and-understanding-language-objects" id="toc-parsing-code-and-understanding-language-objects" class="nav-link" data-scroll-target="#parsing-code-and-understanding-language-objects">Parsing code and understanding language objects</a></li>
+  <li><a href="#manipulating-the-parse-tree" id="toc-manipulating-the-parse-tree" class="nav-link" data-scroll-target="#manipulating-the-parse-tree">Manipulating the parse tree</a></li>
+  <li><a href="#parsing-replacement-expressions" id="toc-parsing-replacement-expressions" class="nav-link" data-scroll-target="#parsing-replacement-expressions">Parsing replacement expressions</a></li>
+  <li><a href="#substitute" id="toc-substitute" class="nav-link" data-scroll-target="#substitute">substitute()</a></li>
+  <li><a href="#final-thoughts" id="toc-final-thoughts" class="nav-link" data-scroll-target="#final-thoughts">Final thoughts</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -462,9 +474,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </header>
 
 <p><a href="./unit5-programming.pdf" class="btn btn-primary">PDF</a></p>
-<blockquote class="blockquote">
-<p><strong>Note</strong> This Unit will be posted in phases as I get the material ready. 2022-09-23: Currently only Sections 1-9 are available.</p>
-</blockquote>
 <p>References:</p>
 <ul>
 <li>Books on R listed on the syllabus: Adler, Chambers, Wickham</li>
@@ -934,7 +943,7 @@ lm(formula = y ~ x)
 
 Coefficients:
 (Intercept)            x  
-      0.442        0.133  </code></pre>
+      0.449        0.153  </code></pre>
 </div>
 </div>
 </section>
@@ -1096,12 +1105,12 @@ y = x * 7.1;</code></pre>
 <div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>qs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> 2.5% 97.5% 
--1.95  1.93 </code></pre>
+-2.03  1.97 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a>qs[<span class="dv">1</span>] <span class="sc">+</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>2.5% 
-1.05 </code></pre>
+<pre><code> 2.5% 
+0.974 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="fu">object.size</span>(qs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1113,7 +1122,7 @@ y = x * 7.1;</code></pre>
 <div class="sourceCode cell-code" id="cb122"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(qs) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
 <span id="cb122-2"><a href="#cb122-2" aria-hidden="true" tabindex="-1"></a>qs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -1.95  1.93</code></pre>
+<pre><code>[1] -2.03  1.97</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb124"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="fu">object.size</span>(qs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1202,12 +1211,12 @@ Levels: a b c</code></pre>
 <span id="cb144-2"><a href="#cb144-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">label =</span> <span class="fu">rep</span>(<span class="st">'a'</span>, n), <span class="at">val1 =</span> <span class="fu">rnorm</span>(n), <span class="at">val2 =</span> <span class="fu">rnorm</span>(n))</span>
 <span id="cb144-3"><a href="#cb144-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  label    val1    val2
-1     a  0.0137  0.0725
-2     a  0.0856 -1.4403
-3     a -0.8618  0.2821
-4     a  0.9218  0.4818
-5     a -0.4576 -0.0614</code></pre>
+<pre><code>  label     val1    val2
+1     a  0.12926  2.5317
+2     a  2.12591 -0.0441
+3     a -0.00329  0.1205
+4     a  0.32112  1.4533
+5     a  0.53857 -1.7047</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb146"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb146-1"><a href="#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Why does the following not work?</span></span>
 <span id="cb146-2"><a href="#cb146-2" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>( <span class="fu">apply</span>(df, <span class="dv">1</span>, <span class="cf">function</span>(x) x[<span class="dv">2</span>] <span class="sc">+</span> x[<span class="dv">3</span>]) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1217,7 +1226,7 @@ Levels: a b c</code></pre>
 <div class="sourceCode cell-code" id="cb148"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb148-1"><a href="#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Instead, this will work. Why?</span></span>
 <span id="cb148-2"><a href="#cb148-2" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(df[ , <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>], <span class="dv">1</span>, <span class="cf">function</span>(x) x[<span class="dv">1</span>] <span class="sc">+</span> x[<span class="dv">2</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1]  0.0862 -1.3547 -0.5797  1.4036 -0.5191</code></pre>
+<pre><code>[1]  2.661  2.082  0.117  1.774 -1.166</code></pre>
 </div>
 </div>
 <p>Be careful of using factors as indices:</p>
@@ -1431,7 +1440,7 @@ Attaching package: 'dplyr'</code></pre>
 <span id="cb177-2"><a href="#cb177-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
- -1.303  -0.529  -0.388  -0.226  -0.156   1.456 </code></pre>
+ -0.875  -0.144   0.273   0.449   0.962   2.041 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb179"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb179-1"><a href="#cb179-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>)</span>
 <span id="cb179-2"><a href="#cb179-2" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x)</span>
@@ -1442,17 +1451,19 @@ Call:
 lm(formula = y ~ x)
 
 Residuals:
-    Min      1Q  Median      3Q     Max 
--0.9176 -0.4226 -0.3121  0.0893  2.1280 
+   Min     1Q Median     3Q    Max 
+-1.306 -0.516 -0.062  0.169  1.495 
 
 Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept)   0.2198     0.3003    0.73     0.49
-x            -0.0917     0.4004   -0.23     0.82
+            Estimate Std. Error t value Pr(&gt;|t|)  
+(Intercept)    0.543      0.318    1.71    0.126  
+x             -0.941      0.305   -3.09    0.015 *
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.905 on 8 degrees of freedom
-Multiple R-squared:  0.00651,   Adjusted R-squared:  -0.118 
-F-statistic: 0.0524 on 1 and 8 DF,  p-value: 0.825</code></pre>
+Residual standard error: 0.906 on 8 degrees of freedom
+Multiple R-squared:  0.544, Adjusted R-squared:  0.487 
+F-statistic: 9.53 on 1 and 8 DF,  p-value: 0.0149</code></pre>
 </div>
 </div>
 <p>Here <em>summary</em> is a generic function (or generic method) that, based on the type of object given to it (the first argument), dispatches a class-specific function (method) that operates on the object.</p>
@@ -1473,7 +1484,7 @@ F-statistic: 0.0524 on 1 and 8 DF,  p-value: 0.825</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>function (object, ...) 
 UseMethod("summary")
-&lt;bytecode: 0x5589f24f61a0&gt;
+&lt;bytecode: 0x56471a29e680&gt;
 &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
@@ -1578,7 +1589,7 @@ lm(formula = y ~ x)
 
 Coefficients:
 (Intercept)            x  
-     0.2198      -0.0917  </code></pre>
+      0.543       -0.941  </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb198"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb198-1"><a href="#cb198-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1588,7 +1599,7 @@ lm(formula = y ~ x)
 
 Coefficients:
 (Intercept)            x  
-     0.2198      -0.0917  </code></pre>
+      0.543       -0.941  </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb200"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb200-1"><a href="#cb200-1" aria-hidden="true" tabindex="-1"></a>stats<span class="sc">:::</span><span class="fu">print.lm</span>(mod)  <span class="do">## print.lm is private to the stats namespace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1598,7 +1609,7 @@ lm(formula = y ~ x)
 
 Coefficients:
 (Intercept)            x  
-     0.2198      -0.0917  </code></pre>
+      0.543       -0.941  </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb202"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb202-1"><a href="#cb202-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print.default(mod)   ## lots of output, so don't print in document...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1618,7 +1629,7 @@ Coefficients:
     cat("\n")
     invisible(x)
 }
-&lt;bytecode: 0x5589ee4f6768&gt;
+&lt;bytecode: 0x56471653ec48&gt;
 &lt;environment: namespace:stats&gt;</code></pre>
 </div>
 </div>
@@ -1636,17 +1647,19 @@ Call:
 lm(formula = y ~ x)
 
 Residuals:
-    Min      1Q  Median      3Q     Max 
--0.9176 -0.4226 -0.3121  0.0893  2.1280 
+   Min     1Q Median     3Q    Max 
+-1.306 -0.516 -0.062  0.169  1.495 
 
 Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept)   0.2198     0.3003    0.73     0.49
-x            -0.0917     0.4004   -0.23     0.82
+            Estimate Std. Error t value Pr(&gt;|t|)  
+(Intercept)    0.543      0.318    1.71    0.126  
+x             -0.941      0.305   -3.09    0.015 *
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.905 on 8 degrees of freedom
-Multiple R-squared:  0.00651,   Adjusted R-squared:  -0.118 
-F-statistic: 0.0524 on 1 and 8 DF,  p-value: 0.825</code></pre>
+Residual standard error: 0.906 on 8 degrees of freedom
+Multiple R-squared:  0.544, Adjusted R-squared:  0.487 
+F-statistic: 9.53 on 1 and 8 DF,  p-value: 0.0149</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb209"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb209-1"><a href="#cb209-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(out)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1655,17 +1668,19 @@ Call:
 lm(formula = y ~ x)
 
 Residuals:
-    Min      1Q  Median      3Q     Max 
--0.9176 -0.4226 -0.3121  0.0893  2.1280 
+   Min     1Q Median     3Q    Max 
+-1.306 -0.516 -0.062  0.169  1.495 
 
 Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept)   0.2198     0.3003    0.73     0.49
-x            -0.0917     0.4004   -0.23     0.82
+            Estimate Std. Error t value Pr(&gt;|t|)  
+(Intercept)    0.543      0.318    1.71    0.126  
+x             -0.941      0.305   -3.09    0.015 *
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.905 on 8 degrees of freedom
-Multiple R-squared:  0.00651,   Adjusted R-squared:  -0.118 
-F-statistic: 0.0524 on 1 and 8 DF,  p-value: 0.825</code></pre>
+Residual standard error: 0.906 on 8 degrees of freedom
+Multiple R-squared:  0.544, Adjusted R-squared:  0.487 
+F-statistic: 9.53 on 1 and 8 DF,  p-value: 0.0149</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb211"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb211-1"><a href="#cb211-1" aria-hidden="true" tabindex="-1"></a><span class="do">## One can look at the code for the method (not shown):</span></span>
 <span id="cb211-2"><a href="#cb211-2" aria-hidden="true" tabindex="-1"></a><span class="do">## getS3method(f = "print", class = "summary.lm")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1709,32 +1724,32 @@ F-statistic: 0.0524 on 1 and 8 DF,  p-value: 0.825</code></pre>
 <div class="sourceCode cell-code" id="cb222"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb222-1"><a href="#cb222-1" aria-hidden="true" tabindex="-1"></a><span class="fu">model.matrix</span>(mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   (Intercept)      x
-1            1 -0.679
-2            1 -0.522
-3            1 -0.538
-4            1 -0.717
-5            1 -0.719
-6            1 -0.261
-7            1 -0.426
-8            1  0.174
-9            1 -0.605
-10           1  0.757
+1            1  0.148
+2            1  0.596
+3            1  0.671
+4            1  0.944
+5            1  0.004
+6            1 -0.612
+7            1 -0.903
+8            1 -0.690
+9            1  0.735
+10           1  0.490
 attr(,"assign")
 [1] 0 1</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb224"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb224-1"><a href="#cb224-1" aria-hidden="true" tabindex="-1"></a><span class="fu">model.matrix</span>(mod2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   (Intercept)      x
-1            1 -0.679
-2            1 -0.522
-3            1 -0.538
-4            1 -0.717
-5            1 -0.719
-6            1 -0.261
-7            1 -0.426
-8            1  0.174
-9            1 -0.605
-10           1  0.757
+1            1  0.148
+2            1  0.596
+3            1  0.671
+4            1  0.944
+5            1  0.004
+6            1 -0.612
+7            1 -0.903
+8            1 -0.690
+9            1  0.735
+10           1  0.490
 attr(,"assign")
 [1] 0 1</code></pre>
 </div>
@@ -2348,7 +2363,7 @@ attr(,"class")
     }
     x
 }
-&lt;bytecode: 0x5589f2de17b0&gt;
+&lt;bytecode: 0x56471abb14f8&gt;
 &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
@@ -2562,7 +2577,7 @@ NULL</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>function (x, ...) 
 UseMethod("quantile")
-&lt;bytecode: 0x5589ec8bb1c8&gt;
+&lt;bytecode: 0x56471465c1c8&gt;
 &lt;environment: namespace:stats&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb356"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb356-1"><a href="#cb356-1" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>(<span class="fu">quantile</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2804,7 +2819,7 @@ myCal(&amp;x)  # x itself will be modified</code></pre>
 <span id="cb392-2"><a href="#cb392-2" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(<span class="fu">mean</span>(<span class="fu">rnorm</span>(<span class="dv">1000000</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.061   0.000   0.061 </code></pre>
+  0.060   0.004   0.065 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb394"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb394-1"><a href="#cb394-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(<span class="fu">f</span>(<span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -2812,7 +2827,7 @@ myCal(&amp;x)  # x itself will be modified</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.001   0.000   0.001 </code></pre>
+  0.001   0.000   0.000 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb397"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb397-1"><a href="#cb397-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(<span class="fu">f</span>(<span class="fu">mean</span>(<span class="fu">rnorm</span>(<span class="dv">1000000</span>)))) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -2820,7 +2835,7 @@ myCal(&amp;x)  # x itself will be modified</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.001   0.000   0.001 </code></pre>
+  0.001   0.001   0.001 </code></pre>
 </div>
 </div>
 <p>Here’s an even stranger situation. Do you think the following code will run?</p>
@@ -2927,7 +2942,7 @@ myCal(&amp;x)  # x itself will be modified</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb407"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb407-1"><a href="#cb407-1" aria-hidden="true" tabindex="-1"></a><span class="fu">environment</span>(myfun)  <span class="co"># enclosing environment of h()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;environment: 0x5589f785e2b0&gt;</code></pre>
+<pre><code>&lt;environment: 0x56471f66e0c0&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb409"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb409-1"><a href="#cb409-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>(<span class="fu">environment</span>(myfun)) <span class="co"># objects in that environment</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -2941,11 +2956,11 @@ myCal(&amp;x)  # x itself will be modified</code></pre>
 <span id="cb411-6"><a href="#cb411-6" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb411-7"><a href="#cb411-7" aria-hidden="true" tabindex="-1"></a>myfun <span class="ot">&lt;-</span> <span class="fu">fun_constructor</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;environment: 0x5589f722a130&gt;</code></pre>
+<pre><code>&lt;environment: 0x56471f045040&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb413"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb413-1"><a href="#cb413-1" aria-hidden="true" tabindex="-1"></a><span class="fu">environment</span>(myfun)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;environment: 0x5589f722a130&gt;</code></pre>
+<pre><code>&lt;environment: 0x56471f045040&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb415"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb415-1"><a href="#cb415-1" aria-hidden="true" tabindex="-1"></a><span class="fu">myfun</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -2959,7 +2974,7 @@ myCal(&amp;x)  # x itself will be modified</code></pre>
 <span id="cb419-2"><a href="#cb419-2" aria-hidden="true" tabindex="-1"></a><span class="fu">environment</span>(myfun)<span class="sc">$</span>g</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>function(x) x + y
-&lt;environment: 0x5589f722a130&gt;</code></pre>
+&lt;environment: 0x56471f045040&gt;</code></pre>
 </div>
 </div>
 <p>Be careful when using variables from the enclosing environment as the value of that variable in the enclosing environment may well not be what you expect it to be. In general it’s bad practice to use variables that are taken from environments outside that of a function, but in some cases it can be useful. Here are some examples of using variables outside of the frame of a function.</p>
@@ -3155,7 +3170,7 @@ Attaching package: 'pryr'</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>   label                              name                 
 1  &lt;environment: namespace:stats&gt;     ""                   
-2  &lt;environment: 0x5589eb083f68&gt;      "imports:stats"      
+2  &lt;environment: 0x564712e24f68&gt;      "imports:stats"      
 3  &lt;environment: namespace:base&gt;      ""                   
 4  &lt;environment: R_GlobalEnv&gt;         ""                   
 5  &lt;environment: package:pryr&gt;        "package:pryr"       
@@ -3166,7 +3181,7 @@ Attaching package: 'pryr'</code></pre>
 10 &lt;environment: package:spam&gt;        "package:spam"       
 11 &lt;environment: package:dplyr&gt;       "package:dplyr"      
 12 &lt;environment: package:stringr&gt;     "package:stringr"    
-13 &lt;environment: 0x5589eadc2580&gt;      "tools:quarto"       
+13 &lt;environment: 0x564712b63158&gt;      "tools:quarto"       
 14 &lt;environment: package:stats&gt;       "package:stats"      
 15 &lt;environment: package:graphics&gt;    "package:graphics"   
 16 &lt;environment: package:grDevices&gt;   "package:grDevices"  
@@ -3174,7 +3189,7 @@ Attaching package: 'pryr'</code></pre>
 18 &lt;environment: package:datasets&gt;    "package:datasets"   
 19 &lt;environment: package:SCF&gt;         "package:SCF"        
 20 &lt;environment: package:methods&gt;     "package:methods"    
-21 &lt;environment: 0x5589eade6510&gt;      "Autoloads"          
+21 &lt;environment: 0x564712b87510&gt;      "Autoloads"          
 22 &lt;environment: base&gt;                ""                   
 23 &lt;environment: R_EmptyEnv&gt;          ""                   </code></pre>
 </div>
@@ -3232,8 +3247,8 @@ Attaching package: 'pryr'</code></pre>
 <div class="sourceCode cell-code" id="cb452"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb452-1"><a href="#cb452-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           used (Mb) gc trigger (Mb) max used (Mb)
-Ncells  2347890  125    4159851  222  4159851  222
-Vcells 14234757  109   23076366  176 14781808  113</code></pre>
+Ncells  2350722  126    4160957  222  4160957  222
+Vcells 14247617  109   23094885  176 14794658  113</code></pre>
 </div>
 </div>
 <p><code>gc()</code> reports memory use and free memory as <code>Ncells</code> and <code>Vcells</code>. <code>Ncells</code> concerns the overhead of running R and <code>Vcells</code> relates to objects created by the user, so you’ll want to focus on <code>Vcells</code>. You can see the number of Mb currently used (the “<code>used</code>” column of the output) and the maximum used in the session (the “<code>max used</code>” column)“.</p>
@@ -3265,13 +3280,13 @@ Vcells 1.14e+08  872   1.67e+08 1275 1.14e+08  872</code></pre>
 <div class="sourceCode cell-code" id="cb462"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb462-1"><a href="#cb462-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(x)</span>
 <span id="cb462-2"><a href="#cb462-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mem_used</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>245 MB</code></pre>
+<pre><code>246 MB</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb464"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb464-1"><a href="#cb464-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>() <span class="co"># note the "max used" column is unchanged</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           used (Mb) gc trigger (Mb) max used (Mb)
-Ncells  2349227  126   4.16e+06  222 4.16e+06  222
-Vcells 14238242  109   1.07e+08  816 1.14e+08  872</code></pre>
+Ncells  2352059  126   4.16e+06  222 4.16e+06  222
+Vcells 14251102  109   1.07e+08  816 1.14e+08  872</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb466"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb466-1"><a href="#cb466-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mem_change</span>(x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fl">1e8</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -3365,7 +3380,7 @@ Vcells 14238242  109   1.07e+08  816 1.14e+08  872</code></pre>
 <div class="sourceCode cell-code" id="cb484"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb484-1"><a href="#cb484-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">5</span>)</span>
 <span id="cb484-2"><a href="#cb484-2" aria-hidden="true" tabindex="-1"></a><span class="fu">.Internal</span>(<span class="fu">inspect</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>@5589fcdcfdb8 14 REALSXP g0c4 [REF(2)] (len=5, tl=0) -0.742042,0.577906,1.85653,0.449136,0.746484</code></pre>
+<pre><code>@56471b401788 14 REALSXP g0c4 [REF(2)] (len=5, tl=0) -0.742042,0.577906,1.85653,0.449136,0.746484</code></pre>
 </div>
 </div>
 <p>The first output is the address in memory (in hexadecimal) of the vector. The <code>REALSXP</code> indicates that the vector is stored as a real-valued “S” object under the hood in C. <code>REF(2)</code> indicates that two variables are referring to this particular memory location (more on this in much detail in a bit).</p>
@@ -3380,38 +3395,38 @@ Vcells 14238242  109   1.07e+08  816 1.14e+08  872</code></pre>
 <span id="cb486-2"><a href="#cb486-2" aria-hidden="true" tabindex="-1"></a>obj <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">a =</span> nums, <span class="at">b =</span> nums, <span class="at">c =</span> <span class="fu">rnorm</span>(<span class="dv">5</span>), <span class="at">d =</span> <span class="fu">list</span>(<span class="at">some_string =</span> <span class="st">"adfs"</span>))</span>
 <span id="cb486-3"><a href="#cb486-3" aria-hidden="true" tabindex="-1"></a><span class="fu">.Internal</span>(<span class="fu">inspect</span>(obj<span class="sc">$</span>a))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>@5589f9079838 14 REALSXP g0c4 [REF(4)] (len=5, tl=0) -1.47998,1.38282,0.22264,0.0640071,0.565649</code></pre>
+<pre><code>@56472341e668 14 REALSXP g0c4 [REF(4)] (len=5, tl=0) -1.47998,1.38282,0.22264,0.0640071,0.565649</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb488"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb488-1"><a href="#cb488-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.Internal</span>(<span class="fu">inspect</span>(obj<span class="sc">$</span>b))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>@5589f9079838 14 REALSXP g0c4 [REF(5)] (len=5, tl=0) -1.47998,1.38282,0.22264,0.0640071,0.565649</code></pre>
+<pre><code>@56472341e668 14 REALSXP g0c4 [REF(5)] (len=5, tl=0) -1.47998,1.38282,0.22264,0.0640071,0.565649</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb490"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb490-1"><a href="#cb490-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.Internal</span>(<span class="fu">inspect</span>(obj<span class="sc">$</span>c))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>@5589f9079ec8 14 REALSXP g0c4 [REF(1)] (len=5, tl=0) -1.07213,-0.451605,-0.0594438,0.153536,-0.939612</code></pre>
+<pre><code>@56472341ecf8 14 REALSXP g0c4 [REF(1)] (len=5, tl=0) -1.07213,-0.451605,-0.0594438,0.153536,-0.939612</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb492"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb492-1"><a href="#cb492-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.Internal</span>(<span class="fu">inspect</span>(obj))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>@5589fce01be8 19 VECSXP g0c3 [REF(2),ATT] (len=4, tl=0)
-  @5589f9079838 14 REALSXP g0c4 [REF(6)] (len=5, tl=0) -1.47998,1.38282,0.22264,0.0640071,0.565649
-  @5589f9079838 14 REALSXP g0c4 [REF(6)] (len=5, tl=0) -1.47998,1.38282,0.22264,0.0640071,0.565649
-  @5589f9079ec8 14 REALSXP g0c4 [REF(2)] (len=5, tl=0) -1.07213,-0.451605,-0.0594438,0.153536,-0.939612
-  @5589fb980668 19 VECSXP g0c1 [REF(1),ATT] (len=1, tl=0)
-    @5589fbc8ee70 16 STRSXP g0c1 [REF(3)] (len=1, tl=0)
-      @5589fbc8eea8 09 CHARSXP g0c1 [REF(2),gp=0x60] [ASCII] [cached] "adfs"
+<pre><code>@564724bc81f8 19 VECSXP g0c3 [REF(2),ATT] (len=4, tl=0)
+  @56472341e668 14 REALSXP g0c4 [REF(6)] (len=5, tl=0) -1.47998,1.38282,0.22264,0.0640071,0.565649
+  @56472341e668 14 REALSXP g0c4 [REF(6)] (len=5, tl=0) -1.47998,1.38282,0.22264,0.0640071,0.565649
+  @56472341ecf8 14 REALSXP g0c4 [REF(2)] (len=5, tl=0) -1.07213,-0.451605,-0.0594438,0.153536,-0.939612
+  @5647237be6a0 19 VECSXP g0c1 [REF(1),ATT] (len=1, tl=0)
+    @564723ac2320 16 STRSXP g0c1 [REF(3)] (len=1, tl=0)
+      @564723ac2358 09 CHARSXP g0c1 [REF(2),gp=0x60] [ASCII] [cached] "adfs"
   ATTRIB:
-    @5589f621ad98 02 LISTSXP g0c0 [REF(1)] 
-      TAG: @5589eab35800 01 SYMSXP g1c0 [MARK,REF(65535),LCK,gp=0x6000] "names" (has value)
-      @5589fb980860 16 STRSXP g0c1 [REF(1)] (len=1, tl=0)
-    @5589fbf533c8 09 CHARSXP g0c2 [REF(4),gp=0x61] [ASCII] [cached] "some_string"
+    @56471e7741b8 02 LISTSXP g0c0 [REF(1)] 
+      TAG: @5647128d6800 01 SYMSXP g1c0 [MARK,REF(65535),LCK,gp=0x6000] "names" (has value)
+      @5647237be6d8 16 STRSXP g0c1 [REF(1)] (len=1, tl=0)
+    @564723e9d2c8 09 CHARSXP g0c2 [REF(4),gp=0x61] [ASCII] [cached] "some_string"
 ATTRIB:
-  @5589f621ae08 02 LISTSXP g0c0 [REF(1)] 
-    TAG: @5589eab35800 01 SYMSXP g1c0 [MARK,REF(65535),LCK,gp=0x6000] "names" (has value)
-    @5589fce01c38 16 STRSXP g0c3 [REF(65535)] (len=4, tl=0)
-      @5589eae375d0 09 CHARSXP g1c1 [MARK,REF(811),gp=0x61] [ASCII] [cached] "a"
-      @5589eb156b80 09 CHARSXP g1c1 [MARK,REF(699),gp=0x61] [ASCII] [cached] "b"
-      @5589eab36bc0 09 CHARSXP g1c1 [MARK,REF(1008),gp=0x61] [ASCII] [cached] "c"
-      @5589eafd56b0 09 CHARSXP g1c1 [MARK,REF(421),gp=0x61] [ASCII] [cached] "d"</code></pre>
+  @56471e774228 02 LISTSXP g0c0 [REF(1)] 
+    TAG: @5647128d6800 01 SYMSXP g1c0 [MARK,REF(65535),LCK,gp=0x6000] "names" (has value)
+    @564724bc8248 16 STRSXP g0c3 [REF(65535)] (len=4, tl=0)
+      @564712bd85d0 09 CHARSXP g1c1 [MARK,REF(811),gp=0x61] [ASCII] [cached] "a"
+      @564712ef7b80 09 CHARSXP g1c1 [MARK,REF(699),gp=0x61] [ASCII] [cached] "b"
+      @5647128d7bc0 09 CHARSXP g1c1 [MARK,REF(1011),gp=0x61] [ASCII] [cached] "c"
+      @564712d766b0 09 CHARSXP g1c1 [MARK,REF(421),gp=0x61] [ASCII] [cached] "d"</code></pre>
 </div>
 </div>
 <p>What do we notice?</p>
@@ -3425,36 +3440,36 @@ ATTRIB:
 <div class="cell">
 <div class="sourceCode cell-code" id="cb494"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb494-1"><a href="#cb494-1" aria-hidden="true" tabindex="-1"></a><span class="fu">address</span>(obj)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "0x5589fce01be8"</code></pre>
+<pre><code>[1] "0x564724bc81f8"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb496"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb496-1"><a href="#cb496-1" aria-hidden="true" tabindex="-1"></a><span class="fu">inspect</span>(obj)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;VECSXP 0x5589fce01be8&gt;
-  &lt;REALSXP 0x5589f9079838&gt;
-  [REALSXP 0x5589f9079838]
-  &lt;REALSXP 0x5589f9079ec8&gt;
-  &lt;VECSXP 0x5589fb980668&gt;
-    &lt;STRSXP 0x5589fbc8ee70&gt;
-      &lt;CHARSXP 0x5589fbc8eea8&gt;
+<pre><code>&lt;VECSXP 0x564724bc81f8&gt;
+  &lt;REALSXP 0x56472341e668&gt;
+  [REALSXP 0x56472341e668]
+  &lt;REALSXP 0x56472341ecf8&gt;
+  &lt;VECSXP 0x5647237be6a0&gt;
+    &lt;STRSXP 0x564723ac2320&gt;
+      &lt;CHARSXP 0x564723ac2358&gt;
   attributes: 
-    &lt;LISTSXP 0x5589f621ad98&gt;
+    &lt;LISTSXP 0x56471e7741b8&gt;
     tag: 
-      &lt;SYMSXP 0x5589eab35800&gt;
+      &lt;SYMSXP 0x5647128d6800&gt;
     car: 
-      &lt;STRSXP 0x5589fb980860&gt;
-        &lt;CHARSXP 0x5589fbf533c8&gt;
+      &lt;STRSXP 0x5647237be6d8&gt;
+        &lt;CHARSXP 0x564723e9d2c8&gt;
     cdr: 
       NULL
 attributes: 
-  &lt;LISTSXP 0x5589f621ae08&gt;
+  &lt;LISTSXP 0x56471e774228&gt;
   tag: 
-    [SYMSXP 0x5589eab35800]
+    [SYMSXP 0x5647128d6800]
   car: 
-    &lt;STRSXP 0x5589fce01c38&gt;
-      &lt;CHARSXP 0x5589eae375d0&gt;
-      &lt;CHARSXP 0x5589eb156b80&gt;
-      &lt;CHARSXP 0x5589eab36bc0&gt;
-      &lt;CHARSXP 0x5589eafd56b0&gt;
+    &lt;STRSXP 0x564724bc8248&gt;
+      &lt;CHARSXP 0x564712bd85d0&gt;
+      &lt;CHARSXP 0x564712ef7b80&gt;
+      &lt;CHARSXP 0x5647128d7bc0&gt;
+      &lt;CHARSXP 0x564712d766b0&gt;
   cdr: 
     NULL</code></pre>
 </div>
@@ -3476,23 +3491,23 @@ attributes:
 <span id="cb500-2"><a href="#cb500-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>(<span class="at">reset =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           used (Mb) gc trigger (Mb) max used (Mb)
-Ncells  2349873  126   4.16e+06  222  2349873  126
-Vcells 34240374  261   1.07e+08  816 34240374  261</code></pre>
+Ncells  2352705  126   4.16e+06  222  2352705  126
+Vcells 34253234  261   1.07e+08  816 34253234  261</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb502"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb502-1"><a href="#cb502-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fl">1e7</span>)</span>
 <span id="cb502-2"><a href="#cb502-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           used (Mb) gc trigger (Mb) max used (Mb)
-Ncells  2349798  126   4.16e+06  222  2362138  126
-Vcells 44240248  338   1.07e+08  816 44261365  338</code></pre>
+Ncells  2352630  126   4.16e+06  222  2364970  126
+Vcells 44253108  338   1.07e+08  816 44274225  338</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb504"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb504-1"><a href="#cb504-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(x) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1e4</span>, <span class="fl">1e3</span>)</span>
 <span id="cb504-2"><a href="#cb504-2" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(x) <span class="ot">&lt;-</span> <span class="dv">1</span></span>
 <span id="cb504-3"><a href="#cb504-3" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           used (Mb) gc trigger (Mb) max used (Mb)
-Ncells  2349825  126   4.16e+06  222  2367724  126
-Vcells 44240288  338   1.07e+08  816 54273103  414</code></pre>
+Ncells  2352657  126   4.16e+06  222  2370556  127
+Vcells 44253148  338   1.07e+08  816 54285963  414</code></pre>
 </div>
 </div>
 <p>However, not all replacement functions actually involve creating a new object and replacing the original object. Here <code>[&lt;-</code> is a primitive function, so the modification of the vector can be done without a copy in the underlying execution in C.</p>
@@ -3504,19 +3519,19 @@ Vcells 44240288  338   1.07e+08  816 54273103  414</code></pre>
 <span id="cb506-2"><a href="#cb506-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>(<span class="at">reset =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           used (Mb) gc trigger (Mb) max used (Mb)
-Ncells  2349795  126   4.16e+06  222  2349795  126
-Vcells 34240386  261   1.07e+08  816 34240386  261</code></pre>
+Ncells  2352627  126   4.16e+06  222  2352627  126
+Vcells 34253246  261   1.07e+08  816 34253246  261</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb508"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb508-1"><a href="#cb508-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fl">1e7</span>)</span>
 <span id="cb508-2"><a href="#cb508-2" aria-hidden="true" tabindex="-1"></a><span class="fu">address</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "0x7fc83ffa2010"</code></pre>
+<pre><code>[1] "0x7f21b90c4010"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb510"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb510-1"><a href="#cb510-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           used (Mb) gc trigger (Mb) max used (Mb)
-Ncells  2349824  126   4.16e+06  222  2368265  126
-Vcells 44240430  338   1.07e+08  816 44271970  338</code></pre>
+Ncells  2352656  126   4.16e+06  222  2371097  127
+Vcells 44253290  338   1.07e+08  816 44284830  338</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb512"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb512-1"><a href="#cb512-1" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="dv">7</span></span>
 <span id="cb512-2"><a href="#cb512-2" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">[&lt;-</span><span class="st">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -3528,13 +3543,13 @@ Vcells 44240430  338   1.07e+08  816 44271970  338</code></pre>
 <span id="cb514-3"><a href="#cb514-3" aria-hidden="true" tabindex="-1"></a><span class="do">## result up!</span></span>
 <span id="cb514-4"><a href="#cb514-4" aria-hidden="true" tabindex="-1"></a><span class="fu">address</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "0x7fc83b356010"</code></pre>
+<pre><code>[1] "0x7f21b4478010"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb516"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb516-1"><a href="#cb516-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           used (Mb) gc trigger (Mb) max used (Mb)
-Ncells  2349875  126   4.16e+06  222  2374884  127
-Vcells 44240520  338   1.07e+08  816 54282192  414</code></pre>
+Ncells  2352707  126   4.16e+06  222  2377716  127
+Vcells 44253380  338   1.07e+08  816 54295052  414</code></pre>
 </div>
 </div>
 <p>It makes some sense that modifying elements of a vector doesn’t cause a copy usually – if it did, working with large vectors would be very difficult.</p>
@@ -3550,7 +3565,7 @@ Vcells 44240520  338   1.07e+08  816 54282192  414</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>Unit: nanoseconds
        expr min  lq mean median  uq  max neval
- tmp &lt;- 1:n 171 182  267    220 256 4231   100</code></pre>
+ tmp &lt;- 1:n 170 180  269    196 270 3971   100</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb520"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb520-1"><a href="#cb520-1" aria-hidden="true" tabindex="-1"></a><span class="fu">object.size</span>(tmp)  <span class="co"># incorrect</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -3588,8 +3603,8 @@ Vcells 44240520  338   1.07e+08  816 54282192  414</code></pre>
 <span id="cb529-2"><a href="#cb529-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>(<span class="at">reset =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           used (Mb) gc trigger (Mb) max used (Mb)
-Ncells  2386928  128   4.16e+06  222  2386928  128
-Vcells 34294265  262   1.07e+08  816 34294265  262</code></pre>
+Ncells  2389773  128   4.16e+06  222  2389773  128
+Vcells 34307238  262   1.07e+08  816 34307238  262</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb531"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb531-1"><a href="#cb531-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
 <span id="cb531-2"><a href="#cb531-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">gc</span>())</span>
@@ -3597,38 +3612,40 @@ Vcells 34294265  262   1.07e+08  816 34294265  262</code></pre>
 <span id="cb531-4"><a href="#cb531-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">gc</span>())</span>
 <span id="cb531-5"><a href="#cb531-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">.Internal</span>(<span class="fu">inspect</span>(x))</span>
 <span id="cb531-6"><a href="#cb531-6" aria-hidden="true" tabindex="-1"></a>    <span class="do">## print(address(x))  ## this gives the wrong answer; not sure why</span></span>
-<span id="cb531-7"><a href="#cb531-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(x)</span>
-<span id="cb531-8"><a href="#cb531-8" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb531-9"><a href="#cb531-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb531-10"><a href="#cb531-10" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fl">1e7</span>)</span>
-<span id="cb531-11"><a href="#cb531-11" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb531-7"><a href="#cb531-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(lobstr<span class="sc">::</span><span class="fu">obj_addr</span>(x)) <span class="do">## fixed in lobstr, which supercedes pryr</span></span>
+<span id="cb531-8"><a href="#cb531-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(x)</span>
+<span id="cb531-9"><a href="#cb531-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb531-10"><a href="#cb531-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb531-11"><a href="#cb531-11" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fl">1e7</span>)</span>
+<span id="cb531-12"><a href="#cb531-12" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           used (Mb) gc trigger (Mb) max used (Mb)
-Ncells  2386908  128   4.16e+06  222  2405174  128
-Vcells 44294262  338   1.07e+08  816 44325477  338</code></pre>
+Ncells  2389753  128   4.16e+06  222  2408019  129
+Vcells 44307235  338   1.07e+08  816 44338450  338</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb533"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb533-1"><a href="#cb533-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.Internal</span>(<span class="fu">inspect</span>(y))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>@7fc83f91e010 14 REALSXP g1c7 [MARK,REF(2)] (len=10000000, tl=0) 1.38438,0.609833,-0.283916,-1.52027,-0.213757,...</code></pre>
+<pre><code>@7f21b8a40010 14 REALSXP g1c7 [MARK,REF(2)] (len=10000000, tl=0) 1.38438,0.609833,-0.283916,-1.52027,-0.213757,...</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb535"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb535-1"><a href="#cb535-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">f</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           used (Mb) gc trigger (Mb) max used (Mb)
-Ncells  2386938  128   4.16e+06  222  2405174  128
-Vcells 44294314  338   1.07e+08  816 44325477  338
+Ncells  2389783  128   4.16e+06  222  2408019  129
+Vcells 44307287  338   1.07e+08  816 44338450  338
 [1] 1.38
            used (Mb) gc trigger (Mb) max used (Mb)
-Ncells  2386948  128   4.16e+06  222  2405174  128
-Vcells 44294337  338   1.07e+08  816 44325477  338
-@7fc83f91e010 14 REALSXP g1c7 [MARK,REF(4)] (len=10000000, tl=0) 1.38438,0.609833,-0.283916,-1.52027,-0.213757,...</code></pre>
+Ncells  2389793  128   4.16e+06  222  2408019  129
+Vcells 44307310  338   1.07e+08  816 44338450  338
+@7f21b8a40010 14 REALSXP g1c7 [MARK,REF(4)] (len=10000000, tl=0) 1.38438,0.609833,-0.283916,-1.52027,-0.213757,...
+[1] "0x7f21b8a40010"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb537"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb537-1"><a href="#cb537-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.Internal</span>(<span class="fu">inspect</span>(y))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>@7fc83f91e010 14 REALSXP g1c7 [MARK,REF(6)] (len=10000000, tl=0) 1.38438,0.609833,-0.283916,-1.52027,-0.213757,...</code></pre>
+<pre><code>@7f21b8a40010 14 REALSXP g1c7 [MARK,REF(6)] (len=10000000, tl=0) 1.38438,0.609833,-0.283916,-1.52027,-0.213757,...</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb539"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb539-1"><a href="#cb539-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.Internal</span>(<span class="fu">inspect</span>(out))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>@7fc83f91e010 14 REALSXP g1c7 [MARK,REF(7)] (len=10000000, tl=0) 1.38438,0.609833,-0.283916,-1.52027,-0.213757,...</code></pre>
+<pre><code>@7f21b8a40010 14 REALSXP g1c7 [MARK,REF(7)] (len=10000000, tl=0) 1.38438,0.609833,-0.283916,-1.52027,-0.213757,...</code></pre>
 </div>
 </div>
 <p>We see that <code>y</code>, the local variable <code>x</code> in the function frame, and <code>out</code> all use the same memory, so no copies are made here. The <code>gc()</code> output confirms that no additional memory was used.</p>
@@ -3644,20 +3661,20 @@ Vcells 44294337  338   1.07e+08  816 44325477  338
 <span id="cb541-8"><a href="#cb541-8" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fl">1e7</span>)</span>
 <span id="cb541-9"><a href="#cb541-9" aria-hidden="true" tabindex="-1"></a><span class="fu">.Internal</span>(<span class="fu">inspect</span>(y))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>@7fc831abd010 14 REALSXP g0c7 [REF(2)] (len=10000000, tl=0) 1.92264,1.19775,1.60747,0.417404,-0.102296,...</code></pre>
+<pre><code>@7f21aabdf010 14 REALSXP g0c7 [REF(2)] (len=10000000, tl=0) 1.92264,1.19775,1.60747,0.417404,-0.102296,...</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb543"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb543-1"><a href="#cb543-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">f</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>@7fc831abd010 14 REALSXP g0c7 [REF(4)] (len=10000000, tl=0) 1.92264,1.19775,1.60747,0.417404,-0.102296,...
-@7fc82ce71010 14 REALSXP g0c7 [REF(1)] (len=10000000, tl=0) 1.92264,7,1.60747,0.417404,-0.102296,...</code></pre>
+<pre><code>@7f21aabdf010 14 REALSXP g0c7 [REF(4)] (len=10000000, tl=0) 1.92264,1.19775,1.60747,0.417404,-0.102296,...
+@7f21a5f93010 14 REALSXP g0c7 [REF(1)] (len=10000000, tl=0) 1.92264,7,1.60747,0.417404,-0.102296,...</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb545"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb545-1"><a href="#cb545-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.Internal</span>(<span class="fu">inspect</span>(y))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>@7fc831abd010 14 REALSXP g0c7 [REF(3)] (len=10000000, tl=0) 1.92264,1.19775,1.60747,0.417404,-0.102296,...</code></pre>
+<pre><code>@7f21aabdf010 14 REALSXP g0c7 [REF(3)] (len=10000000, tl=0) 1.92264,1.19775,1.60747,0.417404,-0.102296,...</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb547"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb547-1"><a href="#cb547-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.Internal</span>(<span class="fu">inspect</span>(out))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>@7fc82ce71010 14 REALSXP g0c7 [REF(2)] (len=10000000, tl=0) 1.92264,7,1.60747,0.417404,-0.102296,...</code></pre>
+<pre><code>@7f21a5f93010 14 REALSXP g0c7 [REF(2)] (len=10000000, tl=0) 1.92264,7,1.60747,0.417404,-0.102296,...</code></pre>
 </div>
 </div>
 </section>
@@ -3669,26 +3686,26 @@ Vcells 44294337  338   1.07e+08  816 44325477  338
 <span id="cb549-2"><a href="#cb549-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>(<span class="at">reset =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           used (Mb) gc trigger (Mb) max used (Mb)
-Ncells  2386985  128   4.16e+06  222  2386985  128
-Vcells 34295419  262   1.07e+08  816 34295419  262</code></pre>
+Ncells  2389955  128   4.16e+06  222  2389955  128
+Vcells 34308578  262   1.07e+08  816 34308578  262</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb551"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb551-1"><a href="#cb551-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fl">1e7</span>)</span>
 <span id="cb551-2"><a href="#cb551-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           used (Mb) gc trigger (Mb) max used (Mb)
-Ncells  2386976  128   4.16e+06  222  2399250  128
-Vcells 44295403  338   1.07e+08  816 44316410  338</code></pre>
+Ncells  2389946  128   4.16e+06  222  2402220  128
+Vcells 44308562  338   1.07e+08  816 44329569  338</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb553"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb553-1"><a href="#cb553-1" aria-hidden="true" tabindex="-1"></a><span class="fu">address</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "0x7fc83f91e010"</code></pre>
+<pre><code>[1] "0x7f21b8a40010"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb555"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb555-1"><a href="#cb555-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> y</span>
 <span id="cb555-2"><a href="#cb555-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           used (Mb) gc trigger (Mb) max used (Mb)
-Ncells  2387002  128   4.16e+06  222  2405230  128
-Vcells 44295448  338   1.07e+08  816 44326637  338</code></pre>
+Ncells  2389972  128   4.16e+06  222  2408200  129
+Vcells 44308607  338   1.07e+08  816 44339796  338</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb557"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb557-1"><a href="#cb557-1" aria-hidden="true" tabindex="-1"></a><span class="fu">object_size</span>(x, y)  <span class="co"># from pryr</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -3696,18 +3713,18 @@ Vcells 44295448  338   1.07e+08  816 44326637  338</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb559"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb559-1"><a href="#cb559-1" aria-hidden="true" tabindex="-1"></a><span class="fu">address</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "0x7fc83f91e010"</code></pre>
+<pre><code>[1] "0x7f21b8a40010"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb561"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb561-1"><a href="#cb561-1" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">5</span></span>
 <span id="cb561-2"><a href="#cb561-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           used (Mb) gc trigger (Mb) max used (Mb)
-Ncells  2387035  128   4.16e+06  222  2413044  129
-Vcells 54295497  414   1.07e+08  816 54337669  415</code></pre>
+Ncells  2390005  128   4.16e+06  222  2416014  129
+Vcells 54308656  414   1.07e+08  816 54350828  415</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb563"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb563-1"><a href="#cb563-1" aria-hidden="true" tabindex="-1"></a><span class="fu">address</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "0x7fc831abd010"</code></pre>
+<pre><code>[1] "0x7f21aabdf010"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb565"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb565-1"><a href="#cb565-1" aria-hidden="true" tabindex="-1"></a><span class="fu">object_size</span>(x, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -3717,20 +3734,20 @@ Vcells 54295497  414   1.07e+08  816 54337669  415</code></pre>
 <span id="cb567-2"><a href="#cb567-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> y</span>
 <span id="cb567-3"><a href="#cb567-3" aria-hidden="true" tabindex="-1"></a><span class="fu">address</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "0x7fc83f91e010"</code></pre>
+<pre><code>[1] "0x7f21b8a40010"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb569"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb569-1"><a href="#cb569-1" aria-hidden="true" tabindex="-1"></a><span class="fu">address</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "0x7fc83f91e010"</code></pre>
+<pre><code>[1] "0x7f21b8a40010"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb571"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb571-1"><a href="#cb571-1" aria-hidden="true" tabindex="-1"></a>y[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">5</span></span>
 <span id="cb571-2"><a href="#cb571-2" aria-hidden="true" tabindex="-1"></a><span class="fu">address</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "0x7fc83f91e010"</code></pre>
+<pre><code>[1] "0x7f21b8a40010"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb573"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb573-1"><a href="#cb573-1" aria-hidden="true" tabindex="-1"></a><span class="fu">address</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "0x7fc82ce71010"</code></pre>
+<pre><code>[1] "0x7f21a5f93010"</code></pre>
 </div>
 </div>
 <p>Or we can see this using <code>mem_change()</code>.</p>
@@ -3744,7 +3761,7 @@ Vcells 54295497  414   1.07e+08  816 54337669  415</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb577"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb577-1"><a href="#cb577-1" aria-hidden="true" tabindex="-1"></a><span class="fu">address</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "0x7fc83f91e010"</code></pre>
+<pre><code>[1] "0x7f21b8a40010"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb579"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb579-1"><a href="#cb579-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mem_change</span>(x[<span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -3752,7 +3769,7 @@ Vcells 54295497  414   1.07e+08  816 54337669  415</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb581"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb581-1"><a href="#cb581-1" aria-hidden="true" tabindex="-1"></a><span class="fu">address</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "0x7fc83f91e010"</code></pre>
+<pre><code>[1] "0x7f21b8a40010"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb583"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb583-1"><a href="#cb583-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mem_change</span>(y <span class="ot">&lt;-</span> x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -3760,7 +3777,7 @@ Vcells 54295497  414   1.07e+08  816 54337669  415</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb585"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb585-1"><a href="#cb585-1" aria-hidden="true" tabindex="-1"></a><span class="fu">address</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "0x7fc83f91e010"</code></pre>
+<pre><code>[1] "0x7f21b8a40010"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb587"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb587-1"><a href="#cb587-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mem_change</span>(x[<span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -3768,11 +3785,11 @@ Vcells 54295497  414   1.07e+08  816 54337669  415</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb589"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb589-1"><a href="#cb589-1" aria-hidden="true" tabindex="-1"></a><span class="fu">address</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "0x7fc831abd010"</code></pre>
+<pre><code>[1] "0x7f21aabdf010"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb591"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb591-1"><a href="#cb591-1" aria-hidden="true" tabindex="-1"></a><span class="fu">address</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "0x7fc83f91e010"</code></pre>
+<pre><code>[1] "0x7f21b8a40010"</code></pre>
 </div>
 </div>
 <p><strong>Challenge</strong>: explain the results of the example above.</p>
@@ -3785,13 +3802,13 @@ Vcells 54295497  414   1.07e+08  816 54337669  415</code></pre>
 <div class="sourceCode cell-code" id="cb593"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb593-1"><a href="#cb593-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">5</span>)</span>
 <span id="cb593-2"><a href="#cb593-2" aria-hidden="true" tabindex="-1"></a><span class="fu">address</span>(a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "0x5589f0c3f1e8"</code></pre>
+<pre><code>[1] "0x56472213f5f8"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb595"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb595-1"><a href="#cb595-1" aria-hidden="true" tabindex="-1"></a><span class="do">## refs(a)  ## 1</span></span>
 <span id="cb595-2"><a href="#cb595-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> a</span>
 <span id="cb595-3"><a href="#cb595-3" aria-hidden="true" tabindex="-1"></a><span class="fu">address</span>(b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "0x5589f0c3f1e8"</code></pre>
+<pre><code>[1] "0x56472213f5f8"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb597"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb597-1"><a href="#cb597-1" aria-hidden="true" tabindex="-1"></a><span class="do">## refs(a)  ## 2</span></span>
 <span id="cb597-2"><a href="#cb597-2" aria-hidden="true" tabindex="-1"></a><span class="do">## refs(b)  ## 2</span></span>
@@ -3802,11 +3819,11 @@ Vcells 54295497  414   1.07e+08  816 54337669  415</code></pre>
 <span id="cb597-7"><a href="#cb597-7" aria-hidden="true" tabindex="-1"></a>a[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
 <span id="cb597-8"><a href="#cb597-8" aria-hidden="true" tabindex="-1"></a><span class="fu">address</span>(a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "0x5589f15f9c58"</code></pre>
+<pre><code>[1] "0x564720f64cd8"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb599"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb599-1"><a href="#cb599-1" aria-hidden="true" tabindex="-1"></a><span class="fu">address</span>(b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "0x5589f0c3f1e8"</code></pre>
+<pre><code>[1] "0x56472213f5f8"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb601"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb601-1"><a href="#cb601-1" aria-hidden="true" tabindex="-1"></a><span class="do">## refs(a)  ## 1</span></span>
 <span id="cb601-2"><a href="#cb601-2" aria-hidden="true" tabindex="-1"></a><span class="do">## refs(b)  ## 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -3921,7 +3938,7 @@ Vcells 54295497  414   1.07e+08  816 54337669  415</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>function (x, ...) 
 UseMethod("mean")
-&lt;bytecode: 0x5589ecfedfb8&gt;
+&lt;bytecode: 0x564714d8ef80&gt;
 &lt;environment: namespace:base&gt;</code></pre>
 </div>
 </div>
@@ -3943,15 +3960,15 @@ UseMethod("mean")
     for(i in seq_along(vals)) x[i] &lt;- exp(vals[i])
     return(x)
 }
-&lt;bytecode: 0x5589f64541d8&gt;</code></pre>
+&lt;bytecode: 0x56471e600d40&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb609"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb609-1"><a href="#cb609-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100000</span>)</span>
 <span id="cb609-2"><a href="#cb609-2" aria-hidden="true" tabindex="-1"></a><span class="fu">benchmark</span>(<span class="fu">f</span>(x), <span class="fu">fc</span>(x), y <span class="ot">&lt;-</span> <span class="fu">exp</span>(x), <span class="at">replications =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         test replications elapsed relative user.self sys.self user.child
-1        f(x)            5   0.039       13     0.038        0          0
-2       fc(x)            5   0.039       13     0.039        0          0
-3 y &lt;- exp(x)            5   0.003        1     0.003        0          0
+1        f(x)            5   0.037     12.3     0.037        0          0
+2       fc(x)            5   0.037     12.3     0.037        0          0
+3 y &lt;- exp(x)            5   0.003      1.0     0.003        0          0
   sys.child
 1         0
 2         0
@@ -3999,9 +4016,19 @@ UseMethod("mean")
 <li>avoid repeated calculations, particularly in a loop
 <ul>
 <li>save (i.e., cache) the result in an object</li>
-<li>move repeated calculations outside of loops (watch out for calculations in a loop that don’t involve all the indices of the loop(s))</li>
+<li>move repeated calculations outside of loops
+<ul>
+<li>watch out for calculations in a loop that don’t involve all the indices of the loop(s)</li>
 </ul></li>
-<li>avoid entirely unneeded calculations (e.g., consider <code>diag(X%*%Y)</code>)</li>
+</ul></li>
+<li>avoid entirely unneeded calculations
+<ul>
+<li>e.g., consider <code>diag(X%*%Y)</code></li>
+</ul></li>
+<li>avoid calculations where you know the answer
+<ul>
+<li>e.g., any part of a computation where you multiply by or add zero or multiply by one</li>
+</ul></li>
 <li>use vectorization in interpreted languages</li>
 <li>consider the order of operations</li>
 <li>combine operations when possible (e.g., use of <code>crossprod</code>)</li>
@@ -4103,9 +4130,588 @@ f(k;n,p,\phi)  =  {n \choose k}\frac{k^{k}(n-k)^{n-k}}{n^{n}}\left(\frac{n^{n}}{
 </section>
 <section id="computing-on-the-language-optional" class="level1">
 <h1>10. Computing on the language (optional)</h1>
-<p>Under construction.</p>
+<p>We won’t cover this section, and I won’t expect you to know this material, but some of you may find it interesting. Also, when I talked about R being a particularly flexible language in explaining in part why R can be slow, much of that flexibility is illustrated here.</p>
+<section id="the-r-interpreter" class="level2">
+<h2 class="anchored" data-anchor-id="the-r-interpreter">The R interpreter</h2>
+<section id="parsing" class="level3">
+<h3 class="anchored" data-anchor-id="parsing">Parsing</h3>
+<p>When you run R, the R interpreter takes the code you type or the lines of code that are read in a batch session and parses each statement, translating the text into functional form. It substitutes objects for the symbols (names) that represent those objects and evaluates the statement, returning the resulting object. For complicated R code, this may be recursive.</p>
+<p>Since everything in R is an object, the result of parsing is an object that we’ll be able to investigate, and the result of evaluating the parsed statement is an object.</p>
+<p>We’ll see more on parsing in the next section.</p>
+</section>
+<section id="primitive-and-.internal-and-.external" class="level3">
+<h3 class="anchored" data-anchor-id="primitive-and-.internal-and-.external"><code>.Primitive()</code> and <code>.Internal()</code> (and <code>.External()</code>)</h3>
+<p>Some functionality is implemented internally within the C implementation that lies at the heart of R. If you see <code>.Internal()</code> or <code>.Primitive()</code> or <code>.External()</code>, in the code of a function, you know it’s implemented internally (and therefore generally very quickly). Unfortunately, it also means that you don’t get to see R code that implements the functionality, though Chambers p.&nbsp;465 describes how you can look into the C source code. Basically you need to download the source code for the relevant package off of CRAN.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb616"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb616-1"><a href="#cb616-1" aria-hidden="true" tabindex="-1"></a>plot.xy <span class="co"># plot.xy() is called by plot.default()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>function (xy, type, pch = par("pch"), lty = par("lty"), col = par("col"), 
+    bg = NA, cex = 1, lwd = par("lwd"), ...) 
+{
+    if (is.null(type)) 
+        type &lt;- "p"
+    type &lt;- as.character(type)
+    if (length(type) != 1L || !nzchar(type) || is.na(type)) 
+        stop(gettextf("invalid plot type"))
+    if (nchar(type) &gt; 1L) 
+        warning(gettextf("plot type '%s' will be truncated to first character", 
+            type))
+    t &lt;- substr(type, 1L, 1L)
+    if (!isTRUE(t %in% c("l", "o", "b", "c", "s", "S", "h", "p", 
+        "n"))) 
+        stop(gettextf("invalid plot type '%s'", t))
+    invisible(.External.graphics(C_plotXY, xy, t, pch, lty, col, 
+        bg, cex, lwd, ...))
+}
+&lt;bytecode: 0x56471fcbeef0&gt;
+&lt;environment: namespace:graphics&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb618"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb618-1"><a href="#cb618-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">`</span><span class="at">%*%</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>function (x, y)  .Primitive("%*%")</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="parsing-code-and-understanding-language-objects" class="level2">
+<h2 class="anchored" data-anchor-id="parsing-code-and-understanding-language-objects">Parsing code and understanding language objects</h2>
+<p>R code can be manipulated in text form and we can actually write R code that will create or manipulate R code. We can then evaluate that R code using <code>eval()</code>.</p>
+<p><code>quote()</code> will parse R code, but not evaluate it. This allows you to work with the code rather than the results of evaluating that code. The <code>print()</code> method for language objects is not very helpful! But we can see the parsed code by treating the result as a list.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb620"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb620-1"><a href="#cb620-1" aria-hidden="true" tabindex="-1"></a>obj <span class="ot">&lt;-</span> <span class="fu">quote</span>(<span class="cf">if</span> (x <span class="sc">&gt;</span> <span class="dv">1</span>) <span class="st">"orange"</span> <span class="cf">else</span> <span class="st">"apple"</span>)</span>
+<span id="cb620-2"><a href="#cb620-2" aria-hidden="true" tabindex="-1"></a><span class="fu">as.list</span>(obj)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+`if`
+
+[[2]]
+x &gt; 1
+
+[[3]]
+[1] "orange"
+
+[[4]]
+[1] "apple"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb622"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb622-1"><a href="#cb622-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(obj)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "if"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb624"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb624-1"><a href="#cb624-1" aria-hidden="true" tabindex="-1"></a>weirdObj <span class="ot">&lt;-</span> <span class="fu">quote</span>(<span class="st">`</span><span class="at">if</span><span class="st">`</span>(x <span class="sc">&gt;</span> <span class="dv">1</span>, <span class="st">'orange'</span>, <span class="st">'apple'</span>))</span>
+<span id="cb624-2"><a href="#cb624-2" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(obj, weirdObj)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<p>Recall that to access symbols that involve special syntax (such as special characters), you use backquotes.</p>
+<p>Officially, the name that you assign to an object (including functions) is a <em>symbol</em>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb626"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb626-1"><a href="#cb626-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span>; <span class="fu">typeof</span>(<span class="fu">quote</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "symbol"</code></pre>
+</div>
+</div>
+<p>We can create an <em>expression</em> object that contains R code as</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb628"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb628-1"><a href="#cb628-1" aria-hidden="true" tabindex="-1"></a>myExpr <span class="ot">&lt;-</span> <span class="fu">expression</span>(x <span class="ot">&lt;-</span> <span class="dv">3</span>)</span>
+<span id="cb628-2"><a href="#cb628-2" aria-hidden="true" tabindex="-1"></a><span class="fu">eval</span>(myExpr)</span>
+<span id="cb628-3"><a href="#cb628-3" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(myExpr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "expression"</code></pre>
+</div>
+</div>
+<p>The difference between <code>quote()</code> and <code>expression()</code> is basically that <code>quote()</code> works with a single statement (including multiple statements inside {...}), while <code>expression()</code> can deal with multiple statements, returning a list-like object of parsed statements. Both of them parse R code.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb630"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb630-1"><a href="#cb630-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">quote</span>(x <span class="ot">&lt;-</span> <span class="dv">5</span>)</span>
+<span id="cb630-2"><a href="#cb630-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">expression</span>(x <span class="ot">&lt;-</span> <span class="dv">5</span>, y <span class="ot">&lt;-</span> <span class="dv">3</span>)</span>
+<span id="cb630-3"><a href="#cb630-3" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">quote</span>({x <span class="ot">&lt;-</span> <span class="dv">5</span>; y <span class="ot">&lt;-</span> <span class="dv">3</span>})</span>
+<span id="cb630-4"><a href="#cb630-4" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "&lt;-"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb632"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb632-1"><a href="#cb632-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "expression"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb634"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb634-1"><a href="#cb634-1" aria-hidden="true" tabindex="-1"></a>b[[<span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>x &lt;- 5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb636"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb636-1"><a href="#cb636-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(b[[<span class="dv">1</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "&lt;-"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb638"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb638-1"><a href="#cb638-1" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(a, b[[<span class="dv">1</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb640"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb640-1"><a href="#cb640-1" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(d[[<span class="dv">2</span>]], b[[<span class="dv">1</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<p>The following table shows the <em>language</em> objects in R; note that there are three classes of language objects: <em>expressions</em>, <em>calls</em>, and <em>names</em>.</p>
+<table class="table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 33%">
+<col style="width: 15%">
+<col style="width: 29%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Example syntax to create</th>
+<th>Class</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>object names</td>
+<td><code>quote(x)</code></td>
+<td>name</td>
+<td>symbol (language)</td>
+</tr>
+<tr class="even">
+<td>expressions</td>
+<td><code>expression(x &lt;- 3)</code></td>
+<td>expression</td>
+<td>expression (language)</td>
+</tr>
+<tr class="odd">
+<td>function calls</td>
+<td><code>quote(f())</code></td>
+<td>call</td>
+<td>language</td>
+</tr>
+<tr class="even">
+<td>if statements</td>
+<td><code>quote(if(x &lt; 3) y=5)</code></td>
+<td>if (call)</td>
+<td>language</td>
+</tr>
+<tr class="odd">
+<td>for statement</td>
+<td><code>quote(for(i in 1:5) {})</code></td>
+<td>for (call)</td>
+<td>language</td>
+</tr>
+<tr class="even">
+<td>assignments</td>
+<td><code>quote(x &lt;- 3)</code></td>
+<td>&lt;- (call)</td>
+<td>language</td>
+</tr>
+<tr class="odd">
+<td>operators</td>
+<td><code>quote(3 + 7)</code></td>
+<td>call</td>
+<td>language</td>
+</tr>
+</tbody>
+</table>
+<p><br>
+Basically any standard function, operator, <code>if</code> statement, <code>for</code> statement, assignment, etc. are function calls and inherit from the <code>call</code> class.</p>
+<p>Objects of type language are not officially lists, but they can be queried as such. You can convert between language objects and lists with <code>as.list()</code> and <code>as.call()</code>.</p>
+<p>An official expression is one or more syntactically correct R statements. When we use <code>quote()</code>, we’re working with a single statement, while <code>expression()</code> will create a list of separate statements (essentially separate call objects). I’m trying to use the term <em>statement</em> to refer colloquially to R code, rather than using the term <em>expression</em>, since that has formal definition in this context.</p>
+<p>Let’s take a look at some examples of language objects and parsing.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb642"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb642-1"><a href="#cb642-1" aria-hidden="true" tabindex="-1"></a>e0 <span class="ot">&lt;-</span> <span class="fu">quote</span>(<span class="dv">3</span>)</span>
+<span id="cb642-2"><a href="#cb642-2" aria-hidden="true" tabindex="-1"></a>e1 <span class="ot">&lt;-</span> <span class="fu">expression</span>(x <span class="ot">&lt;-</span> <span class="dv">3</span>) </span>
+<span id="cb642-3"><a href="#cb642-3" aria-hidden="true" tabindex="-1"></a>e1m <span class="ot">&lt;-</span> <span class="fu">expression</span>({x <span class="ot">&lt;-</span> <span class="dv">3</span>; y <span class="ot">&lt;-</span> <span class="dv">5</span>}) </span>
+<span id="cb642-4"><a href="#cb642-4" aria-hidden="true" tabindex="-1"></a>e2 <span class="ot">&lt;-</span> <span class="fu">quote</span>(x <span class="ot">&lt;-</span> <span class="dv">3</span>) </span>
+<span id="cb642-5"><a href="#cb642-5" aria-hidden="true" tabindex="-1"></a>e3 <span class="ot">&lt;-</span> <span class="fu">quote</span>(<span class="fu">rnorm</span>(<span class="dv">3</span>))</span>
+<span id="cb642-6"><a href="#cb642-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">c</span>(<span class="fu">class</span>(e0), <span class="fu">typeof</span>(e0)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "numeric" "double" </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb644"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb644-1"><a href="#cb644-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">c</span>(<span class="fu">class</span>(e1), <span class="fu">typeof</span>(e1)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "expression" "expression"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb646"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb646-1"><a href="#cb646-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">c</span>(<span class="fu">class</span>(e1[[<span class="dv">1</span>]]), <span class="fu">typeof</span>(e1[[<span class="dv">1</span>]])))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "&lt;-"       "language"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb648"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb648-1"><a href="#cb648-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">c</span>(<span class="fu">class</span>(e1m), <span class="fu">typeof</span>(e1m)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "expression" "expression"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb650"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb650-1"><a href="#cb650-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">c</span>(<span class="fu">class</span>(e2), <span class="fu">typeof</span>(e2)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "&lt;-"       "language"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb652"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb652-1"><a href="#cb652-1" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(e1[[<span class="dv">1</span>]], e2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb654"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb654-1"><a href="#cb654-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">c</span>(<span class="fu">class</span>(e3), <span class="fu">typeof</span>(e3)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "call"     "language"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb656"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb656-1"><a href="#cb656-1" aria-hidden="true" tabindex="-1"></a>e4 <span class="ot">&lt;-</span> <span class="fu">quote</span>(<span class="sc">-</span><span class="dv">7</span>)</span>
+<span id="cb656-2"><a href="#cb656-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">c</span>(<span class="fu">class</span>(e4), <span class="fu">typeof</span>(e4))) <span class="co"># huh? what does this imply?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "call"     "language"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb658"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb658-1"><a href="#cb658-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.list</span>(e4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+`-`
+
+[[2]]
+[1] 7</code></pre>
+</div>
+</div>
+<p>We can evaluate language types using <code>eval()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb660"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb660-1"><a href="#cb660-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(x)</span>
+<span id="cb660-2"><a href="#cb660-2" aria-hidden="true" tabindex="-1"></a><span class="fu">eval</span>(e1)</span>
+<span id="cb660-3"><a href="#cb660-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(x)</span>
+<span id="cb660-4"><a href="#cb660-4" aria-hidden="true" tabindex="-1"></a><span class="fu">eval</span>(e2)</span>
+<span id="cb660-5"><a href="#cb660-5" aria-hidden="true" tabindex="-1"></a>e1mlist <span class="ot">&lt;-</span> <span class="fu">as.list</span>(e1m)</span>
+<span id="cb660-6"><a href="#cb660-6" aria-hidden="true" tabindex="-1"></a>e2list <span class="ot">&lt;-</span> <span class="fu">as.list</span>(e2)</span>
+<span id="cb660-7"><a href="#cb660-7" aria-hidden="true" tabindex="-1"></a><span class="fu">eval</span>(<span class="fu">as.call</span>(e2list)) </span>
+<span id="cb660-8"><a href="#cb660-8" aria-hidden="true" tabindex="-1"></a><span class="do">## here's how to do it if the language object is actually an expression (multiple statements)</span></span>
+<span id="cb660-9"><a href="#cb660-9" aria-hidden="true" tabindex="-1"></a><span class="fu">eval</span>(<span class="fu">as.expression</span>(e1mlist))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now let’s look in more detail at the components of R expressions. We’ll be able to get a sense from this of how R evaluates code. We see that when R evaluates a parse tree, the first element says what function to use and the remaining elements are the arguments. But in many cases one or more arguments will themselves be call objects, so there’s recursion.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb661"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb661-1"><a href="#cb661-1" aria-hidden="true" tabindex="-1"></a>e1 <span class="ot">&lt;-</span> <span class="fu">expression</span>(x <span class="ot">&lt;-</span> <span class="dv">3</span>) </span>
+<span id="cb661-2"><a href="#cb661-2" aria-hidden="true" tabindex="-1"></a><span class="do">## e1 is one-element list with the element an object of class '&lt;-' </span></span>
+<span id="cb661-3"><a href="#cb661-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">c</span>(<span class="fu">class</span>(e1), <span class="fu">typeof</span>(e1)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "expression" "expression"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb663"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb663-1"><a href="#cb663-1" aria-hidden="true" tabindex="-1"></a>e1[[<span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>x &lt;- 3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb665"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb665-1"><a href="#cb665-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.list</span>(e1[[<span class="dv">1</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+`&lt;-`
+
+[[2]]
+x
+
+[[3]]
+[1] 3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb667"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb667-1"><a href="#cb667-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(e1[[<span class="dv">1</span>]], class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] "name"
+
+[[2]]
+[1] "name"
+
+[[3]]
+[1] "numeric"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb669"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb669-1"><a href="#cb669-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">5</span>)</span>
+<span id="cb669-2"><a href="#cb669-2" aria-hidden="true" tabindex="-1"></a>e3 <span class="ot">&lt;-</span> <span class="fu">quote</span>(<span class="fu">mean</span>(y))</span>
+<span id="cb669-3"><a href="#cb669-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">c</span>(<span class="fu">class</span>(e3), <span class="fu">typeof</span>(e3)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "call"     "language"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb671"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb671-1"><a href="#cb671-1" aria-hidden="true" tabindex="-1"></a>e3[[<span class="dv">1</span>]] </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>mean</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb673"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb673-1"><a href="#cb673-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">c</span>(<span class="fu">class</span>(e3[[<span class="dv">1</span>]]), <span class="fu">typeof</span>(e3[[<span class="dv">1</span>]])))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "name"   "symbol"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb675"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb675-1"><a href="#cb675-1" aria-hidden="true" tabindex="-1"></a>e3[[<span class="dv">2</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>y</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb677"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb677-1"><a href="#cb677-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">c</span>(<span class="fu">class</span>(e3[[<span class="dv">2</span>]]), <span class="fu">typeof</span>(e3[[<span class="dv">2</span>]])))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "name"   "symbol"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb679"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb679-1"><a href="#cb679-1" aria-hidden="true" tabindex="-1"></a><span class="do">## we have recursion</span></span>
+<span id="cb679-2"><a href="#cb679-2" aria-hidden="true" tabindex="-1"></a>e3 <span class="ot">&lt;-</span> <span class="fu">quote</span>(<span class="fu">mean</span>(<span class="fu">c</span>(<span class="dv">12</span>,<span class="dv">13</span>,<span class="dv">15</span>) <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">3</span>)))</span>
+<span id="cb679-3"><a href="#cb679-3" aria-hidden="true" tabindex="-1"></a><span class="fu">as.list</span>(e3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+mean
+
+[[2]]
+c(12, 13, 15) + rnorm(3)</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb681"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb681-1"><a href="#cb681-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.list</span>(e3[[<span class="dv">2</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+`+`
+
+[[2]]
+c(12, 13, 15)
+
+[[3]]
+rnorm(3)</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb683"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb683-1"><a href="#cb683-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.list</span>(e3[[<span class="dv">2</span>]][[<span class="dv">3</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+rnorm
+
+[[2]]
+[1] 3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb685"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb685-1"><a href="#cb685-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pryr)</span>
+<span id="cb685-2"><a href="#cb685-2" aria-hidden="true" tabindex="-1"></a><span class="fu">call_tree</span>(e3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>\- ()
+  \- `mean
+  \- ()
+    \- `+
+    \- ()
+      \- `c
+      \-  12
+      \-  13
+      \-  15
+    \- ()
+      \- `rnorm
+      \-  3 </code></pre>
+</div>
+</div>
+</section>
+<section id="manipulating-the-parse-tree" class="level2">
+<h2 class="anchored" data-anchor-id="manipulating-the-parse-tree">Manipulating the parse tree</h2>
+<p>Of course since the parsed code is just an object, we can manipulate it, i.e., <em>compute on the language</em>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb687"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb687-1"><a href="#cb687-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">quote</span>(y <span class="ot">&lt;-</span> <span class="dv">3</span>)</span>
+<span id="cb687-2"><a href="#cb687-2" aria-hidden="true" tabindex="-1"></a>out[[<span class="dv">3</span>]] <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb687-3"><a href="#cb687-3" aria-hidden="true" tabindex="-1"></a><span class="fu">eval</span>(out)</span>
+<span id="cb687-4"><a href="#cb687-4" aria-hidden="true" tabindex="-1"></a>y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+</div>
+<p>Here’s another example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb689"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb689-1"><a href="#cb689-1" aria-hidden="true" tabindex="-1"></a>e1 <span class="ot">&lt;-</span> <span class="fu">quote</span>(<span class="dv">4</span> <span class="sc">+</span> <span class="dv">5</span>)</span>
+<span id="cb689-2"><a href="#cb689-2" aria-hidden="true" tabindex="-1"></a>e2 <span class="ot">&lt;-</span> <span class="fu">quote</span>(<span class="fu">plot</span>(x, y))</span>
+<span id="cb689-3"><a href="#cb689-3" aria-hidden="true" tabindex="-1"></a>e2[[<span class="dv">1</span>]] <span class="ot">&lt;-</span> <span class="st">`</span><span class="at">+</span><span class="st">`</span></span>
+<span id="cb689-4"><a href="#cb689-4" aria-hidden="true" tabindex="-1"></a><span class="fu">eval</span>(e2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb691"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb691-1"><a href="#cb691-1" aria-hidden="true" tabindex="-1"></a>e1[[<span class="dv">3</span>]] <span class="ot">&lt;-</span> e2</span>
+<span id="cb691-2"><a href="#cb691-2" aria-hidden="true" tabindex="-1"></a>e1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>4 + .Primitive("+")(x, y)</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb693"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb693-1"><a href="#cb693-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(e1[[<span class="dv">3</span>]]) <span class="co"># note the nesting</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "call"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb695"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb695-1"><a href="#cb695-1" aria-hidden="true" tabindex="-1"></a><span class="fu">eval</span>(e1) <span class="co"># what should I get?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 11</code></pre>
+</div>
+</div>
+<p>We can also turn it back into standard R code, as a character, using <code>deparse()</code>, which turns the parse tree back into R code as text. <code>parse()</code> is like <code>quote()</code> but it takes the code in the form of a string rather than an actual expression:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb697"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb697-1"><a href="#cb697-1" aria-hidden="true" tabindex="-1"></a>codeText <span class="ot">&lt;-</span> <span class="fu">deparse</span>(out)</span>
+<span id="cb697-2"><a href="#cb697-2" aria-hidden="true" tabindex="-1"></a>parsedCode <span class="ot">&lt;-</span> <span class="fu">parse</span>(<span class="at">text =</span> codeText) </span>
+<span id="cb697-3"><a href="#cb697-3" aria-hidden="true" tabindex="-1"></a><span class="do">## parse() works like quote() except on the code in the form of a string</span></span>
+<span id="cb697-4"><a href="#cb697-4" aria-hidden="true" tabindex="-1"></a><span class="fu">eval</span>(parsedCode)</span>
+<span id="cb697-5"><a href="#cb697-5" aria-hidden="true" tabindex="-1"></a><span class="fu">deparse</span>(<span class="fu">quote</span>(<span class="cf">if</span> (x <span class="sc">&gt;</span> <span class="dv">1</span>) <span class="st">"orange"</span> <span class="cf">else</span> <span class="st">"apple"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "if (x &gt; 1) \"orange\" else \"apple\""</code></pre>
+</div>
+</div>
+<p>Note that the quotes have been escaped since they’re inside a string.</p>
+<p>It can be very useful to be able to convert names of objects that are in the form of text to names that R interprets as symbols referring to objects:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb699"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb699-1"><a href="#cb699-1" aria-hidden="true" tabindex="-1"></a>x3 <span class="ot">&lt;-</span> <span class="dv">7</span></span>
+<span id="cb699-2"><a href="#cb699-2" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb699-3"><a href="#cb699-3" aria-hidden="true" tabindex="-1"></a><span class="fu">as.name</span>(<span class="fu">paste</span>(<span class="st">'x'</span>, i, <span class="at">sep=</span><span class="st">''</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>x3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb701"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb701-1"><a href="#cb701-1" aria-hidden="true" tabindex="-1"></a><span class="fu">eval</span>(<span class="fu">as.name</span>(<span class="fu">paste</span>(<span class="st">'x'</span>, i, <span class="at">sep=</span><span class="st">''</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb703"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb703-1"><a href="#cb703-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assign</span>(<span class="fu">paste</span>(<span class="st">'x'</span>, i, <span class="at">sep =</span> <span class="st">''</span>), <span class="dv">11</span>)</span>
+<span id="cb703-2"><a href="#cb703-2" aria-hidden="true" tabindex="-1"></a>x3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 11</code></pre>
+</div>
+</div>
+</section>
+<section id="parsing-replacement-expressions" class="level2">
+<h2 class="anchored" data-anchor-id="parsing-replacement-expressions">Parsing replacement expressions</h2>
+<p>Let’s consider replacement expressions.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb705"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb705-1"><a href="#cb705-1" aria-hidden="true" tabindex="-1"></a>animals <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'cat'</span>, <span class="st">'dog'</span>, <span class="st">'rat'</span>,<span class="st">'mouse'</span>)</span>
+<span id="cb705-2"><a href="#cb705-2" aria-hidden="true" tabindex="-1"></a>out1 <span class="ot">&lt;-</span> <span class="fu">quote</span>(animals[<span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="st">'rat'</span>) </span>
+<span id="cb705-3"><a href="#cb705-3" aria-hidden="true" tabindex="-1"></a>out2 <span class="ot">&lt;-</span> <span class="fu">quote</span>(<span class="st">`</span><span class="at">&lt;-</span><span class="st">`</span>(animals[<span class="dv">4</span>], <span class="st">'rat'</span>)) </span>
+<span id="cb705-4"><a href="#cb705-4" aria-hidden="true" tabindex="-1"></a>out3 <span class="ot">&lt;-</span> <span class="fu">quote</span>(<span class="st">'[&lt;-'</span>(animals,<span class="dv">4</span>,<span class="st">'rat'</span>)) </span>
+<span id="cb705-5"><a href="#cb705-5" aria-hidden="true" tabindex="-1"></a><span class="fu">as.list</span>(out1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+`&lt;-`
+
+[[2]]
+animals[4]
+
+[[3]]
+[1] "rat"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb707"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb707-1"><a href="#cb707-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.list</span>(out2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+`&lt;-`
+
+[[2]]
+animals[4]
+
+[[3]]
+[1] "rat"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb709"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb709-1"><a href="#cb709-1" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(out1, out2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb711"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb711-1"><a href="#cb711-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.list</span>(out3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+`[&lt;-`
+
+[[2]]
+animals
+
+[[3]]
+[1] 4
+
+[[4]]
+[1] "rat"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb713"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb713-1"><a href="#cb713-1" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(out1, out3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb715"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb715-1"><a href="#cb715-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(out1[[<span class="dv">2</span>]]) <span class="co"># language</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "language"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb717"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb717-1"><a href="#cb717-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(out1[[<span class="dv">2</span>]]) <span class="co"># call</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "call"</code></pre>
+</div>
+</div>
+<p>The parse tree for <code>out3</code> is different than those for <code>out1</code> and <code>out2</code>, but when <code>out3</code> is evaluated the result is the same as for <code>out1</code> and <code>out2</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb719"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb719-1"><a href="#cb719-1" aria-hidden="true" tabindex="-1"></a><span class="fu">eval</span>(out1)</span>
+<span id="cb719-2"><a href="#cb719-2" aria-hidden="true" tabindex="-1"></a>animals</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "cat" "dog" "rat" "rat"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb721"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb721-1"><a href="#cb721-1" aria-hidden="true" tabindex="-1"></a>animals[<span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="st">'mouse'</span>  <span class="co"># reset things to original state</span></span>
+<span id="cb721-2"><a href="#cb721-2" aria-hidden="true" tabindex="-1"></a><span class="fu">eval</span>(out3) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "cat" "dog" "rat" "rat"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb723"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb723-1"><a href="#cb723-1" aria-hidden="true" tabindex="-1"></a>animals <span class="co"># both do the same thing</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "cat"   "dog"   "rat"   "mouse"</code></pre>
+</div>
+</div>
+<p>Why? When R evaluates a call to ‘&lt;-’, if the first argument is a name, then it does the assignment, but if the first argument (i.e.&nbsp;what’s on the left-hand side of the “assignment”) is a call then it calls the appropriate replacement function. The second argument (the value being assigned) is evaluated first. Ultimately in all of these cases, the replacement function is used.</p>
+</section>
+<section id="substitute" class="level2">
+<h2 class="anchored" data-anchor-id="substitute">substitute()</h2>
+<p>The substitute function acts like <code>quote()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb725"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb725-1"><a href="#cb725-1" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(<span class="fu">quote</span>(z <span class="ot">&lt;-</span> x<span class="sc">^</span><span class="dv">2</span>), <span class="fu">substitute</span>(z <span class="ot">&lt;-</span> x<span class="sc">^</span><span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<p>But if you also pass <code>substitute()</code> an environment, it will replace symbols with their object values in that environment.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb727"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb727-1"><a href="#cb727-1" aria-hidden="true" tabindex="-1"></a>e <span class="ot">&lt;-</span> <span class="fu">new.env</span>(); e<span class="sc">$</span>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb727-2"><a href="#cb727-2" aria-hidden="true" tabindex="-1"></a><span class="fu">substitute</span>(z <span class="ot">&lt;-</span> x<span class="sc">^</span><span class="dv">2</span>, e)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>z &lt;- 3^2</code></pre>
+</div>
+</div>
+<p>This can do non-sensical stuff:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb729"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb729-1"><a href="#cb729-1" aria-hidden="true" tabindex="-1"></a>e<span class="sc">$</span>z <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb729-2"><a href="#cb729-2" aria-hidden="true" tabindex="-1"></a><span class="fu">substitute</span>(z <span class="ot">&lt;-</span> x<span class="sc">^</span><span class="dv">2</span>, e)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>5 &lt;- 3^2</code></pre>
+</div>
+</div>
+<p>Let’s see a practical example of substituting for variables in statements:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb731"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb731-1"><a href="#cb731-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> <span class="fu">rnorm</span>(<span class="dv">5</span>), <span class="at">y =</span> <span class="fu">rgamma</span>(<span class="dv">5</span>, <span class="dv">1</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>How does <code>plot()</code> get the axis label names? In the <code>plot()</code> function, you can see this syntax:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb732"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb732-1"><a href="#cb732-1" aria-hidden="true" tabindex="-1"></a>xlabel <span class="ot">&lt;-</span> <span class="cf">if</span>(<span class="sc">!</span><span class="fu">missing</span>(x)) <span class="fu">deparse</span>(<span class="fu">substitute</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>So what’s going on is that within <code>plot.default()</code>, it substitutes in for ‘<code>x</code>’ with the statement that was passed in as the <code>x</code> argument, and then uses <code>deparse()</code> to convert to character. The fact that <code>x</code> still has <code>rnorm(5)</code> associated with it rather than the five numerical values from evaluating <code>rnorm()</code> has to do with lazy evaluation and promises. Here’s the same idea in action in a stripped down example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb733"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb733-1"><a href="#cb733-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(obj){</span>
+<span id="cb733-2"><a href="#cb733-2" aria-hidden="true" tabindex="-1"></a>objName <span class="ot">&lt;-</span> <span class="fu">deparse</span>(<span class="fu">substitute</span>(obj))</span>
+<span id="cb733-3"><a href="#cb733-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(objName)</span>
+<span id="cb733-4"><a href="#cb733-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb733-5"><a href="#cb733-5" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "y"</code></pre>
+</div>
+</div>
+<p>More generally, we can substitute into <em>expression</em> and <em>call</em> objects by providing a named list (or an environment) - the substition happens within the context of this list.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb735"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb735-1"><a href="#cb735-1" aria-hidden="true" tabindex="-1"></a><span class="fu">substitute</span>(a <span class="sc">+</span> b, <span class="fu">list</span>(<span class="at">a =</span> <span class="dv">1</span>, <span class="at">b =</span> <span class="fu">quote</span>(x)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1 + x</code></pre>
+</div>
+</div>
+<p>Things can get intricate quickly:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb737"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb737-1"><a href="#cb737-1" aria-hidden="true" tabindex="-1"></a>e1 <span class="ot">&lt;-</span> <span class="fu">quote</span>(x <span class="sc">+</span> y)</span>
+<span id="cb737-2"><a href="#cb737-2" aria-hidden="true" tabindex="-1"></a>e2 <span class="ot">&lt;-</span> <span class="fu">substitute</span>(e1, <span class="fu">list</span>(<span class="at">x =</span> <span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The problem is that <code>substitute()</code> doesn’t evaluate its first argument, <code>e1</code>, so it can’t replace the parsed elements in <code>e1</code>. Instead, we’d need to do the following, where we force the evaluation of <code>e1</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb738"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb738-1"><a href="#cb738-1" aria-hidden="true" tabindex="-1"></a>e2 <span class="ot">&lt;-</span> <span class="fu">substitute</span>(<span class="fu">substitute</span>(e, <span class="fu">list</span>(<span class="at">x =</span> <span class="dv">3</span>)), <span class="fu">list</span>(<span class="at">e =</span> e1))</span>
+<span id="cb738-2"><a href="#cb738-2" aria-hidden="true" tabindex="-1"></a><span class="fu">substitute</span>(<span class="fu">substitute</span>(e, <span class="fu">list</span>(<span class="at">x =</span> <span class="dv">3</span>)), <span class="fu">list</span>(<span class="at">e =</span> e1)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>substitute(x + y, list(x = 3))</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb740"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb740-1"><a href="#cb740-1" aria-hidden="true" tabindex="-1"></a><span class="do">## so e1 is substituted as an evaluated object, </span></span>
+<span id="cb740-2"><a href="#cb740-2" aria-hidden="true" tabindex="-1"></a><span class="do">## which then allows for substitution for 'x' </span></span>
+<span id="cb740-3"><a href="#cb740-3" aria-hidden="true" tabindex="-1"></a>e2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>substitute(x + y, list(x = 3))</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb742"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb742-1"><a href="#cb742-1" aria-hidden="true" tabindex="-1"></a><span class="fu">eval</span>(e2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>3 + y</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb744"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb744-1"><a href="#cb744-1" aria-hidden="true" tabindex="-1"></a><span class="fu">substitute_q</span>(e1, <span class="fu">list</span>(<span class="at">x =</span> <span class="dv">3</span>))  <span class="co"># from pryr</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>3 + y</code></pre>
+</div>
+</div>
+<p>If this subsection is confusing, let me assure you that it has confused me too. The indirection going on here is very involved.</p>
+</section>
+<section id="final-thoughts" class="level2">
+<h2 class="anchored" data-anchor-id="final-thoughts">Final thoughts</h2>
+<p><strong>Challenge</strong>: figure out how a <code>for</code> loop is parsed in R. See how a <code>for</code> loop with one statement within the loop differs from one with two or more statements.</p>
+<p>We’ll see <code>expression()</code> again when we talk about inserting mathematical notation in plots.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
