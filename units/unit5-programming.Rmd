@@ -3309,10 +3309,10 @@ Here's the procedure in pseudocode:
 
 In general, there will be collisions -- multiple keys will be assigned to the
 same index. However with a good hash function, usually there will be a small number of keys associated
-with a given bucket. So each bucket will contain a list of a small number of values.
+with a given bucket. So each bucket will contain a list of a small number of values and the associated keys.
 (The buckets might contain the actual values or they might contain the addresses of where the values are actually stored
 if the values are complicated objects.) Then determining the correct value (or the required address) within
-a given bucket is fast even with simple linear search through the items one by one .
+a given bucket is fast even with simple linear search through the items one by one.
 Put another way, the
 hash function distributes the keys amongst an array of buckets and
 allows one to look up the appropriate bucket quickly based on the
@@ -3459,8 +3459,15 @@ $$
 where the denominator serves as a normalizing constant to ensure this is
 a valid probability mass function. How would one efficiently code the
 computation of the denominator? For our purposes here you can take
-$n=2000$, $p=0.3$ and $\phi=0.5$ when you need to actually run your
-code.
+$n=10000$, $p=0.3$ and $\phi=0.5$ when you need to actually run your
+code. Note that $0^0=1$.
+
+> **Warning**: we always want to do such calculations on the log scale,
+only exponentiating at the end if necessary. Otherwise we're likely to
+run into overflow or underflow, where the result is too big or too small
+to store in the 8-byte floating point representation (more in a later Unit).
+
+Here's a non-vectorized approach:
 
 ```{r, eval=FALSE}
 logLik <- function(k, n, p, phi) {
@@ -3469,7 +3476,30 @@ logLik <- function(k, n, p, phi) {
   exp(lchoose(n, k) + klogk + nmklognmk - n*log(n) + phi*(n*log(n) -
       klogk - nmklognmk) + k*phi*log(p) + (n-k)*phi*log(1-p))
 }
+n <- 10000
+out1 <- sum(sapply(0:n, logLik, n, p, phi))
 ```
+
+And here's a basic vectorized approach.
+
+```{r, eval=FALSE}
+normConstVecNaive <- function(n, p, phi) {
+    k <- 0:n
+    loglik <- lchoose(n, k)
+    klogk <- k*log(k)
+    klogk[is.nan(klogk)] <- 0
+    nmklognmk <- (n-k)*log((n-k))
+    nmklognmk[is.nan(nmklognmk)] <- 0
+    logLik <- lchoose(n, k) + klogk + nmklognmk - n*log(n) + phi*(n*log(n) - klogk - nmklognmk) +
+        k*phi*log(p) + (n - k)*phi*log(1-p)
+    return(sum(exp(logLik)))
+}
+out2 <- normConstVecNaive(n, p, phi)
+```
+
+Questions:
+  1. List some inefficiencies in `normConstVecNaive`.
+  2. Write a faster version. 
 
 **Challenge 7:** Suppose we have a matrix in which each row is a vector
 of probabilities that add to one, and we want to generate a categorical
