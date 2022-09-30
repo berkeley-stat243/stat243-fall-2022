@@ -47,6 +47,8 @@ website:
           text: "Lab 3"
         - file: labs/04/debugging.Rmd
           text: "Lab 4"
+        - file: labs/05/code_review.qmd
+          text: "Lab 5"
     - id: howtos
       title: "How tos"
       contents:
@@ -70,7 +72,7 @@ website:
 
 output:
   html
-  
+
 format:
   html:
     theme: cosmo
