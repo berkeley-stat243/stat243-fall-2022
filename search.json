@@ -819,6 +819,97 @@
     "text": "Class discussion\n10–15 minutes\nAs a class, we’ll discuss the strengths and weaknesses and find the overall consensus. Please pick two representatives from your group, one for strengths and one for weaknesses."
   },
   {
+    "objectID": "labs/05/code_review.html",
+    "href": "labs/05/code_review.html",
+    "title": "PS3 code review",
+    "section": "",
+    "text": "In section this week we will do a paired code review for Problem 1 of PS3.\nIn order for this to be beneficial, you will need to be as honest with your partner as possible (while staying respectful). If something is actually hard to follow, tell them! If you thought that something they did was clever, also tell them!\n\n\nWe will break up into pairs of 2 (with a possible group of 3 if necessary). Please open up the PDF you submitted.\nNext, you will spend ~15 minutes reading one partner’s code, asking questions to the person whose code you are reviewing. You will then switch roles so that the reviewer becomes the reviewee.\nFinally, each of you will fill out the survey at the following link: tinyurl.com/stat243-2022-lab5, where you will summarize the differences between your work and and your partner’s work, noting anything that was particularly novel to you. You will need to log in with your Berkeley account to access this survey.\nThe survey response is worth 1 point, similar to in class group work or the unit check ins, and will be graded. You will receive credit as long as your response is thoughtful (e.g. at least a couple of sentences). If you choose not to come to section, please find a partner or two on your own to do the paired review with and submit the survey by Wednesday Oct. 5 at 5:59pm to receive credit.\n\n\n\n\nIs the code visually easy to break apart? Can you see the entire body of the functions without scrolling up/down left/right? The general rule-of-thumb is no more than 80 in either direction (80 character width, 80 lines; the first restriction should be practiced more religiously).\nAre the data structures easy to parse? Do you understand what information is in which objects? Is the type of data appropriate?\nAre the functions easy to parse? Is it clear what they are doing, what information is being passed to each function, and what the return value/objects are?\nLook at the regex. Are there any edge cases that were missed? Was anything handled particularly well? Any novel expressions that you didn’t think of?\nLook at the plots. Are they well labeled? Is it easy to read information from them? Do they provide an assurance that the code is running correctly? Was there anything particularly neat about your partner’s solution?\nEXTRA. Look at Problem 2, compare/contrast your approaches to OOP. Explain the logic behind your design."
+  },
+  {
+    "objectID": "labs/05/code_review.html#address-all-aspects-of-the-problems",
+    "href": "labs/05/code_review.html#address-all-aspects-of-the-problems",
+    "title": "PS3 code review",
+    "section": "Address All Aspects of the Problems",
+    "text": "Address All Aspects of the Problems\nYou have to answer the questions on the homework, unless the instructions say otherwise. When in doubt, please post to Ed Discussion!\nDo whatever you’d like beyond that and be as creative as you wish, but you must answer the questions that were asked. This includes all parts of a written response question. If you do not answer these, you are throwing away points."
+  },
+  {
+    "objectID": "labs/05/code_review.html#code-should-be-preceded-by-introductory-text",
+    "href": "labs/05/code_review.html#code-should-be-preceded-by-introductory-text",
+    "title": "PS3 code review",
+    "section": "Code Should be Preceded By Introductory Text",
+    "text": "Code Should be Preceded By Introductory Text\nFor each sub-problem where code is required, please include an introduction to in the text before presenting any code. This should include a brief summary of what the code does and how you approached the solution, plus any relevant challenges you faced. This doesn’t have to be very long, but it should have some substance.\nIf there’s a natural stopping point in your code – e.g., between separate functions, after you’ve accomplished some task(s), or somewhere you want to highlight what you just did – then feel free to break longer code chunks up with some text if you think it will help with readability / flow of your document. However, good code quality and substantive code comments will often suffice.\n\n\n\n\n\n\nCode comments are not a replacement for the introductory text\n\n\n\na. How to lose Presentation points\n\n# To answer this problem, I wrote the code below which does x, y, and z...\n# and this comment should instead be in the text above the code chunk :(\nhow_to_lose_points <- function(...) { ... }"
+  },
+  {
+    "objectID": "labs/05/code_review.html#include-your-code",
+    "href": "labs/05/code_review.html#include-your-code",
+    "title": "PS3 code review",
+    "section": "Include Your Code",
+    "text": "Include Your Code\nMost people include it as they go along, which is fine. If you find that messy, put an appendix at the end with all of the function definitions. This applies to code for plots as well."
+  },
+  {
+    "objectID": "labs/05/code_review.html#include-relevant-outputs",
+    "href": "labs/05/code_review.html#include-relevant-outputs",
+    "title": "PS3 code review",
+    "section": "Include Relevant Outputs",
+    "text": "Include Relevant Outputs\nWhere appropriate, include some sample outputs from your code. You don’t have to do this for every single function, but be sure to give outputs if the question asks for it to avoid points off, e.g. “print out or plot the number of chunks for the candidates” or “report the number of observations in each year by printing the information to the screen”.\nIf outputs are long and you can’t truncate them, then create an appendix section at the end of your document and put them there, with a subheading for the relevant problem. Please also be sure to include a note that you did so in the text, e.g. “The output can be found in the Appendix.”"
+  },
+  {
+    "objectID": "labs/05/code_review.html#avoid-unnecessary-outputs",
+    "href": "labs/05/code_review.html#avoid-unnecessary-outputs",
+    "title": "PS3 code review",
+    "section": "Avoid Unnecessary Outputs",
+    "text": "Avoid Unnecessary Outputs\nPlease use suppressPackageStartupMessages() or set warning = FALSE and message = FALSE in a code chunk that only loads the packages. Please on’t use these chunk options on other chunks. If something is going wrong ou need to fix it, as opposed to not printing the warning."
+  },
+  {
+    "objectID": "labs/05/code_review.html#use-good-formatting-to-make-clear-what-problem-youre-answering",
+    "href": "labs/05/code_review.html#use-good-formatting-to-make-clear-what-problem-youre-answering",
+    "title": "PS3 code review",
+    "section": "Use Good Formatting to Make Clear What Problem You’re Answering",
+    "text": "Use Good Formatting to Make Clear What Problem You’re Answering\nYou have the power of Markdown in your hands, so use it! While you’re free to use the .Rmd source code for the problem set instructions as a template, the instructions are written as a list, and .Rmd is finicky when adding text or code chunks between sequential list items.\nIt can often be less error-prone to start a new .Rmd from scratch and just use header tags like # (top level section) and ## (second level section) to separate your problems and sub-problems.\nFor example:\n# Problem 1: Assertions and testing\n\n## a. Assertions\n\nIn the function below, I added an assertion to check for...\nwhich guards against... and gives helpful feedback to the user\ntelling them to...\nNote that you have to include a space between the final # and the header text, or the header won’t render correctly, e.g.:\n#Header\nproduces the following non-header text:\n#Header\nIf you’re having trouble with Markdown, see 2.5 Markdown syntax from the R Markdown: The Definitive Guide book."
+  },
+  {
+    "objectID": "labs/05/code_review.html#a-couple-of-useful-tools-in-rstudio",
+    "href": "labs/05/code_review.html#a-couple-of-useful-tools-in-rstudio",
+    "title": "PS3 code review",
+    "section": "A Couple of Useful Tools in RStudio",
+    "text": "A Couple of Useful Tools in RStudio\nYou can autoindent your code in RStudio using Command or Ctrl + I. You can also autoformat your code with Shift + Command or Ctrl + A. There are some other useful shortcuts in the Code menu."
+  },
+  {
+    "objectID": "labs/05/code_review.html#extra-credit",
+    "href": "labs/05/code_review.html#extra-credit",
+    "title": "PS3 code review",
+    "section": "Extra Credit",
+    "text": "Extra Credit\nThis is something additional, above and beyond the basic homework. Repeating the analysis already performed, but with different parameters, is not novel."
+  },
+  {
+    "objectID": "labs/05/code_review.html#code-testing",
+    "href": "labs/05/code_review.html#code-testing",
+    "title": "PS3 code review",
+    "section": "Code Testing",
+    "text": "Code Testing\nYou should have already tested all aspects of your R code before you submit it. Your code should run properly if you restart RStudio and render your .Rmd. I have seen several assignments where students renamed a variable at the last second which causes their code to break, are referencing a global variable that doesn’t exist in the .Rmd, etc. which tells me they did not fully test that their code works before submitting. When reasonable, the functions you create should have a set of small but thoughtful examples showing that the code works as expected."
+  },
+  {
+    "objectID": "labs/05/code_review.html#simple-is-often-better",
+    "href": "labs/05/code_review.html#simple-is-often-better",
+    "title": "PS3 code review",
+    "section": "Simple is Often Better",
+    "text": "Simple is Often Better\nYou should always be thinking of ways to make your code as simple as possible (while maintaining correctness, numerical precision, speed, etc.). For example, the following three chunks of code all do the same thing:\n\ntotal <- 0\nfor (i in 1:length(x)) {\n    total <- total + x[i]\n}\ntotal / length(x)\n\n\nsum(x) / length(x)\n\n\nmean(x)\n\nBut the third option is preferred. Simple code helps with debugging (as there are fewer lines of code to check), improves readability (both for yourself and others), and can often (though not always) result in faster code."
+  },
+  {
+    "objectID": "labs/05/code_review.html#plots-and-comments",
+    "href": "labs/05/code_review.html#plots-and-comments",
+    "title": "PS3 code review",
+    "section": "Plots and Comments",
+    "text": "Plots and Comments\nPlots need to have a title, axis labels, and a key if there are several types of data. Both code and comment lines should be ~80 characters in length, e.g.:\n\n####################\n# Wrap your comments\n####################\n\n# This is a bad comment\n# Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\n# This is a good comment\n# Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod\n# tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim\n# veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ...etc\n\n###############\n# Good plotting\n###############\n\n# set things up\nn <- 50\nx <- 1:n\ny <- runif(n = n, min = 0, max = 10)\n\ncol_factor <- sample(x = c(1, 2), size = n, replace = T, prob = c(1, 2))\n\ndf <- data.frame(x, y, color = as.factor(col_factor))\n\n# make the plot\nggplot(df, aes(x = x, y = y)) +\n  geom_point(aes(color = color), size = 3) +\n  geom_line() +\n  theme_bw() +\n  labs(x = \"Label related to data\", y = \"Label related to data\") +\n  ggtitle(\"Short but informative title\") +\n  scale_color_discrete(name = \"Group designation\") +\n  theme(legend.position = c(1, 1),\n        legend.justification = c(1, 1),\n        legend.background = element_blank(),\n        legend.box.background = element_rect(colour = \"black\")) +\n  ylim(0, 13)"
+  },
+  {
+    "objectID": "labs/05/code_review.html#vectorization",
+    "href": "labs/05/code_review.html#vectorization",
+    "title": "PS3 code review",
+    "section": "Vectorization",
+    "text": "Vectorization\n“Vectorization” in R implies using functions that naturally operate over vector inputs, rather than processing each element one at a time. This ends up being faster because, under the hood, vectorized functions in R actually call corresponding code written in C, and the C code itself uses a loop that runs much more quickly than an equivalent loop in R would. But to do that, it needs to receive the full vector all at once.\nR is vectorized in many basic mathematical operations (addition, subtraction, multiplication, division, etc.) and any other functions have built-in vectorization as well. Some functions – like those for linear algebra – even use highly optimized parallel routines in C, adding further speedups. So when operating on large vectors or matrices, be sure to check the documentation to see if there is a vectorized function that you can use to your advantage.\n\n#####################\n# vectorized division\n#####################\n\nx <- 1:100\ny <- 100:1\n\na_div <- mapply(FUN = \"/\", x, y)\nv_div <- x / y\n\nall.equal(a_div, v_div)\n\n[1] TRUE\n\nidentical(a_div, v_div)\n\n[1] TRUE\n\n########################\n# vectorized multinomial\n########################\n\nprobs <- matrix(data = c(0.1,0.1,0.8, 1/3,1/3,1/3), nrow = 2, byrow = T)\n\nset.seed(0)\na_mnom <- t(apply(X = probs, MARGIN = 1, FUN = rmultinom,\n                 n = 1, size = 100))\n\nset.seed(0)\nv_mnom <- extraDistr::rmnom(n = 2, size = 100, prob = probs)\n\nall.equal(a_mnom, v_mnom)\n\n[1] TRUE\n\nidentical(a_mnom, v_mnom) # why false?\n\n[1] FALSE\n\n# short benchmark\nmicrobenchmark::microbenchmark(\n    \"apply\" = apply(X = probs, MARGIN = 1,\n                    FUN = rmultinom, n = 1, size = 100),\n    \"vector\" = extraDistr::rmnom(n = 2, size = 100,\n                                 prob = probs),\n    times = 100)\n\nUnit: microseconds\n   expr    min      lq     mean median    uq     max neval cld\n  apply 36.720 37.6400 39.77439 38.728 39.49 102.926   100   b\n vector  5.639  6.1305  7.42927  7.014  8.30  23.061   100  a \n\n\nIf you want to learn a bit more about vectorization, check out 24.5 Vectorize in the AdvancedR book."
+  },
+  {
     "objectID": "labs/01/intro_git_knitr.html",
     "href": "labs/01/intro_git_knitr.html",
     "title": "Introduction to git and knitr",
