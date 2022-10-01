@@ -36,6 +36,8 @@ website:
           text: "Unit 4"
         - file: units/unit5-programming.Rmd
           text: "Unit 5"
+        - file: units/unit6-parallel.Rmd
+          text: "Unit 6"
     - id: labs
       title: "Labs"
       contents:
