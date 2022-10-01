@@ -152,6 +152,7 @@ personal computer or a given node in a cluster.
     communicating with them via a communication technology called
     sockets.
 -   *scheduler*: a program that manages users' jobs on a cluster.
+    *Slurm* is a commonly used scheduler.
 -   *load-balanced*: when all the cores that are part of a computation
     are busy for the entire period of time the computation is running.
 
@@ -202,9 +203,9 @@ Parallel programming for distributed memory parallelism requires passing
 messages between the different nodes. The standard protocol for doing
 this is MPI, of which there are various versions, including `openMPI`.
 
-While there are various R packages (e.g., `Rmpi` and the `pbdR`
-packages) that use MPI behind the scenes, we'll only cover distributed
-memory parallelization via the future package and Dask, which don't use
+While there are various R (e.g., `Rmpi` and the `pbdR`
+packages) and Python packages that use MPI behind the scenes, we'll only cover distributed
+memory parallelization via the `future` package and `Dask`, which don't use
 MPI.
 
 ## Some other approaches to parallel processing
@@ -221,7 +222,19 @@ Most researchers don't program for a GPU directly but rather use
 software (often machine learning software such as Tensorflow or PyTorch,
 or other software that automatically uses the GPU such as JAX)
  that has been programmed to take advantage of a GPU if one is
-available.
+available. The computations that run on the GPU are run in GPU *kernels*,
+which are functions that are launched on the GPU. The overall workflow
+runs on the CPU and then particular (usually computationally-intensive
+tasks for which parallelization is helpful) tasks are handed off to the GPU.
+GPUs and similar devices (e.g., TPUs) are often called "co-processors"
+in recognition of this style of workflow.
+
+The memory on a GPU is distinct from main memory on the computer, so
+when writing code that will use the GPU, one generally wants to avoid
+having large amounts of data needing to be transferred back and forth between
+main (CPU) memory and GPU memory. Also, since there is overhead in
+launching a GPU kernel, one wants to avoid launching a lot of kernels
+relative to the amount of work being done by each kernel. 
 
 ### Spark and Hadoop
 
@@ -375,7 +388,7 @@ This table gives an overview of the different plans.
 |  --------------| -------------------------------------------| ------------| ----------------------------|
 |   multisession |  uses additional R sessions as the workers |      no     |             yes |
 |    multicore   |   uses forked R processes as the workers   |      no     |  not if object not modified |
-|      remote    |    uses an R process on another machine    |     yes     |             yes |
+|      remote    |    uses an R sessions on another machine    |     yes     |             yes |
 |     cluster    |     uses R sessions on other machine(s)    |     yes     |             yes |
 
 # 5. Illustrating the principles in specific case studies
