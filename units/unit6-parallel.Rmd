@@ -1,5 +1,5 @@
 ---
-title: "Programming concepts"
+title: "Parallel processing"
 author: "Chris Paciorek"
 date: "2022-09-30"
 format:
