@@ -9,7 +9,7 @@
 <meta name="author" content="Chris Paciorek">
 <meta name="dcterms.date" content="2022-09-30">
 
-<title>Statistics 243 Fall 2022 - Programming concepts</title>
+<title>Statistics 243 Fall 2022 - Parallel processing</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -260,7 +260,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Programming concepts</h1>
+      <h1 class="quarto-secondary-nav-title">Parallel processing</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -384,7 +384,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Programming concepts</h1>
+<h1 class="title d-none d-lg-block">Parallel processing</h1>
 </div>
 
 
@@ -711,7 +711,7 @@ NULL</code></pre>
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.023   0.000   2.100 </code></pre>
+  0.020   0.001   2.080 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>({</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    p <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">rnorm</span>(n))</span>
@@ -720,7 +720,7 @@ NULL</code></pre>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  3.006   0.060   3.067 </code></pre>
+  3.034   0.061   3.097 </code></pre>
 </div>
 </div>
 <p>Question: Why might this not have shown a perfect three-fold speedup?</p>
@@ -876,7 +876,7 @@ Finishing 10th job.</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  1.412   0.016   1.429 </code></pre>
+  1.397   0.028   1.426 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(<span class="fu">fun</span>(<span class="dv">5</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -897,7 +897,7 @@ Finishing 10th job.</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.239   0.008   6.579 </code></pre>
+  0.233   0.008   6.570 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="do">## this is the default: 1 future (and therefore 4 tasks) per worker</span></span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(</span>
@@ -909,7 +909,7 @@ Finishing 10th job.</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.252   0.003   6.597 </code></pre>
+  0.238   0.000   6.549 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="do">## equivalently, 4 tasks per chunk, 1 chunk (1 future) per worker</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(</span>
@@ -921,7 +921,7 @@ Finishing 10th job.</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.241   0.007   6.581 </code></pre>
+  0.226   0.009   6.538 </code></pre>
 </div>
 </div>
 <p>And here we prevent prescheduling. I find the <code>future.chunk.size</code> argument easier to understand than the <code>future.scheduling</code> argument. <code>future.chunk.size</code> says how many tasks to group together. So setting equal to 1 means no grouping and therefore not using static allocation.</p>
@@ -938,7 +938,7 @@ Finishing 10th job.</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.246   0.001   2.225 </code></pre>
+  0.236   0.008   2.208 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="do">## or, equivalently, we could specify future.scheduling = 4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1013,7 +1013,7 @@ output &lt;- foreach(idx = 1:(n*M)) %dopar% {
 <span id="cb49-24"><a href="#cb49-24" aria-hidden="true" tabindex="-1"></a>}))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.625   0.020   5.218 </code></pre>
+  0.642   0.013   5.061 </code></pre>
 </div>
 </div>
 <p>To use <code>future_lapply</code>, set up the plan in similar fashion to above. You can then do:</p>
