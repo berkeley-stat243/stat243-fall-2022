@@ -138,7 +138,7 @@ personal computer or a given node in a cluster.
 -   *tasks*: individual units of computation; one or more tasks will be
     executed by a given process on a given core.
 -   *threads*: multiple paths of execution within a single process; the
-    OS sees the threads as a single process, but one can think of them
+    operating system sees the threads as a single process, but one can think of them
     as 'lightweight' processes. Ideally when considering the processes
     and their threads, we would the same number of cores as we have
     processes and threads combined.
@@ -391,6 +391,33 @@ This table gives an overview of the different plans.
 |      remote    |    uses an R sessions on another machine    |     yes     |             yes |
 |     cluster    |     uses R sessions on other machine(s)    |     yes     |             yes |
 
+## Accessing variables and workers in the worker processes
+
+The future package usually does a good job of identifying the packages and (global) variables
+you use in your parallelized code and loading those packages on the workers and copying necessary variables to the workers.
+It uses the `globals` package to do this.
+
+Here's a toy example that shows that `n` and `MASS::geyser` are automatically available in the worker processes.
+
+```{r}
+library(future)
+library(future.apply)
+
+plan(multisession)
+
+library(MASS)
+n <- nrow(geyser)
+
+myfun <- function(idx) {
+   # geyser is in MASS package
+   return(sum(geyser$duration) / n)
+}
+
+future_sapply(1:5, myfun)
+```
+
+In other contexts in R (or other languages) you may need to explicitly copy objects to the workers (or load packages on the workers). This is sometimes called *exporting* variables. 
+
 # 5. Illustrating the principles in specific case studies
 
 ## Scenario 1: one model fit
@@ -518,6 +545,18 @@ system.time({
 
 Question: Why might this not have shown a perfect three-fold speedup?
 
+If we look at the future object (e.g., `fut_p`), we see that by default lazy evaluation is off
+and that the code executes *asynchronously*. Let's consider these ideas in more detail. The future will
+start being evaluated right away -- this is non-lazy evaluation. The future will execute asynchronously,
+which means that the worker process will evaluate the future (in the background from the perspective of the
+main process) while the main process can continue doing
+other things, in particular interacting with the user. This asynchronous evaluation is also called
+a *non-blocking* call because execution of the task in the worker process does not block things from happening in the main process.
+However the call to `value()` is *synchronous* (and is a *blocking* call)  because it needs to returns a result, so control of the session
+does not return to the user until the value is available (i.e., once the future is done being evaluated).
+
+One can change the future to use lazy evaluation.
+
 You could also have used tools like `foreach` and `future_lapply` here
 as well, as we'll discuss next.
 
@@ -525,6 +564,9 @@ as well, as we'll discuss next.
 
 **Scenario**: You are running a prediction method on 10 cross-validation
 folds.
+
+This illustrates the idea of running some number of tasks using the
+cores available on a single machine. 
 
 Here I'll illustrate parallel looping, using this simulated dataset and
 basic use of `randomForest()`.
@@ -645,7 +687,7 @@ processes one future (one chunk), containing multiple tasks.
 First we'll set up an artificial example with four slow tasks and 12
 fast tasks and see the speed of running with the default of
 prescheduling. Whether to preschedule or not is controlled by either the
-`future.scheduling` or `future.chunk.size` arguments.
+`future.chunk.size` or `future.scheduling` arguments.
 
 ```{r}
 ## @knitr parallel-lapply-preschedule
@@ -850,7 +892,7 @@ This creates R worker processes with the same state as the original R
 process. Interestingly, this means that global variables in the forked
 worker processes are just references to the objects in memory in the
 original R process. So the additional processes do not use additional
-memory for those objects (despite what is shown in top) and there is no
+memory for those objects (despite what is shown in `top`) and there is no
 time involved in making copies. However, if you modify objects in the
 worker processes then copies are made.
 
@@ -1045,9 +1087,8 @@ Comments:
 
 ## Parallel map
 
-This is the analog of apply/lapply/sapply type functions in R. The term
-'map' here is a functional programming term (as well as having the same
-meaning as 'map' in the context of MapReduce).
+This is the analog of apply/lapply/sapply type functions in R. As we've discussed
+those are examples of map operations. 
 
 To do a parallel map, we need to use the distributed scheduler, but it's
 fine to do that with multiple cores on a single machine (such as a

@@ -30,7 +30,7 @@ execute:
 1.  This question explores memory use and copying with character
     vectors.
 
-    1.  Consider the following character vector with three strings. Modify one of the
+    a.  Consider the following character vector with three strings. Modify one of the
         strings. Can R make the change in place? (Be careful, there are
         two aspects to this, so it's a bit more complicated than simply
         replacing an element in a numeric vector.) Also note that you
@@ -41,12 +41,12 @@ execute:
         vec <- c("hello there", "better luck next time", "that's not clear")
         ```
 
-    2.  Now consider this vector: `vec <- c(rep('hello friend', 1e6))`.
+    b.  Now consider this vector: `vec <- c(rep('hello friend', 1e6))`.
         Given each character should take 1 byte, this would seemingly
         use 12 million bytes. How much memory is being used? Explain
         what is happening and account for all major uses of memory.
 
-    3.  Compare the size of the string 'hello' with that of a single
+    c.  Compare the size of the string 'hello' with that of a single
         string of length 1 million characters (i.e., one where `nchar()`
         returns 1 million). Does each character take up 1 byte? What
         does this comparison suggest about short strings?
