@@ -42,7 +42,7 @@ website:
           text: "Unit 5"
         - file: units/unit6-parallel.Rmd
           text: "Unit 6"
-        - file: units/unit6-bigData.Rmd
+        - file: units/unit7-bigData.Rmd
           text: "Unit 7"
     - id: labs
       title: "Labs"
