@@ -21,6 +21,10 @@ website:
         text: "Discussion"
       - href: https://statistics.berkeley.edu/computing/training/tutorials
         text: Tutorials
+    right:
+      - icon: github
+        href: https://github.com/berkeley-stat243/stat243-fall-2022
+        aria-label: GitHub
 
   sidebar:
     - id: units

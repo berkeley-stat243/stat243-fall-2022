@@ -2,9 +2,7 @@
 
 This repository holds course materials for the Fall 2022 offering of Statistics 243 at UC Berkeley.
 
-This site is UNDER CONSTRUCTION. Do not rely on materials here before August 22.
-
-See the links above for the key resources for the course. 
+[berkeley-stat243.github.io/stat243-fall-2022](https://berkeley-stat243.github.io/stat243-fall-2022/)
 
 ## Questions about taking the class
 

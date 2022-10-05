@@ -53,3 +53,6 @@ _site/*
 
 # data
 /data/airline.csv
+
+# uneeded files from quarto preview
+/labs/*/*_files/
