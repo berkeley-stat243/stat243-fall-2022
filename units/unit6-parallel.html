@@ -95,6 +95,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../units/unit6-bigData.Rmd" rel="next">
 <link href="../units/unit5-programming.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -184,6 +185,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <li>
     <a class="dropdown-item" href="../units/unit6-parallel.html">
  <span class="dropdown-text">Unit 6</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../units/unit6-bigData.Rmd">
+ <span class="dropdown-text">Unit 7</span></a>
   </li>  
     </ul>
   </li>
@@ -308,6 +313,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../units/unit6-parallel.html" class="sidebar-item-text sidebar-link active">Unit 6</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../units/unit6-bigData.Rmd" class="sidebar-item-text sidebar-link">Unit 7</a>
   </div>
 </li>
     </ul>
@@ -744,7 +754,7 @@ NULL</code></pre>
 <span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.014   0.001   2.096 </code></pre>
+  0.015   0.001   2.086 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>({</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    p <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">rnorm</span>(n))</span>
@@ -753,7 +763,7 @@ NULL</code></pre>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  3.038   0.056   3.095 </code></pre>
+  3.017   0.053   3.072 </code></pre>
 </div>
 </div>
 <p>Question: Why might this not have shown a perfect three-fold speedup?</p>
@@ -912,7 +922,7 @@ Finishing 10th job.</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  1.428   0.013   1.440 </code></pre>
+  1.438   0.016   1.455 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(<span class="fu">fun</span>(<span class="dv">5</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -920,7 +930,7 @@ Finishing 10th job.</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.017   0.000   0.018 </code></pre>
+  0.017   0.000   0.017 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Static allocation ##</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -933,7 +943,7 @@ Finishing 10th job.</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.264   0.006   6.627 </code></pre>
+  0.274   0.005   6.713 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="do">## this is the default: 1 future (and therefore 4 tasks) per worker</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(</span>
@@ -945,7 +955,7 @@ Finishing 10th job.</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.293   0.011   6.635 </code></pre>
+  0.293   0.010   6.669 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="do">## equivalently, 4 tasks per chunk, 1 chunk (1 future) per worker</span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(</span>
@@ -957,7 +967,7 @@ Finishing 10th job.</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.278   0.001   6.652 </code></pre>
+  0.295   0.004   6.761 </code></pre>
 </div>
 </div>
 <p>And here we prevent prescheduling. I find the <code>future.chunk.size</code> argument easier to understand than the <code>future.scheduling</code> argument. <code>future.chunk.size</code> says how many tasks to group together. So setting equal to 1 means no grouping and therefore not using static allocation.</p>
@@ -974,7 +984,7 @@ Finishing 10th job.</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.257   0.005   2.268 </code></pre>
+  0.263   0.000   2.306 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="do">## or, equivalently, we could specify future.scheduling = 4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1049,7 +1059,7 @@ output &lt;- foreach(idx = 1:(n*M)) %dopar% {
 <span id="cb51-24"><a href="#cb51-24" aria-hidden="true" tabindex="-1"></a>}))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.578   0.019   5.162 </code></pre>
+  0.591   0.024   5.203 </code></pre>
 </div>
 </div>
 <p>To use <code>future_lapply</code>, set up the plan in similar fashion to above. You can then do:</p>
@@ -1384,6 +1394,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../units/unit6-bigData.Rmd" class="pagination-link">
+        <span class="nav-page-text">Unit 7</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
