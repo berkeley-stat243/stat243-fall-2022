@@ -352,9 +352,11 @@ To run an interactive job via Slurm, you can use the `srun` command:
 
 ```bash
 # ssh -Y <scf-username>@dorothy.berkeley.edu
-srun --pty /bin/bash
 
-# interactive bash job
+# 10 minute time limit
+srun  -t 00:10:00 -N 1 -n 1 -c 1 --pty /bin/bash
+
+# uses resources already made available from the previous srun command
 srun --pty --x11=first matlab # interactive matlab job
 ```
 
@@ -436,7 +438,7 @@ cluster, or you can do it remotely. 2 - 4 should be done on the SCF.
   lines:
   - Change `job-name` to whatever you want to call this job.
   - Change `rEx.err` and `rEx.out` to `boot.err` and `boot.out`. Note these
-  files can be useful for fixing bugs, particuarily when excecuting shell scripts.
+  files can be useful for fixing bugs, particularly when executing shell scripts.
   These files show errors and output printed to the terminal.
   - Change time to `00:10:00` just in case your code runs longer than one minute.
   - Change the `--cpus-per-task` to 3. This is where you are telling Slurm to
