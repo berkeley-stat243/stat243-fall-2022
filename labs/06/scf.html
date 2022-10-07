@@ -636,10 +636,12 @@ Tip
 </div>
 <p>To run an interactive job via Slurm, you can use the <code>srun</code> command:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ssh -Y &lt;scf-username&gt;@dorothy.berkeley.edu</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--pty</span> /bin/bash</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># interactive bash job</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--pty</span> <span class="at">--x11</span><span class="op">=</span>first matlab <span class="co"># interactive matlab job</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 10 minute time limit</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span>  <span class="at">-t</span> 00:10:00 <span class="at">-N</span> 1 <span class="at">-n</span> 1 <span class="at">-c</span> 1 <span class="at">--pty</span> /bin/bash</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># uses resources already made available from the previous srun command</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--pty</span> <span class="at">--x11</span><span class="op">=</span>first matlab <span class="co"># interactive matlab job</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Here we used the -Y flag to <code>ssh</code> to run software with a GUI, such as MATLAB, which allows the GUI to open in our local machine while still running computations on the SCF cluster. For this to work, you’ll need X server software on your own machine to manage the graphical windows. For Windows, your options include eXceed or Xming and for Mac, there is XQuartz.</p>
 </section>
 <section id="jupyterhub-for-rstudio-or-jupyter-notebooks" class="level4">
@@ -693,7 +695,7 @@ Tip
 </ol>
 <ul>
 <li>Change <code>job-name</code> to whatever you want to call this job.</li>
-<li>Change <code>rEx.err</code> and <code>rEx.out</code> to <code>boot.err</code> and <code>boot.out</code>. Note these files can be useful for fixing bugs, particuarily when excecuting shell scripts. These files show errors and output printed to the terminal.</li>
+<li>Change <code>rEx.err</code> and <code>rEx.out</code> to <code>boot.err</code> and <code>boot.out</code>. Note these files can be useful for fixing bugs, particularly when executing shell scripts. These files show errors and output printed to the terminal.</li>
 <li>Change time to <code>00:10:00</code> just in case your code runs longer than one minute.</li>
 <li>Change the <code>--cpus-per-task</code> to 3. This is where you are telling Slurm to execute in parallel on 3 CPUs.</li>
 <li>Change the last line <code>R CMD BATCH --no-save boot.R boot.Rout</code>. The <code>boot.Rout</code> file will contain all of code, messages, errors, etc. from the R session.</li>
