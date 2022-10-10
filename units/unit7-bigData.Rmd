@@ -18,6 +18,8 @@ execute:
   freeze: auto
 ---
 
+[PDF](./unit7-bigData.pdf){.btn .btn-primary}
+
 References:
 
 -   [Tutorial on parallel processing using Python's Dask and R's future packages](https://berkeley-scf.github.io/tutorial-dask-future)
