@@ -38,7 +38,7 @@ with large datasets.
 We'll focus on Dask and databases/SQL in this Unit. The material on using Spark is provided for reference, but you're not responsible for that material.
 If you're interested in working with big datasets in R or with tools other than Dask in Python, there is [some material in the tutorial on working with large datasets](https://berkeley-scf.github.io/tutorial-databases/R-and-Python).
 
-Videos
+Videos:
 
 As posted in the Discussion Forum, please review the five videos on databases and SQL to accompany Section 3 of this Unit.
 Note that I recorded these videos in fall 2020, so there are occasional references to Unit 8, rather than Unit 7 because I've reordered the units of the class a bit since 2020.
@@ -48,7 +48,6 @@ Note that I recorded these videos in fall 2020, so there are occasional referenc
   - Video 3. Basic SQL queries
   - Video 4. Database joins
   - Video 5. Database indxes
-
 
 
 # 1. A few preparatory notes

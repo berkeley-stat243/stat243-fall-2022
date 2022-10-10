@@ -29,7 +29,7 @@ References:
     both on CRAN.
 -   Murrell, Introduction to Data Technologies
 
-(Optional) Videos
+(Optional) Videos:
 
 There are various videos from 2020 in the bCourses Media Gallery that you
 can use for reference if you want to. Note that I've reorganized the material in this Unit relative to 2020, so the section numbers and ordering in the videos may differ from that in the current Unit, but you should be able to match things up fairly easily.
