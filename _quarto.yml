@@ -57,6 +57,8 @@ website:
           text: "Lab 4"
         - file: labs/05/code_review.qmd
           text: "Lab 5"
+        - file: labs/06/scf.qmd
+          text: "Lab 6"
     - id: howtos
       title: "How tos"
       contents:
