@@ -109,6 +109,9 @@ bits(-1L)
 bytes(-1L)
 ```
 
+What do I mean about facilitating arithmetic? As an example, consider adding
+the binary representations of -1 and 1 above. Nice, right?
+
 
 Finally note that the set of computer integers is not closed under
 arithmetic, with R reporting an overflow (i.e., a result that is too
@@ -204,19 +207,24 @@ So empirically, it looks like we're accurate up to the 16th decimal place
 But actually, the key is the number of digits, not decimal places.
 
 ```{r}
-formatC(18.2, 20, format = 'f')
+formatC(1234.1234, 20, format = 'f')
+formatC(1234.123412341234, 20, format = 'f')
+```
 
+Let's return to our comparison, `0.75-0.5 == 0.25`.
+
+```{r}
 formatC(0.75, 20, format = 'f')
 formatC(0.50, 20, format = 'f')
-
-## alternative to formatC:
-sprintf("%0.20f", a)
 ```
 
 For our future explorations, let's define a wrapper function for convenience:
 
 ```{r}
 dg <- function(x, digits = 20) formatC(x, digits, format = 'f')
+
+## alternative to formatC:
+sprintf("%0.20f", a)
 ```
 
 Notice that we can represent the result accurately only up to 16
