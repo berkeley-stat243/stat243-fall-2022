@@ -219,6 +219,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <a class="dropdown-item" href="../labs/06/scf.html">
  <span class="dropdown-text">Lab 6</span></a>
   </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Lab 7</li>
+        <li>
+    <a class="dropdown-item" href="../labs/07/python_intro.html">
+ <span class="dropdown-text">Intro to Python</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -758,7 +764,7 @@ NULL</code></pre>
 <span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.015   0.001   2.086 </code></pre>
+  0.015   0.000   2.046 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>({</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    p <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">rnorm</span>(n))</span>
@@ -767,7 +773,7 @@ NULL</code></pre>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  3.017   0.053   3.072 </code></pre>
+  2.974   0.057   3.031 </code></pre>
 </div>
 </div>
 <p>Question: Why might this not have shown a perfect three-fold speedup?</p>
@@ -926,7 +932,7 @@ Finishing 10th job.</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  1.438   0.016   1.455 </code></pre>
+  1.393   0.020   1.414 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(<span class="fu">fun</span>(<span class="dv">5</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -934,7 +940,7 @@ Finishing 10th job.</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.017   0.000   0.017 </code></pre>
+  0.016   0.000   0.017 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Static allocation ##</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -947,7 +953,7 @@ Finishing 10th job.</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.274   0.005   6.713 </code></pre>
+  0.241   0.000   6.496 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="do">## this is the default: 1 future (and therefore 4 tasks) per worker</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(</span>
@@ -959,7 +965,7 @@ Finishing 10th job.</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.293   0.010   6.669 </code></pre>
+  0.239   0.000   6.517 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="do">## equivalently, 4 tasks per chunk, 1 chunk (1 future) per worker</span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(</span>
@@ -971,7 +977,7 @@ Finishing 10th job.</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.295   0.004   6.761 </code></pre>
+  0.255   0.010   6.538 </code></pre>
 </div>
 </div>
 <p>And here we prevent prescheduling. I find the <code>future.chunk.size</code> argument easier to understand than the <code>future.scheduling</code> argument. <code>future.chunk.size</code> says how many tasks to group together. So setting equal to 1 means no grouping and therefore not using static allocation.</p>
@@ -988,7 +994,7 @@ Finishing 10th job.</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.263   0.000   2.306 </code></pre>
+  0.247   0.004   2.272 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="do">## or, equivalently, we could specify future.scheduling = 4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1063,7 +1069,7 @@ output &lt;- foreach(idx = 1:(n*M)) %dopar% {
 <span id="cb51-24"><a href="#cb51-24" aria-hidden="true" tabindex="-1"></a>}))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.591   0.024   5.203 </code></pre>
+  0.616   0.019   5.117 </code></pre>
 </div>
 </div>
 <p>To use <code>future_lapply</code>, set up the plan in similar fashion to above. You can then do:</p>
@@ -1176,7 +1182,7 @@ output &lt;- foreach(idx = 1:(n*M)) %dopar% {
 </section>
 <section id="using-dask-in-python" class="level1">
 <h1>7. Using Dask in Python</h1>
-<p>Dask has similar functionality to R’s future package for parallelizing across one or more machines/nodes. In addition, it has the important feature of handling distributed datasets - datasets that are split into chunks/shareds and operated on in parallel. We’ll see more about distributed datasets in Unit 8 but here we’ll introduce the basic functionality.</p>
+<p>Dask has similar functionality to R’s future package for parallelizing across one or more machines/nodes. In addition, it has the important feature of handling distributed datasets - datasets that are split into chunks/shareds and operated on in parallel. We’ll see more about distributed datasets in Unit 7 but here we’ll introduce the basic functionality.</p>
 <section id="scheduler" class="level2">
 <h2 class="anchored" data-anchor-id="scheduler">Scheduler</h2>
 <p>The scheduler is the analogue of plan in the R future package. For example to parallelize across multiple cores via separate Python processes, we’d do this.</p>

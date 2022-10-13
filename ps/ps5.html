@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Statistics 243 Fall 2022 - Problem Set 2</title>
+<title>Statistics 243 Fall 2022 - Problem Set 5</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -223,8 +223,8 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Problem Set 2</h1>
-<p class="subtitle lead">Due Friday Sep.&nbsp;16, 10 am</p>
+<h1 class="title">Problem Set 5</h1>
+<p class="subtitle lead">Due Friday Oct.&nbsp;28, 10 am</p>
 </div>
 
 
@@ -241,68 +241,52 @@ ul.task-list li input[type="checkbox"] {
 <section id="comments" class="level2">
 <h2 class="anchored" data-anchor-id="comments">Comments</h2>
 <ul>
-<li>This covers material in Units 3 and 4.</li>
-<li>It’s due at 10 am (Pacific) on September 16, both submitted as a PDF to Gradescope as well as committed to your GitHub repository.</li>
-<li>Please see PS1 for formatting and attribution requirements.</li>
-<li>Note that using chunks of bash code in Rmd/Rtex/Rnw can sometimes be troublesome, particularly on Windows machine. Some things to try if you are having trouble:
-<ol type="1">
-<li>set the terminal to be the Ubuntu subsystem if you are on Windows;</li>
-<li>if using RStudio, you may only be able to run bash chunks if you have the notebook mode on;</li>
-<li>using single versus double quotes in your Rmd/Rtex document may make a difference.</li>
-</ol>
-If you can’t produce a PDF that includes the bash chunk output, feel free to not run those chunks and just paste in the output you get manually. Please post on the Ed forum if you have trouble.</li>
-<li>You will probably need to use <code>sed</code> in a basic way as we have used it so far in class and in the bash tutorial. You should not need to use more advanced functionality nor should you need to use <code>awk</code>, but you may if you want to.</li>
+<li>This covers Units 6 and 7.</li>
+<li>It’s due at 10 am (Pacific) on October 28, both submitted as a PDF to Gradescope as well as committed to your GitHub repository.</li>
+<li>Please see PS1 and the grading rubric for formatting and attribution requirements.</li>
+<li>Running parallel code, working with large datasets, and using shared computers can result in delays and unexpected problems. Don’t wait until the last minute to work on problems 1 and 2. We are happy to help troubleshoot problems you may have with accessing the SCF, running parallel R and Python code, submitting jobs to the SCF cluster, etc. We will not be happy to do so if it is clear that you started at the last minute.</li>
 </ul>
 </section>
 <section id="problems" class="level2">
 <h2 class="anchored" data-anchor-id="problems">Problems</h2>
 <ol type="1">
-<li><p>Add assertions and testing for your code from Problem 4 of PS1. You may use a modified version of your PS1 solution, perhaps because you found errors in what you did or wanted to make changes based on Chris’ solutions or your discussions with other students.</p>
-<ol type="a">
-<li>Add formal assertions using the <code>assertthat</code> package. You should try to catch the various incorrect inputs a user could provide and anything else that could go wrong (e.g., what happens if one is not online?).</li>
-<li>Use the <code>testthat</code> package to set up a small but thoughtful set of tests of your functions. In deciding on your tests, try to think about tricky cases that might cause problems.</li>
-</ol></li>
-<li><p>A friend of mine is planning to get married in Death Valley National Park in March (this problem is based on real events…). She wants to hold it as late in March as possible but without having a high chance of a very hot day. This problem will automate the task of generating information about what day to hold the wedding on using data from the <a href="https://www1.ncdc.noaa.gov/pub/data/ghcn/daily/by_year">Global Historical Climatology Network</a>. All of your operations should be done using the bash shell except part (c). Also, ALL of your work should be done using shell commands that you save in your solution file. So you can’t say “I downloaded the data from such-and-such website” or “I unzipped the file”; you need to give us the bash code that we could run to repeat what you did. This is partly for practice in writing shell code and partly to enforce the idea that your work should be reproducible and documented.</p>
-<ol type="1">
-<li><p>Download yearly climate data for a set of years of interest into a temporary directory. Do not download all the years and feel free to focus on a small number of years to reduce the amount of data you need to download. Note that data for Death Valley is only present in the last few decades. As you are processing the files, report the number of observations in each year by printing the information to the screen, including if there are no observations for that year.</p></li>
-<li><p>Subset to the station corresponding to Death Valley, to TMAX (maximum daily temperature), and to March, and put all the data into a single file. In subsetting to Death Valley, get the information programmatically from the <em>ghcnd-stations.txt</em> file one level up in the website. Do NOT type in the station ID code when you retrieve the Death Valley data from the yearly files.</p></li>
-<li><p>Create an R or Python chunk that takes as input your single file from (b) and makes a single plot of side-by-side boxplots containing the maximum daily temperatures on each calendar day in March.</p></li>
-<li><p>Now generalize your code from parts (a) and (b). Write a shell function that takes as arguments a string for identifying the location, the weather variable of interest, and the time period (i.e., the years of interest and the month of interest), and returns the results. Your function should detect if the user provides the wrong number of arguments or a string that doesn’t allow one to identify a single weather station and return a useful error message. It should also give useful help information if the user invokes the function as: <code>get_weather -h</code>. Finally the function should remove the raw downloaded data files (or you should download into your operating system’s temporary file location). Hint: to check for equality in an if statement, you generally need syntax like: <code>if [ "${var}" == "7" ]</code>.</p></li>
-</ol></li>
-<li><p>On Friday, September 16, Section will consist of a discussion of good practices in reproducible research and computing. In preparation, please do the following:</p>
-<ol type="a">
-<li><p>Read <strong>one</strong> of these five items (you can read more if you want of course!):</p>
-<ol type="1">
-<li>The Preface, the Basic Reproducible Workflow Template chapter and Lessons Learned chapters of this Berkeley-produced book on reproducible research, found online via UC Library search: <a href="https://www.degruyter.com/document/doi/10.1525/9780520967779/html#contents">The Practice of Reproducible Research</a>. The book is written from the perspective of learning about reproducibility practices using case studies</li>
-<li>This article is written from the perspective of scientific research: <a href="https://www.taylorfrancis.com/chapters/edit/10.1201/9781315373461-6/developing-open-source-scientific-practice-jarrod-millman-fernando-p%C3%A9rez">Millman and Perez</a>.</li>
-<li>This article is written from the perspective of scientific software development: <a href="https://arxiv.org/pdf/1210.0530v3.pdf">Wilson et.al.</a></li>
-<li>This article is written from the perspective of social science research: <a href="https://bcourses.berkeley.edu/files/81180857">Chapter 11 of Christensen et al.&nbsp;Transparent and Reproducible Social Science Research</a>. (You can also see the <a href="https://california.degruyter.com/view/title/568658?tab_body=toc%3E.">entire book online via UC Library search</a></li>
-<li>This article is also written from the perspective of social science research: <a href="https://web.stanford.edu/~gentzkow/research/CodeAndData.pdf">Gentzkow and Shapiro</a>.</li>
+<li>This problem asks you to use the <code>future</code> package to process some Wikipedia traffic data and makes use of tools discussed in Section on October 7. The files in <code>/scratch/users/paciorek/wikistats/dated_2017_small/dated</code> (on the SCF) contain data on the number of visits to different Wikipedia pages on November 4, 2008 (which was the date of the US election in 2008 in which Barack Obama was elected). The columns are: date, time, language, webpage, number of hits, and page size. (Note that the Unit 7 Dask bag example and Question 2 below use a larger set of the same data.)</li>
 </ol>
-<p>When reading, please think about the following questions:</p>
-<ol type="1">
-<li>Are there practices suggested that seem particularly compelling to you? What about ones that don’t seem compelling to you?</li>
-<li>Do you currently use any of the practices described? Which ones, and why? Which ones do you not use and why (apart from just not being aware of them)?</li>
-<li>Why don’t researchers consistently utilize these principles/tools? Which ones might be the most/least used? Which ones might be the easiest/most difficult to implement?</li>
-<li>What principles and practices described apply more to analyses of data, and which apply more to software engineering? Which principles and practices apply to both?</li>
+<ol type="a">
+<li><p>In an interactive session on the SCF Linux cluster (ideally on the <code>low</code> partition, but if necessary on the <code>high</code> partition), started using <code>srun</code> as discussed in Section:</p>
+<ol type="i">
+<li>Copy the <em>data</em> files to a subdirectory of the <code>/tmp</code> directory of the machine your interactive session is running on. (Keep your <em>code</em> files in your home directory.) Putting the files on the local hard drive of the machine you are computing on reduces the amount of copying data across the network (in the situation where you read the data into your program multiple times) and should speed things up in step ii.</li>
+<li>Write efficient R code to do the following: Using the <code>future</code> package, with either <code>future_lapply</code> or <code>foreach</code> with the <code>doFuture</code> backend, write code that, in parallel, reads in the space-delimited files and filters to only the rows that refer to pages where “Barack_Obama” appears in the page title (column 4). You can use the code from Unit 6 as a template. Collect all the results into a single data frame. In your <code>srun</code> invocation and in your code, please use 4 cores in your parallelization so that other cores are saved for use by other users/students. IMPORTANT: before running the code on the full set of data, please test your code on a small subset first (and test your function on a single input file serially).</li>
+<li>Tabulate the number of hits for each hour of the day. (I don’t care how you do this - you could use dplyr or base R functions or something else.) Make a (time-series) plot showing how the number of visits varied over the day. Note that the time zone is UTC/GMT, so you won’t actually see the evening times when Obama’s victory was announced - we’ll see that in Question 2.</li>
+<li>Remove the files from <code>/tmp</code>.</li>
 </ol>
-<p>As your answer to this problem, please write a paragraph or two where you discuss one or more of these questions. I’m not looking for more than 10-15 sentences, just evidence that you’ve read one of the items and considered it thoughtfully.</p></li>
-<li><p>Please skim through <a href="https://journals.sagepub.com/doi/full/10.1177/0042098016668783">this economics paper</a>, focusing on the Method section, but note that the idea is just to get the main idea of the analysis steps, not to understand the context fully or see all the details. Then look at the <a href="https://github.com/andykrause/hhLocation">code the authors provide</a> and think about whether that code makes it easy to reproduce what they did in the paper. Based on the Unit 4 class notes and the item you read above in (a), make a short list of strengths and weaknesses of the reproducibility of the authors’ materials and provide that as your solution to this problem. Your task in Section on Friday, September 16 will be to discuss with your group and in Section as a whole and come up with a consensus answer. Some things to think about when you look at their materials:</p>
-<ol type="1">
-<li>From the information above and the documentation provided, can you quickly identify where in the code (if present at all) the authors:
-<ol type="1">
-<li>collected their data,</li>
-<li>cleaned/processed their data,</li>
-<li>calculated various statistics, and</li>
-<li>produced the plots in their paper.</li>
-</ol></li>
-<li>In terms of coding what elements of their project do you like? Consider: Documentation, comments, organization, naming, workflow, data provenance, etc.</li>
-<li>Similarly, what do you think could be improved?</li>
-<li>Without examining the code itself, can you quickly discern the purpose of each file?</li>
-<li>Without examining the code in detail, can you quickly tell what each block of code does?</li>
-<li>Are there exceptions to your answers above?</li>
-<li>In what way do the authors document their workflow? Do you think this method is effective?</li>
-</ol></li>
+<p>Hints: (a) <code>readr::read_delim()</code> should be quite fast if you give it information about the structure of the files, (b) there are lines with fewer than 6 fields, but <code>read_delim()</code> should still work and simply issue a warning, and (c) there are lines that have quotes that should be treated as part of the text of the fields and not as separators.</p></li>
+<li><p>Now replicate steps i and ii but using <code>sbatch</code> to submit your job as a batch job to the SCF Linux cluster, where step ii involves running R from the command line using <code>R CMD BATCH</code>. You don’t need to make the plot again. Note that you need to copy the files to <code>/tmp</code> in your submission script, so that the files are copied to <code>/tmp</code> on whichever node of the SCF cluster your job gets run on. Make sure that as part of your <code>sbatch</code> script you remove the files in <code>/tmp</code> at the end of the script. (Why? In general <code>/tmp</code> is cleaned out when a machine is rebooted, but this might take a while to happen and many of you will be copying files to the same hard drive.)</p></li>
+</ol>
+<ol start="2" type="1">
+<li><p>Consider the full Wikipedia traffic data for October-December 2008 (already available in <code>/var/local/s243/wikistats/dated_2017</code> on any of the SCF cluster nodes in the low or high partitions).</p>
+<ol type="a">
+<li>Explore the variation over time in the number of visits to Barack Obama-related Wikipedia sites, based on searching for “Barack_Obama” on English language Wikipedia pages. You should use Dask to do the reading and filtering. Then group by day-hour (it’s fine to do the grouping/counting in Python in a way that doesn’t use Dask data structures). You can do this either in an interactive session using <code>srun</code> or a batch job using <code>sbatch</code>. And if you use <code>srun</code>, you can run Python itself either interactively or as a background job. Time how long it takes to read the data and do the filtering to get a sense for how much time is involved working with this much data. Once you have done the filtering and gotten the counts for each day-hour, you can simply use standard R or Python code on your laptop to do some plotting to show how the traffic varied over the days of the full October-December time period and particularly over the hours of November 3-5, 2008 (election day was November 4 and Obama’s victory was declared at 11 pm Eastern time on November 4).</li>
+<li>Extra credit: Carry out some other in-depth analysis of the Wikipedia data (it doesn’t have to involve Barack Obama), addressing a question of interest to you.</li>
+</ol>
+<p>Notes:</p>
+<ul>
+<li>I’m not expecting you to know any more Python than we covered in the Unit 6/7 material on Dask and in Section, so feel free to ask for help (and for those of you who know Python to help out) on Python syntax on the discussion forum or in office hours.</li>
+<li>There are various ways to do this using Dask bags or Dask data frames, but I think the easiest in terms of using code that you’ve seen in Unit 7 is to read the data in and do the filtering using a Dask bag and then convert the Dask bag to a Dask dataframe to do the grouping and summarization. Alternatively you should be able to use <code>foldby()</code> from <code>dask.bag</code>, but figuring out what arguments to pass to <code>foldby()</code> is a bit involved.</li>
+<li>Make sure to test your code on a portion of the data before doing computation on the full dataset. Reading and filtering the whole dataset will take something like 60 minutes with 16 cores. You MUST test on a small number of files on your laptop or on one of the stand-alone SCF machines (e.g., radagast, gandalf, arwen) before trying to run the code on the full 120 GB (zipped) of data. For testing, the files are also available in <code>/scratch/users/paciorek/wikistats/dated_2017</code>.</li>
+<li>When doing the full computation via your Slurm job submission:
+<ul>
+<li>Don’t copy the data (unlike in Question 1) to avoid overloading our disks with each student having their own copy.</li>
+<li>Please do not use more than 16 cores in your Slurm job submissions so that cores are available for your classmates. If your job is stuck in the queue you may want to run it with 8 rather than 16 cores.</li>
+<li>As discussed in Section, when you use sbatch to submit a job to the SCF cluster or srun to run interactively, you should be using the <code>--cpus-per-task</code> flag to specify the number of cores that your computation will use. In your Python code, you can then either hard-code that same number of cores as the number of workers or (better) you can use the <code>SLURM_CPUS_PER_TASK</code> shell environment variable to tell Dask how many workers to start.</li>
+</ul></li>
+</ul></li>
+<li><p>Using the Stack Overflow database, write SQL code that will determine which users have asked html-related questions but not css-related questions. Those of you with more experience with SQL might do this in a single query, but it’s perfectly fine to create one or more views and then use those views to get the result as a subsequent query. Report how many unique such users there are. There are various ways to do this, of which I only covered some approaches in Unit 7 and in the videos. You can run your query via either R or Python.</p></li>
+<li><p>This question prepares for the discussion of a simulation study in section on Friday October 28. I will finalize the question as the time gets closer. The goal of the problem is to think carefully about the design and interpretation of simulation studies, which we’ll talk about in Unit 9, in particular in Section on Friday October 28. In particular, we’ll work with this article [TBD]. The article is available as [TBD] under the <code>ps</code> directory on GitHub. Read Sections TBD of the article. Also read Sections 2.1-2.2 of Unit 9. Briefly (a few sentences for each of the three questions below) answer the following questions.</p>
+<ol type="a">
+<li>What are the goals of their simulation study and what are the metrics that they consider in assessing their method?</li>
+<li>What choices did the authors have to make in designing their simulation study? What are the key aspects of the data generating mechanism that might affect their assessment of their method?</li>
+<li>Consider their Tables reporting the simulation results. For a method to be a good method, what would one want to see numerically in these columns?</li>
 </ol></li>
 </ol>
 
