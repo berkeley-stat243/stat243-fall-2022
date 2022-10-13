@@ -44,6 +44,8 @@ website:
           text: "Unit 6"
         - file: units/unit7-bigData.Rmd
           text: "Unit 7"
+        - file: units/unit8-numbers.Rmd
+          text: "Unit 8"
     - id: labs
       title: "Labs"
       contents:
