@@ -59,6 +59,10 @@ website:
           text: "Lab 5"
         - file: labs/06/scf.qmd
           text: "Lab 6"
+        - section: "Lab 7"
+          contents:
+            - file: labs/07/python_intro.md
+              text: Intro to Python
     - id: howtos
       title: "How tos"
       contents:
