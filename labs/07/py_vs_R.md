@@ -93,6 +93,10 @@ this PDF on Gradescope.
             
             - In the classic Jupyter Notebook interface, **File > Download as > PDF via LaTeX (.pdf)**.
 
+### No shows
+
+If you miss lab this week, you can form a group of 2-3 students and submit this assignment on Gradescope by Monday October 17th at 10pm.
+
 ## Questions
 
 ### Main Questions
