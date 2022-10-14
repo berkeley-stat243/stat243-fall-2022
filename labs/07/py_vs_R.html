@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="James Duncan">
-<meta name="dcterms.date" content="2022-09-16">
+<meta name="author" content="Zoe Vernon, Andrew Vaughn, James Duncan">
+<meta name="dcterms.date" content="2022-10-14">
 
-<title>Statistics 243 Fall 2022 - Reproducibility discussion</title>
+<title>Statistics 243 Fall 2022 - Python vs.&nbsp;R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,8 +32,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../labs/04/debugging.html" rel="next">
-<link href="../../labs/02/assertionsAndTesting.html" rel="prev">
+<link href="../../labs/07/python_intro.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -226,7 +225,7 @@ ul.task-list li input[type="checkbox"] {
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Reproducibility discussion</h1>
+      <h1 class="quarto-secondary-nav-title">Python vs.&nbsp;R</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -251,7 +250,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../labs/03/reproducibility.html" class="sidebar-item-text sidebar-link active">Lab 3</a>
+  <a href="../../labs/03/reproducibility.html" class="sidebar-item-text sidebar-link">Lab 3</a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -284,7 +283,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../labs/07/py_vs_R.html" class="sidebar-item-text sidebar-link">Python vs.&nbsp;R</a>
+  <a href="../../labs/07/py_vs_R.html" class="sidebar-item-text sidebar-link active">Python vs.&nbsp;R</a>
   </div>
 </li>
       </ul>
@@ -298,15 +297,15 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
-  <li><a href="#agenda" id="toc-agenda" class="nav-link" data-scroll-target="#agenda">Agenda</a>
+  <li><a href="#comparing-the-behavior-of-python-and-r" id="toc-comparing-the-behavior-of-python-and-r" class="nav-link active" data-scroll-target="#comparing-the-behavior-of-python-and-r">Comparing the Behavior of Python and R</a>
   <ul class="collapse">
-  <li><a href="#make-small-groups" id="toc-make-small-groups" class="nav-link" data-scroll-target="#make-small-groups">Make small groups</a></li>
-  <li><a href="#general-discussion-in-small-groups" id="toc-general-discussion-in-small-groups" class="nav-link" data-scroll-target="#general-discussion-in-small-groups">General discussion in small groups</a></li>
-  <li><a href="#group-consensus-of-strengths-weaknesses" id="toc-group-consensus-of-strengths-weaknesses" class="nav-link" data-scroll-target="#group-consensus-of-strengths-weaknesses">Group consensus of strengths &amp; weaknesses</a></li>
-  <li><a href="#class-discussion" id="toc-class-discussion" class="nav-link" data-scroll-target="#class-discussion">Class discussion</a></li>
+  <li><a href="#instructions" id="toc-instructions" class="nav-link" data-scroll-target="#instructions">Instructions</a></li>
+  <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions">Questions</a>
+  <ul class="collapse">
+  <li><a href="#main-questions" id="toc-main-questions" class="nav-link" data-scroll-target="#main-questions">Main Questions</a></li>
+  <li><a href="#additional-questions" id="toc-additional-questions" class="nav-link" data-scroll-target="#additional-questions">Additional Questions</a></li>
   </ul></li>
-  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">Further reading</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -315,7 +314,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Reproducibility discussion</h1>
+<h1 class="title d-none d-lg-block">Python vs.&nbsp;R</h1>
 </div>
 
 
@@ -325,14 +324,14 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>James Duncan </p>
+             <p>Zoe Vernon, Andrew Vaughn, James Duncan </p>
           </div>
   </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 16, 2022</p>
+      <p class="date">October 14, 2022</p>
     </div>
   </div>
     
@@ -341,81 +340,124 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="overview" class="level1">
-<h1>Overview</h1>
-<p>Today we’ll discuss reproducibility in small groups and as a class, using the paper “A Cohort Location Model of Household Sorting in US Metropolitan Regions” as a case study.</p>
-<p>Please open up the <a href="https://journals.sagepub.com/doi/full/10.1177/0042098016668783">paper</a> and corresponding <a href="https://github.com/andykrause/hhLocation">code</a>.</p>
-</section>
-<section id="agenda" class="level1">
-<h1>Agenda</h1>
-<section id="make-small-groups" class="level2">
-<h2 class="anchored" data-anchor-id="make-small-groups">Make small groups</h2>
-<p><em>&lt; 5 minutes</em></p>
-<p>Form a group with the 3–4 people sitting nearest to you, turning your desks toward one another.</p>
-<p>A different person should take each of the following roles:</p>
+<p><a href="./py_vs_R.pdf" class="btn btn-primary">PDF</a></p>
+<section id="comparing-the-behavior-of-python-and-r" class="level1">
+<h1>Comparing the Behavior of Python and R</h1>
+<p>This week, we will be exploring the behavior of Python for several common actions that we have previously covered in R. The final product of today’s work will be a PDF which is uploaded as a group submission to Gradescope.</p>
+<p>For quick reference, there is some example Python code in <a href="https://github.com/berkeley-stat243/stat243-fall-2022/blob/main/labs/07/syntax.py"><code>syntax.py</code></a>.</p>
+<section id="instructions" class="level2">
+<h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Please carefully read the full instructions before starting the assignment, as you will need to decide with your group how to organize and combine your efforts.</p>
+</div>
+</div>
+<p>Your group is expected to work on this for <strong>~60 minutes</strong> (so office hours will be cut short by about 10 minutes today).</p>
+<p>It’s OK if you don’t get through all of the questions in one hour (i.e., you can just submit what you have at the end of section), but it should be clear that you put some thought and effort into the questions your group worked on.</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Do your best to document your efforts and insights as you go.</p>
+</div>
+</div>
+<ol type="1">
+<li><p>We will separate into groups of (ideally) 3 or (if necessary) 4. I’ll try to make sure that each group has at least one person with some Python experience, so <strong>please wait to get started</strong> until we’ve figured that out.</p></li>
+<li><p>Groups should try to answer every question in the <a href="#main-questions">Main Questions</a> section. Here are some <strong>options</strong> for working through these questions:</p>
 <ul>
-<li><p><strong>General discussion leader</strong>: Leads the first 15 minutes discussion. You’ll keep the discussion moving and try to encourage contributions from all members of your group.</p></li>
-<li><p><strong>Group consensus leader</strong>: You’ll keep track of the group discussion of strengths and weaknesses and break any ties in the final consensus.</p></li>
-<li><p><strong>Strengths representative</strong>: During the class discussion at the end, you’ll give one of the strengths from your group’s list, and say any differences in your group’s ranking vs.&nbsp;what we currently have on the board.</p></li>
-<li><p><strong>Weakness representative</strong>: During the class discussion at the end, you’ll give one of the weaknesses from your group’s list, and say any differences in your group’s ranking vs.&nbsp;what we currently have on the board.</p></li>
-</ul>
-<p>If you only have 3 people, then one person should serve as the representative for both the strengths and weaknesses.</p>
-</section>
-<section id="general-discussion-in-small-groups" class="level2">
-<h2 class="anchored" data-anchor-id="general-discussion-in-small-groups">General discussion in small groups</h2>
-<p><em>10–15 minutes</em></p>
-<p>Please discuss each of the following together:</p>
-<ul>
-<li><p>From the paper and documentation on GitHub provided by the authors, try to find where the authors carried out each of the following in their code (or if they did at all):</p>
-<ul>
-<li>data collection</li>
-<li>data cleaning / processing</li>
-<li>statistical calculations</li>
-<li>visualizations from the paper</li>
+<li><p>Option A – <strong>Divide, consult, conquer</strong>: Individual group members work on different questions, consulting with each other as they go or as needed.</p></li>
+<li><p>Option B – <strong>Many minds, one task</strong>: The group works together, discussing and answering each question sequentially.</p></li>
+<li><p>Option C – <strong>Go with the flow</strong>: Feel free to use a flexible mixture of Option A and Option B, working separately on some tasks and uniting on others as you see fit.</p></li>
 </ul></li>
-<li><p>In terms of their coding, what elements of their project do you like. Consider:</p>
+<li><p>At the end of section (say, the last ~10-15 minutes), combine the solutions into <strong>one PDF</strong>. Each group member will then <strong>individually submit</strong> copies of this PDF on Gradescope.</p>
 <ul>
-<li>documentation</li>
-<li>comments</li>
-<li>organization</li>
-<li>naming</li>
-<li>workflow</li>
-<li>data provenance</li>
-<li>etc.</li>
+<li><p>Make sure to include the name of each group member at the top of the PDF.</p></li>
+<li><p>How you create the PDF is up to you but some <strong>options</strong> are:</p>
+<ol type="a">
+<li><p>(recommended) Using <strong>Google Docs</strong>.</p>
+<ul>
+<li><p><em>Separate documents, then combine</em>: Each group member uses a separate Google Doc, then one person combines those documents into a final shared document.</p></li>
+<li><p><em>One document</em>: Everyone adds to a single document at the same time.</p></li>
+<li><p>You can take screenshots of code / outputs that you run in Jupyter or RStudio (alternatively, the IPython or R consoles), or just copy paste code and outputs directly to the document.</p></li>
+<li><p>When your final shared document is ready, each group member will export it to PDF and make individual submission to Gradescope.</p></li>
 </ul></li>
-<li><p>What aspects of their code do you think could be improved?</p></li>
-<li><p>Without looking at the code itself, can you tell what the purpose of each file is?</p></li>
-<li><p>Without looking at the code in detail, can you quickly tell what each block of code does?</p></li>
-<li><p>Are there any exceptions to your answers above?</p></li>
-<li><p>In what way do the authors document their workflow? Is it effective?</p></li>
-<li><p>Take note of any judgment calls you noticed in their workflow. Are those judgment calls documented and/or justified in their code?</p></li>
-</ul>
-</section>
-<section id="group-consensus-of-strengths-weaknesses" class="level2">
-<h2 class="anchored" data-anchor-id="group-consensus-of-strengths-weaknesses">Group consensus of strengths &amp; weaknesses</h2>
-<p><em>10–15 minutes</em></p>
-<p>As a group, come to a consensus on the most important strengths and weaknesses of the reproducibility aspects of the paper, and rank each category separately from most important to least.</p>
-<p>These should be succinct enough to write on the board later, so please write them down and keep them short and specific. Try to come up with 4–5 for each.</p>
-</section>
-<section id="class-discussion" class="level2">
-<h2 class="anchored" data-anchor-id="class-discussion">Class discussion</h2>
-<p><em>10–15 minutes</em></p>
-<p>As a class, we’ll discuss the strengths and weaknesses and find the overall consensus. Please pick two representatives from your group, one for strengths and one for weaknesses.</p>
-</section>
-</section>
-<section id="further-reading" class="level1">
-<h1>Further reading</h1>
-<p>Reproducibility is a crucial component of statistical computing and good (data) science, as well as something that you can work to continuously improve in your own practice. I encourage you to take a look at the resources and tools below and to find ways to incorporate reproducibility best practices into your everyday workflow:</p>
+<li><p>Create an <strong>R Markdown</strong> file with the code and render to PDF. This may be more of a headache to combine if each person is working separately.</p></li>
+<li><p>Create a <strong>Jupyter Notebook</strong> and export to PDF.</p>
 <ul>
-<li>UC Berkeley Library guide on <a href="https://guides.lib.berkeley.edu/reproducibility-guide">Reproducible Research Practices</a></li>
-<li>UC Santa Barbara’s <a href="https://carpentries-incubator.github.io/Reproducible-Publications-with-RStudio">Introduction to Reproducible Publications with RStudio</a> (currently in alpha) – materials from a Nov.&nbsp;2022 workshop on reproducible research.</li>
-<li><a href="https://www.tandfonline.com/doi/full/10.1080/00031305.2017.1375986">“Packaging Data Analytical Work Reproducibly Using R (and Friends)”</a> – example reproducible project structure, tailored to R projects.</li>
-<li><a href="https://github.com/rlbarter/reproducibility-workflow">“Reproducbility workflow”</a>, Rebecca Barter (Berkeley Statistics PhD alum and postdoc) – another example project structure you might find useful.</li>
-<li><a href="https://rstudio.github.io/renv/articles/renv.html"><code>renv</code></a> – an R package for managing project-local R dependencies (e.g., libraries and other R packages).</li>
-<li><a href="https://cran.r-project.org/web/views/ReproducibleResearch.html">CRAN Task View: Reproducible Research</a> – compilation of R packages related to</li>
-</ul>
+<li><p>In JupyterLab, <strong>File &gt; Save and Export Notebook As… &gt; PDF</strong>.</p></li>
+<li><p>In the classic Jupyter Notebook interface, <strong>File &gt; Download as &gt; PDF via LaTeX (.pdf)</strong>.</p></li>
+</ul></li>
+</ol></li>
+</ul></li>
+</ol>
+</section>
+<section id="questions" class="level2">
+<h2 class="anchored" data-anchor-id="questions">Questions</h2>
+<section id="main-questions" class="level3">
+<h3 class="anchored" data-anchor-id="main-questions">Main Questions</h3>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ideally, you will make it through all of these, although if you run out of time that is okay.</p>
+</div>
+</div>
+<ol type="1">
+<li><p>Do Python functions behave like pass-by-value or pass-by-reference? In other words, if you pass in an object and modify it, does that affect the value of the object in the environment from which the function was called? Check this for a scalar, a list, and a <code>numpy</code> array.</p></li>
+<li><p>If you copy a list, dictionary, or <code>numpy</code> array in Python, are the values copied or does the new object just use the same memory as the original object?</p></li>
+<li><p>How are <code>NA</code>s handled in Python lists? What about in <code>numpy</code> arrays?</p></li>
+<li><p>Do Python functions use promises/lazy evaluation?</p></li>
+<li><p>How does variable scoping work in Python - does it use lexical scoping and look for variables in the environment where a function was defined?</p></li>
+<li><p>Consider the relative efficiency of <code>for</code> loops versus vectorized calculations for <code>numpy</code> arrays and see how it compares to the equivalent operation in R.</p></li>
+<li><p>Can lists and <code>numpy</code> arrays be modified in place, without copying the object?</p></li>
+<li><p>Consider whether Python allows you to have functions and variables in the global environment that have the same names as functions/variables in packages or in modules (e.g., make a file <code>test.py</code> in your working directory that you can import using <code>import test</code>). Consider <code>math.cos</code> and create your own <code>cos</code> function. How does this compare to how R finds objects?</p></li>
+</ol>
+</section>
+<section id="additional-questions" class="level3">
+<h3 class="anchored" data-anchor-id="additional-questions">Additional Questions</h3>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Work on these if you finish quickly/are curious</p>
+</div>
+</div>
+<ol type="1">
+<li><p>Can you create a closure with embedded data, like we did in R?</p></li>
+<li><p>Can you determine if the speed of looking up values in a dictionary varies with the size of the dictionary (this will indicate if something like hashing is going on or if the look up has to scan through all the elements).</p></li>
+<li><p>Compare the Python debugger to R’s debugger.</p></li>
+<li><p>If you create classes and objects in Python’s object-oriented system, what are the similarities and differences relative to R’s R6 system? There is a brief section on object-oriented programming in Python in the lab 6 materials.</p></li>
+</ol>
 
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -519,14 +561,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../labs/02/assertionsAndTesting.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lab 2</span>
+      <a href="../../labs/07/python_intro.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Intro to Python</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../labs/04/debugging.html" class="pagination-link">
-        <span class="nav-page-text">Lab 4</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
