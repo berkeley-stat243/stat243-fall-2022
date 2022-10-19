@@ -46,6 +46,8 @@ website:
           text: "Unit 7"
         - file: units/unit8-numbers.Rmd
           text: "Unit 8"
+        - file: units/unit8-sim.Rmd
+          text: "Unit 9"
     - id: labs
       title: "Labs"
       contents:
