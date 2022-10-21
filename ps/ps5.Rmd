@@ -24,6 +24,7 @@ execute:
 - It's due at 10 am (Pacific) on October 28, both submitted as a PDF to Gradescope as well as committed to your GitHub repository.
 - Please see PS1 and the grading rubric for formatting and attribution requirements.
 - Running parallel code, working with large datasets, and using shared computers can result in delays and unexpected problems. Don't wait until the last minute to work on problems 1 and 2. We are happy to help troubleshoot problems you may have with accessing the SCF, running parallel R and Python code, submitting jobs to the SCF cluster, etc. We will not be happy to do so if it is clear that you started at the last minute.
+- Given that you'll be running batch jobs and operating on remote servers, in many cases you'll need to provide your code in chunks with `eval=FALSE`. You can paste in any output you need to demonstrate your work. Remember that use can use "```" to delineate blocks of text you want printed verbatim. You may also want to put your answer to the SQL question in an unevaluated chunk (or possibly use `cache=TRUE` as a chunk option), depending on how long the query takes.
 
 ## Problems
 
@@ -55,9 +56,9 @@ execute:
 
 3. Using the Stack Overflow database, write SQL code that will determine which users have asked html-related questions but not css-related questions. Those of you with more experience with SQL might do this in a single query, but it's perfectly fine to create one or more views and then use those views to get the result as a subsequent query. Report how many unique such users there are. There are various ways to do this, of which I only covered some approaches in Unit 7 and in the videos. You can run your query via either R or Python.
 
-4. This question prepares for the discussion of a simulation study in section on Friday October 28. I will finalize the question as the time gets closer. The goal of the problem is to think carefully about the design and interpretation of simulation studies, which we'll talk about in Unit 9, in particular in Section on Friday October 28. In particular, we’ll work with this article [TBD].  The article is available as [TBD] under the `ps` directory on GitHub. Read Sections TBD of the article. Also read Sections 2.1-2.2 of Unit 9. Briefly (a few sentences for each of the three questions below) answer the following questions. 
+4. This question prepares for the discussion of a simulation study in section on Friday October 28. The goal of the problem is to think carefully about the design and interpretation of simulation studies, which we'll talk about in Unit 9, in particular in Section on Friday October 28. In particular, we’ll work with Cao et al. (2015), an article in the Journal of the Royal Statistical Society, Series B, which is a leading statistics journal.  The article is available as `cao_etal_2015.pdf` under the `ps` directory on GitHub. Read Sections 1, 2.1, and 4 of the article. Also read Sections 2 of Unit 9. Briefly (a few sentences for each of the three questions below) answer the following questions. 
 
-   a. What are the goals of their simulation study and what are the metrics that they consider in assessing their method? 
+   a. What are the goals of their simulation study, and what are the metrics that they consider in assessing their method? 
    b. What choices did the authors have to make in designing their simulation study? What are the key aspects of the data generating mechanism that might affect their assessment of their method?
    c. Consider their Tables reporting the simulation results. For a method to be a good method, what would one want to see numerically in these columns?
 

@@ -74,7 +74,7 @@ To be more concrete:
     would we use to assess the hypothesis test? What properties do we
     want the test to have?
 
--   If we have a *method for finding a confidence interval*, what
+-   If we have a *method for finding a confidence interval or a prediction interval*, what
     criteria would we use to assess the interval?
 
 
@@ -85,7 +85,7 @@ To be more concrete:
 Let's consider linear regression, with observations
 $Y=(y_{1},y_{2},\ldots,y_{n})$ and an $n\times p$ matrix of predictors/covariates/features/variables
 $X$, where
-$\hat{\beta}=(X^{\top}X)^{-1}X^{\top}Y$. If we know that we have
+$\hat{\beta}=(X^{\top}X)^{-1}X^{\top}Y$. If we assume that we have
 $EY=X\beta$ and $\mbox{Var}(Y)=\sigma^{2}I$, then we can determine
 analytically that we have $$\begin{aligned}
 E\hat{\beta} & = & \beta\\
@@ -96,7 +96,8 @@ where $Y^{*}$is some new observation we'd like to predict given $X^{*}$.
 But suppose that we're interested in the properties of regression
 estimation when in reality the mean is not linear in $X$ or the
 properties of the errors are more complicated than having independent
-homoscedastic errors. Or suppose we have a modified procedure to produce
+homoscedastic errors. (This is always the case, but the issue is how far
+from the truth the standard assumptions are.) Or suppose we have a modified procedure to produce
 $\hat{\beta}$, such as a procedure that is robust to outliers. In those
 cases, we cannot compute the expectations above analytically.
 
@@ -134,7 +135,7 @@ $$\hat{\phi}=\frac{1}{m}\sum_{i=1}^{m}h(Y_{i}),$$ which is justified by
 the Law of Large Numbers:
 $$\lim_{m\to\infty}\frac{1}{m}\sum_{i=1}^{m}h(Y_{i})=E_{f}h(Y).$$
 
-Note that in most simulation studies, $Y$ is an entire dataset, and the "iid
+Note that in most simulation studies, $Y$ is an entire dataset (predictors/covariates), and the "iid
 sample" means generating $m$ different datasets from $f$, i.e.,
 $Y_{i}\in\{Y_{1},\ldots,Y_{m}\}$ not $m$ different scalar values. If the
 dataset has $n$ observations, then $Y_{i}=(Y_{i1},\ldots,Y_{in})$.
@@ -143,7 +144,7 @@ dataset has $n$ observations, then $Y_{i}=(Y_{i1},\ldots,Y_{in})$.
 
 Let's relate that back to our regression example. In that particular
 case, if we're interested in whether the regression estimator is biased,
-we want to know: $$\phi=E\hat{\beta}.$$ We can use the Monte Carlo
+we want to know: $$\phi=E\hat{\beta},$$ where $h(Y) = \hat(\beta)$. We can use the Monte Carlo
 estimate of $\phi$:
 $$\hat{\phi}=\frac{1}{m}\sum_{i=1}^{m}h(Y_{i})=\frac{1}{m}\sum_{i=1}^{m}\hat{\beta}_{i}=\widehat{E(\hat{\beta})}.$$
 For the variance, we have
@@ -159,8 +160,8 @@ $E\hat{\beta}$ in the Monte Carlo estimation of the variance.
 We might also be interested in the coverage of a confidence interval. In
 that case we have $$h(Y)=1_{\beta\in CI(Y)}$$ and we can estimate the
 coverage as
-$$\hat{\phi}=\frac{1}{m}\sum_{i=1}^{m}1_{\beta\in CI(y_{i})}.$$ Of
-course we want that $\hat{\phi}\approx1-\alpha$ for a $100(1-\alpha)$
+$$\hat{\phi}=\frac{1}{m}\sum_{i=1}^{m}1_{\beta\in CI(y_{i})}.$$
+Of course we want that $\hat{\phi}\approx1-\alpha$ for a $100(1-\alpha)$
 confidence interval. In the standard case of a 95% interval we want
 $\hat{\phi}\approx0.95$.
 
@@ -195,7 +196,7 @@ Some examples of simulation variances we might be interested in in the
 regression example include:
 
 -   Uncertainty in our estimate of bias:
-    $\widehat{\mbox{Var}}(\widehat{E(\hat{\beta})-\beta})$.
+    $\widehat{\mbox{Var}}(\widehat{E(\hat{\beta})}-\beta)$.
 
 -   Uncertainty in the estimated variance of the estimated coefficient:
     $\widehat{\mbox{Var}}(\widehat{\mbox{Var}(\hat{\beta})})$.
