@@ -540,7 +540,7 @@ are Mersenne primes, which have the form $2^{p}-1$ (but these are not
 prime for all $p$), with $m=2^{31}-1$ common. Here's an example of a
 linear congruential sampler:
 
-```{r}
+```{r, fig.height=5}
 n <- 100
 a <- 171
 m <- 30269
@@ -550,7 +550,7 @@ for(i in 2:n)
   u[i] <- (a * u[i-1]) %% m 
 u <- u/m
 uFromR <- runif(n) 
-par(mfrow = c(2,2)) 
+par(mfrow = c(2,2), mgp = c(1.8, 0.7, 0), mai = c(.5,.5,.3,.1)) 
 plot(1:n, u, type = 'l') 
 plot(1:n, uFromR, type = 'l') 
 hist(u, nclass = 25) 

@@ -760,13 +760,13 @@ Let's consider some challenges that illustrate that last concern.
     calculation. Suppose I want to calculate a predictive density (e.g.,
     in a model comparison in a Bayesian context): $$\begin{aligned}
     f(y^{*}|y,x) & = & \int f(y^{*}|y,x,\theta)\pi(\theta|y,x)d\theta\\
-     & \approx & \frac{1}{M}\sum_{j=1}^{m}\prod_{i=1}^{n}f(y_{i}^{*}|x,\theta_{j})\\
-     & = & \frac{1}{M}\sum_{j=1}^{m}\exp\sum_{i=1}^{n}\log f(y_{i}^{*}|x,\theta_{j})\\
-     & \equiv & \frac{1}{M}\sum_{j=1}^{m}\exp(v_{j})\end{aligned}$$
+     & \approx & \frac{1}{m}\sum_{j=1}^{m}\prod_{i=1}^{n}f(y_{i}^{*}|x,\theta_{j})\\
+     & = & \frac{1}{m}\sum_{j=1}^{m}\exp\sum_{i=1}^{n}\log f(y_{i}^{*}|x,\theta_{j})\\
+     & \equiv & \frac{1}{m}\sum_{j=1}^{m}\exp(v_{j})\end{aligned}$$
     First, why do I use the log conditional predictive density? Second,
     let's work with an estimate of the unconditional predictive density
     on the log scale,
-    $\log f(y^{*}|y,x)\approx\log\frac{1}{M}\sum_{j=1}^{m}\exp(v_{j})$.
+    $\log f(y^{*}|y,x)\approx\log\frac{1}{m}\sum_{j=1}^{m}\exp(v_{j})$.
     Now note that $e^{v_{j}}$ may be quite small as $v_{j}$ is the sum
     of log likelihoods. So what happens if we have terms something like
     $e^{-1000}$? So we can't exponentiate each individual $v_{j}$. This
