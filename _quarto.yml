@@ -48,6 +48,8 @@ website:
           text: "Unit 8"
         - file: units/unit9-sim.Rmd
           text: "Unit 9"
+        - file: units/unit10-linalg.Rmd
+          text: "Unit 10"
     - id: labs
       title: "Labs"
       contents:
