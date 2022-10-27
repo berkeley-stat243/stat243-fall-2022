@@ -78,9 +78,9 @@ on a computer may be very different.** Better computational approaches
 can increase speed and improve the numerical properties of the
 calculation.
 
-- Example 1 (already seen in Unit 4): If $X$ and $Y$ are matrices and $z$
+- Example 1 (already seen in Unit 5): If $X$ and $Y$ are matrices and $z$
 is a vector, we should compute $X(Yz)$ rather than $(XY)z$; the former
-is much more computationally efficient.
+is much more computationally efficient. 
 - Example 2: We do not compute $(X^{\top}X)^{-1}X^{\top}Y$ by computing
 $X^{\top}X$ and finding its inverse. In fact, perhaps more surprisingly,
 we may never actually form $X^{\top}X$ in some implementations.
@@ -149,7 +149,7 @@ vectors, $x$. Then $x_{i}$ is the ith element of $x$, $A_{ij}$ is the
 $i$th row, $j$th column element, and $A_{\cdot j}$ is the $j$th column
 and $A_{i\cdot}$ the $i$th row. By default, we'll consider a vector,
 $x$, to be a one-column matrix, and $x^{\top}$ to be a one-row matrix.
-Some of the textbook resources also use $a_{ij}$ for $A_{ij}$ and
+Some of the references given at the start of this Unit also use $a_{ij}$ for $A_{ij}$ and
 $a_{j}$ for the $j$th column.
 
 Throughout, we'll need to be careful that the matrices involved in an
@@ -187,7 +187,7 @@ If you're not familiar with the supremum ("sup" above), you can just
 think of it as taking the maximum.
 
 A property of any legitimate matrix norm (including the induced norm) is
-that $\|AB\|\leq\|A\|\|B\|$. Recall that norms must obey the triangle
+that $\|AB\|\leq\|A\|\|B\|$. Also recall that norms must obey the triangle
 inequality, $\|A+B\|\leq\|A\|+\|B\|$.
 
 A normalized vector is one with "length", i.e., Euclidean norm, of one.
@@ -294,7 +294,7 @@ is $O(n^{3}+m^{3})$ rather than the naive approach being $O((nm)^{3})$.
 
 A matrix decomposition is a re-expression of a matrix, $A$, in terms of
 a product of two or three other, simpler matrices, where the
-decomposition shows structure or relationships present in the original
+decomposition reveals structure or relationships present in the original
 matrix, $A$. The "simpler" matrices may be simpler in various ways,
 including
 
@@ -755,8 +755,7 @@ computation (provided they are stopped before the exact solution is
 found).
 
 Gentle-CS has a nice table overviewing the various factorizations (Table
-5.1, page 219). I've reproduced a variation on it here (sorry about the
-weird lines -- LaTeX is being a pain for some reason).
+5.1, page 219). I've reproduced a variation on it here.
 
 
 
