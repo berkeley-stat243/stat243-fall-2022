@@ -499,7 +499,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 class="anchored" data-anchor-id="key-principle">Key principle</h2>
 <p><strong>The form of a mathematical expression and how it should be evaluated on a computer may be very different.</strong> Better computational approaches can increase speed and improve the numerical properties of the calculation.</p>
 <ul>
-<li>Example 1 (already seen in Unit 4): If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are matrices and <span class="math inline">\(z\)</span> is a vector, we should compute <span class="math inline">\(X(Yz)\)</span> rather than <span class="math inline">\((XY)z\)</span>; the former is much more computationally efficient.</li>
+<li>Example 1 (already seen in Unit 5): If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are matrices and <span class="math inline">\(z\)</span> is a vector, we should compute <span class="math inline">\(X(Yz)\)</span> rather than <span class="math inline">\((XY)z\)</span>; the former is much more computationally efficient.</li>
 <li>Example 2: We do not compute <span class="math inline">\((X^{\top}X)^{-1}X^{\top}Y\)</span> by computing <span class="math inline">\(X^{\top}X\)</span> and finding its inverse. In fact, perhaps more surprisingly, we may never actually form <span class="math inline">\(X^{\top}X\)</span> in some implementations.</li>
 <li>Example 3: Suppose I have a matrix <span class="math inline">\(A\)</span>, and I want to permute (switch) two rows. I can do this with a permutation matrix, <span class="math inline">\(P\)</span>, which is mostly zeroes. On a computer, in general I wouldn’t need to even change the values of <span class="math inline">\(A\)</span> in memory in some cases (e.g., if I were to calculate <span class="math inline">\(PAB\)</span>). Why not?</li>
 </ul>
@@ -515,7 +515,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="notation-and-dimensions" class="level2">
 <h2 class="anchored" data-anchor-id="notation-and-dimensions">Notation and dimensions</h2>
-<p>I’ll try to use capital letters for matrices, <span class="math inline">\(A\)</span>, and lower-case for vectors, <span class="math inline">\(x\)</span>. Then <span class="math inline">\(x_{i}\)</span> is the ith element of <span class="math inline">\(x\)</span>, <span class="math inline">\(A_{ij}\)</span> is the <span class="math inline">\(i\)</span>th row, <span class="math inline">\(j\)</span>th column element, and <span class="math inline">\(A_{\cdot j}\)</span> is the <span class="math inline">\(j\)</span>th column and <span class="math inline">\(A_{i\cdot}\)</span> the <span class="math inline">\(i\)</span>th row. By default, we’ll consider a vector, <span class="math inline">\(x\)</span>, to be a one-column matrix, and <span class="math inline">\(x^{\top}\)</span> to be a one-row matrix. Some of the textbook resources also use <span class="math inline">\(a_{ij}\)</span> for <span class="math inline">\(A_{ij}\)</span> and <span class="math inline">\(a_{j}\)</span> for the <span class="math inline">\(j\)</span>th column.</p>
+<p>I’ll try to use capital letters for matrices, <span class="math inline">\(A\)</span>, and lower-case for vectors, <span class="math inline">\(x\)</span>. Then <span class="math inline">\(x_{i}\)</span> is the ith element of <span class="math inline">\(x\)</span>, <span class="math inline">\(A_{ij}\)</span> is the <span class="math inline">\(i\)</span>th row, <span class="math inline">\(j\)</span>th column element, and <span class="math inline">\(A_{\cdot j}\)</span> is the <span class="math inline">\(j\)</span>th column and <span class="math inline">\(A_{i\cdot}\)</span> the <span class="math inline">\(i\)</span>th row. By default, we’ll consider a vector, <span class="math inline">\(x\)</span>, to be a one-column matrix, and <span class="math inline">\(x^{\top}\)</span> to be a one-row matrix. Some of the references given at the start of this Unit also use <span class="math inline">\(a_{ij}\)</span> for <span class="math inline">\(A_{ij}\)</span> and <span class="math inline">\(a_{j}\)</span> for the <span class="math inline">\(j\)</span>th column.</p>
 <p>Throughout, we’ll need to be careful that the matrices involved in an operation are conformable: for <span class="math inline">\(A+B\)</span> both matrices need to be of the same dimension, while for <span class="math inline">\(AB\)</span> the number of columns of <span class="math inline">\(A\)</span> must match the number of rows of <span class="math inline">\(B\)</span>. Note that this allows for <span class="math inline">\(B\)</span> to be a column vector, with only one column, <span class="math inline">\(Ab\)</span>. Just checking dimensions is a good way to catch many errors. Example: is <span class="math inline">\(\mbox{Cov}(Ax)=A\mbox{Cov}(x)A^{\top}\)</span> or <span class="math inline">\(\mbox{Cov}(Ax)=A^{\top}\mbox{Cov}(x)A\)</span>? Well, if <span class="math inline">\(A\)</span> is <span class="math inline">\(m\times n\)</span>, it must be the former, as the latter is not conformable.</p>
 <p>The <strong>inner product</strong> of two vectors is <span class="math inline">\(\sum_{i}x_{i}y_{i}=x^{\top}y\equiv\langle x,y\rangle\equiv x\cdot y\)</span>.</p>
 <p>The <strong>outer product</strong> is <span class="math inline">\(xy^{\top}\)</span>, which comes from all pairwise products of the elements.</p>
@@ -528,7 +528,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span class="math display">\[\|A\|=\sup_{x\ne0}\frac{\|Ax\|}{\|x\|}\]</span> So we have</p>
 <p><span class="math display">\[\|A\|_{2}=\sup_{x\ne0}\frac{\|Ax\|_{2}}{\|x\|_{2}}=\sup_{\|x\|_{2}=1}\|Ax\|_{2}\]</span></p>
 <p>If you’re not familiar with the supremum (“sup” above), you can just think of it as taking the maximum.</p>
-<p>A property of any legitimate matrix norm (including the induced norm) is that <span class="math inline">\(\|AB\|\leq\|A\|\|B\|\)</span>. Recall that norms must obey the triangle inequality, <span class="math inline">\(\|A+B\|\leq\|A\|+\|B\|\)</span>.</p>
+<p>A property of any legitimate matrix norm (including the induced norm) is that <span class="math inline">\(\|AB\|\leq\|A\|\|B\|\)</span>. Also recall that norms must obey the triangle inequality, <span class="math inline">\(\|A+B\|\leq\|A\|+\|B\|\)</span>.</p>
 <p>A normalized vector is one with “length”, i.e., Euclidean norm, of one. We can easily normalize a vector: <span class="math inline">\(\tilde{x}=x/\|x\|\)</span></p>
 <p>The angle between two vectors is</p>
 <p><span class="math display">\[\theta=\cos^{-1}\left(\frac{\langle x,y\rangle}{\sqrt{\langle x,x\rangle\langle y,y\rangle}}\right)\]</span></p>
@@ -580,7 +580,7 @@ A_{n1}B &amp; \cdots &amp; A_{nm}B
 </section>
 <section id="matrix-decompositions" class="level2">
 <h2 class="anchored" data-anchor-id="matrix-decompositions">Matrix decompositions</h2>
-<p>A matrix decomposition is a re-expression of a matrix, <span class="math inline">\(A\)</span>, in terms of a product of two or three other, simpler matrices, where the decomposition shows structure or relationships present in the original matrix, <span class="math inline">\(A\)</span>. The “simpler” matrices may be simpler in various ways, including</p>
+<p>A matrix decomposition is a re-expression of a matrix, <span class="math inline">\(A\)</span>, in terms of a product of two or three other, simpler matrices, where the decomposition reveals structure or relationships present in the original matrix, <span class="math inline">\(A\)</span>. The “simpler” matrices may be simpler in various ways, including</p>
 <ul>
 <li>having fewer rows or columns;</li>
 <li>being diagonal, triangular or sparse in some way,</li>
@@ -654,7 +654,7 @@ A_{n1}B &amp; \cdots &amp; A_{nm}B
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> e<span class="sc">$</span>vec <span class="sc">%*%</span> (<span class="fu">sqrt</span>(e<span class="sc">$</span>values) <span class="sc">*</span> <span class="fu">rnorm</span>(<span class="dv">5</span>))</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -4.440892e-15</code></pre>
+<pre><code>[1] -1.082467e-15</code></pre>
 </div>
 </div>
 <p>In the second order case, we have two non-identifiabilities: for the sum and for the linear component of the variation in <span class="math inline">\(y\)</span> (linear in the indices of <span class="math inline">\(y\)</span>).</p>
@@ -801,7 +801,7 @@ A_{n1}B &amp; \cdots &amp; A_{nm}B
 <p>Suppose we want to solve the following linear system:</p>
 <p><span class="math display">\[\begin{aligned} Ax &amp; = &amp; b\\ x &amp; = &amp; A^{-1}b \end{aligned}\]</span></p>
 <p>Numerically, this is never done by finding the inverse and multiplying. Rather we solve the system using a matrix decomposition (or equivalent set of steps). One approach uses Gaussian elimination (equivalent to the LU decomposition), while another uses the Cholesky decomposition. There are also iterative methods that generate a sequence of approximations to the solution but reduce computation (provided they are stopped before the exact solution is found).</p>
-<p>Gentle-CS has a nice table overviewing the various factorizations (Table 5.1, page 219). I’ve reproduced a variation on it here (sorry about the weird lines – LaTeX is being a pain for some reason).</p>
+<p>Gentle-CS has a nice table overviewing the various factorizations (Table 5.1, page 219). I’ve reproduced a variation on it here.</p>
 <table class="table">
 <caption>Matrix factorizations useful for statistics / data science / machine learning</caption>
 <colgroup>
