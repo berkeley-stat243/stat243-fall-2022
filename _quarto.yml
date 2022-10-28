@@ -71,6 +71,8 @@ website:
               text: Intro to Python
             - file: labs/07/py_vs_R.md
               text: Python vs. R
+        - file: labs/08/simulations.md
+          text: "Lab 8"
     - id: howtos
       title: "How tos"
       contents:
