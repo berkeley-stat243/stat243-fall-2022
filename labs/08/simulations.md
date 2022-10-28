@@ -48,9 +48,9 @@ presented in Table 1 on page 765.
      Cholesky decomposition (described in [Unit 10](/units/unit10-linalg.html))?
 1. Next, **discuss the specific choices** the authors made in designing their
    simulated datasets. As you discuss, **write down those choices** in your
-   Google Doc.
+   Google Doc. _~10 minutes~_
 1. As a group, pick the **two most important choices** and justify why you
-   picked them in the Google Doc. _~5-10 minutes_
+   picked them in the Google Doc. _~5 minutes_
 1. With those choices in mind, brainstorm and write how you might simulate the
    data differently. _~5-10 minutes_
 1. Finally, each group member should export the Google Doc to PDF and submit it
