@@ -8,7 +8,7 @@
 ## - copy the preamble from units/unit2-dataTech.Rmd (w/ or without the pdf block, depending on if PDFs are required)
 ## update _quarto.yml to reflect the new unit (unless you don't yet want it discoverable by the students)
 ## - run `quarto render <new-Rmd-or-qmd>` locally, which will store computations in the _freeze dir (and it won't have to re-do computations previously saved in _freeze)
-## - commit the new page and changes to the _freeze dir
+## - commit the new page and all changes to the _freeze dir including unit .json and figure .png/pdf files
 ## - push to GitHub and the publish action should run fairly quickly
 
 
