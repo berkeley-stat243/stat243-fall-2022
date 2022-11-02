@@ -40,7 +40,7 @@ execute:
 
    Explain why these two estimates agree to only a small number of decimal places and which of the two is the more accurate answer, when mathematically the variance of `z` and the variance of `x` are exactly the same (since `x` is just the addition of a constant to `z`).
 
-2. Consider the following, in which we run into problems when trying to calculate on a computer. Suppose I want to calculate a predictive density for new data (e.g., in a model comparison in a Bayesian context): $$ f(y^{*}|y,x)  =  \int f(y^{*}|y,x,\theta)\pi(\theta|y,x) = E_{\theta|y,x}f(y^{*}|y,x,\theta). $$ Here $\pi(\theta | y, x)$ is the posterior distribution (the distribution of the parameter, $\theta$, given the data, $y$, and predictors, $x$). All of $\theta$, $y$, and $x$ will generally be vectors.
+2. Consider the following, in which we run into problems when trying to calculate on a computer. Suppose I want to calculate a predictive density for new data (e.g., in a model comparison in a Bayesian context): $$ f(y^{*}|y,x)  =  \int f(y^{*}|y,x,\theta)\pi(\theta|y,x)d\theta = E_{\theta|y,x}f(y^{*}|y,x,\theta). $$ Here $\pi(\theta | y, x)$ is the posterior distribution (the distribution of the parameter, $\theta$, given the data, $y$, and predictors, $x$). All of $\theta$, $y$, and $x$ will generally be vectors.
 
    If we have a set of samples for $\theta$ from the posterior distribution, $\theta_j \sim \pi(\theta|y,x)$, $j=1,\ldots,m$, we can estimate that quantity for a vector of conditionally IID observations using a Monte Carlo estimate of the expectation: $$ f(y^{*}|y,x) \approx \frac{1}{m}\sum_{j=1}^{m}\prod_{i=1}^{n}f(y_i^{*}|y,x,\theta_{j}). $$
 
