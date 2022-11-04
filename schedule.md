@@ -12,6 +12,7 @@ Submit your solutions on Gradescope and (for problem sets but not assignments) v
 | PS 4 [(HTML)](ps/ps4.html) [(PDF)](ps/ps4.pdf) | Wednesday Oct. 12 | 10 am | |
 | PS 5 [(HTML)](ps/ps5.html) [(PDF)](ps/ps5.pdf) | Friday Oct. 28 | 10 am | |
 | PS 6 [(HTML)](ps/ps6.html) [(PDF)](ps/ps6.pdf) | Friday Nov. 4 | 10 am | |
+| PS 7 [(HTML)](ps/ps7.html) [(PDF)](ps/ps7.pdf) | Tuesday Nov. 15 | 10 am | |
 
 ## Quiz schedule
 

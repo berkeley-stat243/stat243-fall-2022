@@ -1,0 +1,129 @@
+---
+title: "Problem Set 7"
+subtitle: "Due Tuesday Nov. 15, 10 am"
+format:
+  pdf:
+    documentclass: article
+    margin-left: 30mm
+    margin-right: 30mm
+    toc: false
+  html:
+    theme: cosmo
+    css: ../styles.css
+    toc: false
+    code-copy: true
+    code-block-background: true
+execute:
+  freeze: auto
+---
+
+
+## Comments
+
+- This covers Unit 10.
+- It's due at 10 am (Pacific) on Tuesday (yes, Tuesday) November 15, both submitted as a PDF to Gradescope as well as committed to your GitHub repository.
+- Please see PS1 and the grading rubric for formatting and attribution requirements.
+
+## Problems (mostly from 2020)
+
+1. Suppose I need to compute the generalized least squares estimator,
+    $\hat{\beta}=(X^{\top}\Sigma^{-1}X)^{-1}X^{\top}\Sigma^{-1}Y$, where
+    $X$ is $n\times p$ and $\Sigma$ is a positive definite $n\times n$ matrix. Assume that $n>p$ and 
+    $n$ could be of order several thousand and $p$ of order in the
+    hundreds. First write out in pseudo-code how you would do this in an
+    efficient way - i.e., the particular linear algebra steps and the
+    order of operations. Then write efficient R code in the form of a
+    function, `gls()`, to do this - you can rely on the various
+    high-level functions for matrix decompositions and solving systems
+    of equations, but you should not use any code that already exists
+    for doing generalized least squares.
+
+2. We've seen how to use Gaussian elimination (i.e., the LU
+    decomposition) to solve $Ax=b$ and that we can do the solution in
+    $n^{3}/3$ operations (plus lower-order terms). Suppose I want to
+    know how inefficient it is to explicitly invert the matrix $A$ and
+    then multiply, thereby finding $x=A^{-1}b$ via matrix-vector
+    multiplication. If we look at R's `solve.default()`, we see it
+    solves the system $AZ=I$ to find $Z=A^{-1}$. Next note that
+    `help(solve)` indicates it calls a Lapack routine [DGESV](http://www.netlib.org/lapack/explore-html/d7/d3b/group__double_g_esolve_ga5ee879032a8365897c3ba91e3dc8d512.html),
+    which uses the LU decomposition.
+    Count the number of computations for
+
+    a.  transforming $AZ=I$ to $UZ=I^{*}$ (where $I^{*}$ is no longer a
+        diagonal matrix),
+    b.  for solving for $Z$ given $UZ=I^{*}$, and
+    c.  for calculating $x=Zb$.
+
+    Then compare the total cost to the $n^{3}/3$ cost of what we saw in
+    class.
+
+    Notes:
+    - In counting the computations you should be able to make use
+    of various results we derived in class concerning the Gaussian
+    elimination computations and computations involved in a backsolve,
+    so your answer should be able to simply combine together results
+    we've already discussed without any detailed new derivation.
+    - Given that R's call to `dgesv` doesn't take account of
+    the special (diagonal) structure of $I$ on the right-hand side, you do not need
+    to take account of the fact that because $I$ has zeroes and ones,
+    one can actually save some computation. You can simply count the
+    calculations as if $I$ were filled with arbitrary values. (Note: if
+    we did actually try to be careful about making use of the structure
+    of $I$, it turns out we could save $n^{3}/3$ calculations.)
+
+3.  Two-stage least squares (2SLS) is a way of implementing a causal
+    inference method called instrumental variables that is commonly used
+    in economics. Consider the following set of regression equations:
+    $$\begin{aligned}
+    \hat{X} & = & Z(Z^{\top}Z)^{-1}Z^{\top}X\\
+    \hat{\beta} & = & (\hat{X}^{\top}\hat{X})^{-1}\hat{X}^{\top}y\end{aligned}$$
+    which can be interpreted as regressing $y$ on $X$ after filtering
+    such that we only retain variation in $X$ that is correlated with
+    the instrumental variable $Z$. An economics graduate student asked
+    how he could compute $\hat{\beta}$ if $Z$ is 60 million by 630, $X$
+    is 60 million by 600, and $y$ is $60$ million by 1, but both $Z$ and
+    $X$ are sparse matrices.
+
+    a.  Describe briefly why I can't do this calculation in two steps as
+        given in the equations, even if I use the techniques for OLS
+        discussed in class for each stage.
+
+    b.  Figure out how to rewrite the equations such that you can
+        actually calculate $\hat{\beta}$ on a computer without a huge
+        amount of memory. You can assume that any matrix multiplications
+        involving sparse matrices can be done on the computer (e.g.,
+        using the *spam* package in R).  Describe the specific steps of
+        how you would do this and/or write out in pseudo-code.
+
+    Notes:
+    - The product of two sparse matrices is not (in general)
+    sparse and would not be sparse in this case.
+    - As discussed in
+    Section 6 of Unit 10, there are R packages (and software packages
+    more generally) for efficiently storing (to save memory) and
+    efficiently doing matrix manipulations (to save computation time)
+    with sparse matrices.
+
+4. (Extra credit) In class we saw that the condition number when
+    solving a system of equations, $Ax=b$, is the ratio of the absolute
+    values of the largest and smallest magnitude eigenvalues of $A$.
+    Show that $\|A\|_{2}$ (i.e., the matrix norm induced by the usual L2
+    vector norm; see Section 1 of Unit 10) is the largest of the
+    absolute values of the eigenvalues of $A$ for symmetric $A$. To do
+    so, find the following quantity,
+    $$\|A\|_{2}=\sup_{z:\|z\|_{2}=1}\sqrt{(Az)^{\top}Az}.$$ If you're
+    not familiar with the notion of the supremum (the *sup* here), just
+    think of it as the maximum. It accounts for situations such as
+    trying to find the maximum of the numbers in the open interval
+    (0,1). The max is undefined in this case since there is always a
+    number closer to 1 than any number you choose, but the *sup* in this
+    case is 1.
+
+    Hints: when you get to having the quantity $\Gamma^{\top}z$ for
+    orthogonal $\Gamma$, set $y=\Gamma^{\top}z$ and show that if
+    $\|z\|_{2}=1$ then $\|y\|_{2}=1$. Finally, if you have the quantity
+    $y^{\top}Dy$, think about how this can be rewritten given the form
+    of $D$ and think intuitively about how to maximize it if
+    $\|y\|_{2}=1$.
+
+
