@@ -73,6 +73,8 @@ website:
               text: Python vs. R
         - file: labs/08/simulations.md
           text: "Lab 8"
+        - file: labs/09/collab_with_git.md
+          text: "Lab 9"
     - id: howtos
       title: "How tos"
       contents:
