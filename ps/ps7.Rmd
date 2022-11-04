@@ -24,7 +24,7 @@ execute:
 - It's due at 10 am (Pacific) on Tuesday (yes, Tuesday) November 15, both submitted as a PDF to Gradescope as well as committed to your GitHub repository.
 - Please see PS1 and the grading rubric for formatting and attribution requirements.
 
-## Problems (mostly from 2020)
+## Problems 
 
 1. Suppose I need to compute the generalized least squares estimator,
     $\hat{\beta}=(X^{\top}\Sigma^{-1}X)^{-1}X^{\top}\Sigma^{-1}Y$, where
