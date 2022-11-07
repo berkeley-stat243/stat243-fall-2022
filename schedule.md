@@ -20,7 +20,7 @@ Quizzes are in-person only.
 
 - Quiz 1: Monday October 24 during class **in Cory 277**.
   - Review session Friday October 21 in Lab.
-- Quiz 2: Monday November 21 in class.
+- Quiz 2: Monday November 21 in class **in Cory 277**.
   - Review session Friday November 18 in Lab.
 
 ## Project schedule
