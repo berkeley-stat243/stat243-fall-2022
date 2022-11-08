@@ -1616,14 +1616,14 @@ mat@rowpointers
 mat@colindices 
 ```
 
-We can do a fast matrix multiply, $Ab$, as follows in pseudo-code:
+We can do a fast matrix multiply, $x = Ab$, as follows in pseudo-code:
 
 ```
     for(i in 1:nrows(A)){
         x[i] = 0
         # should also check that row is not empty...
-        for(j in (rowptr[i]:(rowptr[i+1]-1)) {
-            x[i] = x[i] + value[j] * b[colindices[j]]
+        for(j in (rowpointers[i]:(rowpointers[i+1]-1)) {
+            x[i] = x[i] + entries[j] * b[colindices[j]]
         }   
     }
 ```
