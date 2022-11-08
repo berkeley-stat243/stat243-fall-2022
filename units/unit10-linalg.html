@@ -672,7 +672,7 @@ A_{n1}B &amp; \cdots &amp; A_{nm}B
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> e<span class="sc">$</span>vec <span class="sc">%*%</span> (<span class="fu">sqrt</span>(e<span class="sc">$</span>values) <span class="sc">*</span> <span class="fu">rnorm</span>(<span class="dv">5</span>))</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -1.082467e-15</code></pre>
+<pre><code>[1] 2.720046e-15</code></pre>
 </div>
 </div>
 <p>In the second order case, we have two non-identifiabilities: for the sum and for the linear component of the variation in <span class="math inline">\(y\)</span> (linear in the indices of <span class="math inline">\(y\)</span>).</p>
@@ -1169,7 +1169,7 @@ In R, the following will do it (on the log scale), since <span class="math inlin
 <h4 class="anchored" data-anchor-id="computation-1">Computation</h4>
 <p>There are several methods for eigenvalues; a common one for doing the full eigendecomposition is the <em>QR algorithm</em>. The first step is to reduce <span class="math inline">\(A\)</span> to upper Hessenburg form, which is an upper triangular matrix except that the first subdiagonal in the lower triangular part can be non-zero. For symmetric matrices, the result is actually tridiagonal. We can do the reduction using Householder reflections or Givens rotations. At this point the QR decomposition (using Givens rotations) is applied iteratively (to a version of the matrix in which the diagonals are shifted), and the result converges to a diagonal matrix, which provides the eigenvalues. It’s more work to get the eigenvectors, but they are obtained as a product of Householder matrices (required for the initial reduction) multiplied by the product of the <span class="math inline">\(Q\)</span> matrices from the successive QR decompositions.</p>
 <p>We won’t go into the algorithm in detail, but note that it involves manipulations and ideas we’ve seen already.</p>
-<p>If only the largest (or the first few largest) eigenvalues and their eigenvectors are needed, which can come up in time series and Markov chain contexts, the problem is easier and can be solved by the <em>power method</em>. E.g., in a Markov chain context, steady state is reached through <span class="math inline">\(x_{t}=A^{t}x_{0}\)</span>. One can find the largest eigenvector by multiplying by <span class="math inline">\(A\)</span> many times, normalizing at each step. <span class="math inline">\(v^{(k)}=Az^{(k-1)}\)</span> and <span class="math inline">\(z^{(k)}=v^{(k)}/\|v^{(k)}\|\)</span>. There is an extension to find the <span class="math inline">\(p\)</span> largest eigenvalues and their vectors. See the demo code for an implementation.</p>
+<p>If only the largest (or the first few largest) eigenvalues and their eigenvectors are needed, which can come up in time series and Markov chain contexts, the problem is easier and can be solved by the <em>power method</em>. E.g., in a Markov chain context, steady state is reached through <span class="math inline">\(x_{t}=A^{t}x_{0}\)</span>. One can find the largest eigenvector by multiplying by <span class="math inline">\(A\)</span> many times, normalizing at each step. <span class="math inline">\(v^{(k)}=Az^{(k-1)}\)</span> and <span class="math inline">\(z^{(k)}=v^{(k)}/\|v^{(k)}\|\)</span>. There is an extension to find the <span class="math inline">\(p\)</span> largest eigenvalues and their vectors. See the demo code in the Rmd source file for an implementation.</p>
 </section>
 </section>
 <section id="singular-value-decomposition" class="level2">
@@ -1249,12 +1249,12 @@ Attaching package: 'spam'</code></pre>
 <pre><code>[1] 3 5 4 1</code></pre>
 </div>
 </div>
-<p>We can do a fast matrix multiply, <span class="math inline">\(Ab\)</span>, as follows in pseudo-code:</p>
+<p>We can do a fast matrix multiply, <span class="math inline">\(x = Ab\)</span>, as follows in pseudo-code:</p>
 <pre><code>    for(i in 1:nrows(A)){
         x[i] = 0
         # should also check that row is not empty...
-        for(j in (rowptr[i]:(rowptr[i+1]-1)) {
-            x[i] = x[i] + value[j] * b[colindices[j]]
+        for(j in (rowpointers[i]:(rowpointers[i+1]-1)) {
+            x[i] = x[i] + entries[j] * b[colindices[j]]
         }   
     }</code></pre>
 <p>How many computations have we done? Only <span class="math inline">\(k\)</span> multiplies and <span class="math inline">\(O(k)\)</span> additions where <span class="math inline">\(k\)</span> is the number of non-zero elements of <span class="math inline">\(A\)</span>. Compare this to the usual <span class="math inline">\(O(n^{2})\)</span> for dense multiplication.</p>
