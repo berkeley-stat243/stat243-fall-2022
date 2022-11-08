@@ -388,7 +388,6 @@ This table gives an overview of the different plans.
 |  --------------| -------------------------------------------| ------------| ----------------------------|
 |   multisession |  uses additional R sessions as the workers |      no     |             yes |
 |    multicore   |   uses forked R processes as the workers   |      no     |  not if object not modified |
-|      remote    |    uses an R sessions on another machine    |     yes     |             yes |
 |     cluster    |     uses R sessions on other machine(s)    |     yes     |             yes |
 
 ## Accessing variables and workers in the worker processes
