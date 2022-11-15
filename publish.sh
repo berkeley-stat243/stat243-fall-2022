@@ -11,6 +11,7 @@
 ## - commit the new page and all changes to the _freeze dir including unit .json and figure .png/pdf files
 ## - push to GitHub and the publish action should run fairly quickly
 
+## Sometimes the GHA fails with a message about jsonlite not being available for one of the particular Rmd files. This can be fixed by rerendering the .Rmd file and making sure to commit the _freeze execute-results files.
 
 ## Publish without re-rendering all files after individually rendering file(s)
 ## quarto render file.Rmd
