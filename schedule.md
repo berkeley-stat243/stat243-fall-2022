@@ -27,7 +27,7 @@ Quizzes are in-person only.
 
 ## Project schedule
 
-Due date: Thursday December 15 at 5 pm.
+Due date: Thursday December 15 at 5 pm. Details are [here](project/project.html)..
 
 ## First few week activities and assignments
 
