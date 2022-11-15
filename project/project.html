@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Statistics 243 Fall 2022 - Problem Set 4</title>
+<title>Statistics 243 Fall 2022 - Final Project</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,69 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -327,8 +264,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Problem Set 4</h1>
-<p class="subtitle lead">Due Wednesday Oct.&nbsp;12, 10 am</p>
+<h1 class="title">Final Project</h1>
+<p class="subtitle lead">Due Thursday Dec.&nbsp;15, 5 pm</p>
 </div>
 
 
@@ -343,72 +280,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="comments" class="level2">
-<h2 class="anchored" data-anchor-id="comments">Comments</h2>
-<ul>
-<li>This covers Unit 5.</li>
-<li>It’s due at 10 am (Pacific) on October 12, both submitted as a PDF to Gradescope as well as committed to your GitHub repository.</li>
-<li>Please see PS1 and the grading rubric for formatting and attribution requirements.</li>
-<li>I just noticed that the <code>pryr</code> package has been superseded by functionality in other packages, particularly by <code>lobstr</code> in terms of our uses of <code>pryr</code>. So I suggest you use <code>lobstr::obj_addr</code>, <code>lobstr::obj_size</code>, and <code>lobstr::mem_used</code> in place of <code>pryr::address</code>, <code>pryr::object_size</code>, and <code>pryr::mem_used</code> respectively. That said, you’ll likely need <code>.Internal(inspect())</code> for your solutions for the more granular information it provides.</li>
-</ul>
+<p><a href="./project.pdf" class="btn btn-primary">PDF</a></p>
+<p>The project will be done in groups of three, with students assigned randomly.</p>
+<p>A few comments. First, the project, when split amongst the group members, is not intended to be a huge undertaking. The goals of the project are to give you experience in working collaboratively and developing a well-designed, well-tested piece of software.</p>
+<p>The project will be graded as a letter grade and will count for about as much as two problem sets in your final grade.</p>
+<p>Please use standard citation practices to cite any papers/online reasources/people whose ideas you make use of. Please do not consult with class members who are not in your group.</p>
+<section id="problem" class="level1">
+<h1>Problem</h1>
+<p>Your task is to implement an adaptive-rejection sampler, described in the Unit 9 notes (Section 5) and with details in Section 2.2 of Gilks et al.&nbsp;(1992) - the PDF is in the <code>project</code> directory of the class Git repository. The result should be an R package that I can install and use.</p>
+<ol type="1">
+<li><p>Your solution should allow the user to provide reasonable inputs, including the number of points to sample, and should check the inputs for validity (e.g., using <code>assertthat</code>). The primary input should be an R function that calculates the (possibly unnormalized) density of the distribution of interest in a vectorized fashion (e.g., many of the “d” functions in R, such as <code>dnorm</code> are legitimate inputs). Your code should include numerical checks that catch cases of non-log-concave densities as the calculations proceed. (I.e., you do not need to come up with an overall test of the input density, but you should be able to do some checks that will catch cases where the upper and lower bounds are not actually bounding the density.)</p></li>
+<li><p>Formal testing is required with a set of tests where results are compared to some known truth. You should have tests for the overall function and any modules that do anything complicated. Given the output is stochastic, how to do this will require some thought. The output of your testing should be clear and interpretable. I.e., when I run your tests I should see informative messages of what is being done and whether a given test was passed or failed. You should also have unit tests for individual functions that carry out the individual computations that make up the algorithm. Note also that an important part of the grade will depend on how your code performs on tests that I have prepared.</p></li>
+<li><p>Your solution should involve modular code, with functions or OOP methods that implement discrete tasks. You should have an overall design and style that is consistent across the components, in terms of functions vs.&nbsp;OOP methods, naming of functions/objects, etc.</p></li>
+<li><p>In terms of efficiency, the algorithm is inherently sequential. However, you should try to vectorize as much as possible. One possibility in terms of the overall calculation is that you could generate a vector of samples based on the upper envelope. Then determine where are the points that require evaluation of <span class="math inline">\(f(x)\)</span>. All points up to the first of those points can be generated before changing the envelope, at which point you would throw away the remaining points. How many points you generate at once might vary depending on how far along you are in generating the number of points requested by the user. Or you may think of other tricks.</p></li>
+<li><p>Your solution should include help/manual information as follows:</p>
+<ol type="a">
+<li><p>Basic doc strings for any function you create (i.e., include comments at the beginning of the function), as well as commenting of code as appropriate.</p></li>
+<li><p>An overall help page for the primary function only. This help page should be directly in the form of standard R documentation in a file called <code>ars.Rd</code>. You do not need help pages for your auxiliary functions. Your help page should include example usage.</p></li>
+</ol></li>
+</ol>
 </section>
-<section id="problems" class="level2">
-<h2 class="anchored" data-anchor-id="problems">Problems</h2>
+<section id="formatting-requirements-and-additional-information" class="level1">
+<h1>Formatting requirements and additional information</h1>
+<p>Your solution to the problem should have two parts:</p>
 <ol type="1">
-<li><p>This question explores memory use and copying with character vectors.</p>
+<li><p>A PDF document describing your solution, prepared in R Markdown/quarto/knitr. The description does not need to be more than a few pages, but should describe the approach you took in terms of functions/modularity/object-oriented programming, the testing that you carried out, and usage on examples. It must include a paragraph describing the specific contributions of each team member and which person/people were responsible for each component of the work.</p>
+<p><strong>Please submit a paper copy of the document to me - either directly to me, under my door, or in my mailbox. On your paper solution, please indicate the GitHub repository name clearly at the beginning of your writeup so I can easily get your materials.</strong></p></li>
+<li><p>An R package named <code>ars</code>, including the <code>.tar.gz</code> file created by <code>R CMD build ars</code>, committed to the relevant Git repository (see below). The package should include:</p>
 <ol type="a">
-<li><p>Consider the following character vector with three strings. Modify one of the strings. Can R make the change in place? (Be careful, there are two aspects to this, so it’s a bit more complicated than simply replacing an element in a numeric vector.) Also note that you may need to copy-paste output from R or RStudio as compiling the PDF may change the answer.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"hello there"</span>, <span class="st">"better luck next time"</span>, <span class="st">"that's not clear"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div></li>
-<li><p>Now consider this vector: <code>vec &lt;- c(rep('hello friend', 1e6))</code>. Given each character should take 1 byte, this would seemingly use 12 million bytes. How much memory is being used? Explain what is happening and account for all major uses of memory.</p></li>
-<li><p>Compare the size of the string ‘hello’ with that of a single string of length 1 million characters (i.e., one where <code>nchar()</code> returns 1 million). Does each character take up 1 byte? What does this comparison suggest about short strings?</p></li>
-</ol>
-<p>Warning: Recall that rendering your Rmd can result in the memory allocation/address information being incorrect, so you are likely to need to paste in some results manually.</p></li>
-<li><p>If I want to compute the trace of a matrix, <span class="math inline">\(A=XY\)</span>, where both <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are <span class="math inline">\(n\times n\)</span> and where the trace is <span class="math inline">\(\sum_{i=1}^{n}A_{ii}\)</span>, a naive implementation is <code>sum(diag(X%*%Y))</code>.</p>
-<ol type="1">
-<li><p>What is the computational complexity of that naive implementation: <span class="math inline">\(O(n),\)</span> <span class="math inline">\(O(n^{2})\)</span> or <span class="math inline">\(O(n^{3})\)</span>? You can just count up the number of multiplications and ignore the additions.</p></li>
-<li><p>Why is that naive implementation inefficient?</p></li>
-<li><p>How could you (much) more efficiently compute the trace in R using vectorized operations on the matrices. Please provide R code and do not use <code>apply()</code>? What is the computational complexity of your solution?</p></li>
-<li><p>Create a plot to demonstrate the quadratic vs.&nbsp;cubic scaling using a few values of <span class="math inline">\(n\)</span>.</p></li>
+<li><p>A primary function called <code>ars</code> that carries out the simulation, located in a file <code>ars.R</code> in the <code>R</code> directory of the package,</p></li>
+<li><p>Formal tests you applied to your overall function. You can set this up with <code>usethis::use_testthat</code>. I should be able to run <code>testthat::test_package(’ars’)</code> or <code>testthat::test_file('/path/to/test-file.R')</code> and have it run all your tests. Please check that you can run the tests if you install your own package as a fresh install, and indicate in your writeup how I can run your tests. There is more information on testing in <a href="https://r-pkgs.had.co.nz/tests.html">Hadley Wickham’s book</a>.</p></li>
+<li><p>Auxiliary functions used by the primary function and testing function,</p></li>
+<li><p>Help information for the main function, in a file <code>ars.Rd</code> in the <code>man</code> directory. If you want, you can <code>ars.Rd</code> by hand, but I recommend having it generated based on using the <code>roxygen2</code> package (see <a href="http://adv-r.had.co.nz/Documenting-functions.html">here for an example</a>). In the latter case you would have the documentation included in <code>ars.R</code>.</p>
+<p>A good starting place for information about R packages is <a href="http://r-pkgs.had.co.nz/">Hadley Wickham’s book</a>.</p></li>
 </ol></li>
-<li><p>Suppose we have a matrix in which each row is a vector of probabilities that add to one, and we want to generate a categorical sample based on each row. E.g., the first row might be (0.9, 0.05, 0.05) and the second row might be (0.1, 0.85, .0.5). When we generate the first sample, it is very likely to be a 1 and the second sample is very likely to be a 2. We could do this using a for loop over the rows of the matrix, and <code>sample()</code>, but that is a lot slower than some other ways we might do it because it is a loop executing in R over many elements.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100000</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="dv">5</span>  <span class="do">## number of categories</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="do">## way to generate a random matrix of row-normalized probabilities:</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="fu">matrix</span>(<span class="fu">rnorm</span>(n<span class="sc">*</span>p), <span class="at">nrow =</span> n, <span class="at">ncol =</span> p))</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>probs <span class="ot">&lt;-</span> tmp <span class="sc">/</span> <span class="fu">rowSums</span>(tmp)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>smp <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, n)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="do">## loop by row and use sample()</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="fu">seq_len</span>(n))</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        smp[i] <span class="ot">&lt;-</span> <span class="fu">sample</span>(p, <span class="dv">1</span>, <span class="at">prob =</span> probs[i, ])</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ol type="a">
-<li><p>Consider transposing the matrix and looping over columns. Why might I hypothesize that this could be faster? Is it faster?</p></li>
-<li><p>How can we do it much faster? (Hint: This might involve looping or not, but not in the ways described above. Think about how one can use random uniform numbers to generate from a categorical distribution.)</p></li>
-</ol></li>
-<li><p>Suppose I run the code <code>plot(xvec, yvec)</code>. It’s the case that <code>range()</code> is called when making the axis limits. Suppose I create a function called <code>range()</code> in my R session and then make my plot, as follows.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>xvec <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>yvec <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>range <span class="ot">&lt;-</span> <span class="cf">function</span>(...) <span class="fu">print</span>(<span class="st">"better luck next time"</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(<span class="fu">rnorm</span>(<span class="dv">3</span>))</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "better luck next time"</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(xvec, yvec)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Explain <strong>in detail</strong> why can I still make a plot. As part of your answer, say what functions are on the call stack at the point that <code>range()</code> is called and how the “right” <code>range</code> is found.</p></li>
-<li><p>(Extra credit) Consider <code>plot(xvec, rnorm(5))</code>. Explain how it is that the x-axis and y-axis labels can be assigned to be “xvec” and “rnorm(5)”. The material in the optional Section 10 of Unit 5 will be useful.</p></li>
 </ol>
+<p>For a given subtask of the problem, if you find good code available, you may use it as a modular component of your code provided it does not constitute too large a part of your solution and provided you test the code. Consult me with questions on this matter.</p>
+<p>You should use Git and GitHub to manage your collaboration. Please have the project be a private repository named <code>ars</code> within the Berkeley GitHub account or github.com account of one of the project members. <strong>Make sure to share the repository with me (username <code>paciorek</code> in either <code>github.berkeley.edu</code> or <code>github.com</code>.)</strong></p>
+<p>You should start the process by mapping out as a group the modular components you need to write and how they will fit together, as well as what the primary function will do. After one person writes a component, another person on the team should test it and, with the original coder, improve it. Or you might consider using pair programming.</p>
 
 
 </section>
