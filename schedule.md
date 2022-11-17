@@ -2,8 +2,8 @@
 
 Submit your solutions on Gradescope and (for problem sets but not assignments) via your Git repository. 
 
-| Assignment or PS | Date | Time | Notes |
-|----|----|----|----|
+| Assignment or PS | Date | Time | 
+|----|----|----|-----|
 | [bash shell problems (first 10)](https://berkeley-scf.github.io/tutorial-using-bash/exercises) (reading some of tutorial before Aug. 31 recommended) | Friday Sep. 2 | 10 am |
 | PS 1 [(HTML)](ps/ps1.html) [(PDF)](ps/ps1.pdf) | Wednesday Sep. 7 | 10 am | 
 | [regular expression reading and problems](https://www.gradescope.com/courses/425343/assignments/2227720)| Friday Sep. 9 | 10 am | 
