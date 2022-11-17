@@ -4,7 +4,7 @@ Submit your solutions on Gradescope and (for problem sets but not assignments) v
 
 | Assignment or PS | Date | Time | Notes |
 |----|----|----|----|
-| [bash shell problems (first 10)](https://berkeley-scf.github.io/tutorial-using-bash/exercises) | Friday Sep. 2 | 10 am | I recomend you do at least some of the tutorial reading before class on Aug. 31 |
+| [bash shell problems (first 10)](https://berkeley-scf.github.io/tutorial-using-bash/exercises) | Friday Sep. 2 | 10 am | I recommend you do at least some of the tutorial reading before class on Aug. 31 |
 | PS 1 [(HTML)](ps/ps1.html) [(PDF)](ps/ps1.pdf) | Wednesday Sep. 7 | 10 am | |
 | [regular expression reading and problems](https://www.gradescope.com/courses/425343/assignments/2227720)| Friday Sep. 9 | 10 am | |
 | PS 2 [(HTML)](ps/ps2.html) [(PDF)](ps/ps2.pdf) | Friday Sep. 16 | 10 am | |
@@ -14,6 +14,7 @@ Submit your solutions on Gradescope and (for problem sets but not assignments) v
 | PS 6 [(HTML)](ps/ps6.html) [(PDF)](ps/ps6.pdf) | Friday Nov. 4 | 10 am | |
 | PS 7 [(HTML)](ps/ps7.html) [(PDF)](ps/ps7.pdf) | Tuesday Nov. 15 | 10 am | |
 | Project [(HTML)](project/project.html) [(PDF)](project/project.pdf) | Thursday Dec. 15 | 5 pm | |
+| PS 8 [(HTML)](ps/ps8.html) [(PDF)](ps/ps8.pdf) | Friday Dec. 2 | 5 pm | |
 
 
 ## Quiz schedule
