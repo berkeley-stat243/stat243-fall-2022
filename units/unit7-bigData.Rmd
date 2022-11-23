@@ -1456,6 +1456,8 @@ dbGetQuery(db, "select tag, count(*) as n from questions_tags
 In general `GROUP BY` statements will involve some aggregation operation
 on the subsets. Options include: `COUNT`, `MIN`, `MAX`, `AVG`, `SUM`.
 
+If you filter after using `GROUP BY`, you need to use `having` instead of `where`.
+
 **Challenge**: Write a query that will count the number of answers for
 each question, returning the most answered questions.
 

@@ -1953,7 +1953,12 @@ recipe that makes the optimization straightforward for many problems.
 
 The algorithm is as follows. Let $\theta^{t}$ be the current value of
 $\theta$. Then define
-$$Q(\theta|\theta^{t})=E(\log L(\theta|Y)|x;\theta^{t})$$ The algorithm is
+$$Q(\theta|\theta^{t})=E(\log L(\theta|Y)|x;\theta^{t})$$.
+
+That expectation is an expectation with respect to the conditional distribution,
+$ f(z|x; \theta = \theta^t)$.
+
+ The algorithm is
 
 1.  E step: Compute $Q(\theta|\theta^{t})$, ideally calculating the
     expectation over the missing data in closed form. Note that
@@ -2018,7 +2023,7 @@ $$Q(\theta|\theta^{t})=\sum_{i}\sum_{k}E(I(z_{i}=k)|x_{i};\theta^{t})(\log f_{k}
 where $E(I(z_{i}=k)|x_{i};\theta^{t})$ is equal to the probability that
 the $i$th observation is in the $k$th group given $x_{i}$ and
 $\theta_{t}$, which is calculated from Bayes theorem as
-$$p_{ik}^{t}=\frac{\pi_{k}^{t}f_{k}(x_{i}|\mu_{k}^{t},\sigma_{k}^{t})}{\sum_{j}\pi_{j}^{t}f_{j}(x_{i}|\mu_{k}^{t},\sigma_{k}^{t})}$$
+$$p_{ik}^{t}=\frac{\pi_{k}^{t}f_{k}(x_{i};\mu_{k}^{t},\sigma_{k}^{t})}{\sum_{j}\pi_{j}^{t}f_{j}(x_{i};\mu_{k}^{t},\sigma_{k}^{t})}$$
 We can now separately maximize $Q(\theta|\theta^{t})$ with respect to
 $\pi_{k}$ and $\mu_{k},\sigma_{k}$ to find $\pi_{k}^{t+1}$ and
 $\mu_{k}^{t+1},\sigma_{k}^{t+1}$, since the expression is the sum of a
