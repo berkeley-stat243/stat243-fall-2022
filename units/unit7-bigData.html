@@ -1348,7 +1348,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbListTables</span>(db)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "answers"        "questions"      "questions_tags" "users"         </code></pre>
+<pre><code>[1] "answers"        "cssUsers"       "htmlUsers"      "questions"     
+[5] "questions_tags" "tmp"            "users"         </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbListFields</span>(db, <span class="st">"questions"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1535,6 +1536,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>In general <code>GROUP BY</code> statements will involve some aggregation operation on the subsets. Options include: <code>COUNT</code>, <code>MIN</code>, <code>MAX</code>, <code>AVG</code>, <code>SUM</code>.</p>
+<p>If you filter after using <code>GROUP BY</code>, you need to use <code>having</code> instead of <code>where</code>.</p>
 <p><strong>Challenge</strong>: Write a query that will count the number of answers for each question, returning the most answered questions.</p>
 </section>
 <section id="getting-unique-results-distinct" class="level2">
