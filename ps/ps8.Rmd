@@ -113,7 +113,7 @@ execute:
         estimate and standard error. Then adjust $\beta_{1}$ as needed.
 
     e.  A different approach to this problem just directly maximizes the
-        log-likelihood of the observed data under the original probit model with the `z`s. Estimate the parameters
+        log-likelihood of the observed data under the original probit model (i.e., without the `z`s). Estimate the parameters
         (and standard errors, based on the Hessian at the optimum) for your test cases using `optim()` with
         the BFGS option in R. Compare how many iterations EM and BFGS
         take.
