@@ -2038,9 +2038,9 @@ weighted mean of the observations and the weighted variance.
 Constrained optimization is harder than unconstrained, and inequality
 constraints harder to deal with than equality constraints.
 
-Constrained optimization can sometimes be avoided by reparameterizing.
-E.g., to optimize w.r.t. a variance component or other non-negative
-parameter, you can work on the log scale.
+Constrained optimization can sometimes be avoided by reparameterizing. Some examples include:
+- working on the log scale (e.g., to optimize w.r.t. a variance component or other non-negative parameter)
+- using the logit transformation to optimize with respect to a parameter on $(0,1)$ (or more generally some other bounded interval, after shifting and scaling to $(0,1)$.
 
 Optimization under constraints often goes under the name of
 'programming', with different types of programming for different types
@@ -2282,7 +2282,7 @@ is to turn the more complicated constraint problem into one with only
 linear equality constraints.
 
 Recall our previous notation, in which convex programming minimizes
-$f(x)$ s.t. $h_{i}(x)\leq0,\,i=1,\ldots,m$ and
+$f(x)$ s.t. $h_{i}(x)\leq0,\,j=1,\ldots,m$ and
 $a_{i}^{\top}x=b_{i},\,i=1,\ldots,q$, where both $f$ and the constraint
 functions are convex. The strategy begins with moving the inequality
 constraints into the objective function:
